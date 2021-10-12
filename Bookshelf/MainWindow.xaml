@@ -12,33 +12,135 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         >
-    
+    <Window.Resources>
+        <ImageBrush x:Key="CloseOver" 
+                    Stretch="None" 
+                    ImageSource="Images/Topbar/CloseOver.png">
+            <ImageBrush.Transform>
+                <ScaleTransform ScaleX=".7"  ScaleY=".7" CenterX="20" CenterY="10"/>
+            </ImageBrush.Transform>
+        </ImageBrush>
+
+        <ImageBrush x:Key="MaximizeOver" 
+                    Stretch="None" 
+                    ImageSource="Images/Topbar/MaximizeOver.png">
+            <ImageBrush.Transform>
+                <ScaleTransform ScaleX=".7"  ScaleY=".7" CenterX="20" CenterY="10"/>
+            </ImageBrush.Transform>
+        </ImageBrush>
+
+        <ImageBrush x:Key="MinimizeOver" 
+                    Stretch="None" 
+                    ImageSource="Images/Topbar/MinimizeOver.png">
+            <ImageBrush.Transform>
+                <ScaleTransform ScaleX=".7"  ScaleY=".7" CenterX="20" CenterY="10"/>
+            </ImageBrush.Transform>
+        </ImageBrush>
+
+        <Style x:Key="MinimizeButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource MinimizeOver}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource MinimizeOver}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="MaximizeButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource MaximizeOver}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource MaximizeOver}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource CloseOver}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource CloseOver}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Border CornerRadius="5"
-            BorderThickness="2"
-            BorderBrush="#F2F2F2"
-            Margin="20">
+        BorderThickness="2"
+        Background="#F2F2F2"
+        BorderBrush="#F2F2F2"
+        Margin="20">
         <Border.Effect>
             <DropShadowEffect
                     BlurRadius="20"
                     ShadowDepth="2"
                     Direction="-90"
-                    Color="Gray"
-                    />
+                    Color="Gray" />
         </Border.Effect>
 
         <Grid Background="#F2F2F2" >
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="21" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="21" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="117"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="117"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-            
             <!-- TopBar -->
             <Grid Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
@@ -48,59 +150,56 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           Margin="10,0,0,0"
-                           Text="Bookshelf v0.0.1"
-                           Foreground="#B9B9B9"
-                           FontFamily="Roboto"/>
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"
+                               Text="Bookshelf v0.0.1"
+                               Foreground="#B9B9B9"
+                               FontFamily="Roboto"/>
 
                 <!-- Topbar Buttons -->
                 <StackPanel Grid.Column="2"
-                            HorizontalAlignment="Right"
-                            Orientation="Horizontal">
-
-                    <Button Width="44" Height="21"
-                            BorderThickness="0"
-                            Foreground="Black"
-                            >
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                    <Button Style="{DynamicResource MinimizeButtonStyle}" Width="44" Height="21"
+                                BorderThickness="0"
+                                Foreground="Black">
                         <Button.Background>
                             <ImageBrush Stretch="None" 
-                                        ImageSource="Images/Topbar/Minimize.png">
+                                            ImageSource="Images/Topbar/Minimize.png">
                                 <ImageBrush.Transform>
                                     <ScaleTransform ScaleX=".7" ScaleY=".7"
-                                                    CenterX="20"
-                                                    CenterY="10"/>
+                                                        CenterX="20"
+                                                        CenterY="10"/>
                                 </ImageBrush.Transform>
                             </ImageBrush>
                         </Button.Background>
                     </Button>
 
-                    <Button Width="44" Height="21"
-                            BorderThickness="0"
-                            Foreground="Black"
-                            >
+                    <Button Style="{DynamicResource MaximizeButtonStyle}" Width="44" Height="21"
+                                BorderThickness="0"
+                                Foreground="Black">
                         <Button.Background>
                             <ImageBrush Stretch="None" 
-                                        ImageSource="Images/Topbar/Maximize.png">
+                                            ImageSource="Images/Topbar/Maximize.png">
                                 <ImageBrush.Transform>
                                     <ScaleTransform ScaleX=".7" ScaleY=".7"
-                                                    CenterX="20"
-                                                    CenterY="10"/>
+                                                        CenterX="20"
+                                                        CenterY="10"/>
                                 </ImageBrush.Transform>
                             </ImageBrush>
                         </Button.Background>
                     </Button>
 
-                    <Button Width="44" Height="20"
-                            BorderThickness="0"
-                            Foreground="Black">
-                        <Button.Background >
+                    <Button Style="{DynamicResource CloseButtonStyle}" Width="44" Height="20"
+                                BorderThickness="0"
+                                Foreground="Black">
+                        <Button.Background>
                             <ImageBrush Stretch="None" 
-                                        ImageSource="Images/Topbar/Cancel.png">
+                                            ImageSource="Images/Topbar/Close.png">
                                 <ImageBrush.Transform>
                                     <ScaleTransform ScaleX=".7" ScaleY=".7"
-                                                    CenterX="20"
-                                                    CenterY="10"/>
+                                                        CenterX="20"
+                                                        CenterY="10"/>
                                 </ImageBrush.Transform>
                             </ImageBrush>
                         </Button.Background>
@@ -111,28 +210,35 @@
             </Grid>
 
             <!-- SideBar -->
-            <Grid Grid.Row="1"
-                  Background="#FDFDFD"
-                  >
+            <Border Grid.Row="1"
+                Background="#FDFDFD" 
+                BorderThickness="0,0,2,0"
+                BorderBrush="#F2F2F2"
+                    CornerRadius="10,10,10,5">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="39" />
-                    <RowDefinition Height="39" />
-                    <RowDefinition Height="39" />
-                    <RowDefinition Height="39" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-            </Grid>
+                <Grid Grid.Row="1"
+                      >
 
-            <!-- Content -->
-            <Grid Background="White"
-                Grid.Row="1"
-                  Grid.Column="1">
-                 
-            </Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="39" />
+                        <RowDefinition Height="39" />
+                        <RowDefinition Height="39" />
+                        <RowDefinition Height="39" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                </Grid>
+            </Border>
 
+            <Border
+                Background="White"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                BorderBrush="#F2F2F2"
+                    CornerRadius="10,10,5,10">
+                <!-- Content -->
+                <Grid >
+                </Grid>
+            </Border>
         </Grid>
-        
-        
-        </Border>
+    </Border>
 </Window>

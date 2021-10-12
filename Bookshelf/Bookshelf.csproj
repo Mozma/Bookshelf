@@ -8,9 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Topbar\Cancel.png" />
+    <None Remove="Images\Topbar\Close.png" />
+    <None Remove="Images\Topbar\CloseOver.png" />
     <None Remove="Images\Topbar\Maximize.png" />
+    <None Remove="Images\Topbar\MaximizeOver.png" />
     <None Remove="Images\Topbar\Minimize.png" />
+    <None Remove="Images\Topbar\MinimizeOver.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,9 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\Topbar\Cancel.png" />
+    <Resource Include="Images\Topbar\Close.png" />
+    <Resource Include="Images\Topbar\CloseOver.png" />
     <Resource Include="Images\Topbar\Maximize.png" />
+    <Resource Include="Images\Topbar\MaximizeOver.png" />
     <Resource Include="Images\Topbar\Minimize.png" />
+    <Resource Include="Images\Topbar\MinimizeOver.png" />
   </ItemGroup>
 
 </Project>
