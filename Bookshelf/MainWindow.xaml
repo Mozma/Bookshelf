@@ -44,7 +44,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="117"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="117"/>
+                    <ColumnDefinition Width="134"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock HorizontalAlignment="Left"
@@ -54,12 +54,67 @@
                            Foreground="#B9B9B9"
                            FontFamily="Roboto"/>
 
+                <!-- Topbar Buttons -->
+                <StackPanel Grid.Column="2"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+
+                    <Button Width="44" Height="21"
+                            BorderThickness="0"
+                            Foreground="Black"
+                            >
+                        <Button.Background>
+                            <ImageBrush Stretch="None" 
+                                        ImageSource="Images/Topbar/Minimize.png">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX=".7" ScaleY=".7"
+                                                    CenterX="20"
+                                                    CenterY="10"/>
+                                </ImageBrush.Transform>
+                            </ImageBrush>
+                        </Button.Background>
+                    </Button>
+
+                    <Button Width="44" Height="21"
+                            BorderThickness="0"
+                            Foreground="Black"
+                            >
+                        <Button.Background>
+                            <ImageBrush Stretch="None" 
+                                        ImageSource="Images/Topbar/Maximize.png">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX=".7" ScaleY=".7"
+                                                    CenterX="20"
+                                                    CenterY="10"/>
+                                </ImageBrush.Transform>
+                            </ImageBrush>
+                        </Button.Background>
+                    </Button>
+
+                    <Button Width="44" Height="20"
+                            BorderThickness="0"
+                            Foreground="Black">
+                        <Button.Background >
+                            <ImageBrush Stretch="None" 
+                                        ImageSource="Images/Topbar/Cancel.png">
+                                <ImageBrush.Transform>
+                                    <ScaleTransform ScaleX=".7" ScaleY=".7"
+                                                    CenterX="20"
+                                                    CenterY="10"/>
+                                </ImageBrush.Transform>
+                            </ImageBrush>
+                        </Button.Background>
+                    </Button>
+
+                </StackPanel>
+
             </Grid>
 
             <!-- SideBar -->
             <Grid Grid.Row="1"
                   Background="#FDFDFD"
                   >
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="39" />
                     <RowDefinition Height="39" />
