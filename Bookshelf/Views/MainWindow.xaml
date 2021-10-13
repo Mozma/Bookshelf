@@ -15,7 +15,7 @@
     <Window.Resources>
         <ImageBrush x:Key="CloseOver" 
                     Stretch="None" 
-                    ImageSource="Images/Topbar/CloseOver.png">
+                    ImageSource="\Resources\Images\Topbar\CloseOver.png">
             <ImageBrush.Transform>
                 <ScaleTransform ScaleX=".7"  ScaleY=".7" CenterX="20" CenterY="10"/>
             </ImageBrush.Transform>
@@ -23,7 +23,7 @@
 
         <ImageBrush x:Key="MaximizeOver" 
                     Stretch="None" 
-                    ImageSource="Images/Topbar/MaximizeOver.png">
+                    ImageSource="\Resources\Images\Topbar\MaximizeOver.png">
             <ImageBrush.Transform>
                 <ScaleTransform ScaleX=".7"  ScaleY=".7" CenterX="20" CenterY="10"/>
             </ImageBrush.Transform>
@@ -31,7 +31,7 @@
 
         <ImageBrush x:Key="MinimizeOver" 
                     Stretch="None" 
-                    ImageSource="Images/Topbar/MinimizeOver.png">
+                    ImageSource="\Resources\Images\Topbar\MinimizeOver.png">
             <ImageBrush.Transform>
                 <ScaleTransform ScaleX=".7"  ScaleY=".7" CenterX="20" CenterY="10"/>
             </ImageBrush.Transform>
@@ -156,7 +156,7 @@
                                 Foreground="Black">
                         <Button.Background>
                             <ImageBrush Stretch="None" 
-                                            ImageSource="Images/Topbar/Minimize.png">
+                                            ImageSource="\Resources\Images\Topbar\Minimize.png">
                                 <ImageBrush.Transform>
                                     <ScaleTransform ScaleX=".7" ScaleY=".7"
                                                         CenterX="20"
@@ -171,7 +171,7 @@
                                 Foreground="Black">
                         <Button.Background>
                             <ImageBrush Stretch="None" 
-                                            ImageSource="Images/Topbar/Maximize.png">
+                                            ImageSource="\Resources\Images\Topbar\Maximize.png">
                                 <ImageBrush.Transform>
                                     <ScaleTransform ScaleX=".7" ScaleY=".7"
                                                         CenterX="20"
@@ -186,7 +186,7 @@
                                 Foreground="Black">
                         <Button.Background>
                             <ImageBrush Stretch="None" 
-                                            ImageSource="Images/Topbar/Close.png">
+                                            ImageSource="\Resources\Images\Topbar\Close.png">
                                 <ImageBrush.Transform>
                                     <ScaleTransform ScaleX=".7" ScaleY=".7"
                                                         CenterX="20"
@@ -209,10 +209,6 @@
                 <Grid
                     Margin="0,10,0,0">
                     <Grid.RowDefinitions>
-                        <!--<RowDefinition Height="39" />
-                        <RowDefinition Height="39" />
-                        <RowDefinition Height="39" />
-                        <RowDefinition Height="39" />-->
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -227,7 +223,7 @@
                                 Foreground="#A0A0A0">
                             <Button.Background>
                                 <ImageBrush Stretch="None" 
-                                            ImageSource="Images/Sidebar/Home.png"
+                                            ImageSource="\Resources\Images\Sidebar\Home.png"
                                             AlignmentX="Left">
                                     <ImageBrush.Transform>
                                         <ScaleTransform ScaleX=".6" ScaleY=".6"
@@ -245,7 +241,7 @@
                                 Foreground="#A0A0A0">
                             <Button.Background>
                                 <ImageBrush Stretch="None" 
-                                            ImageSource="Images/Sidebar/Shelf.png"
+                                            ImageSource="\Resources\Images\Sidebar\Shelf.png"
                                             AlignmentX="Left">
                                     <ImageBrush.Transform>
                                         <ScaleTransform ScaleX=".6" ScaleY=".6"
@@ -263,7 +259,7 @@
                                 Foreground="#A0A0A0">
                             <Button.Background>
                                 <ImageBrush Stretch="None" 
-                                            ImageSource="Images/Sidebar/Note.png"
+                                            ImageSource="\Resources\Images\Sidebar\Note.png"
                                             AlignmentX="Left">
                                     <ImageBrush.Transform>
                                         <ScaleTransform ScaleX=".6" ScaleY=".6"

@@ -8,15 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Sidebar\Home.png" />
-    <None Remove="Images\Sidebar\Note.png" />
-    <None Remove="Images\Sidebar\Shelf.png" />
-    <None Remove="Images\Topbar\Close.png" />
-    <None Remove="Images\Topbar\CloseOver.png" />
-    <None Remove="Images\Topbar\Maximize.png" />
-    <None Remove="Images\Topbar\MaximizeOver.png" />
-    <None Remove="Images\Topbar\Minimize.png" />
-    <None Remove="Images\Topbar\MinimizeOver.png" />
+    <None Remove="Resources\Images\Sidebar\Home.png" />
+    <None Remove="Resources\Images\Sidebar\Note.png" />
+    <None Remove="Resources\Images\Sidebar\Shelf.png" />
+    <None Remove="Resources\Images\Topbar\Close.png" />
+    <None Remove="Resources\Images\Topbar\CloseOver.png" />
+    <None Remove="Resources\Images\Topbar\Maximize.png" />
+    <None Remove="Resources\Images\Topbar\MaximizeOver.png" />
+    <None Remove="Resources\Images\Topbar\Minimize.png" />
+    <None Remove="Resources\Images\Topbar\MinimizeOver.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,33 +25,39 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\Sidebar\Home.png">
+    <Resource Include="Resources\Images\Sidebar\Home.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Sidebar\Note.png">
+    <Resource Include="Resources\Images\Sidebar\Note.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Sidebar\Shelf.png">
+    <Resource Include="Resources\Images\Sidebar\Shelf.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Topbar\Close.png">
+    <Resource Include="Resources\Images\Topbar\Close.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Topbar\CloseOver.png">
+    <Resource Include="Resources\Images\Topbar\CloseOver.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Topbar\Maximize.png">
+    <Resource Include="Resources\Images\Topbar\Maximize.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Topbar\MaximizeOver.png">
+    <Resource Include="Resources\Images\Topbar\MaximizeOver.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Topbar\Minimize.png">
+    <Resource Include="Resources\Images\Topbar\Minimize.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Topbar\MinimizeOver.png">
+    <Resource Include="Resources\Images\Topbar\MinimizeOver.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>
