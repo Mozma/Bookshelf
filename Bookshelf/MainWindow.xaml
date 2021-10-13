@@ -59,7 +59,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="MaximizeButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -78,15 +78,6 @@
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource MaximizeOver}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="FocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -211,32 +202,90 @@
 
             <!-- SideBar -->
             <Border Grid.Row="1"
-                Background="#FDFDFD" 
-                BorderThickness="0,0,2,0"
-                BorderBrush="#F2F2F2"
+                    Background="#FDFDFD" 
+                    BorderThickness="0,0,2,0"
+                    BorderBrush="#F2F2F2"
                     CornerRadius="10,10,10,5">
-
-                <Grid Grid.Row="1"
-                      >
-
+                <Grid
+                    Margin="0,10,0,0">
                     <Grid.RowDefinitions>
+                        <!--<RowDefinition Height="39" />
                         <RowDefinition Height="39" />
                         <RowDefinition Height="39" />
-                        <RowDefinition Height="39" />
-                        <RowDefinition Height="39" />
+                        <RowDefinition Height="39" />-->
                         <RowDefinition />
                     </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="0"
+                                HorizontalAlignment="Right"
+                                Orientation="Vertical">
+                        <Button Width="115" Height="39"
+                                BorderThickness="0"
+                                Content="Home"
+                                FontFamily="Roboto"
+                                FontSize="14"
+                                Foreground="#A0A0A0">
+                            <Button.Background>
+                                <ImageBrush Stretch="None" 
+                                            ImageSource="Images/Sidebar/Home.png"
+                                            AlignmentX="Left">
+                                    <ImageBrush.Transform>
+                                        <ScaleTransform ScaleX=".6" ScaleY=".6"
+                                                        CenterY="17" CenterX="25"/>
+                                    </ImageBrush.Transform>
+                                </ImageBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <Button Width="115" Height="39"
+                                BorderThickness="0"
+                                Content="Shelfs"
+                                FontFamily="Roboto"
+                                FontSize="14"
+                                Foreground="#A0A0A0">
+                            <Button.Background>
+                                <ImageBrush Stretch="None" 
+                                            ImageSource="Images/Sidebar/Shelf.png"
+                                            AlignmentX="Left">
+                                    <ImageBrush.Transform>
+                                        <ScaleTransform ScaleX=".6" ScaleY=".6"
+                                                        CenterY="17" CenterX="25"/>
+                                    </ImageBrush.Transform>
+                                </ImageBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <Button Width="115" Height="39"
+                                BorderThickness="0"
+                                Content="Notes"
+                                FontFamily="Roboto"
+                                FontSize="14"
+                                Foreground="#A0A0A0">
+                            <Button.Background>
+                                <ImageBrush Stretch="None" 
+                                            ImageSource="Images/Sidebar/Note.png"
+                                            AlignmentX="Left">
+                                    <ImageBrush.Transform>
+                                        <ScaleTransform ScaleX=".6" ScaleY=".6"
+                                                        CenterY="17" CenterX="25"/>
+                                    </ImageBrush.Transform>
+                                </ImageBrush>
+                            </Button.Background>
+                        </Button>
+
+                    </StackPanel>
+
                 </Grid>
             </Border>
-
-            <Border
-                Background="White"
-                  Grid.Row="1"
-                  Grid.Column="1"
-                BorderBrush="#F2F2F2"
+            
+            <!-- Content -->
+            <Border Background="White"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BorderBrush="#F2F2F2"
                     CornerRadius="10,10,5,10">
-                <!-- Content -->
                 <Grid >
+                    
                 </Grid>
             </Border>
         </Grid>
