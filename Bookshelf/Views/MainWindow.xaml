@@ -4,294 +4,65 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bookshelf"
-        xmlns:viewmodel="clr-namespace:Bookshelf.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="780" Width="1300"
-        WindowStyle="None"
-        ResizeMode="NoResize"
+        Title="MainWindow" 
+        Height="780" 
+        Width="1300"
+        WindowStyle="None"       
         Background="Transparent"
         AllowsTransparency="True"
+        
+        x:Name="AppMainWindow"
         WindowStartupLocation="CenterScreen"
         >
-    <Window.DataContext>
-        <viewmodel:MainWindowViewModel/>
-    </Window.DataContext>
-        
-        <Window.Resources>
-        <ImageBrush x:Key="CloseOver" 
-                    Stretch="None" 
-                    ImageSource="\Resources\Images\Topbar\CloseOver.png">
-            <ImageBrush.Transform>
-                <ScaleTransform ScaleX=".7"  ScaleY=".7" CenterX="20" CenterY="10"/>
-            </ImageBrush.Transform>
-        </ImageBrush>
 
-        <ImageBrush x:Key="MaximizeOver" 
-                    Stretch="None" 
-                    ImageSource="\Resources\Images\Topbar\MaximizeOver.png">
-            <ImageBrush.Transform>
-                <ScaleTransform ScaleX=".7"  ScaleY=".7" CenterX="20" CenterY="10"/>
-            </ImageBrush.Transform>
-        </ImageBrush>
-
-        <ImageBrush x:Key="MinimizeOver" 
-                    Stretch="None" 
-                    ImageSource="\Resources\Images\Topbar\MinimizeOver.png">
-            <ImageBrush.Transform>
-                <ScaleTransform ScaleX=".7"  ScaleY=".7" CenterX="20" CenterY="10"/>
-            </ImageBrush.Transform>
-        </ImageBrush>
-
-        <Style x:Key="MinimizeButtonStyle" TargetType="{x:Type Button}">
-                <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource MinimizeOver}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource MinimizeOver}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="MaximizeButtonStyle" TargetType="{x:Type Button}">
+    <!--<Window.Resources>
+        <Style TargetType="{x:Type local:MainWindow}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource MaximizeOver}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource MaximizeOver}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                       
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+    </Window.Resources>-->
 
-        <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource CloseOver}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource CloseOver}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+              
+        ResizeBorderThickness="{Binding ResizeBorderThickness}"
+        CaptionHeight="{Binding TitleHeight}"
+        CornerRadius="0"
+        GlassFrameThickness="0"
+            />
 
-    <Border CornerRadius="5"
-        BorderThickness="2"
-        BorderBrush="#F2F2F2"
-        Margin="20">
-        <Border.Effect>
-            <DropShadowEffect
-                    BlurRadius="20"
-                    ShadowDepth="2"
-                    Direction="-90"
-                    Color="Gray" />
-        </Border.Effect>
+    </WindowChrome.WindowChrome>
+    
+    <Border Padding="{Binding Path=OuterMarginSizeThikness, Mode=OneWay, FallbackValue=6}">
+        <!-- Main window outline -->
+        <Grid>
 
-        <Grid Background="#F2F2F2" >
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="21" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="117"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Border Grid.ColumnSpan="2"
-                    CornerRadius="5"
-                    Background="#F2F2F2"
-                    MouseDown="Border_MouseDown">
-                <!-- TopBar -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="117"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="134"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Margin="10,0,0,0"
-                               Text="Bookshelf v0.0.1"
-                               Foreground="#B9B9B9"
-                               FontFamily="Roboto"/>
-
-                    <!-- Topbar Buttons -->
-                    <StackPanel Grid.Column="2"
-                                HorizontalAlignment="Right"
-                                Orientation="Horizontal">
-                        <Button Style="{DynamicResource MinimizeButtonStyle}" Width="44" Height="21"
-                                BorderThickness="0"
-                                Foreground="Black">
-                            <Button.Background>
-                                <ImageBrush Stretch="None" 
-                                            ImageSource="\Resources\Images\Topbar\Minimize.png">
-                                    <ImageBrush.Transform>
-                                        <ScaleTransform ScaleX=".7" ScaleY=".7"
-                                                        CenterX="20"
-                                                        CenterY="10"/>
-                                    </ImageBrush.Transform>
-                                </ImageBrush>
-                            </Button.Background>
-                        </Button>
-
-                        <Button Style="{DynamicResource MaximizeButtonStyle}" Width="44" Height="21"
-                                BorderThickness="0"
-                                Foreground="Black">
-                            <Button.Background>
-                                <ImageBrush Stretch="None" 
-                                            ImageSource="\Resources\Images\Topbar\Maximize.png">
-                                    <ImageBrush.Transform>
-                                        <ScaleTransform ScaleX=".7" ScaleY=".7"
-                                                        CenterX="20"
-                                                        CenterY="10"/>
-                                    </ImageBrush.Transform>
-                                </ImageBrush>
-                            </Button.Background>
-                        </Button>
-
-                        <Button Style="{DynamicResource CloseButtonStyle}" Width="44" Height="20"
-                                BorderThickness="0"
-                                Foreground="Black">
-                            <Button.Background>
-                                <ImageBrush Stretch="None" 
-                                            ImageSource="\Resources\Images\Topbar\Close.png">
-                                    <ImageBrush.Transform>
-                                        <ScaleTransform ScaleX=".7" ScaleY=".7"
-                                                        CenterX="20"
-                                                        CenterY="10"/>
-                                    </ImageBrush.Transform>
-                                </ImageBrush>
-                            </Button.Background>
-                        </Button>
-
-                    </StackPanel>
-
-                </Grid>
-            </Border>
-            <!-- SideBar -->
-            <Border Grid.Row="1"
-                    Background="#FDFDFD" 
-                    BorderThickness="0,0,2,0"
-                    BorderBrush="#F2F2F2"
-                    CornerRadius="10,10,10,5">
-                <Grid
-                    Margin="0,10,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Grid.Column="0"
-                                HorizontalAlignment="Right"
-                                Orientation="Vertical">
-                        <Button Width="115" Height="39"
-                                BorderThickness="0"
-                                Content="Home"
-                                FontFamily="Roboto"
-                                FontSize="14"
-                                Foreground="#A0A0A0">
-                            <Button.Background>
-                                <ImageBrush Stretch="None" 
-                                            ImageSource="\Resources\Images\Sidebar\Home.png"
-                                            AlignmentX="Left">
-                                    <ImageBrush.Transform>
-                                        <ScaleTransform ScaleX=".6" ScaleY=".6"
-                                                        CenterY="17" CenterX="25"/>
-                                    </ImageBrush.Transform>
-                                </ImageBrush>
-                            </Button.Background>
-                        </Button>
-
-                        <Button Width="115" Height="39"
-                                BorderThickness="0"
-                                Content="Shelfs"
-                                FontFamily="Roboto"
-                                FontSize="14"
-                                Foreground="#A0A0A0">
-                            <Button.Background>
-                                <ImageBrush Stretch="None" 
-                                            ImageSource="\Resources\Images\Sidebar\Shelf.png"
-                                            AlignmentX="Left">
-                                    <ImageBrush.Transform>
-                                        <ScaleTransform ScaleX=".6" ScaleY=".6"
-                                                        CenterY="17" CenterX="25"/>
-                                    </ImageBrush.Transform>
-                                </ImageBrush>
-                            </Button.Background>
-                        </Button>
-
-                        <Button Width="115" Height="39"
-                                BorderThickness="0"
-                                Content="Notes"
-                                FontFamily="Roboto"
-                                FontSize="14"
-                                Foreground="#A0A0A0">
-                            <Button.Background>
-                                <ImageBrush Stretch="None" 
-                                            ImageSource="\Resources\Images\Sidebar\Note.png"
-                                            AlignmentX="Left">
-                                    <ImageBrush.Transform>
-                                        <ScaleTransform ScaleX=".6" ScaleY=".6"
-                                                        CenterY="17" CenterX="25"/>
-                                    </ImageBrush.Transform>
-                                </ImageBrush>
-                            </Button.Background>
-                        </Button>
-
-                    </StackPanel>
-
-                </Grid>
+            <Border CornerRadius="{Binding Path=WindowCornerRadius ,Mode=OneWay, FallbackValue=10}"
+                                        Background="{Binding Path=BackgroundWhiteBrush, Mode=TwoWay, FallbackValue=White}">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" Opacity="0.4" />
+                </Border.Effect>
             </Border>
             
-            <!-- Content -->
-            <Border Background="White"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    BorderBrush="#F2F2F2"
-                    CornerRadius="10,10,5,10">
-                <Grid >
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{Binding Path=TitleHeightGridLength, Mode=OneWay, FallbackValue=21}"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Background="red" Grid.Column="0" Panel.ZIndex="1">
                     
                 </Grid>
-            </Border>
+            </Grid>
+
         </Grid>
     </Border>
+    
 </Window>
