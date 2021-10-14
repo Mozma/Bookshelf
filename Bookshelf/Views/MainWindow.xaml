@@ -39,13 +39,20 @@
                 Background="{StaticResource BackgroundLightGrayBrush}"
                 CornerRadius="10"
                 BorderThickness="0"
-                Padding="1,10,1,1">
+                Padding="0,10,1,1">
 
-                <StackPanel >
-                    <Button Style="{StaticResource TransparentTextButton}"  Content="dsds"/>
-                    <Button Content="dsdsd"/>
-                    <Button/>
+                <StackPanel Grid.Column="0"
+                                HorizontalAlignment="left"
+                                Orientation="Vertical">
 
+                    <Button Style="{StaticResource SidebarHomeButton}"/>
+                    <Button Style="{StaticResource SidebarShelfButton}"/>
+                    <Button Style="{StaticResource SidebarNoteButton}"/>
+
+                    <!--<local:SidebarButton Height="39">
+                        
+                    </local:SidebarButton>-->
+                        
                 </StackPanel>
             </Border>
 
