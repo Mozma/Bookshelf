@@ -11,58 +11,55 @@
         WindowStyle="None"       
         Background="Transparent"
         AllowsTransparency="True"
-        
+        MinHeight="{Binding Path=MinHeight, Mode=OneWay}"
+        MinWidth="{Binding Path=MinWidth, Mode=OneWay}"
         x:Name="AppMainWindow"
         WindowStartupLocation="CenterScreen"
-        >
+        Style="{StaticResource ModernWindowStyle}">
 
-    <!--<Window.Resources>
-        <Style TargetType="{x:Type local:MainWindow}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Window}">
-                       
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>-->
 
     <WindowChrome.WindowChrome>
-        <WindowChrome
-              
-        ResizeBorderThickness="{Binding ResizeBorderThickness}"
-        CaptionHeight="{Binding TitleHeight}"
-        CornerRadius="0"
-        GlassFrameThickness="0"
-            />
-
+        <WindowChrome ResizeBorderThickness="{Binding ResizeBorderThickness}"
+                      CaptionHeight="{Binding TitleHeight}"
+                      CornerRadius="0"
+                      GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
-    
-    <Border Padding="{Binding Path=OuterMarginSizeThikness, Mode=OneWay, FallbackValue=6}">
-        <!-- Main window outline -->
-        <Grid>
 
-            <Border CornerRadius="{Binding Path=WindowCornerRadius ,Mode=OneWay, FallbackValue=10}"
-                                        Background="{Binding Path=BackgroundWhiteBrush, Mode=TwoWay, FallbackValue=White}">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0" Opacity="0.4" />
-                </Border.Effect>
+
+    <Border Background="{StaticResource BackgroundDarkGrayBrush}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Sidebar -->
+            <Border
+                Grid.Column="0"
+                Background="{StaticResource BackgroundLightGrayBrush}"
+                CornerRadius="10"
+                BorderThickness="0"
+                Padding="1,10,1,1">
+
+                <StackPanel >
+                    <Button Style="{StaticResource TransparentTextButton}"  Content="dsds"/>
+                    <Button Content="dsdsd"/>
+                    <Button/>
+
+                </StackPanel>
+            </Border>
+
+            <Border 
+                Grid.Column="2"
+                Background="{StaticResource BackgroundWhiteBrush}"
+                CornerRadius="10"
+                BorderThickness="0">
+
+                <Grid>
+
+                </Grid>
             </Border>
             
-            <Grid>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="{Binding Path=TitleHeightGridLength, Mode=OneWay, FallbackValue=21}"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid Background="red" Grid.Column="0" Panel.ZIndex="1">
-                    
-                </Grid>
-            </Grid>
-
         </Grid>
     </Border>
-    
 </Window>
