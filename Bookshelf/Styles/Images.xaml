@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <system:String x:Key="HomePath">/Resources/Images/Sidebar/Home.png</system:String>
+    <BitmapImage x:Key="HomeIcon" UriSource="/Resources/Images/Sidebar/Home.png" />
+
+    <system:String x:Key="NotePath">/Resources/Images/Sidebar/Note.png</system:String>
+    <BitmapImage x:Key="NoteIcon" UriSource="/Resources/Images/Sidebar/Note.png" />
+
+    <system:String x:Key="ShelfPath">/Resources/Images/Sidebar/Shelf.png</system:String>
+    <BitmapImage x:Key="ShelfIcon" UriSource="/Resources/Images/Sidebar/Shelf.png" />
+    
+</ResourceDictionary>

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bookshelf"
+        xmlns:local="clr-namespace:Bookshelf" xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="780" 
@@ -25,6 +25,9 @@
                       GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
 
+    <Window.Resources>
+        
+    </Window.Resources>
 
     <Border Background="{StaticResource BackgroundDarkGrayBrush}">
         <Grid>
@@ -42,17 +45,13 @@
                 Padding="0,10,1,1">
 
                 <StackPanel Grid.Column="0"
-                                HorizontalAlignment="left"
-                                Orientation="Vertical">
+                            HorizontalAlignment="left"
+                            Orientation="Vertical">
 
-                    <Button Style="{StaticResource SidebarHomeButton}"/>
-                    <Button Style="{StaticResource SidebarShelfButton}"/>
-                    <Button Style="{StaticResource SidebarNoteButton}"/>
-
-                    <!--<local:SidebarButton Height="39">
-                        
-                    </local:SidebarButton>-->
-                        
+                    <customcontrols:SideBarMenuButton Icon="{StaticResource HomeIcon}" ButtonContent="Home"/>
+                    <customcontrols:SideBarMenuButton Icon="{StaticResource NoteIcon}" ButtonContent="Note"/>
+                    <customcontrols:SideBarMenuButton Icon="{StaticResource ShelfIcon}" ButtonContent="Shelf"/>
+                    
                 </StackPanel>
             </Border>
 

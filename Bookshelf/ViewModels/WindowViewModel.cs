@@ -1,9 +1,4 @@
 ﻿using Bookshelf.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -20,14 +15,14 @@ namespace Bookshelf
 
         #region Properties
         public int ResizeBorder { get; set; } = 4;
-        public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder + OuterMarginSize); }  }
-        public int OuterMarginSize 
-        { 
-            get 
-            { 
+        public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder + OuterMarginSize); } }
+        public int OuterMarginSize
+        {
+            get
+            {
                 return currentWindow.WindowState == WindowState.Maximized ? 0 : outerMarginSize;
             }
-            set 
+            set
             {
                 outerMarginSize = value;
             }
