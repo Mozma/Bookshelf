@@ -1,4 +1,5 @@
 ﻿using Bookshelf.Helpers;
+using Bookshelf.ViewModels;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,8 +13,23 @@ namespace Bookshelf
         private Window currentWindow;
         private int outerMarginSize = 10;
         private int windowRadius = 5;
+        private BaseViewModel currentViewModel;
 
         #region Properties
+
+        public HomeViewModel HomeVM { get; set; }
+        public ShelfsViewModel ShelfsVM { get; set; }
+        public NotesViewModel NotesVM { get; set; }
+
+
+        public BaseViewModel CurrentViewModel 
+        { 
+            get { return currentViewModel; } 
+            set { currentViewModel = value;
+                OnPropertyChanged();
+            } 
+        }
+
         public int ResizeBorder { get; set; } = 4;
         public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder + OuterMarginSize); } }
         public int OuterMarginSize
@@ -52,11 +68,20 @@ namespace Bookshelf
         public ICommand MinimizeCommand { get; set; }
         public ICommand MaximizeCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand HomeViewCommand { get; set; }
+        public ICommand NotesViewCommand { get; set; }
+        public ICommand ShelfsViewCommand { get; set; }
+
 
         #endregion
 
         public WindowViewModel(Window window)
         {
+            HomeVM = new HomeViewModel();
+            ShelfsVM = new ShelfsViewModel();
+            NotesVM = new NotesViewModel();
+            currentViewModel = HomeVM;
+
             currentWindow = window;
             currentWindow.StateChanged += (sender, e) =>
             {
@@ -69,9 +94,20 @@ namespace Bookshelf
                 OnPropertyChanged(nameof(TitleHeightGridLength));
             };
 
-            MinimizeCommand = new RelayCommand(() => currentWindow.WindowState = WindowState.Minimized);
-            MaximizeCommand = new RelayCommand(() => currentWindow.WindowState ^= WindowState.Maximized);
-            CloseCommand = new RelayCommand(() => currentWindow.Close());
+            MinimizeCommand = new RelayCommand(o => currentWindow.WindowState = WindowState.Minimized);
+            MaximizeCommand = new RelayCommand(o => currentWindow.WindowState ^= WindowState.Maximized);
+            CloseCommand = new RelayCommand(o => currentWindow.Close());
+
+            HomeViewCommand = new RelayCommand(o => {
+                CurrentViewModel = HomeVM;
+            });
+            ShelfsViewCommand = new RelayCommand(o => {
+                CurrentViewModel = ShelfsVM; 
+            });
+            NotesViewCommand = new RelayCommand(o => {
+                CurrentViewModel = NotesVM;
+            });
+
 
             var resizer = new WindowResizer(currentWindow);
         }

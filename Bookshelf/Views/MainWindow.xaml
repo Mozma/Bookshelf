@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bookshelf" 
+        xmlns:view="clr-namespace:Bookshelf.Views"
+        xmlns:viewmodel="clr-namespace:Bookshelf.ViewModels"
         xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
     mc:Ignorable="d"
         Title="MainWindow" 
@@ -17,7 +19,6 @@
         x:Name="AppMainWindow"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource ModernWindowStyle}">
-    
 
 
     <WindowChrome.WindowChrome>
@@ -26,11 +27,7 @@
                       CornerRadius="0"
                       GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
-
-    <Window.Resources>
-        
-    </Window.Resources>
-
+    
     <Border Background="{StaticResource BackgroundDarkGrayBrush}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -50,9 +47,15 @@
                             HorizontalAlignment="left"
                             Orientation="Vertical">
 
-                    <customcontrols:SideBarMenuButton Icon="{StaticResource HomeIcon}" ButtonContent="Home"/>
-                    <customcontrols:SideBarMenuButton Icon="{StaticResource NoteIcon}" ButtonContent="Note"/>
-                    <customcontrols:SideBarMenuButton Icon="{StaticResource ShelfIcon}" ButtonContent="Shelf"/>
+                    <customcontrols:SideBarMenuButton Icon="{StaticResource HomeIcon}" 
+                                                      ButtonContent="Home"
+                                                      Command="{Binding HomeViewCommand}"/>
+                    <customcontrols:SideBarMenuButton Icon="{StaticResource NoteIcon}" 
+                                                      ButtonContent="Note"
+                                                      Command="{Binding NotesViewCommand}"/>
+                    <customcontrols:SideBarMenuButton Icon="{StaticResource ShelfIcon}" 
+                                                      ButtonContent="Shelf"
+                                                      Command="{Binding ShelfsViewCommand}"/>
                     
                 </StackPanel>
             </Border>
@@ -64,7 +67,10 @@
                 BorderThickness="0"
                 Padding="5">
 
-                <Grid>
+
+                <ContentControl  Content="{Binding CurrentViewModel}"/>
+
+                <!--<Grid>
                     <StackPanel HorizontalAlignment="Left" >
                         <customcontrols:BookListItem Width="400"/>
                         <customcontrols:BookListItem Width="400"/>
@@ -75,7 +81,7 @@
                     </StackPanel>
                     
                     
-                </Grid>
+                </Grid>-->
             </Border>
             
         </Grid>

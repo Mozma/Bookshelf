@@ -7,16 +7,17 @@
              mc:Ignorable="d" 
              x:Name="this">
     <UserControl.Resources>
-        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TransparentButton}">
+        <Style TargetType="{x:Type Button}">
             <Setter Property="Width" Value="115"/>
             <Setter Property="Height" Value="39"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Foreground" Value="{StaticResource ForegroundDarkGrayBrush}"/>
             <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Command" Value="{Binding HomeViewCommand}"/>
             <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid x:Name="grid" Background="{StaticResource BackgroundLightGrayBrush}">
+                <Setter.Value>
+                  <ControlTemplate TargetType="Button">
+                        <Grid x:Name="grid" Background="{StaticResource BackgroundLightGrayBrush}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="7"/>
                             <ColumnDefinition Width="39"/>
@@ -68,6 +69,9 @@
             </Setter>
         </Style>
     </UserControl.Resources>
+
+
+
+    <Button Command="{Binding Command, ElementName=this}"/>
     
-    <Button/>
 </UserControl>

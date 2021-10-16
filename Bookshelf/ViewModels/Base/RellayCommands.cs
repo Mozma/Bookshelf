@@ -3,62 +3,32 @@ using System.Windows.Input;
 
 namespace Bookshelf
 {
-    /// <summary>
-    /// A basic command that runs an Action
-    /// </summary>
+
     public class RelayCommand : ICommand
     {
-        #region Private Members
+        private Action<object> execute;
+        private Func<object, bool> canExecute;
 
-        /// <summary>
-        /// The action to run
-        /// </summary>
-        private Action mAction;
-
-        #endregion
-
-        #region Public Events
-
-        /// <summary>
-        /// The event thats fired when the <see cref="CanExecute(object)"/> value has changed
-        /// </summary>
-        public event EventHandler CanExecuteChanged = (sender, e) => { };
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public RelayCommand(Action action)
+        public event EventHandler CanExecuteChanged 
         {
-            mAction = action;
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
 
-        #endregion
-
-        #region Command Methods
-
-        /// <summary>
-        /// A relay command can always execute
-        /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
-        public bool CanExecute(object parameter)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
-            return true;
+            this.execute = execute;
+            this.canExecute = canExecute;
         }
 
-        /// <summary>
-        /// Executes the commands Action
-        /// </summary>
-        /// <param name="parameter"></param>
-        public void Execute(object parameter)
+        public bool CanExecute(object? parameter)
         {
-            mAction();
+            return canExecute == null || canExecute(parameter);
         }
 
-        #endregion
+        public void Execute(object? parameter)
+        {
+           execute(parameter);
+        }
     }
 }

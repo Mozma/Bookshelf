@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace Bookshelf.CustomControls
@@ -33,9 +34,28 @@ namespace Bookshelf.CustomControls
             DependencyProperty.Register("ButtonContent", typeof(string), typeof(SideBarMenuButton), new PropertyMetadata("Button Content"));
 
 
+
+
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Command.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CommandProperty =
+            DependencyProperty.Register("Command", typeof(ICommand), typeof(SideBarMenuButton));
+
+
+
+
         public SideBarMenuButton()
         {
             InitializeComponent();
+
         }
+
+
+
     }
 }
