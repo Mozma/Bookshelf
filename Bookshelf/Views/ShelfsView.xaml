@@ -33,12 +33,7 @@
                     CornerRadius="2"
                     />
             <StackPanel Grid.Row="2" HorizontalAlignment="Left">
-                <customcontrols:BookListItem/>
-                <customcontrols:BookListItem/>
-                <customcontrols:BookListItem/>
-                <customcontrols:BookListItem/>
-                <customcontrols:BookListItem/>
-                <customcontrols:BookListItem/>
+                <customcontrols:BookListControl Width="400"/>
             </StackPanel>
 
             </Grid>

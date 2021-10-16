@@ -7,9 +7,9 @@ namespace Bookshelf.CustomControls
     /// <summary>
     /// Interaction logic for SideBarMenuButton.xaml
     /// </summary>
-    public partial class BookListItem : UserControl
+    public partial class BookListItemControl : UserControl
     {
-        public BookListItem()
+        public BookListItemControl()
         {
             InitializeComponent();
         }

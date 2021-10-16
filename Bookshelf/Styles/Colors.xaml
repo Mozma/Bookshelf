@@ -22,4 +22,7 @@
     <Color x:Key="ForegroundBlack">#000000</Color>
     <SolidColorBrush x:Key="ForegroundBlackBrush" Color="{StaticResource ForegroundBlack}"/>
 
+    <Color x:Key="BackgroundSilver">#FAFAFA</Color>
+    <SolidColorBrush x:Key="BackgroundSilverBrush" Color="{StaticResource BackgroundSilver}"/>
+
 </ResourceDictionary>

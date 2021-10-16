@@ -47,6 +47,7 @@
                             HorizontalAlignment="left"
                             Orientation="Vertical">
 
+                    
                     <customcontrols:SideBarMenuButton Icon="{StaticResource HomeIcon}" 
                                                       ButtonContent="Home"
                                                       Command="{Binding HomeViewCommand}"/>

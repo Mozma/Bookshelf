@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <None Remove="Resources\Fonts\fontawesome-webfont.ttf" />
+    <None Remove="Resources\Images\DesginTime\decart.png" />
+    <None Remove="Resources\Images\DesginTime\default.png" />
     <None Remove="Resources\Images\Sidebar\Home.png" />
     <None Remove="Resources\Images\Sidebar\HomeOld.png" />
     <None Remove="Resources\Images\Sidebar\Note.png" />
@@ -35,6 +37,8 @@
 
   <ItemGroup>
     <Resource Include="Resources\Fonts\fontawesome-webfont.ttf" />
+    <Resource Include="Resources\Images\DesginTime\decart.png" />
+    <Resource Include="Resources\Images\DesginTime\default.png" />
     <Resource Include="Resources\Images\Sidebar\HomeOld.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -72,7 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CustomControls\BookListItem.xaml.cs">
+    <Compile Update="CustomControls\BookListItemControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\NotesView.xaml.cs">
@@ -81,7 +85,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="CustomControls\BookListItem.xaml">
+    <Page Update="CustomControls\BookListItemControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
