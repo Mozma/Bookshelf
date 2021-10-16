@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bookshelf" xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:Bookshelf" 
+        xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
+    mc:Ignorable="d"
         Title="MainWindow" 
         Height="780" 
         Width="1300"
@@ -16,6 +17,7 @@
         x:Name="AppMainWindow"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource ModernWindowStyle}">
+    
 
 
     <WindowChrome.WindowChrome>
@@ -59,10 +61,20 @@
                 Grid.Column="2"
                 Background="{StaticResource BackgroundWhiteBrush}"
                 CornerRadius="10"
-                BorderThickness="0">
+                BorderThickness="0"
+                Padding="5">
 
                 <Grid>
+                    <StackPanel HorizontalAlignment="Left" >
+                        <customcontrols:BookListItem Width="400"/>
+                        <customcontrols:BookListItem Width="400"/>
+                        <customcontrols:BookListItem Width="400"/>
+                        <customcontrols:BookListItem Width="400"/>
 
+
+                    </StackPanel>
+                    
+                    
                 </Grid>
             </Border>
             
