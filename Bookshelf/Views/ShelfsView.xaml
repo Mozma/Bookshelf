@@ -3,14 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Bookshelf.Views"
+             xmlns:local="clr-namespace:Bookshelf.Views" xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
              mc:Ignorable="d" 
-             >
-    <Grid>
-        <TextBlock Text="Shelfs View" 
-                   FontSize="72"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   />
-    </Grid>
+           MinHeight="500"
+             MinWidth="600">
+
+    <Border 
+            Background="{StaticResource BackgroundWhiteBrush}"
+            CornerRadius="10"
+            BorderThickness="0"
+            Padding="15,7,15,0">
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="4"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0"
+                       Text="Shelfs"
+                       FontSize="64"
+                       TextTrimming="CharacterEllipsis"
+                       HorizontalAlignment="Left"
+                       />
+
+            <Border Grid.Row="1"
+                    Background="{StaticResource BackgroundDarkGrayBrush}"
+                    CornerRadius="2"
+                    />
+            <StackPanel Grid.Row="2" HorizontalAlignment="Left">
+                <customcontrols:BookListItem/>
+                <customcontrols:BookListItem/>
+                <customcontrols:BookListItem/>
+                <customcontrols:BookListItem/>
+                <customcontrols:BookListItem/>
+                <customcontrols:BookListItem/>
+            </StackPanel>
+
+            </Grid>
+    </Border>
+    
 </UserControl>

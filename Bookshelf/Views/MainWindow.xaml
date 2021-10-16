@@ -60,28 +60,10 @@
                 </StackPanel>
             </Border>
 
-            <Border 
-                Grid.Column="2"
-                Background="{StaticResource BackgroundWhiteBrush}"
-                CornerRadius="10"
-                BorderThickness="0"
-                Padding="5">
+            <Border  Grid.Column="2">
+                <view:ShelfsView />
 
-
-                <ContentControl  Content="{Binding CurrentViewModel}"/>
-
-                <!--<Grid>
-                    <StackPanel HorizontalAlignment="Left" >
-                        <customcontrols:BookListItem Width="400"/>
-                        <customcontrols:BookListItem Width="400"/>
-                        <customcontrols:BookListItem Width="400"/>
-                        <customcontrols:BookListItem Width="400"/>
-
-
-                    </StackPanel>
-                    
-                    
-                </Grid>-->
+                <!--<ContentControl  Content="{Binding CurrentViewModel}"/>-->
             </Border>
             
         </Grid>
