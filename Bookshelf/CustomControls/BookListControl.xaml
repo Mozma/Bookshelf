@@ -1,42 +1,91 @@
 ﻿<UserControl x:Class="Bookshelf.CustomControls.BookListControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Bookshelf.CustomControls"
              xmlns:design="clr-namespace:Bookshelf.ViewModels"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+
     <Grid Background="White">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" 
-                    Style="{StaticResource TransparentTextButton}"
-                    Content="v"
-                    Foreground="black"
-                    FontSize="36"/>
-            <TextBlock Grid.Column="2" Text="Философия" 
-                   FontSize="36"/>
+            <Border HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Padding="10">
+                <Polygon Points="0,0 8,5, 0,10"
+                         Stroke="Black"
+                         Fill="Black"
+                         RenderTransformOrigin="0.5, 0.5"
+                         x:Name="poly">
+                    <Polygon.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform x:Name="angle"
+                                             Angle="90" />
+                            <ScaleTransform  ScaleX="1.2"
+                                             ScaleY="1.2" />
+                        </TransformGroup>
+                    </Polygon.RenderTransform>
+                    
+                    <Polygon.Triggers>
+                        
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="poly"
+                                                     Storyboard.TargetProperty="RenderTransform.Children[0].(RotateTransform.Angle)"
+                                                     From="90"
+                                                     To="0"
+                                                     Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="poly"
+                                                     Storyboard.TargetProperty="RenderTransform.Children[0].(RotateTransform.Angle)"
+                                                     From="0"
+                                                     To="90"
+                                                     Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        
+                    </Polygon.Triggers>
+                </Polygon>
+
+            </Border>
+
+            <TextBlock Grid.Column="2"
+                       Text="Философия"
+                       FontSize="36" />
         </Grid>
         <Grid Grid.Row="1"
-            DataContext="{x:Static design:BookListDesignModel.Instance}">
+              DataContext="{x:Static design:BookListDesignModel.Instance}">
             <Border Padding="0,5,0, 0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding Items}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <local:BookListItemControl/>
+                                <local:BookListItemControl />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

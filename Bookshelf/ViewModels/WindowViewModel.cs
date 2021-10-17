@@ -22,12 +22,14 @@ namespace Bookshelf
         public NotesViewModel NotesVM { get; set; }
 
 
-        public BaseViewModel CurrentViewModel 
-        { 
-            get { return currentViewModel; } 
-            set { currentViewModel = value;
+        public BaseViewModel CurrentViewModel
+        {
+            get { return currentViewModel; }
+            set
+            {
+                currentViewModel = value;
                 OnPropertyChanged();
-            } 
+            }
         }
 
         public int ResizeBorder { get; set; } = 4;
@@ -98,13 +100,16 @@ namespace Bookshelf
             MaximizeCommand = new RelayCommand(o => currentWindow.WindowState ^= WindowState.Maximized);
             CloseCommand = new RelayCommand(o => currentWindow.Close());
 
-            HomeViewCommand = new RelayCommand(o => {
+            HomeViewCommand = new RelayCommand(o =>
+            {
                 CurrentViewModel = HomeVM;
             });
-            ShelfsViewCommand = new RelayCommand(o => {
-                CurrentViewModel = ShelfsVM; 
+            ShelfsViewCommand = new RelayCommand(o =>
+            {
+                CurrentViewModel = ShelfsVM;
             });
-            NotesViewCommand = new RelayCommand(o => {
+            NotesViewCommand = new RelayCommand(o =>
+            {
                 CurrentViewModel = NotesVM;
             });
 

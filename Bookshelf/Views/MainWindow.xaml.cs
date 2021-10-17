@@ -1,5 +1,4 @@
-﻿using Bookshelf.ViewModels;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Bookshelf
 {

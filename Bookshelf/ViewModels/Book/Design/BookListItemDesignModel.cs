@@ -1,8 +1,8 @@
 ﻿using Bookshelf.ViewModels.Book;
 using System;
 
-namespace Bookshelf.ViewModels 
-{ 
+namespace Bookshelf.ViewModels
+{
     public class BookListItemDesignModel : BookListItemViewModel
     {
 

@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bookshelf" 
+        xmlns:local="clr-namespace:Bookshelf"
         xmlns:view="clr-namespace:Bookshelf.Views"
         xmlns:viewmodel="clr-namespace:Bookshelf.ViewModels"
         xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
-    mc:Ignorable="d"
-        Title="MainWindow" 
-        Height="780" 
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="780"
         Width="1300"
-        WindowStyle="None"       
+        WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
         MinHeight="{Binding Path=MinHeight, Mode=OneWay}"
@@ -20,53 +20,50 @@
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource ModernWindowStyle}">
 
-
     <WindowChrome.WindowChrome>
         <WindowChrome ResizeBorderThickness="{Binding ResizeBorderThickness}"
                       CaptionHeight="{Binding TitleHeight}"
                       CornerRadius="0"
-                      GlassFrameThickness="0"/>
+                      GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
-    
+
     <Border Background="{StaticResource BackgroundDarkGrayBrush}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="2"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="2" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!-- Sidebar -->
-            <Border
-                Grid.Column="0"
-                Background="{StaticResource BackgroundLightGrayBrush}"
-                CornerRadius="10"
-                BorderThickness="0"
-                Padding="0,10,1,1">
+            <Border Grid.Column="0"
+                    Background="{StaticResource BackgroundLightGrayBrush}"
+                    CornerRadius="10"
+                    BorderThickness="0"
+                    Padding="0,10,0,1">
 
                 <StackPanel Grid.Column="0"
-                            HorizontalAlignment="left"
+                            HorizontalAlignment="Stretch"
                             Orientation="Vertical">
 
-                    
-                    <customcontrols:SideBarMenuButton Icon="{StaticResource HomeIcon}" 
+                    <customcontrols:SideBarMenuButton Icon="{StaticResource HomeIcon}"
                                                       ButtonContent="Home"
-                                                      Command="{Binding HomeViewCommand}"/>
-                    <customcontrols:SideBarMenuButton Icon="{StaticResource NoteIcon}" 
+                                                      Command="{Binding HomeViewCommand}" />
+                    <customcontrols:SideBarMenuButton Icon="{StaticResource NoteIcon}"
                                                       ButtonContent="Note"
-                                                      Command="{Binding NotesViewCommand}"/>
-                    <customcontrols:SideBarMenuButton Icon="{StaticResource ShelfIcon}" 
+                                                      Command="{Binding NotesViewCommand}" />
+                    <customcontrols:SideBarMenuButton Icon="{StaticResource ShelfIcon}"
                                                       ButtonContent="Shelf"
-                                                      Command="{Binding ShelfsViewCommand}"/>
-                    
+                                                      Command="{Binding ShelfsViewCommand}" />
+
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="2">
-                <view:ShelfsView />
+                <!--<view:ShelfsView />-->
 
-                <!--<ContentControl  Content="{Binding CurrentViewModel}"/>-->
+                <ContentControl  Content="{Binding CurrentViewModel}"/>
             </Border>
-            
+
         </Grid>
     </Border>
 </Window>

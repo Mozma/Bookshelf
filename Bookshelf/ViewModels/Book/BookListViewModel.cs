@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 
 namespace Bookshelf.ViewModels.Book
 {
     public class BookListViewModel : BaseViewModel
     {
-    public List<BookListItemViewModel> Items { get; set; }
+        public List<BookListItemViewModel> Items { get; set; }
 
     }
 }
