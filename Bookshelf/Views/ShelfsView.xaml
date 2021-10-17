@@ -32,8 +32,11 @@
                     Background="{StaticResource BackgroundDarkGrayBrush}"
                     CornerRadius="2"
                     />
-            <StackPanel Grid.Row="2" HorizontalAlignment="Left">
-                <customcontrols:BookListControl Width="400"/>
+            <StackPanel Grid.Row="2">
+                <customcontrols:BookListControl HorizontalAlignment="Stretch"/>
+                <customcontrols:BookListControl HorizontalAlignment="Stretch" />
+                <customcontrols:BookListControl HorizontalAlignment="Stretch" />
+                <customcontrols:BookListControl HorizontalAlignment="Stretch" />
             </StackPanel>
 
             </Grid>

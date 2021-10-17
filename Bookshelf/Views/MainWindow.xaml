@@ -59,9 +59,9 @@
             </Border>
 
             <Border  Grid.Column="2">
-                <!--<view:ShelfsView />-->
+                <view:ShelfsView />
 
-                <ContentControl  Content="{Binding CurrentViewModel}"/>
+                <!--<ContentControl  Content="{Binding CurrentViewModel}"/>-->
             </Border>
 
         </Grid>
