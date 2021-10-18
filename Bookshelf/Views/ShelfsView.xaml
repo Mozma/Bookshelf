@@ -7,20 +7,17 @@
              xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
              xmlns:design="clr-namespace:Bookshelf.ViewModels"
              mc:Ignorable="d"
-             MinHeight="500"
-             MinWidth="600"
              d:Height="500"
              d:Width="900">
 
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"
-            BorderThickness="0"
-            Padding="15,7,15,0">
+            BorderThickness="0">
         <Grid>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="75" />
-                <RowDefinition Height="4" />
+                <RowDefinition Height="3" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -28,27 +25,31 @@
                        Text="Shelfs"
                        FontSize="64"
                        TextTrimming="CharacterEllipsis"
-                       HorizontalAlignment="Left" />
+                       HorizontalAlignment="Left"
+                       Padding="15,5,0,0" />
 
             <Border Grid.Row="1"
-                    Background="{StaticResource BackgroundDarkGrayBrush}"
-                    CornerRadius="2" />
-            
-            <StackPanel Grid.Row="2"
-                        DataContext="{x:Static design:ShelfListDesignModel.Instance}">
+                    Padding="15,0,15,0">
+                <Border CornerRadius="2"
+                        Background="{StaticResource BackgroundDarkGrayBrush}" />
+            </Border>
 
-                <ScrollViewer VerticalScrollBarVisibility="Visible">
-                    <ItemsControl ItemsSource="{Binding Items}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <customcontrols:BookListControl HorizontalAlignment="Stretch" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-                
-            </StackPanel>
-            
+            <Border Grid.Row="2"
+                    Padding="15,0,0,0">
+                <Grid DataContext="{x:Static design:ShelfListDesignModel.Instance}">
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding Items}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <customcontrols:BookListControl HorizontalAlignment="Stretch" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                </Grid>
+            </Border>
         </Grid>
     </Border>
 

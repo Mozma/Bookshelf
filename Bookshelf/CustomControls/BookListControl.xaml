@@ -10,10 +10,12 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    <Grid Background="White">
+    <Border Padding="0,7,0,0"
+        Background="White">
+    <Grid >
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -71,4 +73,5 @@
         </Grid>
 
     </Grid>
+    </Border>
 </UserControl>

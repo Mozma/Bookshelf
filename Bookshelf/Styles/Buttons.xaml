@@ -157,9 +157,8 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="poly"
                                                          Storyboard.TargetProperty="RenderTransform.Children[0].(RotateTransform.Angle)"
-                                                         From="0"
                                                          To="90"
-                                                         Duration="0:0:0.3" />
+                                                         Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -168,7 +167,6 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="poly"
                                                          Storyboard.TargetProperty="RenderTransform.Children[0].(RotateTransform.Angle)"
-                                                         From="90"
                                                          To="0"
                                                          Duration="0:0:0.2" />
                                     </Storyboard>
