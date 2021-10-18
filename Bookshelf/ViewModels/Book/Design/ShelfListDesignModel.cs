@@ -93,8 +93,76 @@ namespace Bookshelf.ViewModels
                 {
                     Name=  "Разное",
                     Items = new List<BookListItemViewModel>()
-                }
+                },
 
+                new ShelfListItemViewModel()
+                {
+                    Name=  "Философия",
+                    Items = new List<BookListItemViewModel>
+                    {
+                        new BookListItemViewModel()
+                        {
+                            Title = "Сомневайся во всём",
+                            Author = "Рене Декарт",
+                            Cover = new BitmapImage(new Uri(@"C:\Users\ilmoz\Source\Repos\Bookshelf\Bookshelf\Resources\Images\DesginTime\decart.png", UriKind.RelativeOrAbsolute))
+                        },
+                        new BookListItemViewModel()
+                        {
+                            Title = "Рассуждения о методе",
+                            Author = "Рене Декарт"
+                        },
+                        new BookListItemViewModel()
+                        {
+                            Title = "Афоризмы житейской мудрости",
+                            Author = "Артур Шопенгауэр"
+                        },
+                        new BookListItemViewModel()
+                        {
+                            Title = "Мир как Воля и Представление",
+                            Author = "Артур Шопенгауэр"
+                        },
+                        new BookListItemViewModel()
+                        {
+                            Title = "Париж",
+                            Author = "Эдвард Резерфорд",
+                                Cover = new BitmapImage(new Uri(@"C:\Users\ilmoz\Source\Repos\Bookshelf\Bookshelf\Resources\Images\DesginTime\edvard.jpg", UriKind.RelativeOrAbsolute))
+                        }
+                    }
+                },
+                 new ShelfListItemViewModel()
+                {
+                    Name=  "Философия",
+                    Items = new List<BookListItemViewModel>
+                    {
+                        new BookListItemViewModel()
+                        {
+                            Title = "Сомневайся во всём",
+                            Author = "Рене Декарт",
+                            Cover = new BitmapImage(new Uri(@"C:\Users\ilmoz\Source\Repos\Bookshelf\Bookshelf\Resources\Images\DesginTime\decart.png", UriKind.RelativeOrAbsolute))
+                        },
+                        new BookListItemViewModel()
+                        {
+                            Title = "Рассуждения о методе",
+                            Author = "Рене Декарт"
+                        },
+                        new BookListItemViewModel()
+                        {
+                            Title = "Афоризмы житейской мудрости",
+                            Author = "Артур Шопенгауэр"
+                        },
+                        new BookListItemViewModel()
+                        {
+                            Title = "Мир как Воля и Представление",
+                            Author = "Артур Шопенгауэр"
+                        },
+                        new BookListItemViewModel()
+                        {
+                            Title = "Париж",
+                            Author = "Эдвард Резерфорд",
+                                Cover = new BitmapImage(new Uri(@"C:\Users\ilmoz\Source\Repos\Bookshelf\Bookshelf\Resources\Images\DesginTime\edvard.jpg", UriKind.RelativeOrAbsolute))
+                        }
+                    }
+                }
             };
 
         }

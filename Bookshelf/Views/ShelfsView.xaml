@@ -35,7 +35,22 @@
             </Border>
 
             <Border Grid.Row="2"
-                    Padding="15,0,0,0">
+                    Padding="15,5,0,0">
+                <Border.OpacityMask>
+                    <LinearGradientBrush EndPoint="0.5,1"
+                                         StartPoint="0.5,0">
+
+                        <GradientStop Color="Transparent"
+                                      Offset="0" />
+                        <GradientStop Color="Black"
+                                      Offset="0.01" />
+                        <GradientStop Color="Black"
+                                      Offset="0.99" />
+                        <GradientStop Color="Transparent"
+                                      Offset="1" />
+
+                    </LinearGradientBrush>
+                </Border.OpacityMask>
                 <Grid DataContext="{x:Static design:ShelfListDesignModel.Instance}">
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
