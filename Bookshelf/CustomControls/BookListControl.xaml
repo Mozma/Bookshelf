@@ -33,43 +33,39 @@
                 <ToggleButton x:Name="toggleButton"
                               Style="{StaticResource CollapsingToggleButton}"
                               IsChecked="{Binding IsOpen,FallbackValue=true}">
-                    
+
                 </ToggleButton>
 
             </Border>
 
             <TextBlock Grid.Column="2"
-                       Text="Философия"
-                       FontSize="36"
-                       TextTrimming="CharacterEllipsis" />
+                       Text="{Binding Name, FallbackValue=Заголовок }"
+                       FontSize="24"
+                       TextTrimming="CharacterEllipsis"
+                       VerticalAlignment="Center" />
         </Grid>
 
         <!-- Shelf preview -->
         <Grid x:Name="content"
               Grid.Row="1"
-              Visibility="{Binding IsChecked, ElementName=toggleButton, Converter={StaticResource BooleanToVisibilityConverter}}"
-              >
-            <Grid DataContext="{x:Static design:BookListDesignModel.Instance}">
+              Visibility="{Binding IsChecked, ElementName=toggleButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid>
                 <Border Padding="0,5,0, 0">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Items, FallbackValue=.....}">
 
-                        <ItemsControl ItemsSource="{Binding Items}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:BookListItemControl HorizontalAlignment="Stretch" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
 
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <local:BookListItemControl HorizontalAlignment="Stretch" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel ItemWidth="350" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel ItemWidth="350" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-
-                        </ItemsControl>
-
-                    </ScrollViewer>
+                    </ItemsControl>
                 </Border>
             </Grid>
         </Grid>

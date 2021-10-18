@@ -142,8 +142,8 @@
                                 <TransformGroup>
                                     <RotateTransform x:Name="angle"
                                                      Angle="90" />
-                                    <ScaleTransform  ScaleX="1.2"
-                                                     ScaleY="1.2" />
+                                    <ScaleTransform  ScaleX="1"
+                                                     ScaleY="1" />
                                 </TransformGroup>
                             </Polygon.RenderTransform>
                         </Polygon>
