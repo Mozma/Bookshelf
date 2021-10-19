@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Bookshelf.Views.ShelfsView"
+﻿<UserControl x:Class="Bookshelf.Views.ShelvesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -22,7 +22,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
-                       Text="Shelfs"
+                       Text="Shelves"
                        FontSize="64"
                        TextTrimming="CharacterEllipsis"
                        HorizontalAlignment="Left"

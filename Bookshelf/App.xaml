@@ -25,7 +25,7 @@
                 <view:NotesView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodel:ShelfsViewModel}">
-                <view:ShelfsView />
+                <view:ShelvesView />
             </DataTemplate>
         </ResourceDictionary>
 

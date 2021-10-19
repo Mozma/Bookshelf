@@ -8,5 +8,10 @@ namespace Bookshelf.ViewModels.Book
         public int Count => Items.Count;
         public List<BookListItemViewModel> Items { get; set; }
 
+        public BookListViewModel()
+        {
+
+        }
+
     }
 }

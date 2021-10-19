@@ -59,7 +59,7 @@
             </Border>
 
             <Border  Grid.Column="2">
-                <view:ShelfsView />
+                <view:ShelvesView />
 
                 <!--<ContentControl  Content="{Binding CurrentViewModel}"/>-->
             </Border>
