@@ -15,6 +15,7 @@
                 Value="Transparent" />
         <Setter Property="BorderThickness"
                 Value="0" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -27,6 +28,7 @@
             </Setter.Value>
         </Setter>
 
+        
     </Style>
 
     <!-- Transparent button with text -->
@@ -37,6 +39,28 @@
                 Value="12" />
         <Setter Property="Foreground"
                 Value="{StaticResource ForegroundGrayBrush}" />
+    </Style>
+
+    <!-- Transparent button with text -->
+    <Style TargetType="{x:Type Button}"
+           x:Key="HyperlinkLikeButton"
+           BasedOn="{StaticResource TransparentButton}">
+        <Setter Property="FontSize"
+                Value="12" />
+
+        <Setter Property="Focusable"
+                Value="False" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Foreground"
+                        Value="{StaticResource LightBlackBrush}" />
+
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- Window control button base -->
@@ -51,6 +75,7 @@
                 Value="45" />
         <Setter Property="Height"
                 Value="21" />
+        
     </Style>
 
     <!-- Minimize Button -->
@@ -123,7 +148,10 @@
                 Value="0" />
         <Setter Property="Background"
                 Value="Transparent" />
+        <Setter Property="Cursor"
+                Value="Hand" />
         <Setter Property="Template">
+            
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border Height="20"

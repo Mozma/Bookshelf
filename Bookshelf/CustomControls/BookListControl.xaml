@@ -11,67 +11,77 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <Border Padding="0,7,0,0"
-        Background="White">
-    <Grid >
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
+            Background="White">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
 
-            <Border x:Name="showItems"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Height="25"
-                    Width="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-                <ToggleButton x:Name="toggleButton"
-                              Style="{StaticResource CollapsingToggleButton}"
-                              IsChecked="{Binding IsOpen,FallbackValue=true}">
-
-                </ToggleButton>
-
-            </Border>
-
-            <TextBlock Grid.Column="2"
-                       Text="{Binding Name, FallbackValue=Заголовок }"
-                       FontSize="24"
-                       TextTrimming="CharacterEllipsis"
-                       VerticalAlignment="Center" />
-        </Grid>
-
-        <!-- Shelf preview -->
-        <Grid x:Name="content"
-              Grid.Row="1"
-              Visibility="{Binding IsChecked, ElementName=toggleButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid>
-                <Border Padding="0,5,0, 0">
-                    <ItemsControl ItemsSource="{Binding Items, FallbackValue=.....}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:BookListItemControl HorizontalAlignment="Stretch" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
+                <Border x:Name="showItems"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Height="25"
+                        Width="25">
 
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel ItemWidth="350" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
+                    <ToggleButton x:Name="toggleButton"
+                                  Style="{StaticResource CollapsingToggleButton}"
+                                  IsChecked="{Binding IsOpen,FallbackValue=true}">
 
-                    </ItemsControl>
+                    </ToggleButton>
+
                 </Border>
-            </Grid>
-        </Grid>
 
-    </Grid>
+                <Button Grid.Column="2"
+                        Style="{StaticResource HyperlinkLikeButton}"    
+                        Content="{Binding Name, FallbackValue=Заголовок }"
+                        
+                        FontSize="24"/>
+                
+                <TextBlock Grid.Column="3"
+                           Text="{Binding Items.Count, FallbackValue=0 }"
+                           FontSize="14"
+                           Foreground="{StaticResource ForegroundDarkGrayBrush}"
+                           Padding="5,0,0,0"
+                           TextTrimming="CharacterEllipsis"
+                           VerticalAlignment="Top" />
+            </Grid>
+
+            <!-- Shelf preview -->
+            <Grid x:Name="content"
+                  Grid.Row="1"
+                  Visibility="{Binding IsChecked, ElementName=toggleButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid>
+                    <Border Padding="0,5,0, 0">
+                        <ItemsControl ItemsSource="{Binding Items, FallbackValue=.....}">
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <local:BookListItemControl HorizontalAlignment="Stretch" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel ItemWidth="350" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                        </ItemsControl>
+                    </Border>
+                </Grid>
+            </Grid>
+
+        </Grid>
     </Border>
 </UserControl>
