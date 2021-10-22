@@ -1,8 +1,7 @@
 ﻿namespace Bookshelf.Models
 {
-    public class BookBind
+    public class BookBind : DomainObject
     {
-        public int Id { get; set; }
         public int AuthorId { get; set; }
         public int BookId { get; set; }
         public int ShelfId { get; set; }

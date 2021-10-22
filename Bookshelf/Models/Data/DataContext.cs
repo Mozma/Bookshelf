@@ -18,24 +18,11 @@ namespace Bookshelf.Models.Data
 
         }
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public DataContext(DbContextOptionsBuilder options)
         {
 
+
+            base.OnConfiguring(options);
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
-        {
-
-            if (!optionsBuilder.IsConfigured)
-            {
-                IConfigurationRoot configuration = new ConfigurationBuilder()
-                   .SetBasePath(Directory.GetCurrentDirectory())
-                   .AddJsonFile("appsettings.json")
-                   .Build();
-                var connectionString = configuration.GetConnectionString("Default");
-                optionsBuilder.UseSqlite(connectionString);
-            }
-        }
-
     }
 }

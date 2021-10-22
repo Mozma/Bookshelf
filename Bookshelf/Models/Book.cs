@@ -2,9 +2,8 @@
 
 namespace Bookshelf.Models
 {
-    public class Book 
+    public class Book : DomainObject
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public int PagesNumber { get; set; }
         public int Year { get; set; }

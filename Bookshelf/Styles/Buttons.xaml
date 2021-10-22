@@ -154,11 +154,14 @@
             
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Height="20"
+                    <Border x:Name="border"
+                            Height="20"
                             Width="20"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Background="{StaticResource BackgroundWhiteBrush}">
+                            Background="{StaticResource BackgroundWhiteBrush}"
+                            CornerRadius="5">
+                            
                         <Polygon Points="0,0 8,5, 0,10"
                                  Stroke="Black"
                                  Fill="Black"
@@ -186,7 +189,7 @@
                                         <DoubleAnimation Storyboard.TargetName="poly"
                                                          Storyboard.TargetProperty="RenderTransform.Children[0].(RotateTransform.Angle)"
                                                          To="90"
-                                                         Duration="0:0:0.2" />
+                                                         Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -196,7 +199,7 @@
                                         <DoubleAnimation Storyboard.TargetName="poly"
                                                          Storyboard.TargetProperty="RenderTransform.Children[0].(RotateTransform.Angle)"
                                                          To="0"
-                                                         Duration="0:0:0.2" />
+                                                         Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
