@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace Bookshelf.ViewModels.Book
+namespace Bookshelf.ViewModels
 {
     public class BookListViewModel : BaseViewModel
     {

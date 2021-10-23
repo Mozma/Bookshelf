@@ -1,5 +1,9 @@
 ﻿using Bookshelf.Helpers;
+using Bookshelf.Models;
+using Bookshelf.Models.Interfaces;
+using Bookshelf.Services;
 using Bookshelf.ViewModels;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -79,6 +83,7 @@ namespace Bookshelf
 
         public WindowViewModel(Window window)
         {
+
             HomeVM = new HomeViewModel();
             ShelfsVM = new ShelfsViewModel();
             NotesVM = new NotesViewModel();

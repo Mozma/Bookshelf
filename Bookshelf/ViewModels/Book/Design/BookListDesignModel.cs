@@ -1,5 +1,4 @@
-﻿using Bookshelf.ViewModels.Book;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 

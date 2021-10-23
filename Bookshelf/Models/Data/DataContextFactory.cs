@@ -1,25 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+
+using System.Configuration;
 using System.IO;
 
 namespace Bookshelf.Models.Data
 {
-    public static class DataContextFactory
+    public class DataContextFactory : IDesignTimeDbContextFactory<DataContext>
     {
-
-        public static DataContext GetDataContext(DbContextOptionsBuilder options) 
+        public DataContext CreateDbContext(string[] args = null)
         {
-            if (!options.IsConfigured)
+            DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
+            if (!optionsBuilder.IsConfigured)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
                    .SetBasePath(Directory.GetCurrentDirectory())
                    .AddJsonFile("appsettings.json")
                    .Build();
                 var connectionString = configuration.GetConnectionString("Default");
-                options.UseSqlite(connectionString);
+                optionsBuilder.UseSqlite(connectionString);
             }
-
-            return new DataContext(options);
+            return new DataContext(optionsBuilder.Options);
         }
     }
 }

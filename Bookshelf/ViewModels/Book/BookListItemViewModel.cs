@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media.Imaging;
 
-namespace Bookshelf.ViewModels.Book
+namespace Bookshelf.ViewModels
 {
     public class BookListItemViewModel : BaseViewModel
     {

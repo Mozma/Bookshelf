@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-
-using System.Configuration;
-using System.IO;
 
 namespace Bookshelf.Models.Data
 {
@@ -13,16 +9,9 @@ namespace Bookshelf.Models.Data
         DbSet<Shelf> Shelves { get; set; }
         DbSet<BookBind> BookBinds { get; set; }
 
-        public DataContext()
+        public DataContext(DbContextOptions options) : base(options)
         {
 
-        }
-
-        public DataContext(DbContextOptionsBuilder options)
-        {
-
-
-            base.OnConfiguring(options);
         }
     }
 }
