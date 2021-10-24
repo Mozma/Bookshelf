@@ -9,38 +9,58 @@ namespace Bookshelf.ViewModels
 {
     public class ShelfListViewModel : BaseViewModel
     {
+        public static ShelfListViewModel Instance => new ShelfListViewModel();
+
         public List<ShelfListItemViewModel> Items { get; set; }
 
-        //public ShelfListViewModel()
-        //{
-        //    IDataManagerService<Book> bookService = new DataManagerService<Book>();
-        //    IDataManagerService<Author> authorService = new DataManagerService<Author>();
-        //    IDataManagerService<Shelf> shelvesService = new DataManagerService<Shelf>();
-        //    IDataManagerService<BookBind> bookBindService = new DataManagerService<BookBind>();
+        public ShelfListViewModel()
+        {
+
+            SetupView();
+        }
+
+        public void SetupView()
+        {
+
+            IDataManagerService<Book> bookService = new DataManagerService<Book>();
+            IDataManagerService<Author> authorService = new DataManagerService<Author>();
+            IDataManagerService<Shelf> shelvesService = new DataManagerService<Shelf>();
+            IDataManagerService<BookBind> bookBindService = new DataManagerService<BookBind>();
 
 
-        //    List<Book> bookItems = bookService.GetAll().Result.ToList();
-        //    List<Shelf> shelfItems = shelvesService.GetAll().Result.ToList();
+            List<Book> bookItems = bookService.GetAll().Result.ToList();
+            List<Shelf> shelfItems = shelvesService.GetAll().Result.ToList();
 
-            
-
-        //    foreach (var item in shelfItems)
-        //    {
-        //        List<BookListItemViewModel>() list = from shelf in shelfItems
-        //                                             where user.Age > 25
-        //                                             select user;
+            Items = new List<ShelfListItemViewModel>();
 
 
+            foreach (var item in shelfItems)
+            {
+
+                List<BookBind> bookBindItems = bookBindService.GetAll().Result
+                    .Where(o => o.ShelfId == item.Id)
+                    .ToList();
+
+                var books = new List<BookListItemViewModel>() { };
+
+                foreach (var bookBind in bookBindItems)
+                {
+                    books.Add(new BookListItemViewModel()
+                    {
+                        Title = bookService.Get(bookBind.BookId).Result.Title,
+                        Author = authorService.Get(bookBind.AuthorId).Result.FullName
+                    });
+                }
+
+                Items.Add(
+                    new ShelfListItemViewModel()
+                    {
+                        Name = item.Name,
+                        Items = books
 
 
-        //        Items.Add(
-        //            new ShelfListItemViewModel()
-        //            {
-        //                Name = item.Name,
-        //                Items = shelfBooks
-        //            }
-        //                );
-        //    }
-        //}
+                    });
+            }
+        }
     }
 }

@@ -5,11 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Bookshelf.Views"
              xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
-             xmlns:design="clr-namespace:Bookshelf.ViewModels"
+             xmlns:viewmodel="clr-namespace:Bookshelf.ViewModels"
              mc:Ignorable="d"
              d:Height="500"
              d:Width="900">
 
+    <UserControl.DataContext>
+        <viewmodel:ShelfListDesignModel />
+    </UserControl.DataContext>
+    
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"
             BorderThickness="0">
@@ -51,7 +55,7 @@
 
                     </LinearGradientBrush>
                 </Border.OpacityMask>
-                <Grid DataContext="{x:Static design:ShelfListDesignModel.Instance}">
+                <Grid>
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ItemsControl ItemsSource="{Binding Items}">
