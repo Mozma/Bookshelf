@@ -2,9 +2,9 @@
 {
     public class BookBind : DomainObject
     {
-        public int AuthorId { get; set; }
-        public int BookId { get; set; }
-        public int ShelfId { get; set; }
+        //public int AuthorId { get; set; }
+        //public int BookId { get; set; }
+        //public int ShelfId { get; set; }
 
         
         public Author Author { get; set; }

@@ -38,7 +38,7 @@ namespace Bookshelf.ViewModels
             {
 
                 List<BookBind> bookBindItems = bookBindService.GetAll().Result
-                    .Where(o => o.ShelfId == item.Id)
+                    .Where(o => o.Shelf.Id == item.Id)
                     .ToList();
 
                 var books = new List<BookListItemViewModel>() { };
@@ -47,8 +47,8 @@ namespace Bookshelf.ViewModels
                 {
                     books.Add(new BookListItemViewModel()
                     {
-                        Title = bookService.Get(bookBind.BookId).Result.Title,
-                        Author = authorService.Get(bookBind.AuthorId).Result.FullName
+                        Title = bookService.Get(bookBind.Book.Id).Result.Title,
+                        Author = authorService.Get(bookBind.Author.Id).Result.FullName
                     });
                 }
 
