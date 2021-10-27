@@ -20,6 +20,7 @@ namespace Bookshelf.Models.Data
         {
             builder.ApplyConfiguration(new AuthorConfiguration());
             builder.ApplyConfiguration(new BookConfiguration());
+            builder.ApplyConfiguration(new BookBindConfiguration());
             builder.ApplyConfiguration(new ShelfConfiguration());
             builder.ApplyConfiguration(new StatusConfiguration());
         }

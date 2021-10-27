@@ -22,7 +22,7 @@ namespace Bookshelf
         #region Properties
 
         public HomeViewModel HomeVM { get; set; }
-        public ShelfsViewModel ShelfsVM { get; set; }
+        public ShelvesViewModel ShelfsVM { get; set; }
         public NotesViewModel NotesVM { get; set; }
 
 
@@ -85,7 +85,7 @@ namespace Bookshelf
         {
 
             HomeVM = new HomeViewModel();
-            ShelfsVM = new ShelfsViewModel();
+            ShelfsVM = new ShelvesViewModel();
             NotesVM = new NotesViewModel();
             currentViewModel = HomeVM;
 

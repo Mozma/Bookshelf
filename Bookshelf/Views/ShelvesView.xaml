@@ -11,7 +11,7 @@
              d:Width="900">
 
     <UserControl.DataContext>
-        <viewmodel:ShelfListDesignModel />
+        <viewmodel:ShelfListViewModel />
     </UserControl.DataContext>
     
     <Border Background="{StaticResource BackgroundWhiteBrush}"

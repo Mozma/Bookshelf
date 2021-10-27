@@ -22,14 +22,14 @@ namespace Bookshelf.ViewModels
         public void SetupView()
         {
 
-            IDataManagerService<Book> bookService = new DataManagerService<Book>();
-            IDataManagerService<Author> authorService = new DataManagerService<Author>();
-            IDataManagerService<Shelf> shelvesService = new DataManagerService<Shelf>();
-            IDataManagerService<BookBind> bookBindService = new DataManagerService<BookBind>();
+            IRepository<Book> bookService = new Repository<Book>();
+            IRepository<Author> authorService = new Repository<Author>();
+            IRepository<Shelf> shelvesService = new Repository<Shelf>();
+            IRepository<BookBind> bookBindService = new Repository<BookBind>();
 
 
-            List<Book> bookItems = bookService.GetAll().Result.ToList();
-            List<Shelf> shelfItems = shelvesService.GetAll().Result.ToList();
+            List<Book> bookItems = bookService.GetAll().ToList();
+            List<Shelf> shelfItems = shelvesService.GetAll().ToList();
 
             Items = new List<ShelfListItemViewModel>();
 
@@ -37,7 +37,7 @@ namespace Bookshelf.ViewModels
             foreach (var item in shelfItems)
             {
 
-                List<BookBind> bookBindItems = bookBindService.GetAll().Result
+                List<BookBind> bookBindItems = bookBindService.GetAll()
                     .Where(o => o.Shelf.Id == item.Id)
                     .ToList();
 
@@ -47,8 +47,8 @@ namespace Bookshelf.ViewModels
                 {
                     books.Add(new BookListItemViewModel()
                     {
-                        Title = bookService.Get(bookBind.Book.Id).Result.Title,
-                        Author = authorService.Get(bookBind.Author.Id).Result.FullName
+                        Title = bookService.Get(bookBind.Book.Id).Title,
+                        Author = authorService.Get(bookBind.Author.Id).FullName
                     });
                 }
 
@@ -57,8 +57,6 @@ namespace Bookshelf.ViewModels
                     {
                         Name = item.Name,
                         Items = books
-
-
                     });
             }
         }

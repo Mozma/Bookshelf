@@ -1,6 +1,6 @@
 ﻿namespace Bookshelf.ViewModels
 {
-    public class ShelfsViewModel : BaseViewModel
+    public class ShelvesViewModel : BaseViewModel
     {
     }
 }
