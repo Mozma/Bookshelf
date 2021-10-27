@@ -6,7 +6,7 @@ namespace Bookshelf.Models
 {
     public class Image : DomainObject
     {
-        public byte[] Data { get; set; }
+        public byte[] Binary { get; set; }
 
 
         public List<Book> Books { get; set; }
