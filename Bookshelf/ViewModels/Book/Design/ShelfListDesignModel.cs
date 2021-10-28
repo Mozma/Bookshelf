@@ -4,16 +4,16 @@ using System.Windows.Media.Imaging;
 
 namespace Bookshelf.ViewModels
 {
-    public class ShelfListDesignModel : ShelfListViewModel
+    public class ShelfListDesignModel : ShelvesViewModel
     {
 
         public static ShelfListDesignModel Instance => new ShelfListDesignModel();
 
         public ShelfListDesignModel()
         {
-            Items = new List<ShelfListItemViewModel>()
+            Items = new List<ShelfViewModel>()
             {
-                new ShelfListItemViewModel()
+                new ShelfViewModel()
                 {
                     Name=  "Философия",
                     Items = new List<BookListItemViewModel>
@@ -48,7 +48,7 @@ namespace Bookshelf.ViewModels
                     }
                 },
 
-                new ShelfListItemViewModel()
+                new ShelfViewModel()
                 {
                     Name=  "IT",
                     Items = new List<BookListItemViewModel>
@@ -70,7 +70,7 @@ namespace Bookshelf.ViewModels
                         }
                     }
                 },
-                                new ShelfListItemViewModel()
+                                new ShelfViewModel()
                 {
                     Name=  "Искусство",
                     Items = new List<BookListItemViewModel>
@@ -88,13 +88,13 @@ namespace Bookshelf.ViewModels
                     }
                 },
 
-                new ShelfListItemViewModel()
+                new ShelfViewModel()
                 {
                     Name=  "Разное",
                     Items = new List<BookListItemViewModel>()
                 },
 
-                new ShelfListItemViewModel()
+                new ShelfViewModel()
                 {
                     Name=  "Философия",
                     Items = new List<BookListItemViewModel>
@@ -128,7 +128,7 @@ namespace Bookshelf.ViewModels
                         }
                     }
                 },
-                 new ShelfListItemViewModel()
+                 new ShelfViewModel()
                 {
                     Name=  "Философия",
                     Items = new List<BookListItemViewModel>

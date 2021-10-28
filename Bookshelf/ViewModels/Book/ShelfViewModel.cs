@@ -7,13 +7,13 @@ using System.Linq;
 
 namespace Bookshelf.ViewModels
 {
-    public class ShelfListItemViewModel : BaseViewModel
+    public class ShelfViewModel : BaseViewModel
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = "Полка";
         public List<BookListItemViewModel> Items { get; set; }
 
 
-        public ShelfListItemViewModel()
+        public ShelfViewModel()
         {
 
         }
