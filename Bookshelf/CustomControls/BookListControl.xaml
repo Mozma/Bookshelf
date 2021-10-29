@@ -45,7 +45,7 @@
                 <Button Grid.Column="2"
                         Style="{StaticResource HyperlinkLikeButton}"    
                         Content="{Binding Name, FallbackValue=Заголовок }"
-                        
+                        Command="{Binding TitleClickCommand}"
                         FontSize="24"/>
                 
                 <TextBlock Grid.Column="3"

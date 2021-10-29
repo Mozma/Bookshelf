@@ -9,11 +9,6 @@
              mc:Ignorable="d"
              d:Height="500"
              d:Width="900">
-
-    <UserControl.DataContext>
-        <viewmodel:ShelvesViewModel />
-    </UserControl.DataContext>
-    
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"
             BorderThickness="0">
@@ -61,7 +56,10 @@
                         <ItemsControl ItemsSource="{Binding Items}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <customcontrols:BookListControl HorizontalAlignment="Stretch" />
+                                    <customcontrols:BookListControl HorizontalAlignment="Stretch"
+                                                                    TitleClickCommand="{Binding OpenShelfCommand}"
+                                                                    />
+                                    
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

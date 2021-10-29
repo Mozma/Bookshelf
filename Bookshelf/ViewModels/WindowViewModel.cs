@@ -1,6 +1,7 @@
 ﻿using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Interfaces;
+using Bookshelf.Navigation;
 using Bookshelf.Services;
 using Bookshelf.ViewModels;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace Bookshelf
         private int windowRadius = 5;
         private BaseViewModel currentViewModel;
 
+        private readonly NavigationStore navigationStore; 
+
         #region Properties
 
         public HomeViewModel HomeVM { get; set; }
@@ -28,10 +31,10 @@ namespace Bookshelf
 
         public BaseViewModel CurrentViewModel
         {
-            get { return currentViewModel; }
+            get => navigationStore.CurrentViewModel;
             set
             {
-                currentViewModel = value;
+                navigationStore.CurrentViewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -84,11 +87,7 @@ namespace Bookshelf
         public WindowViewModel(Window window)
         {
 
-            HomeVM = new HomeViewModel();
-            ShelfsVM = new ShelvesViewModel();
-            NotesVM = new NotesViewModel();
-            currentViewModel = HomeVM;
-
+        
             currentWindow = window;
             currentWindow.StateChanged += (sender, e) =>
             {
@@ -101,25 +100,46 @@ namespace Bookshelf
                 OnPropertyChanged(nameof(TitleHeightGridLength));
             };
 
+
+            navigationStore = new NavigationStore();
+
+            SetupViewModels();
+            SetupCommands();
+
+            var resizer = new WindowResizer(currentWindow);
+        }
+
+
+        private void SetupViewModels() 
+        {
+            navigationStore.CurrentViewModel = new HomeViewModel();
+        }
+
+
+        private void SetupCommands() 
+        {
             MinimizeCommand = new RelayCommand(o => currentWindow.WindowState = WindowState.Minimized);
             MaximizeCommand = new RelayCommand(o => currentWindow.WindowState ^= WindowState.Maximized);
             CloseCommand = new RelayCommand(o => currentWindow.Close());
 
+            
+            /// Navigation Commands
+
             HomeViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = HomeVM;
+                CurrentViewModel = new HomeViewModel(); ;
             });
+
             ShelfsViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = ShelfsVM;
+                CurrentViewModel = new ShelvesViewModel(navigationStore); ;
             });
+            
             NotesViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = NotesVM;
+                CurrentViewModel = new NotesViewModel();
             });
 
-
-            var resizer = new WindowResizer(currentWindow);
         }
     }
 }

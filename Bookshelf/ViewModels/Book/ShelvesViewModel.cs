@@ -1,19 +1,30 @@
 ﻿using Bookshelf.Models;
+using Bookshelf.Navigation;
 using Bookshelf.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
 {
     public class ShelvesViewModel : BaseViewModel
     {
-        public static ShelvesViewModel Instance => new ShelvesViewModel();
-
         public List<ShelfViewModel> Items { get; set; }
 
-        public ShelvesViewModel()
+
+        private NavigationStore navigationStore;
+        public ICommand OpenShelfCommand { get; set; }
+
+        public ShelvesViewModel(NavigationStore navigationStore) 
         {
             SetupView();
+
+            this.navigationStore = navigationStore;
+            
+            OpenShelfCommand = new RelayCommand(o =>
+            {
+                this.navigationStore.CurrentViewModel = new ShelfViewModel(navigationStore);
+            });
         }
 
         public void SetupView()
