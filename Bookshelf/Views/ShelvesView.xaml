@@ -35,22 +35,8 @@
             </Border>
 
             <Border Grid.Row="2"
-                    Padding="15,5,0,0">
-                <Border.OpacityMask>
-                    <LinearGradientBrush EndPoint="0.5,1"
-                                         StartPoint="0.5,0">
-
-                        <GradientStop Color="Transparent"
-                                      Offset="0" />
-                        <GradientStop Color="Black"
-                                      Offset="0.01" />
-                        <GradientStop Color="Black"
-                                      Offset="0.99" />
-                        <GradientStop Color="Transparent"
-                                      Offset="1" />
-
-                    </LinearGradientBrush>
-                </Border.OpacityMask>
+                    Padding="15,5,0,0"
+                    Style="{StaticResource ShadowBorder}">
                 <Grid>
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -58,6 +44,7 @@
                                       ItemsSource="{Binding Items}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
+
                                     <customcontrols:ShelfItemControl HorizontalAlignment="Stretch" />
 
                                 </DataTemplate>

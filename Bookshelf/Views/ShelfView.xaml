@@ -35,22 +35,9 @@
             </Border>
 
             <Border Grid.Row="2"
-                    Padding="15,5,15,5">
-                <Border.OpacityMask>
-                    <LinearGradientBrush EndPoint="0.5,1"
-                                         StartPoint="0.5,0">
+                    Padding="15,5,15,5"
+                    Style="{StaticResource ShadowBorder}">
 
-                        <GradientStop Color="Transparent"
-                                      Offset="0" />
-                        <GradientStop Color="Black"
-                                      Offset="0.01" />
-                        <GradientStop Color="Black"
-                                      Offset="0.99" />
-                        <GradientStop Color="Transparent"
-                                      Offset="1" />
-
-                    </LinearGradientBrush>
-                </Border.OpacityMask>
                 <Grid x:Name="content"
                       Grid.Row="1">
                     <Grid>
