@@ -1,10 +1,6 @@
 ﻿using Bookshelf.Helpers;
-using Bookshelf.Models;
-using Bookshelf.Models.Interfaces;
 using Bookshelf.Navigation;
-using Bookshelf.Services;
 using Bookshelf.ViewModels;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,9 +14,8 @@ namespace Bookshelf
         private Window currentWindow;
         private int outerMarginSize = 10;
         private int windowRadius = 5;
-        private BaseViewModel currentViewModel;
 
-        private readonly NavigationStore navigationStore; 
+        private readonly NavigationStore navigationStore;
 
         #region Properties
 
@@ -32,11 +27,7 @@ namespace Bookshelf
         public BaseViewModel CurrentViewModel
         {
             get => navigationStore.CurrentViewModel;
-            set
-            {
-                navigationStore.CurrentViewModel = value;
-                OnPropertyChanged();
-            }
+            set => navigationStore.CurrentViewModel = value;
         }
 
         public int ResizeBorder { get; set; } = 4;
@@ -86,8 +77,6 @@ namespace Bookshelf
 
         public WindowViewModel(Window window)
         {
-
-        
             currentWindow = window;
             currentWindow.StateChanged += (sender, e) =>
             {
@@ -100,8 +89,8 @@ namespace Bookshelf
                 OnPropertyChanged(nameof(TitleHeightGridLength));
             };
 
-
             navigationStore = new NavigationStore();
+            navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
             SetupViewModels();
             SetupCommands();
@@ -109,20 +98,23 @@ namespace Bookshelf
             var resizer = new WindowResizer(currentWindow);
         }
 
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
 
-        private void SetupViewModels() 
+        private void SetupViewModels()
         {
             navigationStore.CurrentViewModel = new HomeViewModel();
         }
 
-
-        private void SetupCommands() 
+        private void SetupCommands()
         {
             MinimizeCommand = new RelayCommand(o => currentWindow.WindowState = WindowState.Minimized);
             MaximizeCommand = new RelayCommand(o => currentWindow.WindowState ^= WindowState.Maximized);
             CloseCommand = new RelayCommand(o => currentWindow.Close());
 
-            
+
             /// Navigation Commands
 
             HomeViewCommand = new RelayCommand(o =>
@@ -134,7 +126,7 @@ namespace Bookshelf
             {
                 CurrentViewModel = new ShelvesViewModel(navigationStore); ;
             });
-            
+
             NotesViewCommand = new RelayCommand(o =>
             {
                 CurrentViewModel = new NotesViewModel();

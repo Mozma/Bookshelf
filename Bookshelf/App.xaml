@@ -27,6 +27,9 @@
             <DataTemplate DataType="{x:Type viewmodel:ShelvesViewModel}">
                 <view:ShelvesView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:ShelfViewModel}">
+                <view:ShelfView />
+            </DataTemplate>
         </ResourceDictionary>
 
     </Application.Resources>

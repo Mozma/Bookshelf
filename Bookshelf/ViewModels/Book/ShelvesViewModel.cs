@@ -3,7 +3,6 @@ using Bookshelf.Navigation;
 using Bookshelf.Services;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
 {
@@ -11,20 +10,13 @@ namespace Bookshelf.ViewModels
     {
         public List<ShelfViewModel> Items { get; set; }
 
-
         private NavigationStore navigationStore;
-        public ICommand OpenShelfCommand { get; set; }
 
-        public ShelvesViewModel(NavigationStore navigationStore) 
+        public ShelvesViewModel(NavigationStore navigationStore)
         {
-            SetupView();
-
             this.navigationStore = navigationStore;
-            
-            OpenShelfCommand = new RelayCommand(o =>
-            {
-                this.navigationStore.CurrentViewModel = new ShelfViewModel(navigationStore);
-            });
+
+            SetupView();
         }
 
         public void SetupView()
@@ -48,19 +40,14 @@ namespace Bookshelf.ViewModels
 
                 foreach (var bookBind in bookBindItems)
                 {
-                    books.Add(new BookListItemViewModel()
+                    books.Add(new BookListItemViewModel
                     {
                         Title = bookBind.Book.Title,
                         Author = bookBind.Author.FullName
                     });
                 }
 
-                Items.Add(
-                    new ShelfViewModel()
-                    {
-                        Name = item.Name,
-                        Items = books
-                    });
+                Items.Add(new ShelfViewModel(navigationStore, item.Name, books));
             }
         }
     }

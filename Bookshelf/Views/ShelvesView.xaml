@@ -8,7 +8,8 @@
              xmlns:viewmodel="clr-namespace:Bookshelf.ViewModels"
              mc:Ignorable="d"
              d:Height="500"
-             d:Width="900">
+             d:Width="900"
+             x:Name="thisControl">
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"
             BorderThickness="0">
@@ -53,13 +54,12 @@
                 <Grid>
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ItemsControl ItemsSource="{Binding Items}">
+                        <ItemsControl x:Name="ShelfItems"
+                                      ItemsSource="{Binding Items}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <customcontrols:BookListControl HorizontalAlignment="Stretch"
-                                                                    TitleClickCommand="{Binding OpenShelfCommand}"
-                                                                    />
-                                    
+                                    <customcontrols:ShelfItemControl HorizontalAlignment="Stretch" />
+
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

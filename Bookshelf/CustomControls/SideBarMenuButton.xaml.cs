@@ -10,8 +10,6 @@ namespace Bookshelf.CustomControls
     /// </summary>
     public partial class SideBarMenuButton : UserControl
     {
-
-
         public BitmapImage Icon
         {
             get { return (BitmapImage)GetValue(MyIconertyProperty); }
@@ -34,8 +32,6 @@ namespace Bookshelf.CustomControls
             DependencyProperty.Register("ButtonContent", typeof(string), typeof(SideBarMenuButton), new PropertyMetadata("Button Content"));
 
 
-
-
         public ICommand Command
         {
             get { return (ICommand)GetValue(CommandProperty); }
@@ -47,15 +43,9 @@ namespace Bookshelf.CustomControls
             DependencyProperty.Register("Command", typeof(ICommand), typeof(SideBarMenuButton));
 
 
-
-
         public SideBarMenuButton()
         {
             InitializeComponent();
-
         }
-
-
-
     }
 }

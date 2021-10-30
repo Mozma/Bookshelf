@@ -1,12 +1,7 @@
-﻿using Bookshelf.Models;
-using Bookshelf.Models.Data;
+﻿using Bookshelf.Models.Data;
 using Bookshelf.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bookshelf.Services
 {
@@ -66,11 +61,11 @@ namespace Bookshelf.Services
 
         public T Update(object id, T entity)
         {
-                T exsistingEntity = Get(id);
-                context.Update(entity);
-                context.SaveChangesAsync();
+            T exsistingEntity = Get(id);
+            context.Update(entity);
+            context.SaveChangesAsync();
 
-                return entity;
+            return entity;
         }
 
 

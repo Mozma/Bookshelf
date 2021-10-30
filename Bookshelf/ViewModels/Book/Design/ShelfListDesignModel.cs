@@ -1,7 +1,4 @@
 ﻿using Bookshelf.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Windows.Media.Imaging;
 
 namespace Bookshelf.ViewModels
 {

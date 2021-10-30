@@ -10,10 +10,6 @@
              d:Height="500"
              d:Width="900">
 
-    <UserControl.DataContext>
-        <viewmodel:ShelfViewModel />
-    </UserControl.DataContext>
-    
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"
             BorderThickness="0">
@@ -55,18 +51,27 @@
 
                     </LinearGradientBrush>
                 </Border.OpacityMask>
-                <Grid>
+                <Grid x:Name="content"
+                      Grid.Row="1">
+                    <Grid>
+                        <Border Padding="0,5,0, 0">
+                            <ItemsControl ItemsSource="{Binding Items, FallbackValue=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}">
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ItemsControl ItemsSource="{Binding Items}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <customcontrols:BookListControl HorizontalAlignment="Stretch" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <customcontrols:BookListItemControl HorizontalAlignment="Stretch" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
 
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel ItemWidth="350" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                            </ItemsControl>
+                        </Border>
+                    </Grid>
                 </Grid>
             </Border>
         </Grid>

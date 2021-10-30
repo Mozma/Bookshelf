@@ -17,8 +17,6 @@
                     Value="{StaticResource ForegroundDarkGrayBrush}" />
             <Setter Property="WindowChrome.IsHitTestVisibleInChrome"
                     Value="True" />
-            <Setter Property="Command"
-                    Value="{Binding HomeViewCommand}" />
             <Setter Property="Stylus.IsPressAndHoldEnabled"
                     Value="False" />
             <Setter Property="Template">
