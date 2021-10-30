@@ -16,14 +16,14 @@
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="75" />
-                <RowDefinition Height="3" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="2" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
-                       Text="Shelves"
-                       FontSize="64"
+                       Text="Полки"
+                       FontSize="48"
                        TextTrimming="CharacterEllipsis"
                        HorizontalAlignment="Left"
                        Padding="15,5,0,0" />

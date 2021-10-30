@@ -1,5 +1,5 @@
-﻿using System.Windows.Media.Imaging;
-using Bookshelf.Helpers;
+﻿using Bookshelf.Helpers;
+using System.Windows.Media.Imaging;
 
 namespace Bookshelf.ViewModels
 {

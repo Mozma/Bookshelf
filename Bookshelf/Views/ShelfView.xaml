@@ -16,14 +16,14 @@
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="75" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
                        Text="{Binding Name}"
-                       FontSize="64"
+                       FontSize="48"
                        TextTrimming="CharacterEllipsis"
                        HorizontalAlignment="Left"
                        Padding="15,5,0,0" />
@@ -31,7 +31,15 @@
             <Border Grid.Row="1"
                     Padding="15,0,15,0">
                 <Border CornerRadius="2"
-                        Background="{StaticResource BackgroundDarkGrayBrush}" />
+                        Background="{StaticResource BackgroundWhiteBrush}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="310"/>
+                        </Grid.ColumnDefinitions>
+                            <customcontrols:SearchBox Height="30" Width="300"/>
+                    </Grid>
+                    
+                </Border>
             </Border>
 
             <Border Grid.Row="2"

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Fonts\fontawesome-webfont.ttf" />
+    <None Remove="Images\Default\search.png" />
     <None Remove="Images\Sidebar\Home.png" />
     <None Remove="Images\Sidebar\HomeOld.png" />
     <None Remove="Images\Sidebar\Note.png" />
@@ -20,6 +21,12 @@
     <None Remove="Images\Topbar\MaximizeOver.png" />
     <None Remove="Images\Topbar\Minimize.png" />
     <None Remove="Images\Topbar\MinimizeOver.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Default\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

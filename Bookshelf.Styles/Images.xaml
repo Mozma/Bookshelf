@@ -14,9 +14,7 @@
     <BitmapImage x:Key="ShelfIcon"
                  UriSource="{StaticResource ShelfPath}" />
 
-    <system:Uri x:Key="DefaultBookCoverPath">pack://application:,,,/Bookshelf.Resources;component/Images/Default/bookCover.png</system:Uri>
-    <BitmapImage x:Key="DefaultBookCover"
-                 UriSource="{StaticResource DefaultBookCoverPath}" />
+
 
     <!-- Toolbox icons -->
 
@@ -43,5 +41,15 @@
     <system:Uri x:Key="CloseOverPath">pack://application:,,,/Bookshelf.Resources;component/Images/Topbar/CloseOver.png</system:Uri>
     <BitmapImage x:Key="CloseOverIcon"
                  UriSource="{StaticResource CloseOverPath}" />
-    
+
+    <!-- Default Icon -->
+
+    <system:Uri x:Key="DefaultBookCoverPath">pack://application:,,,/Bookshelf.Resources;component/Images/Default/bookCover.png</system:Uri>
+    <BitmapImage x:Key="DefaultBookCover"
+                 UriSource="{StaticResource DefaultBookCoverPath}" />
+
+    <system:Uri x:Key="SearchPath">pack://application:,,,/Bookshelf.Resources;component/Images/Default/search.png</system:Uri>
+    <BitmapImage x:Key="SearchIcon"
+                 UriSource="{StaticResource SearchPath}" />
+
 </ResourceDictionary>

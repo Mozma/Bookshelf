@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Bookshelf.CustomControls.SearchBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Bookshelf.CustomControls"
+             mc:Ignorable="d"
+             d:DesignHeight="30"
+             d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
+            <Setter Property="KeyboardNavigation.TabNavigation"
+                    Value="None" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{x:Null}" />
+            <Setter Property="MinWidth"
+                    Value="120" />
+            <Setter Property="MinHeight"
+                    Value="20" />
+            <Setter Property="AllowDrop"
+                    Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border Name="Border"
+                                CornerRadius="10"
+                                Padding="2"
+                                BorderThickness="0"
+                                Background="{StaticResource BackgroundSilverBrush}">
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="0.4"
+                                                  BlurRadius="2"
+                                                  ShadowDepth="1"
+                                                  Direction="315" />
+                            </Border.Effect>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="26" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="5" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="1"
+                                        Padding="5">
+                                    <Border>
+                                        <Image Source="{StaticResource SearchIcon}" />
+                                    </Border>
+                                </Border>
+
+                                <ScrollViewer Grid.Column="2"
+                                              Padding="5,0,0,0"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"
+                                              x:Name="PART_ContentHost" />
+
+                                <TextBlock Grid.Column="2"
+                                           x:Name="SearchPlaceholder"
+                                           Padding="0,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontFamily="{StaticResource RobotoRegular}"
+                                           FontSize="13"
+                                           Foreground="{StaticResource ForegroundGrayBrush}"
+                                           Text="Поиск...">
+
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility"
+                                                    Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text,ElementName=SearchTextBox}"
+                                                             Value="">
+                                                    <Setter Property="Visibility"
+                                                            Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <TextBox x:Name="SearchTextBox"
+             FontSize="13"
+             CaretBrush="{StaticResource ForegroundGrayBrush}"
+             Foreground="{StaticResource ForegroundDarkGrayBrush}"
+             Text="" />
+</UserControl>
