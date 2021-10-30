@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
+using Bookshelf.Helpers;
 
 namespace Bookshelf.ViewModels
 {
@@ -8,7 +8,7 @@ namespace Bookshelf.ViewModels
         public string Title { get; set; }
 
         public string Author { get; set; }
-        public BitmapImage Cover { get; set; } = new BitmapImage(new Uri(@"C:\Users\ilmoz\Source\Repos\Bookshelf\Bookshelf\Resources\Images\DesginTime\default.png", UriKind.RelativeOrAbsolute));
+        public BitmapImage Cover { get; set; } = ResourceFinder.Get<BitmapImage>("DefaultBookCover");
 
     }
 }

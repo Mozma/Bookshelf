@@ -8,24 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Fonts\fontawesome-webfont.ttf" />
-    <None Remove="Resources\Images\DesginTime\decart.png" />
-    <None Remove="Resources\Images\DesginTime\default.png" />
-    <None Remove="Resources\Images\Sidebar\Home.png" />
-    <None Remove="Resources\Images\Sidebar\HomeOld.png" />
-    <None Remove="Resources\Images\Sidebar\Note.png" />
-    <None Remove="Resources\Images\Sidebar\NoteOld.png" />
-    <None Remove="Resources\Images\Sidebar\Shelf.png" />
-    <None Remove="Resources\Images\Sidebar\ShelfOld.png" />
-    <None Remove="Resources\Images\Topbar\Close.png" />
-    <None Remove="Resources\Images\Topbar\CloseOver.png" />
-    <None Remove="Resources\Images\Topbar\Maximize.png" />
-    <None Remove="Resources\Images\Topbar\MaximizeOver.png" />
-    <None Remove="Resources\Images\Topbar\Minimize.png" />
-    <None Remove="Resources\Images\Topbar\MinimizeOver.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Fody" Version="6.5.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -39,42 +21,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0-rc.2.21480.5" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\Fonts\fontawesome-webfont.ttf" />
-    <Resource Include="Resources\Images\DesginTime\decart.png" />
-    <Resource Include="Resources\Images\DesginTime\default.png" />
-    <Resource Include="Resources\Images\Sidebar\HomeOld.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Sidebar\Home.png" />
-    <Resource Include="Resources\Images\Sidebar\Note.png" />
-    <Resource Include="Resources\Images\Sidebar\NoteOld.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Sidebar\Shelf.png" />
-    <Resource Include="Resources\Images\Sidebar\ShelfOld.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Topbar\Close.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Topbar\CloseOver.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Topbar\Maximize.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Topbar\MaximizeOver.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Topbar\Minimize.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Topbar\MinimizeOver.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -103,26 +49,6 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Styles\Images.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Windows.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Text.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Buttons.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Colors.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\NotesView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -134,7 +60,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <ProjectReference Include="..\Bookshelf.Helpers\Bookshelf.Helpers.csproj" />
+    <ProjectReference Include="..\Bookshelf.Styles\Bookshelf.Styles.csproj" />
   </ItemGroup>
 
 </Project>
