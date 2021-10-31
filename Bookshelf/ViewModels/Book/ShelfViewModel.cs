@@ -9,6 +9,9 @@ namespace Bookshelf.ViewModels
         private NavigationStore navigationStore;
 
         public ICommand OpenShelfCommand { get; set; }
+        public ICommand AddNewBookCommand { get; set; }
+        public ICommand GoToShelvesCommand { get; set; }
+
         public string Name { get; set; }
         public List<BookListItemViewModel> Items { get; set; }
 
@@ -24,9 +27,20 @@ namespace Bookshelf.ViewModels
         {
             this.navigationStore = navigationStore;
 
+            SetupCommands();
+        }
+
+        private void SetupCommands() 
+        {
             OpenShelfCommand = new RelayCommand(o =>
             {
                 this.navigationStore.CurrentViewModel = this;
+
+            });
+
+            GoToShelvesCommand = new RelayCommand(o =>
+            {
+                this.navigationStore.CurrentViewModel = new ShelvesViewModel(navigationStore);
 
             });
         }

@@ -210,4 +210,61 @@
         </Setter>
     </Style>
 
+    <!-- Button with rounded corner-->
+    <Style x:Key="RoundCornerButton"
+           TargetType="{x:Type Button}">
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="MinHeight"
+                Value="30" />
+        <Setter Property="Template">
+
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            Height="{TemplateBinding Height}"
+                            Width="{TemplateBinding Width}"
+                            MinHeight="30"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="{StaticResource BackgroundSilverBrush}"
+                            CornerRadius="10">
+
+                        <Border.Effect>
+                            <DropShadowEffect Opacity="0.4"
+                                              BlurRadius="2"
+                                              ShadowDepth="1"
+                                              Direction="315" />
+                        </Border.Effect>
+
+                        <TextBlock FontSize="13"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="15,0,15,0"
+                                   Foreground="{StaticResource ForegroundDarkGrayBrush}">
+                                
+                                <ContentPresenter />
+
+                        </TextBlock>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter TargetName="border"
+                                    Property="Background"
+                                    Value="{StaticResource SilverPressedBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>
