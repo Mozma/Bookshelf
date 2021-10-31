@@ -10,6 +10,54 @@
              d:Height="500"
              d:Width="900">
 
+    <UserControl.Resources>
+        <Style x:Key="RoundCornerButton"
+               TargetType="{x:Type Button}">
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
+            <Setter Property="MinHeight"
+                    Value="30" />
+            <Setter Property="Template">
+
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                                Height="{TemplateBinding Height}"
+                                Width="{TemplateBinding Width}"
+                                MinHeight="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{StaticResource BackgroundSilverBrush}"
+                                CornerRadius="10">
+
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="0.4"
+                                                  BlurRadius="2"
+                                                  ShadowDepth="1"
+                                                  Direction="315" />
+                            </Border.Effect>
+
+                            <TextBlock FontSize="13"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Margin="15,0,15,0"
+                                       Foreground="{StaticResource ForegroundDarkGrayBrush}">
+                                
+                                <ContentPresenter />
+
+                            </TextBlock>
+
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"
             BorderThickness="0">
@@ -34,11 +82,26 @@
                         Background="{StaticResource BackgroundWhiteBrush}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="310"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                            <customcontrols:SearchBox Height="30" Width="300"/>
+                        <customcontrols:SearchBox Height="30"
+                                                  Width="300" />
+                        <Border Grid.Column="1"
+                                Margin="15,0,15,0">
+                            <Button Style="{StaticResource RoundCornerButton}"
+                                    
+                                    Content="+ Добавить книгу" />
+                        </Border>
+                        <Border Grid.Column="2">
+                            <Button Style="{StaticResource RoundCornerButton}"
+                                    
+                                    Content="Назад" />
+                        </Border >
                     </Grid>
-                    
+
                 </Border>
             </Border>
 
