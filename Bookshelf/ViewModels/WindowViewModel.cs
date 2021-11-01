@@ -1,6 +1,8 @@
 ﻿using Bookshelf.Helpers;
+using Bookshelf.Models.Data;
 using Bookshelf.Navigation;
 using Bookshelf.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System.Windows;
 using System.Windows.Input;
 
@@ -77,6 +79,10 @@ namespace Bookshelf
 
         public WindowViewModel(Window window)
         {
+           
+
+
+
             currentWindow = window;
             currentWindow.StateChanged += (sender, e) =>
             {
@@ -92,10 +98,22 @@ namespace Bookshelf
             navigationStore = new NavigationStore();
             navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
+            FixEfFirstLoadProblem();
+
+
+
             SetupViewModels();
             SetupCommands();
 
             var resizer = new WindowResizer(currentWindow);
+        }
+
+        private void FixEfFirstLoadProblem() {
+            // Fix for Issue: Reduce EF Core application startup time via compiled models
+            // https://github.com/dotnet/efcore/issues/1906
+            var tmp = CurrentViewModel;
+            CurrentViewModel = new ShelvesViewModel(navigationStore);
+            CurrentViewModel = tmp;
         }
 
         private void OnCurrentViewModelChanged()
