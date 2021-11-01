@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:Bookshelf.Views"
              xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
              xmlns:viewmodel="clr-namespace:Bookshelf.ViewModels"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              mc:Ignorable="d"
              d:Height="500"
              d:Width="900"
@@ -21,8 +24,9 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0"
-                       Text="Полки"
+            <TextBlock x:Name="ShelfNameTextBlock"
+                       Grid.Row="0"
+                       Text="{lex:Loc}"
                        FontSize="48"
                        TextTrimming="CharacterEllipsis"
                        HorizontalAlignment="Left"

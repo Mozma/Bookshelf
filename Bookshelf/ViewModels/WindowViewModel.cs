@@ -72,7 +72,7 @@ namespace Bookshelf
         public ICommand CloseCommand { get; set; }
         public ICommand HomeViewCommand { get; set; }
         public ICommand NotesViewCommand { get; set; }
-        public ICommand ShelfsViewCommand { get; set; }
+        public ICommand ShelvesViewCommand { get; set; }
 
 
         #endregion
@@ -140,7 +140,7 @@ namespace Bookshelf
                 CurrentViewModel = new HomeViewModel(); ;
             });
 
-            ShelfsViewCommand = new RelayCommand(o =>
+            ShelvesViewCommand = new RelayCommand(o =>
             {
                 CurrentViewModel = new ShelvesViewModel(navigationStore); ;
             });

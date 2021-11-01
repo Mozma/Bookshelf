@@ -7,6 +7,9 @@
         xmlns:view="clr-namespace:Bookshelf.Views"
         xmlns:viewmodel="clr-namespace:Bookshelf.ViewModels"
         xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="780"
@@ -45,23 +48,24 @@
                             HorizontalAlignment="Stretch"
                             Orientation="Vertical">
 
-                    <customcontrols:SideBarMenuButton Icon="{StaticResource HomeIcon}"
-                                                      ButtonContent="Home"
+                    <customcontrols:SideBarMenuButton x:Name="SideBarHomeButton"
+                                                      Icon="{StaticResource HomeIcon}"
+                                                      ButtonContent="{lex:Loc}"
                                                       Command="{Binding HomeViewCommand}" />
-                    <customcontrols:SideBarMenuButton Icon="{StaticResource NoteIcon}"
-                                                      ButtonContent="Note"
+                    <customcontrols:SideBarMenuButton x:Name="SideBarNoteButton"
+                                                      Icon="{StaticResource NoteIcon}"
+                                                      ButtonContent="{lex:Loc}"
                                                       Command="{Binding NotesViewCommand}" />
-                    <customcontrols:SideBarMenuButton Icon="{StaticResource ShelfIcon}"
-                                                      ButtonContent="Shelf"
-                                                      Command="{Binding ShelfsViewCommand}" />
+                    <customcontrols:SideBarMenuButton  x:Name="SideBarShelvesButton"
+                                                       Icon="{StaticResource ShelfIcon}"
+                                                       ButtonContent="{lex:Loc}"
+                                                       Command="{Binding ShelvesViewCommand}" />
 
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="2">
-                <!--<view:ShelvesView />-->
-
-                <ContentControl  Content="{Binding CurrentViewModel}"/>
+                <ContentControl  Content="{Binding CurrentViewModel}" />
             </Border>
 
         </Grid>
