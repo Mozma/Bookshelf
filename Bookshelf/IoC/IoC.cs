@@ -1,4 +1,5 @@
-﻿using Bookshelf.ViewModels;
+﻿using Bookshelf.Dialogs;
+using Bookshelf.ViewModels;
 using Ninject;
 
 namespace Bookshelf
@@ -7,6 +8,8 @@ namespace Bookshelf
     {
 
         public static IKernel Kernel { get; private set; } = new StandardKernel();
+
+        public static IUIManager UI => IoC.Get<IUIManager>();
 
         /// <summary>
         /// Bind all required ViewModels
@@ -19,6 +22,7 @@ namespace Bookshelf
         private static void BindViewModel()
         {
             Kernel.Bind<ApplicationViewModel>().ToConstant(new ApplicationViewModel { CurrentViewModel = new HomeViewModel() });
+            Kernel.Bind<IUIManager>().ToConstant(new UIManager());
         }
 
         internal static T Get<T>()

@@ -92,8 +92,6 @@ namespace Bookshelf
 
             FixEfFirstLoadProblem();
 
-
-
             SetupViewModels();
             SetupCommands();
 

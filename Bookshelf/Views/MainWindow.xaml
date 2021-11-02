@@ -3,9 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bookshelf"
-        xmlns:view="clr-namespace:Bookshelf.Views"
-        xmlns:viewmodel="clr-namespace:Bookshelf.ViewModels"
         xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
@@ -21,7 +18,10 @@
         MinWidth="{Binding Path=MinWidth, Mode=OneWay}"
         x:Name="AppMainWindow"
         WindowStartupLocation="CenterScreen"
-        Style="{StaticResource ModernWindowStyle}">
+        Style="{StaticResource ModernWindowStyle}"
+        Activated="AppMainWindow_Activated"
+        Deactivated="AppMainWindow_Deactivated"
+        IsEnabledChanged="AppMainWindow_IsEnabledChanged">
 
     <WindowChrome.WindowChrome>
         <WindowChrome ResizeBorderThickness="{Binding ResizeBorderThickness}"
@@ -30,44 +30,59 @@
                       GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
 
-    <Border Background="{StaticResource BackgroundDarkGrayBrush}">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="2" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <!-- Sidebar -->
-            <Border Grid.Column="0"
-                    Background="{StaticResource BackgroundLightGrayBrush}"
-                    CornerRadius="10"
-                    BorderThickness="0"
-                    Padding="0,10,0,1">
+    <Grid>
 
-                <StackPanel Grid.Column="0"
-                            HorizontalAlignment="Stretch"
-                            Orientation="Vertical">
+        <Border x:Name="Overlay" Panel.ZIndex="10"
+                Visibility="Visible"
+                Opacity="0.1"
+                CornerRadius="10"
+                Background="Black">
 
-                    <customcontrols:SideBarMenuButton x:Name="SideBarHomeButton"
-                                                      Icon="{StaticResource HomeIcon}"
-                                                      ButtonContent="{lex:Loc}"
-                                                      Command="{Binding HomeViewCommand}" />
-                    <customcontrols:SideBarMenuButton x:Name="SideBarNoteButton"
-                                                      Icon="{StaticResource NoteIcon}"
-                                                      ButtonContent="{lex:Loc}"
-                                                      Command="{Binding NotesViewCommand}" />
-                    <customcontrols:SideBarMenuButton  x:Name="SideBarShelvesButton"
-                                                       Icon="{StaticResource ShelfIcon}"
-                                                       ButtonContent="{lex:Loc}"
-                                                       Command="{Binding ShelvesViewCommand}" />
+        </Border>
 
-                </StackPanel>
-            </Border>
+        <Border Background="{StaticResource BackgroundDarkGrayBrush}">
 
-            <Border  Grid.Column="2">
-                <ContentControl  Content="{Binding CurrentViewModel}" />
-            </Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="2" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        </Grid>
-    </Border>
+                <!-- Overlay -->
+
+                <!-- Sidebar -->
+                <Border Grid.Column="0"
+                        Background="{StaticResource BackgroundLightGrayBrush}"
+                        CornerRadius="10"
+                        BorderThickness="0"
+                        Padding="0,10,0,1">
+
+                    <StackPanel Grid.Column="0"
+                                HorizontalAlignment="Stretch"
+                                Orientation="Vertical">
+
+                        <customcontrols:SideBarMenuButton x:Name="SideBarHomeButton"
+                                                          Icon="{StaticResource HomeIcon}"
+                                                          ButtonContent="{lex:Loc}"
+                                                          Command="{Binding HomeViewCommand}" />
+                        <customcontrols:SideBarMenuButton x:Name="SideBarNoteButton"
+                                                          Icon="{StaticResource NoteIcon}"
+                                                          ButtonContent="{lex:Loc}"
+                                                          Command="{Binding NotesViewCommand}" />
+                        <customcontrols:SideBarMenuButton  x:Name="SideBarShelvesButton"
+                                                           Icon="{StaticResource ShelfIcon}"
+                                                           ButtonContent="{lex:Loc}"
+                                                           Command="{Binding ShelvesViewCommand}" />
+
+                    </StackPanel>
+                </Border>
+
+                <Border  Grid.Column="2">
+                    <ContentControl  Content="{Binding CurrentViewModel}" />
+                </Border>
+
+            </Grid>
+        </Border>
+    </Grid>
 </Window>

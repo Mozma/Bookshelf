@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace Bookshelf
 {
@@ -11,6 +12,26 @@ namespace Bookshelf
         {
             InitializeComponent();
             this.DataContext = new WindowViewModel(this);
+        }
+
+        private void AppMainWindow_Activated(object sender, System.EventArgs e)
+        {
+           
+            Overlay.Visibility = Visibility.Hidden;  
+        }
+
+        private void AppMainWindow_Deactivated(object sender, System.EventArgs e)
+        {
+            if (Application.Current.Windows.OfType<DialogWindow>().Any()){ 
+
+                Overlay.Visibility = Visibility.Visible;
+            }
+
+        }
+
+        private void AppMainWindow_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }

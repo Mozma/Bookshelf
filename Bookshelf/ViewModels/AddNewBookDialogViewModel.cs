@@ -1,14 +1,13 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
 {
-    public class AddNewBookDialogViewModel : BaseViewModel
+    public class AddNewBookDialogViewModel : WindowViewModel
     {
-        public ICommand CreateNewBookCommand { get; set; }
-
-
-        public AddNewBookDialogViewModel()
+        public AddNewBookDialogViewModel(Window window) : base(window)
         {
+
         }
     }
 }

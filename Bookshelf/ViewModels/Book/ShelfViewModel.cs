@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Bookshelf.Dialogs;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
@@ -35,6 +36,12 @@ namespace Bookshelf.ViewModels
             {
                 Navigation.SetView(new ShelvesViewModel());
             });
+
+            AddNewBookCommand = new RelayCommand(o =>
+            {
+                IoC.UI.ShowMessage(new MessageBoxDialogViewModel() { Title = "Заголовко диалога" });
+            });
+
         }
 
     }
