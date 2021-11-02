@@ -51,7 +51,9 @@
                                 Margin="15,0,15,0">
                             <Button x:Name="ShelfAddNewBookButton"
                                     Style="{StaticResource RoundCornerButton}"
-                                    Content="{lex:Loc}" />
+                                    Content="{lex:Loc}"
+                                    Command="{Binding AddNewBookCommand}"
+                                    />
                         </Border>
                         <Border Grid.Column="2">
                             <Button x:Name="ShelfBackButton"

@@ -1,8 +1,5 @@
 ﻿using Bookshelf.Helpers;
-using Bookshelf.Models.Data;
-using Bookshelf.Navigation;
 using Bookshelf.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,7 +14,6 @@ namespace Bookshelf
         private int outerMarginSize = 10;
         private int windowRadius = 5;
 
-        private readonly NavigationStore navigationStore;
 
         #region Properties
 
@@ -28,8 +24,8 @@ namespace Bookshelf
 
         public BaseViewModel CurrentViewModel
         {
-            get => navigationStore.CurrentViewModel;
-            set => navigationStore.CurrentViewModel = value;
+            get => Navigation.GetCurrentViewModel();
+            set => Navigation.SetView(value);
         }
 
         public int ResizeBorder { get; set; } = 4;
@@ -79,10 +75,6 @@ namespace Bookshelf
 
         public WindowViewModel(Window window)
         {
-           
-
-
-
             currentWindow = window;
             currentWindow.StateChanged += (sender, e) =>
             {
@@ -95,8 +87,8 @@ namespace Bookshelf
                 OnPropertyChanged(nameof(TitleHeightGridLength));
             };
 
-            navigationStore = new NavigationStore();
-            navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+
+            Navigation.Instance.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
             FixEfFirstLoadProblem();
 
@@ -108,12 +100,12 @@ namespace Bookshelf
             var resizer = new WindowResizer(currentWindow);
         }
 
-        private void FixEfFirstLoadProblem() {
+        private void FixEfFirstLoadProblem()
+        {
             // Fix for Issue: Reduce EF Core application startup time via compiled models
             // https://github.com/dotnet/efcore/issues/1906
-            var tmp = CurrentViewModel;
-            CurrentViewModel = new ShelvesViewModel(navigationStore);
-            CurrentViewModel = tmp;
+            CurrentViewModel = new ShelvesViewModel();
+            CurrentViewModel = null;
         }
 
         private void OnCurrentViewModelChanged()
@@ -123,7 +115,7 @@ namespace Bookshelf
 
         private void SetupViewModels()
         {
-            navigationStore.CurrentViewModel = new HomeViewModel();
+            Navigation.SetView(new HomeViewModel());
         }
 
         private void SetupCommands()
@@ -142,7 +134,7 @@ namespace Bookshelf
 
             ShelvesViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = new ShelvesViewModel(navigationStore); ;
+                CurrentViewModel = new ShelvesViewModel(); ;
             });
 
             NotesViewCommand = new RelayCommand(o =>

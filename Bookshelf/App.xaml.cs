@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
-using WPFLocalizeExtension.Engine;
 
 namespace Bookshelf
 {
@@ -15,10 +14,14 @@ namespace Bookshelf
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+
+            IoC.Setup();
+
             SetupLocalization();
         }
 
-        private void SetupLocalization() 
+        private void SetupLocalization()
         {
 
             CultureInfo info = new CultureInfo("ru-RU");

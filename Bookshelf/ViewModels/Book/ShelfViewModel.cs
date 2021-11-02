@@ -1,13 +1,10 @@
-﻿using Bookshelf.Navigation;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
 {
     public class ShelfViewModel : BaseViewModel
     {
-        private NavigationStore navigationStore;
-
         public ICommand OpenShelfCommand { get; set; }
         public ICommand AddNewBookCommand { get; set; }
         public ICommand GoToShelvesCommand { get; set; }
@@ -15,33 +12,28 @@ namespace Bookshelf.ViewModels
         public string Name { get; set; }
         public List<BookListItemViewModel> Items { get; set; }
 
-
-        public ShelfViewModel(NavigationStore navigationStore, string name, List<BookListItemViewModel> items)
-            : this(navigationStore)
+        public ShelfViewModel(string name, List<BookListItemViewModel> items) : this()
         {
             Name = name;
             Items = items;
         }
 
-        public ShelfViewModel(NavigationStore navigationStore)
+        public ShelfViewModel()
         {
-            this.navigationStore = navigationStore;
-
             SetupCommands();
         }
 
-        private void SetupCommands() 
+        private void SetupCommands()
         {
             OpenShelfCommand = new RelayCommand(o =>
             {
-                this.navigationStore.CurrentViewModel = this;
+                Navigation.SetView(this);
 
             });
 
             GoToShelvesCommand = new RelayCommand(o =>
             {
-                this.navigationStore.CurrentViewModel = new ShelvesViewModel(navigationStore);
-
+                Navigation.SetView(new ShelvesViewModel());
             });
         }
 

@@ -1,5 +1,5 @@
 ﻿using Bookshelf.Models;
-using Bookshelf.Navigation;
+
 using Bookshelf.Services;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +8,11 @@ namespace Bookshelf.ViewModels
 {
     public class ShelvesViewModel : BaseViewModel
     {
+
         public List<ShelfViewModel> Items { get; set; }
 
-        private NavigationStore navigationStore;
-
-        public ShelvesViewModel(NavigationStore navigationStore)
+        public ShelvesViewModel()
         {
-            this.navigationStore = navigationStore;
-
             SetupView();
         }
 
@@ -47,7 +44,7 @@ namespace Bookshelf.ViewModels
                     });
                 }
 
-                Items.Add(new ShelfViewModel(navigationStore, item.Name, books));
+                Items.Add(new ShelfViewModel(item.Name, books));
             }
         }
     }

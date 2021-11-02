@@ -1,5 +1,4 @@
-﻿using Bookshelf.Navigation;
-
+﻿
 namespace Bookshelf.ViewModels
 {
     public class ShelfListDesignModel : ShelvesViewModel
@@ -165,8 +164,6 @@ namespace Bookshelf.ViewModels
 
                 }
         */
-        public ShelfListDesignModel(NavigationStore navigationStore) : base(navigationStore)
-        {
-        }
+
     }
 }
