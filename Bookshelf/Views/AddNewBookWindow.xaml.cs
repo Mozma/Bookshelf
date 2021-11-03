@@ -6,12 +6,12 @@ namespace Bookshelf
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class DialogWindow : Window
+    public partial class AddNewBookWindow : Window
     {
-        public DialogWindow()
+        public AddNewBookWindow()
         {
             InitializeComponent();
-            this.DataContext = new DialogWindowViewModel(this);
+            this.DataContext = new AddNewBookViewModel(this);
         }
     }
 }

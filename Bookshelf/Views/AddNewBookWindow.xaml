@@ -1,0 +1,163 @@
+﻿<Window x:Class="Bookshelf.AddNewBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        xmlns:local="clr-namespace:Bookshelf"
+        lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
+        mc:Ignorable="d"
+        Title="{Binding Title}"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="{Binding ResizeBorderThickness}"
+                      CaptionHeight="{Binding TitleHeight}"
+                      CornerRadius="0"
+                      GlassFrameThickness="0" />
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Border Padding="{Binding Path=OuterMarginSizeThikness, Mode=OneWay, FallbackValue=6}" />
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Padding="20">
+        <Border CornerRadius="10"
+                Width="750"
+                Height="500"
+                Background="{StaticResource BackgroundSilverBrush}"
+                Padding="19,14,19,19">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0"
+                                  Opacity="0.5"
+                                  BlurRadius="20" />
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Title -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Новая книга"
+                               FontSize="24" />
+                    <Button Grid.Column="1"
+                            Width="30"
+                            Height="25"
+                            Style="{StaticResource DialogCloseButton}"
+                            Command="{Binding Path=CloseCommand}" />
+                </Grid>
+                <!-- Content -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Cover -->
+                    <Border Width="280"
+                            Background="{StaticResource DefaultGrayBrush}"
+                            CornerRadius="10">
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="64"
+                                   Foreground="{StaticResource ForegroundGrayBrush}"
+                                   Text="+" />
+                        <Border.Effect>
+                            <DropShadowEffect Opacity="0.4"
+                                              BlurRadius="2"
+                                              ShadowDepth="1"
+                                              Direction="315" />
+                        </Border.Effect>
+
+                    </Border>
+
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   FontSize="18"
+                                   Text="Название"
+                                   FontFamily="{StaticResource RobotoRegular}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Grid.Row="2"
+                                 Height="30"
+                                 Text="" />
+
+                        <TextBlock Grid.Row="4"
+                                   FontSize="18"
+                                   Text="Автор"
+                                   FontFamily="{StaticResource RobotoRegular}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Grid.Row="6"
+                                 Height="30"
+                                 Text="" />
+
+                        <TextBlock Grid.Row="8"
+                                   FontSize="18"
+                                   Text="Полка"
+                                   FontFamily="{StaticResource RobotoRegular}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Grid.Row="10"
+                                 Height="30"
+                                 Text="" />
+
+                        <StackPanel Grid.Row="12"
+                                    Orientation="Horizontal"
+                                    FlowDirection="RightToLeft">
+                            <Button x:Name="ShelfBackButton"
+                                    Style="{StaticResource RoundCornerButton}"
+                                    Command="{Binding GoToShelvesCommand}"
+                                    Background="Black"
+                                    Content="Текст" />
+                            <Button x:Name="ShelfBackButton2"
+                                    Style="{StaticResource RoundCornerButton}"
+                                    Command="{Binding GoToShelvesCommand}"
+                                    Background="Black"
+                                    Content="Текст" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

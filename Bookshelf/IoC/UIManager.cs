@@ -15,7 +15,7 @@ namespace Bookshelf
             {
                 try
                 {
-                    new DialogWindow().ShowDialog();
+                    new AddNewBookWindow().ShowDialog();
                 }
                 finally 
                 {

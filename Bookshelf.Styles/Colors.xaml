@@ -25,6 +25,11 @@
     <Color x:Key="BackgroundSilver">#FAFAFA</Color>
     <SolidColorBrush x:Key="BackgroundSilverBrush" Color="{StaticResource BackgroundSilver}"/>
 
+    <Color x:Key="DefaultGrayBackground">#ebebeb</Color>
+    <SolidColorBrush x:Key="DefaultGrayBrush"
+                     Color="{StaticResource DefaultGrayBackground}" />
+    
+    
     <Color x:Key="SilverPressed">#fdfdfd</Color>
     <SolidColorBrush x:Key="SilverPressedBrush"
                      Color="{StaticResource SilverPressed}" />

@@ -22,7 +22,7 @@ namespace Bookshelf
 
         private void AppMainWindow_Deactivated(object sender, System.EventArgs e)
         {
-            if (Application.Current.Windows.OfType<DialogWindow>().Any()){ 
+            if (Application.Current.Windows.OfType<AddNewBookWindow>().Any()){ 
 
                 Overlay.Visibility = Visibility.Visible;
             }
