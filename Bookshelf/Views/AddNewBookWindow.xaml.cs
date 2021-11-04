@@ -13,5 +13,10 @@ namespace Bookshelf
             InitializeComponent();
             this.DataContext = new AddNewBookViewModel(this);
         }
+
+        private void RoundCornerTextBox_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

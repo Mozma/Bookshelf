@@ -61,6 +61,60 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить.
+        /// </summary>
+        public static string AddBookAcceptButton {
+            get {
+                return ResourceManager.GetString("AddBookAcceptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Автор.
+        /// </summary>
+        public static string AddBookAuthorTextBlock {
+            get {
+                return ResourceManager.GetString("AddBookAuthorTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отменить.
+        /// </summary>
+        public static string AddBookCancelButton {
+            get {
+                return ResourceManager.GetString("AddBookCancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Новая книга.
+        /// </summary>
+        public static string AddBookHeaderTextBlock {
+            get {
+                return ResourceManager.GetString("AddBookHeaderTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Полка.
+        /// </summary>
+        public static string AddBookShelfTextBlock {
+            get {
+                return ResourceManager.GetString("AddBookShelfTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Название.
+        /// </summary>
+        public static string AddBookTitleTextBlock {
+            get {
+                return ResourceManager.GetString("AddBookTitleTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to + Добавить новую книгу.
         /// </summary>
         public static string ShelfAddNewBookButton {
@@ -84,6 +138,33 @@ namespace Bookshelf.Resources.Localization {
         public static string ShelfNameTextBlock {
             get {
                 return ResourceManager.GetString("ShelfNameTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Главная.
+        /// </summary>
+        public static string SideBarHomeButton {
+            get {
+                return ResourceManager.GetString("SideBarHomeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заметки.
+        /// </summary>
+        public static string SideBarNoteButton {
+            get {
+                return ResourceManager.GetString("SideBarNoteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Полки.
+        /// </summary>
+        public static string SideBarShelvesButton {
+            get {
+                return ResourceManager.GetString("SideBarShelvesButton", resourceCulture);
             }
         }
     }

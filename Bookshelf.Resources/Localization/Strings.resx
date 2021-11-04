@@ -135,4 +135,22 @@
   <data name="ShelfNameTextBlock" xml:space="preserve">
     <value>Полки</value>
   </data>
+  <data name="AddBookTitleTextBlock" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="AddBookAuthorTextBlock" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="AddBookShelfTextBlock" xml:space="preserve">
+    <value>Полка</value>
+  </data>
+  <data name="AddBookHeaderTextBlock" xml:space="preserve">
+    <value>Новая книга</value>
+  </data>
+  <data name="AddBookAcceptButton" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="AddBookCancelButton" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
 </root>

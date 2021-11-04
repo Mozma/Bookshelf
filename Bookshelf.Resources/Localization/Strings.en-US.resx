@@ -135,4 +135,22 @@
   <data name="ShelfNameTextBlock" xml:space="preserve">
     <value>Shelves</value>
   </data>
+  <data name="AddBookTitleTextBlock" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="AddBookAuthorTextBlock" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="AddBookShelfTextBlock" xml:space="preserve">
+    <value>Shelf</value>
+  </data>
+  <data name="AddBookHeaderTextBlock" xml:space="preserve">
+    <value>New book</value>
+  </data>
+  <data name="AddBookAcceptButton" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddBookCancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

@@ -287,5 +287,62 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <!-- Gray Button with rounded corner-->
+    <Style x:Key="GrayRoundCornerButton"
+           TargetType="{x:Type Button}">
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="MinHeight"
+                Value="30" />
+        <Setter Property="Template">
+
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            Height="{TemplateBinding Height}"
+                            Width="{TemplateBinding Width}"
+                            MinHeight="30"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="{StaticResource DefaultGrayBrush}"
+                            CornerRadius="10">
+
+                        <Border.Effect>
+                            <DropShadowEffect Opacity="0.4"
+                                              BlurRadius="2"
+                                              ShadowDepth="1"
+                                              Direction="315" />
+                        </Border.Effect>
+
+                        <TextBlock FontSize="16"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="15,0,15,0"
+                                   Foreground="{StaticResource ForegroundBlackBrush}">
+                                
+                                <ContentPresenter />
+
+                        </TextBlock>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter TargetName="border"
+                                    Property="Background"
+                                    Value="{StaticResource BackgroundDarkGrayBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

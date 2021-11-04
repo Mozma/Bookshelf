@@ -9,7 +9,6 @@
         lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
-        Title="{Binding Title}"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
         WindowStyle="None"
@@ -62,7 +61,8 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Новая книга"
+                    <TextBlock x:Name="AddBookHeaderTextBlock"
+                               Text="{lex:Loc}"
                                FontSize="24" />
                     <Button Grid.Column="1"
                             Width="30"
@@ -81,18 +81,28 @@
                     <!-- Cover -->
                     <Border Width="280"
                             Background="{StaticResource DefaultGrayBrush}"
-                            CornerRadius="10">
-                        <TextBlock HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontSize="64"
-                                   Foreground="{StaticResource ForegroundGrayBrush}"
-                                   Text="+" />
+                            CornerRadius="10"
+                            BorderThickness="0"
+                            Padding="5">
+
                         <Border.Effect>
                             <DropShadowEffect Opacity="0.4"
                                               BlurRadius="2"
                                               ShadowDepth="1"
                                               Direction="315" />
                         </Border.Effect>
+                        <Grid>
+                            <Rectangle StrokeDashArray="3 2"
+                                       Stroke="{StaticResource ForegroundGrayBrush}"
+                                       StrokeThickness="2"
+                                       RadiusX="5"
+                                       RadiusY="5" />
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="64"
+                                       Foreground="{StaticResource ForegroundGrayBrush}"
+                                       Text="+" />
+                        </Grid>
 
                     </Border>
 
@@ -115,46 +125,53 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0"
+                                   x:Name="AddBookTitleTextBlock"
                                    FontSize="18"
-                                   Text="Название"
-                                   FontFamily="{StaticResource RobotoRegular}"
+                                   Text="{lex:Loc}"
                                    VerticalAlignment="Center" />
-                        <TextBox Grid.Row="2"
-                                 Height="30"
-                                 Text="" />
+                        <customcontrols:RoundCornerTextBox  Grid.Row="2"
+                                                            Height="30" />
 
                         <TextBlock Grid.Row="4"
+                                   x:Name="AddBookAuthorTextBlock"
                                    FontSize="18"
-                                   Text="Автор"
-                                   FontFamily="{StaticResource RobotoRegular}"
+                                   Text="{lex:Loc}"
                                    VerticalAlignment="Center" />
-                        <TextBox Grid.Row="6"
-                                 Height="30"
-                                 Text="" />
+                        <customcontrols:RoundCornerTextBox  Grid.Row="6"
+                                                            Height="30" />
 
                         <TextBlock Grid.Row="8"
+                                   x:Name="AddBookShelfTextBlock"
                                    FontSize="18"
-                                   Text="Полка"
-                                   FontFamily="{StaticResource RobotoRegular}"
+                                   Text="{lex:Loc}"
                                    VerticalAlignment="Center" />
-                        <TextBox Grid.Row="10"
-                                 Height="30"
-                                 Text="" />
 
-                        <StackPanel Grid.Row="12"
-                                    Orientation="Horizontal"
-                                    FlowDirection="RightToLeft">
-                            <Button x:Name="ShelfBackButton"
-                                    Style="{StaticResource RoundCornerButton}"
-                                    Command="{Binding GoToShelvesCommand}"
+                        <customcontrols:RoundCornerTextBox  Grid.Row="10"
+                                                            Height="30" />
+
+                        <Grid Grid.Row="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="1"
+                                    x:Name="AddBookCancelButton"
+                                    Width="125"
+                                    Style="{StaticResource GrayRoundCornerButton}"
+                                    Command="{Binding CloseCommand}"
                                     Background="Black"
-                                    Content="Текст" />
-                            <Button x:Name="ShelfBackButton2"
-                                    Style="{StaticResource RoundCornerButton}"
-                                    Command="{Binding GoToShelvesCommand}"
+                                    Content="{lex:Loc}"/>
+
+                            <Button Grid.Column="3"
+                                    x:Name="AddBookAcceptButton"
+                                    Width="125"
+                                    Style="{StaticResource GrayRoundCornerButton}"
+                                    Command="{Binding AddBookCommand}"
                                     Background="Black"
-                                    Content="Текст" />
-                        </StackPanel>
+                                    Content="{lex:Loc}" />
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
