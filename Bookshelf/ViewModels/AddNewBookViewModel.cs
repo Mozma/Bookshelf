@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Bookshelf.ViewModels
 {
@@ -12,10 +13,25 @@ namespace Bookshelf.ViewModels
 
         public ICommand CloseCommand { get; set; }
 
-        public AddNewBookViewModel(Window window) 
+        public ICommand AddBookCommand { get; set; }
+        public ICommand ChooseBookCoverCommand { get; set; }
+
+        public BitmapImage Image { get; set; }
+
+        public bool IsCoverVisible { get; set; } = false;
+
+
+
+        public AddNewBookViewModel(Window window)
         {
             CloseCommand = new RelayCommand(o => window.Close());
+            //AddBookCommand = new RelayCommand(o => IsCoverVisible = !IsCoverVisible);
+            ChooseBookCoverCommand = new RelayCommand(o =>
+            {
+                IsCoverVisible = !IsCoverVisible;
+            });
 
+            
         }
     }
 }

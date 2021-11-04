@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:Bookshelf"
         lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
@@ -24,6 +25,8 @@
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
         <Style TargetType="{x:Type Window}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -79,11 +82,15 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Cover -->
-                    <Border Width="280"
-                            Background="{StaticResource DefaultGrayBrush}"
+
+                    <Border Grid.Column="0"
+                            Width="280"
+                            Background="{StaticResource BackgroundDarkGrayBrush}"
                             CornerRadius="10"
                             BorderThickness="0"
-                            Padding="5">
+                            Padding="5"
+                            Cursor="Hand"
+                            Name="mask">
 
                         <Border.Effect>
                             <DropShadowEffect Opacity="0.4"
@@ -92,6 +99,7 @@
                                               Direction="315" />
                         </Border.Effect>
                         <Grid>
+
                             <Rectangle StrokeDashArray="3 2"
                                        Stroke="{StaticResource ForegroundGrayBrush}"
                                        StrokeThickness="2"
@@ -103,7 +111,20 @@
                                        Foreground="{StaticResource ForegroundGrayBrush}"
                                        Text="+" />
                         </Grid>
+      
+                    </Border>
+                    <Border Grid.Column="0"
+                            x:Name="Cover"
+                            Width="280"
+                            CornerRadius="10"
+                            BorderThickness="0"
+                            Padding="5"
+                            Visibility="{Binding IsCoverVisible,FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Border.Background>
+                            <ImageBrush ImageSource="https://upload.wikimedia.org/wikipedia/commons/3/31/Trattato_Della_Pittura_%2888395%29.jpg"
+                                        Stretch="UniformToFill" />
 
+                        </Border.Background>
                     </Border>
 
                     <Grid Grid.Column="2">
@@ -162,7 +183,7 @@
                                     Style="{StaticResource GrayRoundCornerButton}"
                                     Command="{Binding CloseCommand}"
                                     Background="Black"
-                                    Content="{lex:Loc}"/>
+                                    Content="{lex:Loc}" />
 
                             <Button Grid.Column="3"
                                     x:Name="AddBookAcceptButton"
