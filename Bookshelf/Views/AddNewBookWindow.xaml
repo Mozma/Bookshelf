@@ -7,6 +7,8 @@
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:Bookshelf"
+        xmlns:input="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime"
         lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
@@ -25,6 +27,7 @@
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
+
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
         <Style TargetType="{x:Type Window}">
@@ -111,7 +114,7 @@
                                        Foreground="{StaticResource ForegroundGrayBrush}"
                                        Text="+" />
                         </Grid>
-      
+
                     </Border>
                     <Border Grid.Column="0"
                             x:Name="Cover"
@@ -150,16 +153,24 @@
                                    FontSize="18"
                                    Text="{lex:Loc}"
                                    VerticalAlignment="Center" />
-                        <customcontrols:RoundCornerTextBox  Grid.Row="2"
-                                                            Height="30" />
+                        
+                       <input:AutoCompleteBox Grid.Row="2"
+                                               TextBoxStyle="{StaticResource RoundCornersTextbox}"
+                                               ItemsSource="{Binding Items}"
+                                               ItemContainerStyle="{StaticResource ItemsControlRoundCorners}"
+                                               Height="30" />
 
                         <TextBlock Grid.Row="4"
                                    x:Name="AddBookAuthorTextBlock"
                                    FontSize="18"
                                    Text="{lex:Loc}"
                                    VerticalAlignment="Center" />
-                        <customcontrols:RoundCornerTextBox  Grid.Row="6"
-                                                            Height="30" />
+
+                        <input:AutoCompleteBox Grid.Row="6"
+                                               TextBoxStyle="{StaticResource RoundCornersTextbox}"
+                                               ItemsSource="{Binding Items}"
+                                               ItemContainerStyle="{StaticResource ItemsControlRoundCorners}"
+                                               Height="30" />
 
                         <TextBlock Grid.Row="8"
                                    x:Name="AddBookShelfTextBlock"
@@ -167,8 +178,12 @@
                                    Text="{lex:Loc}"
                                    VerticalAlignment="Center" />
 
-                        <customcontrols:RoundCornerTextBox  Grid.Row="10"
-                                                            Height="30" />
+                        <input:AutoCompleteBox Grid.Row="10"
+                                               TextBoxStyle="{StaticResource RoundCornersTextbox}"
+                                               ItemsSource="{Binding Items}"
+                                               ItemContainerStyle="{StaticResource ItemsControlRoundCorners}"
+                                               Height="30" />
+
 
                         <Grid Grid.Row="12">
                             <Grid.ColumnDefinitions>

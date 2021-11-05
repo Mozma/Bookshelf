@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -20,7 +21,7 @@ namespace Bookshelf.ViewModels
 
         public bool IsCoverVisible { get; set; } = false;
 
-
+        public List<string> Items { get; set; } 
 
         public AddNewBookViewModel(Window window)
         {
@@ -31,6 +32,13 @@ namespace Bookshelf.ViewModels
                 IsCoverVisible = !IsCoverVisible;
             });
 
+            Items = new List<string>()
+            {
+                "Value 1",
+                "Value 2",
+                "Value 3"
+
+            };
             
         }
     }

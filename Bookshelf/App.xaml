@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Buttons.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Borders.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Text.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Textboxes.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Windows.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
