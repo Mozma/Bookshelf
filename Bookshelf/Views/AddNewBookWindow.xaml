@@ -30,6 +30,20 @@
 
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
+        <Style x:Key="ACBBaseStyle"
+               TargetType="{x:Type input:AutoCompleteBox}">
+            <Setter Property="TextBoxStyle"
+                    Value="{StaticResource RoundCornersTextbox}" />
+            <Setter Property="ItemContainerStyle"
+                    Value="{StaticResource ItemsControlRoundCorners}" />
+            <Setter Property="Height"
+                    Value="30" />
+            <Setter Property="MaxDropDownHeight"
+                    Value="200" />
+            <Setter Property="FilterMode"
+                    Value="ContainsOrdinal" />
+        </Style>
+
         <Style TargetType="{x:Type Window}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -143,7 +157,6 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="5" />
                             <RowDefinition Height="Auto" />
-
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
@@ -153,12 +166,11 @@
                                    FontSize="18"
                                    Text="{lex:Loc}"
                                    VerticalAlignment="Center" />
-                        
-                       <input:AutoCompleteBox Grid.Row="2"
-                                               TextBoxStyle="{StaticResource RoundCornersTextbox}"
-                                               ItemsSource="{Binding Items}"
-                                               ItemContainerStyle="{StaticResource ItemsControlRoundCorners}"
-                                               Height="30" />
+
+                        <input:AutoCompleteBox Grid.Row="2"
+                                               Text="{Binding BookTitle, Mode=TwoWay}"
+                                               ItemsSource="{Binding BooksTitles}"
+                                               Style="{StaticResource ACBBaseStyle}" />
 
                         <TextBlock Grid.Row="4"
                                    x:Name="AddBookAuthorTextBlock"
@@ -167,10 +179,9 @@
                                    VerticalAlignment="Center" />
 
                         <input:AutoCompleteBox Grid.Row="6"
-                                               TextBoxStyle="{StaticResource RoundCornersTextbox}"
-                                               ItemsSource="{Binding Items}"
-                                               ItemContainerStyle="{StaticResource ItemsControlRoundCorners}"
-                                               Height="30" />
+                                               Text="{Binding AuthorName, Mode=TwoWay}"
+                                               ItemsSource="{Binding AuthorsNames}"
+                                               Style="{StaticResource ACBBaseStyle}" />
 
                         <TextBlock Grid.Row="8"
                                    x:Name="AddBookShelfTextBlock"
@@ -179,11 +190,9 @@
                                    VerticalAlignment="Center" />
 
                         <input:AutoCompleteBox Grid.Row="10"
-                                               TextBoxStyle="{StaticResource RoundCornersTextbox}"
-                                               ItemsSource="{Binding Items}"
-                                               ItemContainerStyle="{StaticResource ItemsControlRoundCorners}"
-                                               Height="30" />
-
+                                               Text="{Binding ShelfName, Mode=TwoWay}"
+                                               ItemsSource="{Binding ShelvesNames}"
+                                               Style="{StaticResource ACBBaseStyle}" />
 
                         <Grid Grid.Row="12">
                             <Grid.ColumnDefinitions>
