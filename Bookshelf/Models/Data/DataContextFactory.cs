@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-
-using System.Configuration;
 using System.IO;
 
 namespace Bookshelf.Models.Data

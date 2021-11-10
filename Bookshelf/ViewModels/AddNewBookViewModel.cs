@@ -51,19 +51,19 @@ namespace Bookshelf.ViewModels
 
         private void AddBook()
         {
-            var bookBindRepository = new Repository<BookBind>();
+            //var bookBindRepository = new Repository<BookBind>();
 
-             bookBindRepository.Create(new BookBind{
-                Book = new Book
-                {
-                    Title = BookTitle,
-                    Status = new Status { Name = "Новая книга" }
-                },
-                Author = new Author { FullName = AuthorName },
-                Shelf = new Shelf { Name = ShelfName }
-             });
+            // bookBindRepository.Create(new BookBind{
+            //    Book = new Book
+            //    {
+            //        Title = BookTitle,
+            //        Status = new Status { Name = "Новая книга" }
+            //    },
+            //    Author = new Author { FullName = AuthorName },
+            //    Shelf = new Shelf { Name = ShelfName }
+            // });
 
-            CloseCommand.Execute(this);
+            //CloseCommand.Execute(this);
         }
 
         private void GetSuggestions()

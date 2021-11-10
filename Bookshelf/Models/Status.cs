@@ -9,6 +9,5 @@ namespace Bookshelf.Models
         public string Description { get; set; }
 
         public List<Book> Books { get; set; }
-        public List<Shelf> Shelves { get; set; }
     }
 }

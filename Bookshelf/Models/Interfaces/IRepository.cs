@@ -8,7 +8,7 @@ namespace Bookshelf.Models.Interfaces
         T Get(object id);
         T Create(T entity);
         T Update(object id, T entity);
-        bool Delete(object id); 
-        
+        bool Delete(object id);
+
     }
 }

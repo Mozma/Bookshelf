@@ -18,34 +18,34 @@ namespace Bookshelf.ViewModels
 
         public void SetupView()
         {
-            var bookRepository = new Repository<Book>();
-            var shelvesRepository = new Repository<Shelf>();
-            var bookBindRepository = new Repository<BookBind>();
+            //var bookRepository = new Repository<Book>();
+            //var shelvesRepository = new Repository<Shelf>();
+            //var bookBindRepository = new Repository<BookBind>();
 
-            List<Book> bookItems = bookRepository.GetAll().ToList();
-            List<Shelf> shelfItems = shelvesRepository.GetAll().ToList();
+            //List<Book> bookItems = bookRepository.GetAll().ToList();
+            //List<Shelf> shelfItems = shelvesRepository.GetAll().ToList();
 
-            Items = new List<ShelfViewModel>();
+            //Items = new List<ShelfViewModel>();
 
-            foreach (var item in shelfItems)
-            {
-                var books = new List<BookListItemViewModel>() { };
+            //foreach (var item in shelfItems)
+            //{
+            //    var books = new List<BookListItemViewModel>() { };
 
-                List<BookBind> bookBindItems = bookBindRepository.GetAll()
-                    .Where(o => o.Shelf.Id == item.Id)
-                    .ToList();
+            //    List<BookBind> bookBindItems = bookBindRepository.GetAll()
+            //        .Where(o => o.Shelf.Id == item.Id)
+            //        .ToList();
 
-                foreach (var bookBind in bookBindItems)
-                {
-                    books.Add(new BookListItemViewModel
-                    {
-                        Title = bookBind.Book.Title,
-                        Author = bookBind.Author.FullName
-                    });
-                }
+            //    foreach (var bookBind in bookBindItems)
+            //    {
+            //        books.Add(new BookListItemViewModel
+            //        {
+            //            Title = bookBind.Book.Title,
+            //            Author = bookBind.Author.FullName
+            //        });
+            //    }
 
-                Items.Add(new ShelfViewModel(item.Name, books));
-            }
+            //    Items.Add(new ShelfViewModel(item.Name, books));
+            //}
         }
     }
 }
