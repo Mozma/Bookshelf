@@ -79,4 +79,8 @@
     <ProjectReference Include="..\Bookshelf.Styles\Bookshelf.Styles.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

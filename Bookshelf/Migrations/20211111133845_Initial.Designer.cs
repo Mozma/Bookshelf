@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bookshelf.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211027085029_ApplyNewConfiguration")]
-    partial class ApplyNewConfiguration
+    [Migration("20211111133845_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,11 +51,23 @@ namespace Bookshelf.Migrations
                     b.Property<int?>("BookImageId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ISBN")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("PagesNumber")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("PublisherId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<int?>("StatusId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Subtitle")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -67,6 +79,8 @@ namespace Bookshelf.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BookImageId");
+
+                    b.HasIndex("PublisherId");
 
                     b.HasIndex("StatusId");
 
@@ -85,16 +99,11 @@ namespace Bookshelf.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ShelfId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
 
                     b.HasIndex("BookId");
-
-                    b.HasIndex("ShelfId");
 
                     b.ToTable("BookBinds");
                 });
@@ -114,6 +123,24 @@ namespace Bookshelf.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("Bookshelf.Models.Publisher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Publishers");
+                });
+
             modelBuilder.Entity("Bookshelf.Models.Shelf", b =>
                 {
                     b.Property<int>("Id")
@@ -124,14 +151,30 @@ namespace Bookshelf.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("StatusId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Shelves");
+                });
+
+            modelBuilder.Entity("Bookshelf.Models.ShelfBind", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ShelfId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StatusId");
+                    b.HasIndex("BookId");
 
-                    b.ToTable("Shelves");
+                    b.HasIndex("ShelfId");
+
+                    b.ToTable("ShelfBinds");
                 });
 
             modelBuilder.Entity("Bookshelf.Models.Status", b =>
@@ -167,13 +210,17 @@ namespace Bookshelf.Migrations
                         .WithMany("Books")
                         .HasForeignKey("BookImageId");
 
+                    b.HasOne("Bookshelf.Models.Publisher", "Publisher")
+                        .WithMany("Books")
+                        .HasForeignKey("PublisherId");
+
                     b.HasOne("Bookshelf.Models.Status", "Status")
                         .WithMany("Books")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StatusId");
 
                     b.Navigation("BookImage");
+
+                    b.Navigation("Publisher");
 
                     b.Navigation("Status");
                 });
@@ -192,26 +239,28 @@ namespace Bookshelf.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Author");
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("Bookshelf.Models.ShelfBind", b =>
+                {
+                    b.HasOne("Bookshelf.Models.Book", "Book")
+                        .WithMany("ShelfBinds")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Bookshelf.Models.Shelf", "Shelf")
-                        .WithMany("BookBinds")
+                        .WithMany("ShelfBinds")
                         .HasForeignKey("ShelfId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
-
                     b.Navigation("Book");
 
                     b.Navigation("Shelf");
-                });
-
-            modelBuilder.Entity("Bookshelf.Models.Shelf", b =>
-                {
-                    b.HasOne("Bookshelf.Models.Status", "Status")
-                        .WithMany("Shelves")
-                        .HasForeignKey("StatusId");
-
-                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Bookshelf.Models.Author", b =>
@@ -222,6 +271,8 @@ namespace Bookshelf.Migrations
             modelBuilder.Entity("Bookshelf.Models.Book", b =>
                 {
                     b.Navigation("BookBinds");
+
+                    b.Navigation("ShelfBinds");
                 });
 
             modelBuilder.Entity("Bookshelf.Models.Image", b =>
@@ -231,16 +282,19 @@ namespace Bookshelf.Migrations
                     b.Navigation("Books");
                 });
 
+            modelBuilder.Entity("Bookshelf.Models.Publisher", b =>
+                {
+                    b.Navigation("Books");
+                });
+
             modelBuilder.Entity("Bookshelf.Models.Shelf", b =>
                 {
-                    b.Navigation("BookBinds");
+                    b.Navigation("ShelfBinds");
                 });
 
             modelBuilder.Entity("Bookshelf.Models.Status", b =>
                 {
                     b.Navigation("Books");
-
-                    b.Navigation("Shelves");
                 });
 #pragma warning restore 612, 618
         }

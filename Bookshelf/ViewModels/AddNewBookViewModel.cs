@@ -1,4 +1,5 @@
 ﻿using Bookshelf.Models;
+using Bookshelf.Models.Data;
 using Bookshelf.Services;
 using System;
 using System.Collections.Generic;
@@ -51,19 +52,33 @@ namespace Bookshelf.ViewModels
 
         private void AddBook()
         {
-            //var bookBindRepository = new Repository<BookBind>();
+            using (var context = new DataContextFactory().CreateDbContext())
+            {
 
-            // bookBindRepository.Create(new BookBind{
-            //    Book = new Book
-            //    {
-            //        Title = BookTitle,
-            //        Status = new Status { Name = "Новая книга" }
-            //    },
-            //    Author = new Author { FullName = AuthorName },
-            //    Shelf = new Shelf { Name = ShelfName }
-            // });
+                var bookBindRepository = new Repository<BookBind>(context);
+                var shelfBindRepository = new Repository<ShelfBind>(context);
 
-            //CloseCommand.Execute(this);
+                var bookRepository = new Repository<Book>(context);
+
+                var book = bookRepository.Create(new Book { Title = BookTitle });
+
+                shelfBindRepository.Create(new ShelfBind
+                {
+                    Book = book,
+                    Shelf = new Shelf { Name = ShelfName }
+                });
+
+
+                bookBindRepository.Create(new BookBind
+                {
+                    Book = book,
+                    Author = new Author { FullName = AuthorName }
+                });
+
+            }
+
+
+            CloseCommand.Execute(this);
         }
 
         private void GetSuggestions()

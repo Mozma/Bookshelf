@@ -8,7 +8,6 @@ namespace Bookshelf.ViewModels
 {
     public class ShelvesViewModel : BaseViewModel
     {
-
         public List<ShelfViewModel> Items { get; set; }
 
         public ShelvesViewModel()
@@ -18,34 +17,35 @@ namespace Bookshelf.ViewModels
 
         public void SetupView()
         {
-            //var bookRepository = new Repository<Book>();
-            //var shelvesRepository = new Repository<Shelf>();
-            //var bookBindRepository = new Repository<BookBind>();
+            var shelvesRepository = new Repository<Shelf>();
+            var bookBindRepository = new Repository<BookBind>();
+            var shelfBindRepository = new Repository<ShelfBind>();
 
-            //List<Book> bookItems = bookRepository.GetAll().ToList();
-            //List<Shelf> shelfItems = shelvesRepository.GetAll().ToList();
+            List<Shelf> shelfItems = shelvesRepository.GetAll().ToList();
+            List<BookBind> bookBindItems = bookBindRepository.GetAll().ToList();
+            List<ShelfBind> shelfBindItems = shelfBindRepository.GetAll().ToList();
 
-            //Items = new List<ShelfViewModel>();
+            Items = new List<ShelfViewModel>();
 
-            //foreach (var item in shelfItems)
-            //{
-            //    var books = new List<BookListItemViewModel>() { };
+            foreach (var item in shelfItems)
+            {
+                var books = new List<BookListItemViewModel>() { };
 
-            //    List<BookBind> bookBindItems = bookBindRepository.GetAll()
-            //        .Where(o => o.Shelf.Id == item.Id)
-            //        .ToList();
+                shelfBindItems = shelfBindRepository.GetAll()
+                    .Where(o => o.Shelf.Id.Equals(item.Id))
+                    .ToList();
 
-            //    foreach (var bookBind in bookBindItems)
-            //    {
-            //        books.Add(new BookListItemViewModel
-            //        {
-            //            Title = bookBind.Book.Title,
-            //            Author = bookBind.Author.FullName
-            //        });
-            //    }
+                foreach (var shelfBind in shelfBindItems)
+                {
+                    books.Add(new BookListItemViewModel
+                    {
+                        Title = shelfBind.Book.Title,
+                        Author = bookBindItems.Where(o => o.Book.Id == shelfBind.Book.Id).Select(o => o.Author.FullName).First()
+                    });
+                }
 
-            //    Items.Add(new ShelfViewModel(item.Name, books));
-            //}
+                Items.Add(new ShelfViewModel(item.Name, books));
+            }
         }
     }
 }
