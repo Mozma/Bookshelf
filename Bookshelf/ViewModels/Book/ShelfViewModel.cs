@@ -11,9 +11,9 @@ namespace Bookshelf.ViewModels
         public ICommand GoToShelvesCommand { get; set; }
 
         public string Name { get; set; }
-        public List<BookListItemViewModel> Items { get; set; }
+        public List<BookViewModel> Items { get; set; }
 
-        public ShelfViewModel(string name, List<BookListItemViewModel> items) : this()
+        public ShelfViewModel(string name, List<BookViewModel> items) : this()
         {
             Name = name;
             Items = items;

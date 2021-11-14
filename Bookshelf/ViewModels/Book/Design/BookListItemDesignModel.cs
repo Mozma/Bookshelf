@@ -2,7 +2,7 @@
 
 namespace Bookshelf.ViewModels
 {
-    public class BookListItemDesignModel : BookListItemViewModel
+    public class BookListItemDesignModel : BookViewModel
     {
 
         public static BookListItemDesignModel Instance => new BookListItemDesignModel();

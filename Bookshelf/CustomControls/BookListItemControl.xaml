@@ -166,7 +166,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Button>
+        <Button Command="{Binding OpenBookViewCommand}">
             <Button.ContextMenu>
                 <ContextMenu Style="{StaticResource CStyle}">
                     <MenuItem Header="Удалить" />

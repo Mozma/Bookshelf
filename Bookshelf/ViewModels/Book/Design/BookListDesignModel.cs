@@ -11,30 +11,30 @@ namespace Bookshelf.ViewModels
 
         public BookListDesignModel()
         {
-            Items = new List<BookListItemViewModel>
+            Items = new List<BookViewModel>
             {
-                new BookListItemViewModel()
+                new BookViewModel()
                 {
                     Title = "Сомневайся во всём",
                     Author = "Рене Декарт",
                     Cover = new BitmapImage(new Uri(@"C:\Users\ilmoz\Source\Repos\Bookshelf\Bookshelf\Resources\Images\DesginTime\decart.png", UriKind.RelativeOrAbsolute))
                 },
-                new BookListItemViewModel()
+                new BookViewModel()
                 {
                     Title = "Рассуждения о методе",
                     Author = "Рене Декарт"
                 },
-                new BookListItemViewModel()
+                new BookViewModel()
                 {
                     Title = "Афоризмы житейской мудрости",
                     Author = "Артур Шопенгауэр"
                 },
-                new BookListItemViewModel()
+                new BookViewModel()
                 {
                     Title = "Мир как Воля и Предаставление",
                     Author = "Артур Шопенгауэр"
                 },
-                new BookListItemViewModel()
+                new BookViewModel()
                 {
                     Title = "Париж",
                     Author = "Эдвард Резерфорд",

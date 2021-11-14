@@ -29,7 +29,7 @@ namespace Bookshelf.ViewModels
 
             foreach (var item in shelfItems)
             {
-                var books = new List<BookListItemViewModel>() { };
+                var books = new List<BookViewModel>() { };
 
                 shelfBindItems = shelfBindRepository.GetAll()
                     .Where(o => o.Shelf.Id.Equals(item.Id))
@@ -37,7 +37,7 @@ namespace Bookshelf.ViewModels
 
                 foreach (var shelfBind in shelfBindItems)
                 {
-                    books.Add(new BookListItemViewModel
+                    books.Add(new BookViewModel
                     {
                         Title = shelfBind.Book.Title,
                         Author = bookBindItems.Where(o => o.Book.Id == shelfBind.Book.Id).Select(o => o.Author.FullName).First()

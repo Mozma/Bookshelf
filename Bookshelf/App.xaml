@@ -32,6 +32,9 @@
             <DataTemplate DataType="{x:Type viewmodel:ShelfViewModel}">
                 <view:ShelfView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:BookViewModel}">
+                <view:BookView />
+            </DataTemplate>
         </ResourceDictionary>
 
     </Application.Resources>
