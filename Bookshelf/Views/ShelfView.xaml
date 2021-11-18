@@ -8,6 +8,7 @@
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
+             TextOptions.TextFormattingMode="Display"
              mc:Ignorable="d"
              d:Height="500"
              d:Width="900">

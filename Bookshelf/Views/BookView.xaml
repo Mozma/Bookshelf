@@ -7,8 +7,10 @@
              xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:input="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
              lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
+             TextOptions.TextFormattingMode="Display"
              mc:Ignorable="d"
              d:Height="700"
              d:Width="900">
@@ -78,7 +80,8 @@
                                 TextDecorations="Underline"
                                 Text="{Binding Author, FallbackValue=Автор}" />
                     <!-- Other Info -->
-                    <Grid>
+                    <Grid  HorizontalAlignment="Left">
+
                         <Grid.Resources>
                             <GridLength x:Key="lineSpasing">10</GridLength>
                         </Grid.Resources>
@@ -95,70 +98,113 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="{DynamicResource lineSpasing}" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="{DynamicResource lineSpasing}" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="Auto"
+                                              MinWidth="300" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Row="1"
                                    Grid.Column="0"
+                                   x:Name="BookViewISBNTextBlock"
                                    FontSize="18"
-                                   Text="ISBN:" />
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="2"
-                                   FontSize="18"
-                                   Text="---" />
+                                   VerticalAlignment="Center"
+                                   Text="{lex:Loc}" />
+                        <input:AutoCompleteBox Grid.Row="1"
+                                               Grid.Column="2"
+                                               Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                               Style="{StaticResource ACBBaseStyle}" />
 
                         <TextBlock Grid.Row="3"
                                    Grid.Column="0"
                                    FontSize="18"
-                                   Text="Year:" />
-                        <TextBlock Grid.Row="3"
-                                   Grid.Column="2"
-                                   FontSize="18"
-                                   Text="---" />
+                                   VerticalAlignment="Center"
+                                   x:Name="BookViewYearTextBlock"
+                                   Text="{lex:Loc}" />
+                        <input:AutoCompleteBox Grid.Row="3"
+                                               Grid.Column="2"
+                                               Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                               Style="{StaticResource ACBBaseStyle}" />
 
                         <TextBlock Grid.Row="5"
                                    Grid.Column="0"
                                    FontSize="18"
-                                   Text="Publisher:" />
-                        <TextBlock Grid.Row="5"
-                                   Grid.Column="2"
-                                   FontSize="18"
-                                   Text="---" />
+                                   VerticalAlignment="Center"
+                                   x:Name="BookViewPublisherTextBlock"
+                                   Text="{lex:Loc}" />
+                        <input:AutoCompleteBox Grid.Row="5"
+                                               Grid.Column="2"
+                                               Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                               Style="{StaticResource ACBBaseStyle}" />
 
                         <TextBlock Grid.Row="7"
                                    Grid.Column="0"
+                                   x:Name="BookViewNumberOfPagesTextBlock"
                                    FontSize="18"
-                                   Text="Number of pages:" />
-                        <TextBlock Grid.Row="7"
-                                   Grid.Column="2"
-                                   FontSize="18"
-                                   Text="---" />
+                                   VerticalAlignment="Center"
+                                   Text="{lex:Loc}" />
+                        <input:AutoCompleteBox Grid.Row="7"
+                                               Grid.Column="2"
+                                               Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                               Style="{StaticResource ACBBaseStyle}" />
 
                         <TextBlock Grid.Row="9"
                                    Grid.Column="0"
+                                   x:Name="BookViewPagesReadTextBlock"
                                    FontSize="18"
-                                   Text="Pages read:" />
-                        <TextBlock Grid.Row="9"
-                                   Grid.Column="2"
-                                   FontSize="18"
-                                   Text="---" />
+                                   VerticalAlignment="Center"
+                                   Text="{lex:Loc}" />
+                        <input:AutoCompleteBox Grid.Row="9"
+                                               Grid.Column="2"
+                                               Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                               Style="{StaticResource ACBBaseStyle}" />
 
                         <TextBlock Grid.Row="11"
                                    Grid.Column="0"
+                                   x:Name="BookViewStatusTextBlock"
                                    FontSize="18"
-                                   Text="Status:" />
-                        <TextBlock Grid.Row="11"
-                                   Grid.Column="2"
-                                   FontSize="18"
-                                   Text="---" />
+                                   VerticalAlignment="Center"
+                                   Text="{lex:Loc}" />
+                        <input:AutoCompleteBox Grid.Row="11"
+                                               Grid.Column="2"
+                                               MaxWidth="500"
+                                               Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                               Style="{StaticResource ACBBaseStyle}" />
 
+                        <Grid Grid.Row="13"
+                              Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Row="1"
+                                    Grid.Column="1"
+                                    Content="Cancel"
+                                    Width="90"
+                                    Style="{StaticResource RoundCornerButton}" />
+                            <Button Grid.Row="1"
+                                    Grid.Column="3"
+                                    Content="Save"
+                                    Width="90"
+                                    Style="{StaticResource RoundCornerButton}" />
+
+                        </Grid>
                     </Grid>
+
                 </StackPanel>
+
             </Grid>
         </Grid>
     </Border>

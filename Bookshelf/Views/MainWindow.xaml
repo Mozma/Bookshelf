@@ -7,6 +7,7 @@
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
+        TextOptions.TextFormattingMode="Display"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="780"

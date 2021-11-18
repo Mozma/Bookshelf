@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Bookshelf.CustomControls"
              xmlns:bookshelf="clr-namespace:Bookshelf"
              d:DataContext="{d:DesignInstance Type=bookshelf:BaseViewModel}"
+             TextOptions.TextFormattingMode="Display"
              mc:Ignorable="d"
              x:Name="this"
              d:DesignWidth="300">

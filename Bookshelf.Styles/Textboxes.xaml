@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:s="clr-namespace:System;assembly=System.Runtime">
+                    xmlns:s="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:input="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit">
 
     <ResourceDictionary.MergedDictionaries>
         <!-- Order is important -->
@@ -85,6 +86,36 @@
                         Value="0" />
             </Style>
         </Style.Resources>
+    </Style>
+
+    <Style x:Key="ACBBaseStyle"
+           TargetType="{x:Type input:AutoCompleteBox}">
+        <Setter Property="TextBoxStyle"
+                Value="{StaticResource RoundCornersTextbox}" />
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource ItemsControlRoundCorners}" />
+        <Setter Property="MinHeight"
+                Value="30" />
+        <Setter Property="MaxDropDownHeight"
+                Value="200" />
+        <Setter Property="FilterMode"
+                Value="ContainsOrdinal" />
+    </Style>
+    <!-- Shadow Border -->
+    <Style TargetType="TextBox"
+           x:Key="HiddenRoundCornersTextbox"
+           BasedOn="{StaticResource RoundCornersTextbox}">
+
+        <Style.Triggers>
+            
+        </Style.Triggers>
+    </Style>
+    
+
+    <Style x:Key="ACBBaseHiddenStyle"
+           TargetType="{x:Type input:AutoCompleteBox}">
+        <Setter Property="TextBoxStyle"
+                Value="{StaticResource HiddenRoundCornersTextbox}" />
     </Style>
 
 </ResourceDictionary>

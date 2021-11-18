@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Bookshelf.CustomControls"
              mc:Ignorable="d"
+             TextOptions.TextFormattingMode="Display"
              d:DesignHeight="30"
              d:DesignWidth="300">
 

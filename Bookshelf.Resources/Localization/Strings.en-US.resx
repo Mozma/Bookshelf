@@ -153,4 +153,22 @@
   <data name="AddBookCancelButton" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="BookViewISBNTextBlock" xml:space="preserve">
+    <value>ISBN:</value>
+  </data>
+  <data name="BookViewYearTextBlock" xml:space="preserve">
+    <value>Year:</value>
+  </data>
+  <data name="BookViewPublisherTextBlock" xml:space="preserve">
+    <value>Publisher:</value>
+  </data>
+  <data name="BookViewNumberOfPagesTextBlock" xml:space="preserve">
+    <value>Number of pages:</value>
+  </data>
+  <data name="BookViewPagesReadTextBlock" xml:space="preserve">
+    <value>Pages read:</value>
+  </data>
+  <data name="BookViewStatusTextBlock" xml:space="preserve">
+    <value>Status:</value>
+  </data>
 </root>

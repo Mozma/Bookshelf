@@ -12,6 +12,7 @@
              mc:Ignorable="d"
              d:Height="500"
              d:Width="900"
+             TextOptions.TextFormattingMode="Display"
              x:Name="thisControl">
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"

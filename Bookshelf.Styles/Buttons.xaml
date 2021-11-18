@@ -35,6 +35,8 @@
     <Style TargetType="{x:Type Button}"
            x:Key="TransparentTextButton"
            BasedOn="{StaticResource TransparentButton}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
         <Setter Property="FontSize"
                 Value="12" />
         <Setter Property="Foreground"
@@ -67,6 +69,7 @@
     <Style TargetType="{x:Type Button}"
            x:Key="WindowControlButton"
            BasedOn="{StaticResource TransparentButton}">
+        
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome"
                 Value="True" />
         <Setter Property="Padding"
@@ -234,6 +237,8 @@
     <!-- Button with rounded corner-->
     <Style x:Key="RoundCornerButton"
            TargetType="{x:Type Button}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
         <Setter Property="BorderThickness"
                 Value="0" />
         <Setter Property="Background"
@@ -291,6 +296,8 @@
     <!-- Gray Button with rounded corner-->
     <Style x:Key="GrayRoundCornerButton"
            TargetType="{x:Type Button}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
         <Setter Property="BorderThickness"
                 Value="0" />
         <Setter Property="Background"

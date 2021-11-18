@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Bookshelf.CustomControls"
              xmlns:design="clr-namespace:Bookshelf.ViewModels"
              mc:Ignorable="d"
+             TextOptions.TextFormattingMode="Display"
              d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />

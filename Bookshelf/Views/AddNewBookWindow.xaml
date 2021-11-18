@@ -11,6 +11,7 @@
         xmlns:System="clr-namespace:System;assembly=System.Runtime"
         lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
+        TextOptions.TextFormattingMode="Display"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
@@ -30,19 +31,7 @@
 
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
-        <Style x:Key="ACBBaseStyle"
-               TargetType="{x:Type input:AutoCompleteBox}">
-            <Setter Property="TextBoxStyle"
-                    Value="{StaticResource RoundCornersTextbox}" />
-            <Setter Property="ItemContainerStyle"
-                    Value="{StaticResource ItemsControlRoundCorners}" />
-            <Setter Property="Height"
-                    Value="30" />
-            <Setter Property="MaxDropDownHeight"
-                    Value="200" />
-            <Setter Property="FilterMode"
-                    Value="ContainsOrdinal" />
-        </Style>
+     
 
         <Style TargetType="{x:Type Window}">
             <Setter Property="Template">

@@ -115,6 +115,60 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ISBN:.
+        /// </summary>
+        public static string BookViewISBNTextBlock {
+            get {
+                return ResourceManager.GetString("BookViewISBNTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Количество страниц:.
+        /// </summary>
+        public static string BookViewNumberOfPagesTextBlock {
+            get {
+                return ResourceManager.GetString("BookViewNumberOfPagesTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Прочитано страниц:.
+        /// </summary>
+        public static string BookViewPagesReadTextBlock {
+            get {
+                return ResourceManager.GetString("BookViewPagesReadTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Издательство:.
+        /// </summary>
+        public static string BookViewPublisherTextBlock {
+            get {
+                return ResourceManager.GetString("BookViewPublisherTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Статус:.
+        /// </summary>
+        public static string BookViewStatusTextBlock {
+            get {
+                return ResourceManager.GetString("BookViewStatusTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Год публикации:.
+        /// </summary>
+        public static string BookViewYearTextBlock {
+            get {
+                return ResourceManager.GetString("BookViewYearTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to + Добавить новую книгу.
         /// </summary>
         public static string ShelfAddNewBookButton {
