@@ -43,27 +43,39 @@
                         Background="{StaticResource BackgroundDarkGrayBrush}"
                         CornerRadius="10"
                         BorderThickness="0"
-                        Padding="5"
-                        Cursor="Hand"
-                        Name="mask">
+                        Cursor="Hand">
 
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.4"
-                                          BlurRadius="2"
-                                          ShadowDepth="1"
+                                          BlurRadius="10"
+                                          ShadowDepth="0"
                                           Direction="315" />
                     </Border.Effect>
-                    <Grid>
-
-                        <Image Source="{Binding Cover}" />
-                        <Rectangle StrokeDashArray="3 2"
-                                   Stroke="{StaticResource ForegroundGrayBrush}"
-                                   StrokeThickness="2"
-                                   RadiusX="5"
-                                   RadiusY="5" />
-                    </Grid>
-
                 </Border>
+
+                <Border Width="345"
+                        Height="580"
+                        Background="{StaticResource BackgroundDarkGrayBrush}"
+                        CornerRadius="10"
+                        BorderThickness="0"
+                        Name="mask">
+                </Border>
+
+                <Button Style="{StaticResource RoundCornerCoverButton}"
+                        Command="{Binding SelectCoverCommand}">
+                        <Button.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=mask}" />
+                        </Button.OpacityMask>
+                        <Button.Background>
+                            <ImageBrush   
+                                Stretch="UniformToFill"
+                                ImageSource="{Binding Cover, FallbackValue={StaticResource TempBookCoverPath}}" />
+                        </Button.Background>
+
+                    </Button>
+                
+
+
             </Grid>
 
             <!-- Book Info -->

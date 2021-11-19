@@ -15,6 +15,7 @@
     <None Remove="Images\Sidebar\NoteOld.png" />
     <None Remove="Images\Sidebar\Shelf.png" />
     <None Remove="Images\Sidebar\ShelfOld.png" />
+    <None Remove="Images\tempCover.jpg" />
     <None Remove="Images\Topbar\Close.png" />
     <None Remove="Images\Topbar\CloseOver.png" />
     <None Remove="Images\Topbar\Maximize.png" />
@@ -50,6 +51,7 @@
     <Resource Include="Images\Sidebar\ShelfOld.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\tempCover.jpg" />
     <Resource Include="Images\Topbar\Close.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

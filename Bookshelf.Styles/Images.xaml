@@ -52,4 +52,10 @@
     <BitmapImage x:Key="SearchIcon"
                  UriSource="{StaticResource SearchPath}" />
 
+    <!-- Design time Icon -->
+
+    <system:Uri x:Key="TempBookCoverPath">pack://application:,,,/Bookshelf.Resources;component/Images/tempCover.jpg</system:Uri>
+    <BitmapImage x:Key="TempBookCover"
+                 UriSource="{StaticResource TempBookCoverPath}" />
+
 </ResourceDictionary>

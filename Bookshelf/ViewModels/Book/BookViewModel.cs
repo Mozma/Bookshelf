@@ -1,4 +1,6 @@
 ﻿using Bookshelf.Helpers;
+using Microsoft.Win32;
+using System;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -8,6 +10,7 @@ namespace Bookshelf.ViewModels
     {
         public ICommand OpenBookViewCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
+        public ICommand SelectCoverCommand { get; set; }
 
         public string Title { get; set; }
 
@@ -32,6 +35,21 @@ namespace Bookshelf.ViewModels
             // Todo: Добавить историю переключений
             });
 
+            SelectCoverCommand = new RelayCommand(o =>
+            {
+                SelectCover();   
+            });
+
+        }
+        private void SelectCover()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Cover = new BitmapImage(new Uri(System.IO.Path.GetFullPath(openFileDialog.FileName)));
+            }
         }
 
     }

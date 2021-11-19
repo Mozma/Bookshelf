@@ -293,6 +293,56 @@
         </Setter>
     </Style>
 
+    <!-- Button with rounded  with background corner-->
+    <Style x:Key="RoundCornerCoverButton"
+           TargetType="{x:Type Button}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="Template">
+
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            Height="{TemplateBinding Height}"
+                            Width="{TemplateBinding Width}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="10">
+
+                        <TextBlock FontSize="13"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="15,0,15,0"
+                                   Foreground="{StaticResource ForegroundDarkGrayBrush}">
+                                
+                                <ContentPresenter />
+
+                        </TextBlock>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="border"
+                                    Property="Opacity"
+                                    Value="0.8">
+                            </Setter>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Gray Button with rounded corner-->
     <Style x:Key="GrayRoundCornerButton"
            TargetType="{x:Type Button}">
