@@ -38,4 +38,6 @@
     <SolidColorBrush x:Key="LightBlackBrush"
                      Color="{StaticResource LightBlack}" />
 
+    <Color x:Key="GlyphColor">#FF444444</Color>
+
 </ResourceDictionary>

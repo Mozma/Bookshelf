@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="ComboBoxes.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Textboxes.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

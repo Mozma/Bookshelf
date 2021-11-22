@@ -5,13 +5,13 @@ VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf", "Bookshelf\Bookshelf.csproj", "{2EC01B23-BF7B-4328-BD72-22D242C52736}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookshelfDebug", "BookshelfDebug\BookshelfDebug.csproj", "{FFDC393B-0CBF-44A5-9B5F-0EA9A038F619}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Helpers", "Bookshelf.Helpers\Bookshelf.Helpers.csproj", "{99B144BC-71B2-4B48-BB20-64D404926851}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.Helpers", "Bookshelf.Helpers\Bookshelf.Helpers.csproj", "{99B144BC-71B2-4B48-BB20-64D404926851}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Styles", "Bookshelf.Styles\Bookshelf.Styles.csproj", "{5D36B66D-CADE-4D2E-B906-956EBA05E896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.Styles", "Bookshelf.Styles\Bookshelf.Styles.csproj", "{5D36B66D-CADE-4D2E-B906-956EBA05E896}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Resources", "Bookshelf.Resources\Bookshelf.Resources.csproj", "{10EF83A7-323B-4786-B6F4-080C4746BBAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.Resources", "Bookshelf.Resources\Bookshelf.Resources.csproj", "{10EF83A7-323B-4786-B6F4-080C4746BBAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.ViewModels.Tests", "Bookshelf.ViewModels.Tests\Bookshelf.ViewModels.Tests.csproj", "{FE50BC2F-8A74-43EE-B32F-4185C67A0DB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{2EC01B23-BF7B-4328-BD72-22D242C52736}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EC01B23-BF7B-4328-BD72-22D242C52736}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EC01B23-BF7B-4328-BD72-22D242C52736}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FFDC393B-0CBF-44A5-9B5F-0EA9A038F619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FFDC393B-0CBF-44A5-9B5F-0EA9A038F619}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FFDC393B-0CBF-44A5-9B5F-0EA9A038F619}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FFDC393B-0CBF-44A5-9B5F-0EA9A038F619}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99B144BC-71B2-4B48-BB20-64D404926851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99B144BC-71B2-4B48-BB20-64D404926851}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99B144BC-71B2-4B48-BB20-64D404926851}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{10EF83A7-323B-4786-B6F4-080C4746BBAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10EF83A7-323B-4786-B6F4-080C4746BBAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10EF83A7-323B-4786-B6F4-080C4746BBAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE50BC2F-8A74-43EE-B32F-4185C67A0DB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE50BC2F-8A74-43EE-B32F-4185C67A0DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE50BC2F-8A74-43EE-B32F-4185C67A0DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE50BC2F-8A74-43EE-B32F-4185C67A0DB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

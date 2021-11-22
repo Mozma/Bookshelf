@@ -13,29 +13,22 @@ namespace Bookshelf.ViewModels
 {
     public class AddNewBookViewModel : BaseViewModel
     {
-        public string Title { get; set; }
-
-        public Control Content { get; set; }
-
-        public ICommand CloseCommand { get; set; }
-
-        public ICommand AddBookCommand { get; set; }
-        public ICommand ChooseBookCoverCommand { get; set; }
-
         public BitmapImage Image { get; set; }
-
-        public bool IsCoverVisible { get; set; } = false;
-
-
         public string BookTitle { get; set; }
         public string AuthorName { get; set; }
         public string ShelfName { get; set; }
 
+        public ICommand CloseCommand { get; set; }
+        public ICommand AddBookCommand { get; set; }
+        public ICommand ChooseBookCoverCommand { get; set; }
 
+        public bool IsCoverVisible { get; set; } = false;
 
         public List<string> BooksTitles { get; set; }
         public List<string> AuthorsNames { get; set; }
         public List<string> ShelvesNames { get; set; }
+        public List<Shelf> Shelves { get; set; }
+        public Shelf SelectedShelf { get; set; }
 
         public AddNewBookViewModel(Window window)
         {
@@ -47,7 +40,6 @@ namespace Bookshelf.ViewModels
             });
 
             GetSuggestions();
-
         }
 
         private void AddBook()
@@ -59,13 +51,17 @@ namespace Bookshelf.ViewModels
                 var shelfBindRepository = new Repository<ShelfBind>(context);
 
                 var bookRepository = new Repository<Book>(context);
+                var shelfRepository = new Repository<Shelf>(context);
 
                 var book = bookRepository.Create(new Book { Title = BookTitle });
+
+
+                var shelf = shelfRepository.GetAll().First(s => s.Name == SelectedShelf.Name);
 
                 shelfBindRepository.Create(new ShelfBind
                 {
                     Book = book,
-                    Shelf = new Shelf { Name = ShelfName }
+                    Shelf = shelf
                 });
 
 
@@ -81,17 +77,17 @@ namespace Bookshelf.ViewModels
             CloseCommand.Execute(this);
         }
 
-        private void GetSuggestions()
+        public void GetSuggestions()
         {
             var bookRepository = new Repository<Book>();
             var authorRepository = new Repository<Author>();
             var shelvesRepository = new Repository<Shelf>();
 
             BooksTitles = bookRepository.GetAll().Select(o => o.Title).ToList();
-
             AuthorsNames = authorRepository.GetAll().Select(o => o.FullName).ToList();
             ShelvesNames = shelvesRepository.GetAll().Select(o => o.Name).ToList();
 
+            Shelves = shelvesRepository.GetAll().ToList();
         }
     }
 }
