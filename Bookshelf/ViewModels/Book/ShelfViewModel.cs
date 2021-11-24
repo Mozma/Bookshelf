@@ -40,6 +40,7 @@ namespace Bookshelf.ViewModels
             AddNewBookCommand = new RelayCommand(o =>
             {
                 IoC.UI.ShowMessage(new MessageBoxDialogViewModel() { Title = "Заголовко диалога" });
+                Navigation.SetView(this);
             });
 
         }

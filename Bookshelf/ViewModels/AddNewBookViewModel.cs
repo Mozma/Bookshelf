@@ -46,36 +46,48 @@ namespace Bookshelf.ViewModels
         {
             using (var context = new DataContextFactory().CreateDbContext())
             {
-
                 var bookBindRepository = new Repository<BookBind>(context);
                 var shelfBindRepository = new Repository<ShelfBind>(context);
-
+                var authorRepository = new Repository<Author>(context);
                 var bookRepository = new Repository<Book>(context);
                 var shelfRepository = new Repository<Shelf>(context);
 
-                var book = bookRepository.Create(new Book { Title = BookTitle });
+                var author = authorRepository.GetAll().FirstOrDefault(a => a.FullName == AuthorName);
+                var book = bookRepository.GetAll().FirstOrDefault(b => b.Title == BookTitle);
+                var shelf = shelfRepository.GetAll().FirstOrDefault(s => s.Name == SelectedShelf.Name);
 
-
-                var shelf = shelfRepository.GetAll().First(s => s.Name == SelectedShelf.Name);
-
-                shelfBindRepository.Create(new ShelfBind
+                if (book == null)
                 {
-                    Book = book,
-                    Shelf = shelf
-                });
+                    book = bookRepository.Create(new Book { Title = BookTitle });
+                }
 
-
-                bookBindRepository.Create(new BookBind
+                if (author == null)
                 {
-                    Book = book,
-                    Author = new Author { FullName = AuthorName }
-                });
+                    author = authorRepository.Create(new Author { FullName = AuthorName });
+                }
 
+                if (shelfBindRepository.GetAll().FirstOrDefault(s => s.BookId == book.Id && s.ShelfId == shelf.Id) == null)
+                {
+                    shelfBindRepository.Create(new ShelfBind
+                    {
+                        BookId = book.Id,
+                        ShelfId = shelf.Id
+                    });
+                }
+
+                if (bookBindRepository.GetAll().FirstOrDefault(b => b.BookId == book.Id && b.AuthorId == author.Id) == null)
+                {
+                    bookBindRepository.Create(new BookBind
+                    {
+                        BookId = book.Id,
+                        AuthorId = author.Id
+                    });
+                }
             }
-
 
             CloseCommand.Execute(this);
         }
+
 
         public void GetSuggestions()
         {
