@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Bookshelf.ViewModels
+﻿namespace Bookshelf.ViewModels
 {
     public class BookListItemDesignModel : BookViewModel
     {
@@ -9,9 +7,9 @@ namespace Bookshelf.ViewModels
 
         public BookListItemDesignModel()
         {
-            Title = "Сомневайся во всём";
-            Author = "Рене Декарт";
-            Cover = new System.Windows.Media.Imaging.BitmapImage(new Uri(@"C:\Users\ilmoz\Source\Repos\Bookshelf\Bookshelf\Resources\Images\DesginTime\decart.png", UriKind.RelativeOrAbsolute));
+            //Title = "Сомневайся во всём";
+            //Author = "Рене Декарт";
+            //Cover = new System.Windows.Media.Imaging.BitmapImage(new Uri(@"C:\Users\ilmoz\Source\Repos\Bookshelf\Bookshelf\Resources\Images\DesginTime\decart.png", UriKind.RelativeOrAbsolute));
         }
 
     }

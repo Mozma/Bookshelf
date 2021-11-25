@@ -27,10 +27,6 @@
                       GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
 
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    </Window.Resources>
-
     <Border Padding="20">
         <Border CornerRadius="10"
                 Width="750"
@@ -82,50 +78,40 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Cover -->
+                    <Grid Grid.Column="0"
+                          Width="280">
+                        <Border Background="{StaticResource BackgroundDarkGrayBrush}"
+                                CornerRadius="10"
+                                BorderThickness="0"
+                                Cursor="Hand">
 
-                    <Border Grid.Column="0"
-                            Width="280"
-                            Background="{StaticResource BackgroundDarkGrayBrush}"
-                            CornerRadius="10"
-                            BorderThickness="0"
-                            Padding="5"
-                            Cursor="Hand"
-                            Name="mask">
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="0.4"
+                                                  BlurRadius="10"
+                                                  ShadowDepth="0"
+                                                  Direction="315" />
+                            </Border.Effect>
+                        </Border>
 
-                        <Border.Effect>
-                            <DropShadowEffect Opacity="0.4"
-                                              BlurRadius="2"
-                                              ShadowDepth="1"
-                                              Direction="315" />
-                        </Border.Effect>
-                        <Grid>
+                        <Border Background="{StaticResource BackgroundDarkGrayBrush}"
+                                CornerRadius="10"
+                                BorderThickness="0"
+                                Name="coverMask">
+                        </Border>
 
-                            <Rectangle StrokeDashArray="3 2"
-                                       Stroke="{StaticResource ForegroundGrayBrush}"
-                                       StrokeThickness="2"
-                                       RadiusX="5"
-                                       RadiusY="5" />
-                            <TextBlock HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       FontSize="64"
-                                       Foreground="{StaticResource ForegroundGrayBrush}"
-                                       Text="+" />
-                        </Grid>
+                        <Button Style="{StaticResource RoundCornerCoverButton}"
+                                Command="{Binding SelectCoverCommand}">
+                            <Button.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=coverMask}" />
+                            </Button.OpacityMask>
+                            <Button.Background>
+                                <ImageBrush Stretch="UniformToFill"
+                                            ImageSource="{Binding Cover,Converter={StaticResource WPFBitmapConverter}, FallbackValue={StaticResource DefaultBookCover}}" />
+                            </Button.Background>
 
-                    </Border>
-                    <Border Grid.Column="0"
-                            x:Name="Cover"
-                            Width="280"
-                            CornerRadius="10"
-                            BorderThickness="0"
-                            Padding="5"
-                            Visibility="{Binding IsCoverVisible,FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Border.Background>
-                            <ImageBrush ImageSource="https://upload.wikimedia.org/wikipedia/commons/3/31/Trattato_Della_Pittura_%2888395%29.jpg"
-                                        Stretch="UniformToFill" />
+                        </Button>
 
-                        </Border.Background>
-                    </Border>
+                    </Grid>
 
                     <Grid Grid.Column="2">
                         <Grid.RowDefinitions>

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Bookshelf.CustomControls"
              xmlns:bookshelf="clr-namespace:Bookshelf"
+         
              d:DataContext="{d:DesignInstance Type=bookshelf:BaseViewModel}"
              TextOptions.TextFormattingMode="Display"
              mc:Ignorable="d"
@@ -12,7 +13,9 @@
              d:DesignWidth="300">
     <UserControl.Resources>
 
-        <Style x:Key="CStyle"
+
+        
+            <Style x:Key="CStyle"
                TargetType="ContextMenu">
             <Setter Property="SnapsToDevicePixels"
                     Value="True" />
@@ -101,7 +104,8 @@
                                             Background="{StaticResource BackgroundDarkGrayBrush}">
                                         <Border CornerRadius="2">
                                             <Border.Background>
-                                                <ImageBrush ImageSource="{Binding Cover}" />
+                                                <ImageBrush ImageSource="{Binding Cover, Converter={StaticResource WPFBitmapConverter}}"
+                                                             />
                                             </Border.Background>
                                         </Border>
                                     </Border>

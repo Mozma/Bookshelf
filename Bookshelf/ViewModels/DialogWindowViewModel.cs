@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
 {
@@ -11,7 +10,7 @@ namespace Bookshelf.ViewModels
 
         public Control Content { get; set; }
 
-        public DialogWindowViewModel(Window window) 
+        public DialogWindowViewModel(Window window)
         {
 
         }

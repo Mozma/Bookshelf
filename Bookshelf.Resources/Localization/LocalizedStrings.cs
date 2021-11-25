@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using WPFLocalizeExtension.Engine;
 
 namespace Bookshelf.Resources.Localization
@@ -27,12 +22,12 @@ namespace Bookshelf.Resources.Localization
             LocalizeDictionary.Instance.Culture = info;
         }
 
-        public string this[string key] 
+        public string this[string key]
         {
             get
             {
                 var result = LocalizeDictionary.Instance.GetLocalizedObject("Bookshelf.Resources", "Strings", key, LocalizeDictionary.Instance.Culture);
-                return result as string;    
+                return result as string;
             }
         }
     }

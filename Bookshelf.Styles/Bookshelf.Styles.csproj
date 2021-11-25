@@ -12,10 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bookshelf.Helpers\Bookshelf.Helpers.csproj" />
     <ProjectReference Include="..\Bookshelf.Resources\Bookshelf.Resources.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Converters.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="ComboBoxes.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

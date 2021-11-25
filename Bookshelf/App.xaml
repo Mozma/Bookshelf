@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Textboxes.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/ComboBoxes.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Windows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Converters.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodel:HomeViewModel}">

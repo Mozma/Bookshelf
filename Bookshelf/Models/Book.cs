@@ -14,7 +14,7 @@ namespace Bookshelf.Models
         public int? PublisherId { get; set; }
         public int? StatusId { get; set; }
         public string Description { get; set; }
-        
+
 
         public Status Status { get; set; }
         public Image BookImage { get; set; }
