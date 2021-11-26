@@ -1,11 +1,14 @@
 ﻿using Bookshelf.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace Bookshelf
 {
     public class Navigation
     {
         public static Navigation Instance = new Navigation();
+
+        public static Stack<BaseViewModel> History { get; set; } = new Stack<BaseViewModel>();
 
         public BaseViewModel CurrentViewModel
         {
@@ -24,7 +27,23 @@ namespace Bookshelf
 
         public static void SetView(BaseViewModel viewModel)
         {
+            History.Push(Instance.CurrentViewModel);
             Instance.CurrentViewModel = viewModel;
+
+        }
+
+        public static void GoToPrevieusViewModel()
+        {
+            // Нужен тест
+
+            if (History.Count != 0)
+            {
+                while (History.Count != 0 && History.Peek() == GetCurrentViewModel())
+                {
+                    History.Pop();
+                }
+                SetView(History.Pop());
+            }
         }
 
         private void OnCurrentViewModelChanged()
