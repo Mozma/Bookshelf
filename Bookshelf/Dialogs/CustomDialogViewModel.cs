@@ -1,6 +1,6 @@
 ﻿namespace Bookshelf.Dialogs
 {
-    public class MessageBoxDialogViewModel : BaseViewModel
+    public class CustomDialogViewModel : BaseViewModel
     {
         public string Title { get; set; }
         public string Message { get; set; }

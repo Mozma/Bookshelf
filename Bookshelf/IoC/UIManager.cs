@@ -7,7 +7,7 @@ namespace Bookshelf
     public class UIManager : IUIManager
     {
 
-        public Task ShowMessage(MessageBoxDialogViewModel viewModel)
+        public Task ShowDialogWindow<T>(T viewModel) where T : Window
         {
             var tcs = new TaskCompletionSource<bool>();
 
@@ -15,7 +15,7 @@ namespace Bookshelf
             {
                 try
                 {
-                    new AddNewBookWindow().ShowDialog();
+                    viewModel.ShowDialog();
                 }
                 finally
                 {

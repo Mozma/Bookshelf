@@ -115,6 +115,33 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить.
+        /// </summary>
+        public static string AddShelfAcceptButton {
+            get {
+                return ResourceManager.GetString("AddShelfAcceptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Новая полка.
+        /// </summary>
+        public static string AddShelfHeaderTextBlock {
+            get {
+                return ResourceManager.GetString("AddShelfHeaderTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Название:.
+        /// </summary>
+        public static string AddShelfTitleTextBlock {
+            get {
+                return ResourceManager.GetString("AddShelfTitleTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ISBN:.
         /// </summary>
         public static string BookViewISBNTextBlock {
@@ -192,6 +219,15 @@ namespace Bookshelf.Resources.Localization {
         public static string ShelfNameTextBlock {
             get {
                 return ResourceManager.GetString("ShelfNameTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +  Добавить полку.
+        /// </summary>
+        public static string ShelvesAddNewShelfButton {
+            get {
+                return ResourceManager.GetString("ShelvesAddNewShelfButton", resourceCulture);
             }
         }
         

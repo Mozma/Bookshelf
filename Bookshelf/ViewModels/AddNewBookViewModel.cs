@@ -48,6 +48,7 @@ namespace Bookshelf.ViewModels
 
             GetSuggestions();
         }
+
         // Todo: вынести метод в отдельное место 
         private void SelectCover()
         {
@@ -60,7 +61,6 @@ namespace Bookshelf.ViewModels
             }
         }
 
-
         private void AddBook()
         {
             using (var context = new DataContextFactory().CreateDbContext())
@@ -71,7 +71,6 @@ namespace Bookshelf.ViewModels
                 var bookRepository = new Repository<Book>(context);
                 var shelfRepository = new Repository<Shelf>(context);
                 var imageRepository = new Repository<Models.Image>(context);
-
 
                 var author = authorRepository.GetAll().FirstOrDefault(a => a.FullName == AuthorName);
                 var book = bookRepository.GetAll().FirstOrDefault(b => b.Title == BookTitle);
@@ -92,7 +91,6 @@ namespace Bookshelf.ViewModels
                     {
                         Title = BookTitle,
                         ImageId = image.Id
-
                     });
                 }
 

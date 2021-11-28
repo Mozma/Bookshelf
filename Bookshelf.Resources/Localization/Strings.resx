@@ -171,4 +171,16 @@
   <data name="BookViewStatusTextBlock" xml:space="preserve">
     <value>Статус:</value>
   </data>
+  <data name="ShelvesAddNewShelfButton" xml:space="preserve">
+    <value>+  Добавить полку</value>
+  </data>
+  <data name="AddShelfHeaderTextBlock" xml:space="preserve">
+    <value>Новая полка</value>
+  </data>
+  <data name="AddShelfTitleTextBlock" xml:space="preserve">
+    <value>Название:</value>
+  </data>
+  <data name="AddShelfAcceptButton" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
 </root>

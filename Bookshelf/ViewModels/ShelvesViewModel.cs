@@ -2,6 +2,7 @@
 using Bookshelf.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
 {
@@ -9,9 +10,21 @@ namespace Bookshelf.ViewModels
     {
         public List<ShelfViewModel> Items { get; set; }
 
+        public ICommand AddShelfCommand { get; set; }
+
         public ShelvesViewModel()
         {
             SetupView();
+            SetupCommands();
+        }
+
+        private void SetupCommands()
+        {
+            AddShelfCommand = new RelayCommand(o =>
+            {
+                IoC.UI.ShowDialogWindow(new AddShelfWindow());
+                Navigation.SetView(this);
+            });
         }
 
         public void SetupView()
