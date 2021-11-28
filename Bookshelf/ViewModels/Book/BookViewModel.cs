@@ -1,5 +1,6 @@
 ﻿
 using Bookshelf.Helpers;
+using Bookshelf.Models;
 using Microsoft.Win32;
 using System;
 using System.Drawing;
@@ -10,6 +11,7 @@ namespace Bookshelf.ViewModels
 {
     public class BookViewModel : BaseViewModel
     {
+        public Book Entity { get; set; }
         public ICommand OpenBookViewCommand { get; set; }
         public ICommand SelectCoverCommand { get; set; }
 
@@ -28,6 +30,12 @@ namespace Bookshelf.ViewModels
             SetupCommands();
         }
 
+        public BookViewModel(Book entity) : this()
+        {
+            Entity = entity;
+            SetFields();
+        }
+
         private void SetupCommands()
         {
             OpenBookViewCommand = new RelayCommand(o =>
@@ -38,15 +46,35 @@ namespace Bookshelf.ViewModels
             GoBackCommand = new RelayCommand(o =>
             {
                 Navigation.GoToPrevieusViewModel();
+                SetFields();
             });
-
 
             SelectCoverCommand = new RelayCommand(o =>
             {
                 SelectCover();
             });
 
+
+            CancelCommand = new RelayCommand(o =>
+            {
+                SetFields();
+            });
+
         }
+
+        private void SetFields()
+        {
+            if (Entity != null)
+            {
+                Title = Entity.Title;
+                Author = Entity.BookBinds[0].Author.FullName;
+                if (Entity.Image != null)
+                {
+                    Cover = Entity.Image.Base64Data.Base64StringToBitmap();
+                }
+            }
+        }
+
         private void SelectCover()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();

@@ -9,7 +9,7 @@ namespace Bookshelf.Models
         public string Subtitle { get; set; }
         public int? PagesNumber { get; set; }
         public int? Year { get; set; }
-        public int? BookImageId { get; set; }
+        public int? ImageId { get; set; }
         public int? ISBN { get; set; }
         public int? PublisherId { get; set; }
         public int? StatusId { get; set; }
@@ -17,7 +17,7 @@ namespace Bookshelf.Models
 
 
         public Status Status { get; set; }
-        public Image BookImage { get; set; }
+        public Image Image { get; set; }
         public Publisher Publisher { get; set; }
 
         public List<BookBind> BookBinds { get; set; }

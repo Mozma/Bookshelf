@@ -7,7 +7,7 @@ namespace Bookshelf.Models
     {
         public void Configure(EntityTypeBuilder<Book> builder)
         {
-            builder.Property(o => o.BookImageId).IsRequired(false);
+            builder.Property(o => o.ImageId).IsRequired(false);
             builder.Property(o => o.Year).IsRequired(false);
             builder.Property(o => o.PagesNumber).IsRequired(false);
             builder.Property(o => o.Subtitle).IsRequired(false);
@@ -15,6 +15,9 @@ namespace Bookshelf.Models
             builder.Property(o => o.PublisherId).IsRequired(false);
             builder.Property(o => o.Description).IsRequired(false);
             builder.Property(o => o.StatusId).IsRequired(false);
+
+            builder.Navigation(o => o.Image).AutoInclude();
+            builder.Navigation(o => o.BookBinds).AutoInclude();
         }
     }
 }

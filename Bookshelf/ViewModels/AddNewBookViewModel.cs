@@ -91,7 +91,7 @@ namespace Bookshelf.ViewModels
                     book = bookRepository.Create(new Book
                     {
                         Title = BookTitle,
-                        BookImageId = image.Id
+                        ImageId = image.Id
 
                     });
                 }
