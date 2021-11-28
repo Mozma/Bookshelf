@@ -13,7 +13,7 @@ namespace Bookshelf.Helpers
             System.Globalization.CultureInfo culture)
         {
             MemoryStream ms = new MemoryStream();
-            ((Bitmap)value).Save(ms, ImageFormat.Bmp);
+            ((Bitmap)value).Save(ms, ImageFormat.Png);
             BitmapImage image = new BitmapImage();
             image.BeginInit();
             ms.Seek(0, SeekOrigin.Begin);

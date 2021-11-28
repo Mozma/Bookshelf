@@ -29,16 +29,16 @@ namespace Bookshelf
         {
             History.Push(Instance.CurrentViewModel);
             Instance.CurrentViewModel = viewModel;
-
+            
         }
 
         public static void GoToPrevieusViewModel()
         {
             // Нужен тест
 
-            if (History.Count != 0)
+            if(History.Count != 0)
             {
-                while (History.Count != 0 && History.Peek() == GetCurrentViewModel())
+                while(History.Count != 0 && History.Peek() == GetCurrentViewModel())
                 {
                     History.Pop();
                 }

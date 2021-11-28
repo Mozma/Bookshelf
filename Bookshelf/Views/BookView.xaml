@@ -22,9 +22,10 @@
             CornerRadius="10"
             BorderThickness="0"
             Padding="15">
-        <Grid>
+        <Grid 
+            >
             <Grid Background="Transparent"
-                  Panel.ZIndex="1">
+                  >
                 <Grid.ContextMenu>
                     <ContextMenu Style="{StaticResource ModernContextMenuStyle}">
                         <MenuItem Header="Изменить"
@@ -39,7 +40,7 @@
                 </Grid.ContextMenu>
             </Grid>
 
-            <Grid>
+            <Grid Panel.ZIndex="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
@@ -53,7 +54,8 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Row="2"
-                      Grid.Column="0">
+                      Grid.Column="0"
+                      Panel.ZIndex="1">
                     <Border Width="345"
                             Height="580"
                             Background="{StaticResource BackgroundDarkGrayBrush}"
@@ -84,7 +86,7 @@
                         </Button.OpacityMask>
                         <Button.Background>
                             <ImageBrush Stretch="UniformToFill"
-                                        ImageSource="{Binding Cover, FallbackValue={StaticResource DefaultBookCover}}" />
+                                        ImageSource="{Binding Cover, FallbackValue={StaticResource DefaultBookCover}, Converter={StaticResource WPFBitmapConverter}}" />
                         </Button.Background>
 
                     </Button>
@@ -93,7 +95,8 @@
 
                 <!-- Book Info -->
                 <Grid Grid.Row="2"
-                      Grid.Column="2">
+                      Grid.Column="2"
+                      >
                     <StackPanel>
                         <!-- Title and Author-->
                         <TextBlock  FontSize="36"

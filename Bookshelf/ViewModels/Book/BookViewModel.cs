@@ -1,6 +1,7 @@
 ﻿
 using Bookshelf.Helpers;
 using Microsoft.Win32;
+using System;
 using System.Drawing;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -53,7 +54,7 @@ namespace Bookshelf.ViewModels
 
             if (openFileDialog.ShowDialog() == true)
             {
-                //  Cover = new BitmapImage(new Uri(System.IO.Path.GetFullPath(openFileDialog.FileName)));
+                  Cover = BitmapImageConverter.BitmapImageToBitmap(new BitmapImage(new Uri(System.IO.Path.GetFullPath(openFileDialog.FileName))));
             }
         }
 

@@ -9,7 +9,7 @@ namespace Bookshelf
 
         public Task ShowMessage(MessageBoxDialogViewModel viewModel)
         {
-            var tcs = new TaskCompletionSource<bool>();
+            var tcs = new TaskCompletionSource<bool>(); 
 
             Application.Current.Dispatcher.BeginInvoke(() =>
             {
@@ -17,11 +17,11 @@ namespace Bookshelf
                 {
                     new AddNewBookWindow().ShowDialog();
                 }
-                finally
+                finally 
                 {
                     tcs.TrySetResult(true);
                 }
-
+                
             });
 
             return tcs.Task;

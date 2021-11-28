@@ -51,7 +51,7 @@ namespace Bookshelf.Helpers
 
             using (MemoryStream outStream = new MemoryStream())
             {
-                BitmapEncoder enc = new BmpBitmapEncoder();
+                PngBitmapEncoder enc = new PngBitmapEncoder();
                 enc.Frames.Add(BitmapFrame.Create(bitmapImage));
                 enc.Save(outStream);
                 Bitmap bitmap = new Bitmap(outStream);
