@@ -20,7 +20,7 @@ namespace Bookshelf.ViewModels
         public string BookTitle { get; set; }
         public string AuthorName { get; set; }
         public string ShelfName { get; set; }
-        public Bitmap Cover { get; set; }  = ResourceFinder.Get<BitmapImage>("DefaultBookCover").BitmapImageToBitmap();
+        public Bitmap Cover { get; set; } = ResourceFinder.Get<BitmapImage>("DefaultBookCover").BitmapImageToBitmap();
 
         public ICommand CloseCommand { get; set; }
         public ICommand AddBookCommand { get; set; }

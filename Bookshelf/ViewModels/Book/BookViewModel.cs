@@ -54,7 +54,6 @@ namespace Bookshelf.ViewModels
                 SelectCover();
             });
 
-
             CancelCommand = new RelayCommand(o =>
             {
                 SetFields();
@@ -82,7 +81,7 @@ namespace Bookshelf.ViewModels
 
             if (openFileDialog.ShowDialog() == true)
             {
-                  Cover = BitmapImageConverter.BitmapImageToBitmap(new BitmapImage(new Uri(System.IO.Path.GetFullPath(openFileDialog.FileName))));
+                Cover = BitmapImageConverter.BitmapImageToBitmap(new BitmapImage(new Uri(System.IO.Path.GetFullPath(openFileDialog.FileName))));
             }
         }
 

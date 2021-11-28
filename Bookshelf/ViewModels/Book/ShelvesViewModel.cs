@@ -1,10 +1,7 @@
-﻿using Bookshelf.Helpers;
-using Bookshelf.Models;
+﻿using Bookshelf.Models;
 using Bookshelf.Services;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Windows.Media.Imaging;
 
 namespace Bookshelf.ViewModels
 {
