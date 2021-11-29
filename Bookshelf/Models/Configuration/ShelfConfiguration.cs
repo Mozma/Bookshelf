@@ -7,7 +7,7 @@ namespace Bookshelf.Models
     {
         public void Configure(EntityTypeBuilder<Shelf> builder)
         {
-
+            builder.Navigation(o => o.ShelfBinds).AutoInclude();
         }
     }
 }

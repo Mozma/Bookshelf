@@ -16,7 +16,10 @@ namespace Bookshelf.ViewModels
 
         public AddShelfViewModel(Window window)
         {
-            CloseCommand = new RelayCommand(o => window.Close());
+            CloseCommand = new RelayCommand(o =>
+            {
+                window.Close();
+            });
 
             AddShelfCommand = new RelayCommand(o =>
             {
@@ -27,7 +30,6 @@ namespace Bookshelf.ViewModels
             });
 
         }
-
 
         private void AddShelf()
         {
@@ -45,6 +47,7 @@ namespace Bookshelf.ViewModels
                     });
                 }
             }
+
 
             CloseCommand.Execute(this);
         }

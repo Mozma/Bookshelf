@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Bookshelf.Dialogs
 {
     public interface IUIManager
     {
-        Task ShowDialogWindow<T>(T window) where T : Window;
+        bool? ShowDialogWindow<T>(T window) where T : Window;
     }
 }

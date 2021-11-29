@@ -1,26 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using Bookshelf.Models;
+using Bookshelf.Services;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
 {
     public class ShelfViewModel : BaseViewModel
     {
+        public Shelf Entity { get; set; }
+
         public ICommand OpenShelfCommand { get; set; }
         public ICommand AddNewBookCommand { get; set; }
         public ICommand GoToShelvesCommand { get; set; }
 
         public string Name { get; set; }
-        public List<BookViewModel> Items { get; set; }
+        public ObservableCollection<BookViewModel> Items { get; set; }
 
-        public ShelfViewModel(string name, List<BookViewModel> items) : this()
+        public ShelfViewModel(Shelf entity)
         {
-            Name = name;
-            Items = items;
+            Entity = entity;
+            Name = entity.Name;
+
+            if (Entity != null)
+            {
+                SetupView();
+            }
+
+            SetupCommands();
         }
 
-        public ShelfViewModel()
+        private void SetupView()
         {
-            SetupCommands();
+            Items = new ObservableCollection<BookViewModel>();
+
+            var shelvesRepository = new Repository<Shelf>();
+            var shelfBindRepository = new Repository<ShelfBind>();
+
+            List<Shelf> shelfItems = shelvesRepository.GetAll().ToList();
+            List<ShelfBind> shelfBindItems = shelfBindRepository.GetAll().ToList();
+
+            shelfBindItems = shelfBindRepository.GetAll()
+                .Where(o => o.Shelf.Id.Equals(Entity.Id))
+                .ToList();
+
+            foreach (var shelfBind in shelfBindItems)
+            {
+                Items.Add(new BookViewModel(shelfBind.Book));
+            }
         }
 
         private void SetupCommands()
@@ -28,7 +56,6 @@ namespace Bookshelf.ViewModels
             OpenShelfCommand = new RelayCommand(o =>
             {
                 Navigation.SetView(this);
-
             });
 
             GoToShelvesCommand = new RelayCommand(o =>
@@ -39,7 +66,7 @@ namespace Bookshelf.ViewModels
             AddNewBookCommand = new RelayCommand(o =>
             {
                 IoC.UI.ShowDialogWindow(new AddNewBookWindow());
-                Navigation.SetView(this);
+                SetupView();
             });
 
         }
