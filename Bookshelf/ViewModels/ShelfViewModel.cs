@@ -1,5 +1,5 @@
 ﻿using Bookshelf.Models;
-using Bookshelf.Services;
+using Bookshelf.Models.Data;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -35,19 +35,18 @@ namespace Bookshelf.ViewModels
         {
             Items = new ObservableCollection<BookViewModel>();
 
-            var shelvesRepository = new Repository<Shelf>();
-            var shelfBindRepository = new Repository<ShelfBind>();
-
-            List<Shelf> shelfItems = shelvesRepository.GetAll().ToList();
-            List<ShelfBind> shelfBindItems = shelfBindRepository.GetAll().ToList();
-
-            shelfBindItems = shelfBindRepository.GetAll()
-                .Where(o => o.Shelf.Id.Equals(Entity.Id))
-                .ToList();
-
-            foreach (var shelfBind in shelfBindItems)
+            using (var context = new DataContextFactory().CreateDbContext())
             {
-                Items.Add(new BookViewModel(shelfBind.Book));
+                List<ShelfBind> shelfBindItems = context.Set<ShelfBind>().ToList();
+
+                shelfBindItems = context.Set<ShelfBind>()
+                    .Where(o => o.Shelf.Id.Equals(Entity.Id))
+                    .ToList();
+
+                foreach (var shelfBind in shelfBindItems)
+                {
+                    Items.Add(new BookViewModel(shelfBind.Book));
+                }
             }
         }
 

@@ -183,4 +183,10 @@
   <data name="AddShelfAcceptButton" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="BookCancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="BookSaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

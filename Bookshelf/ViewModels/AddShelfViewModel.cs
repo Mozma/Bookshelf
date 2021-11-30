@@ -1,6 +1,5 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
-using Bookshelf.Services;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -35,19 +34,17 @@ namespace Bookshelf.ViewModels
         {
             using (var context = new DataContextFactory().CreateDbContext())
             {
-                var shelfRepository = new Repository<Shelf>(context);
-
-                var shelf = shelfRepository.GetAll().FirstOrDefault(s => s.Name == ShelfName);
+                var shelf = context.Set<Shelf>().FirstOrDefault(s => s.Name == ShelfName);
 
                 if (shelf == null)
                 {
-                    shelfRepository.Create(new Shelf
+                    context.Set<Shelf>().Add(new Shelf
                     {
                         Name = ShelfName
                     });
+                    context.SaveChanges();
                 }
             }
-
 
             CloseCommand.Execute(this);
         }

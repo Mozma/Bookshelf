@@ -1,6 +1,7 @@
 ﻿
 using Bookshelf.Helpers;
 using Bookshelf.Models;
+using Bookshelf.Services;
 using Microsoft.Win32;
 using System;
 using System.Drawing;
@@ -23,7 +24,12 @@ namespace Bookshelf.ViewModels
         public string Title { get; set; }
         public string Author { get; set; }
         public Bitmap Cover { get; set; } = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
-
+     
+        public string PagesNumber { get; set; }
+        public string Year { get; set; }
+        public string ISBN { get; set; }
+        public string Publisher { get; set; }
+        public string Status { get; set; }
 
         public BookViewModel()
         {
@@ -59,6 +65,54 @@ namespace Bookshelf.ViewModels
                 SetFields();
             });
 
+            SaveCommand = new RelayCommand(o =>
+            {
+                SaveEntity();
+            });
+            
+    }
+
+        private void SaveEntity()
+        {
+            var bookRepository = new Repository<Book>();
+
+            if (!Title.Trim().Equals("---")) {
+                Entity.Title = Title;
+            }
+
+            if (!Author.Trim().Equals("---"))
+            {
+                //Entity.Author = Author;
+            }
+
+            if (!PagesNumber.Trim().Equals("---") && !string.IsNullOrWhiteSpace(PagesNumber)) 
+            {
+                Entity.PagesNumber = int.Parse(PagesNumber);
+            }
+
+            //if (!Title.Trim().Equals("---"))
+            //{
+            //    Entity.Year = Title;
+            //}
+
+            //if (!Title.Trim().Equals("---"))
+            //{
+            //    Entity.ISBN = Title;
+            //}
+
+            //if (!Title.Trim().Equals("---"))
+            //{
+            //    Entity.Publisher = Title;
+            //}
+
+            //if (!Title.Trim().Equals("---"))
+            //{
+            //    Entity.Publisher = Status;
+            //}
+
+
+            bookRepository.Update(Entity.Id, Entity);
+            
         }
 
         private void SetFields()
@@ -67,6 +121,11 @@ namespace Bookshelf.ViewModels
             {
                 Title = Entity.Title;
                 Author = Entity.BookBinds[0].Author.FullName;
+
+
+                PagesNumber = Entity.PagesNumber == null ? "---" : Entity.PagesNumber.ToString(); 
+
+
                 if (Entity.Image != null)
                 {
                     Cover = Entity.Image.Base64Data.Base64StringToBitmap();

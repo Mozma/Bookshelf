@@ -1,4 +1,5 @@
 ﻿using Bookshelf.Models;
+using Bookshelf.Models.Data;
 using Bookshelf.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,15 +41,19 @@ namespace Bookshelf.ViewModels
 
         public void SetupView()
         {
-            var shelvesRepository = new Repository<Shelf>();
-
-            List<Shelf> shelfItems = shelvesRepository.GetAll().ToList();
-
-            Items = new ObservableCollection<ShelfViewModel>();
-
-            foreach (var item in shelfItems)
+            using (var context = new DataContextFactory().CreateDbContext())
             {
-                Items.Add(new ShelfViewModel(item));
+                //var shelfRepository = new Repository<Shelf>(context);
+                //List<Shelf> shelfItems = shelfRepository.GetAll().Result.ToList();
+               List<Shelf> shelfItems = context.Set<Shelf>().ToList();
+
+
+                Items = new ObservableCollection<ShelfViewModel>();
+
+                foreach (var item in shelfItems)
+                {
+                    Items.Add(new ShelfViewModel(item));
+                }
             }
         }
     }

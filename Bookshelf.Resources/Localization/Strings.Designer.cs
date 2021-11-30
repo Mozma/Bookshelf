@@ -142,6 +142,24 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отменить.
+        /// </summary>
+        public static string BookCancelButton {
+            get {
+                return ResourceManager.GetString("BookCancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string BookSaveButton {
+            get {
+                return ResourceManager.GetString("BookSaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ISBN:.
         /// </summary>
         public static string BookViewISBNTextBlock {

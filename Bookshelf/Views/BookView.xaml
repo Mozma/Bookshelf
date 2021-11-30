@@ -16,7 +16,30 @@
              d:Width="900">
 
     <UserControl.Resources>
-
+            <!--<Style x:Key="{x:Type ToolTip}"
+                   TargetType="ToolTip">
+                <Setter Property="OverridesDefaultStyle"
+                        Value="true" />
+                <Setter Property="HasDropShadow"
+                        Value="True" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToolTip">
+                        <Border Background="White"
+                                CornerRadius="5"
+                                Padding="5,0,5,0"
+                                BorderThickness="0"
+                                >
+                            <TextBlock FontSize="16"
+                                       FontWeight="Regular"
+                                       >
+                            <ContentPresenter />
+                            </TextBlock>
+                        </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
     </UserControl.Resources>
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"
@@ -101,8 +124,10 @@
                         <!-- Title and Author-->
                         <TextBlock  FontSize="36"
                                     FontWeight="Bold"
+                                    TextTrimming="CharacterEllipsis"
                                     FontFamily="{StaticResource RobotoRegular}"
-                                    Text="{Binding Title, FallbackValue=Название книги}" />
+                                    Text="{Binding Title, FallbackValue=Название книги}"
+                                    ToolTip="{Binding Title}"/>
                         <TextBlock  FontSize="24"
                                     FontFamily="{StaticResource RobotoRegular}"
                                     TextDecorations="Underline"
@@ -179,7 +204,7 @@
                                        Text="{lex:Loc}" />
                             <input:AutoCompleteBox Grid.Row="7"
                                                    Grid.Column="2"
-                                                   Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                                   Text="{Binding PagesNumber, Mode=TwoWay,FallbackValue=---}"
                                                    Style="{StaticResource ACBBaseStyle}" />
 
                             <TextBlock Grid.Row="9"
@@ -217,16 +242,20 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Button Grid.Row="1"
+                                <Button x:Name="BookCancelButton"
+                                    Grid.Row="1"
                                         Grid.Column="1"
-                                        Content="Cancel"
-                                        Width="90"
-                                        Style="{StaticResource RoundCornerButton}" />
-                                <Button Grid.Row="1"
+                                        Content="{lex:Loc}"
+                                        
+                                        Style="{StaticResource RoundCornerButton}"
+                                        Command="{Binding CancelCommand}"/>
+                                <Button x:Name="BookSaveButton"
+                                    Grid.Row="1"
                                         Grid.Column="3"
-                                        Content="Save"
-                                        Width="90"
-                                        Style="{StaticResource RoundCornerButton}" />
+                                        Content="{lex:Loc}"
+                                        
+                                        Style="{StaticResource RoundCornerButton}"
+                                        Command="{Binding SaveCommand}"/>
 
                             </Grid>
                         </Grid>

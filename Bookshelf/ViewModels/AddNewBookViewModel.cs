@@ -65,57 +65,55 @@ namespace Bookshelf.ViewModels
         {
             using (var context = new DataContextFactory().CreateDbContext())
             {
-                var bookBindRepository = new Repository<BookBind>(context);
-                var shelfBindRepository = new Repository<ShelfBind>(context);
-                var authorRepository = new Repository<Author>(context);
-                var bookRepository = new Repository<Book>(context);
-                var shelfRepository = new Repository<Shelf>(context);
-                var imageRepository = new Repository<Models.Image>(context);
-
-                var author = authorRepository.GetAll().FirstOrDefault(a => a.FullName == AuthorName);
-                var book = bookRepository.GetAll().FirstOrDefault(b => b.Title == BookTitle);
-                var shelf = shelfRepository.GetAll().FirstOrDefault(s => s.Name == SelectedShelf.Name);
-                var image = imageRepository.GetAll().FirstOrDefault(i => i.Base64Data.Equals(Cover.BitmapToBase64String()));
+                var author = context.Set<Author>().FirstOrDefault(a => a.FullName == AuthorName);
+                var book = context.Set<Book>().FirstOrDefault(b => b.Title == BookTitle);
+                var shelf = context.Set<Shelf>().FirstOrDefault(s => s.Name == SelectedShelf.Name);
+                var image = context.Set<Models.Image>().FirstOrDefault(i => i.Base64Data.Equals(Cover.BitmapToBase64String()));
 
                 if (image == null)
                 {
-                    image = imageRepository.Create(new Models.Image
+                    image = context.Set<Models.Image>().Add(new Models.Image
                     {
                         Base64Data = Cover.BitmapToBase64String()
-                    });
+                    }).Entity;
+                    context.SaveChangesAsync();
                 }
 
                 if (book == null)
                 {
-                    book = bookRepository.Create(new Book
+                    book = context.Set<Book>().Add(new Book
                     {
                         Title = BookTitle,
                         ImageId = image.Id
-                    });
+                    }).Entity;
+                    context.SaveChangesAsync();
                 }
 
                 if (author == null)
                 {
-                    author = authorRepository.Create(new Author { FullName = AuthorName });
+                    author = context.Set<Author>().Add(new Author { FullName = AuthorName }).Entity;
+                    context.SaveChangesAsync();
                 }
 
-                if (shelfBindRepository.GetAll().FirstOrDefault(s => s.BookId == book.Id && s.ShelfId == shelf.Id) == null)
+                if (context.Set<ShelfBind>().FirstOrDefault(s => s.BookId == book.Id && s.ShelfId == shelf.Id) == null)
                 {
-                    shelfBindRepository.Create(new ShelfBind
+                    context.Set<ShelfBind>().Add(new ShelfBind
                     {
                         BookId = book.Id,
                         ShelfId = shelf.Id
                     });
                 }
 
-                if (bookBindRepository.GetAll().FirstOrDefault(b => b.BookId == book.Id && b.AuthorId == author.Id) == null)
+                if (context.Set<BookBind>().FirstOrDefault(b => b.BookId == book.Id && b.AuthorId == author.Id) == null)
                 {
-                    bookBindRepository.Create(new BookBind
+                    context.Set<BookBind>().Add(new BookBind
                     {
                         BookId = book.Id,
                         AuthorId = author.Id
                     });
                 }
+
+                context.SaveChangesAsync();
             }
 
             CloseCommand.Execute(this);
@@ -123,15 +121,15 @@ namespace Bookshelf.ViewModels
 
         public void GetSuggestions()
         {
-            var bookRepository = new Repository<Book>();
-            var authorRepository = new Repository<Author>();
-            var shelvesRepository = new Repository<Shelf>();
+            using (var context = new DataContextFactory().CreateDbContext()) {
+                
+                BooksTitles = context.Set<Book>().Select(o => o.Title).ToList();
+                AuthorsNames = context.Set<Author>().Select(o => o.FullName).ToList();
+                ShelvesNames = context.Set<Shelf>().Select(o => o.Name).ToList();
 
-            BooksTitles = bookRepository.GetAll().Select(o => o.Title).ToList();
-            AuthorsNames = authorRepository.GetAll().Select(o => o.FullName).ToList();
-            ShelvesNames = shelvesRepository.GetAll().Select(o => o.Name).ToList();
+                Shelves = context.Set<Shelf>().ToList();
 
-            Shelves = shelvesRepository.GetAll().ToList();
+            }
         }
     }
 }

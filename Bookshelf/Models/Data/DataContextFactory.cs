@@ -19,7 +19,11 @@ namespace Bookshelf.Models.Data
                 var connectionString = configuration.GetConnectionString("Default");
                 optionsBuilder.UseSqlite(connectionString);
             }
-            return new DataContext(optionsBuilder.Options);
+
+            var context = new DataContext(optionsBuilder.Options);
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            
+            return context;
         }
     }
 }
