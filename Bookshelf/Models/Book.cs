@@ -8,9 +8,10 @@ namespace Bookshelf.Models
         public string Title { get; set; }
         public string Subtitle { get; set; }
         public int? PagesNumber { get; set; }
+        public int? PagesRead { get; set; }
         public int? Year { get; set; }
         public int? ImageId { get; set; }
-        public int? ISBN { get; set; }
+        public string ISBN { get; set; }
         public int? PublisherId { get; set; }
         public int? StatusId { get; set; }
         public string Description { get; set; }

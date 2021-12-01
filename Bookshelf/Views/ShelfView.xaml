@@ -27,12 +27,37 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0"
-                       Text="{Binding Name}"
-                       FontSize="48"
-                       TextTrimming="CharacterEllipsis"
-                       HorizontalAlignment="Left"
-                       Padding="15,5,0,0" />
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*"
+                                      MinWidth="100" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="{Binding Name}"
+                           FontSize="48"
+                           TextTrimming="CharacterEllipsis"
+                           HorizontalAlignment="Left"
+                           Padding="15,5,0,0" />
+
+                <Button x:Name="ShelfAddNewBookButton"
+                        Grid.Column="2"
+                        Style="{StaticResource RoundCornerButton}"
+                        Content="{lex:Loc}"
+                        Command="{Binding AddNewBookCommand}" />
+
+                <Button x:Name="ShelfBackButton"
+                        Grid.Column="4"
+                        Style="{StaticResource RoundCornerButton}"
+                        Command="{Binding GoBackCommand}"
+                        Content="{lex:Loc}" />
+
+            </Grid>
 
             <Border Grid.Row="1"
                     Padding="15,0,15,0">
@@ -48,7 +73,7 @@
                         <customcontrols:SearchBox x:Name="SearchBoxPlaceHolder"
                                                   Height="30"
                                                   Width="300" />
-                        <Border Grid.Column="1"
+                        <!--<Border Grid.Column="1"
                                 Margin="15,0,15,0">
                             <Button x:Name="ShelfAddNewBookButton"
                                     Style="{StaticResource RoundCornerButton}"
@@ -61,7 +86,7 @@
                                     Style="{StaticResource RoundCornerButton}"
                                     Command="{Binding GoToShelvesCommand}"
                                     Content="{lex:Loc}" />
-                        </Border >
+                        </Border >-->
                     </Grid>
 
                 </Border>

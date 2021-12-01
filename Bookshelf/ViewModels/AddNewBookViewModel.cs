@@ -42,22 +42,24 @@ namespace Bookshelf.ViewModels
 
             SelectCoverCommand = new RelayCommand(o =>
             {
-                SelectCover();
+                Cover = GetBitmapImageFromDialog();
             });
 
             GetSuggestions();
         }
 
         // Todo: вынести метод в отдельное место 
-        private void SelectCover()
+        private Bitmap GetBitmapImageFromDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == true)
             {
-                Cover = new BitmapImage(new Uri(Path.GetFullPath(openFileDialog.FileName))).BitmapImageToBitmap();
+                return new BitmapImage(new Uri(Path.GetFullPath(openFileDialog.FileName))).BitmapImageToBitmap();
             }
+
+            return ResourceFinder.Get<BitmapImage>("DefaultBookCover").BitmapImageToBitmap();
         }
 
         private void AddBook()

@@ -12,7 +12,7 @@ namespace Bookshelf.ViewModels
 
         public ICommand OpenShelfCommand { get; set; }
         public ICommand AddNewBookCommand { get; set; }
-        public ICommand GoToShelvesCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
         public ICommand LoadViewCommand { get; set; }
 
         public string Name { get; set; }
@@ -50,9 +50,9 @@ namespace Bookshelf.ViewModels
                 Navigation.SetView(this);
             });
 
-            GoToShelvesCommand = new RelayCommand(o =>
+            GoBackCommand = new RelayCommand(o =>
             {
-                Navigation.SetView(new ShelvesViewModel());
+                Navigation.GoToPrevieusViewModel();
             });
 
             AddNewBookCommand = new RelayCommand(o =>

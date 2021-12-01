@@ -1,5 +1,9 @@
-﻿using Bookshelf.Resources.Localization;
+﻿using Bookshelf.Models.Data;
+using Bookshelf.Resources.Localization;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
@@ -19,6 +23,18 @@ namespace Bookshelf
             IoC.Setup();
 
             SetupLocalization();
+            CheckDatabase();
+        }
+
+        private void CheckDatabase()
+        {
+            using (var context = new DataContextFactory().CreateDbContext())
+            {
+                if (context.Database.GetPendingMigrations().Any())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
 
         private void SetupLocalization()
@@ -36,6 +52,7 @@ namespace Bookshelf
         }
 
 
+        
 
     }
 }

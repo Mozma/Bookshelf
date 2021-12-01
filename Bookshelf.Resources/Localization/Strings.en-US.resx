@@ -189,4 +189,7 @@
   <data name="BookSaveButton" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="ShelvesBackButton" xml:space="preserve">
+    <value>Back</value>
+  </data>
 </root>

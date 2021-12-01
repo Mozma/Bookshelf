@@ -42,7 +42,7 @@ namespace Bookshelf.ViewModels
                     {
                         Name = ShelfName
                     });
-                    context.SaveChanges();
+                    context.SaveChangesAsync();
                 }
             }
 

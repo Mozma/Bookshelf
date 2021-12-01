@@ -22,11 +22,11 @@ namespace Bookshelf.ViewModels
 
         public ICommand AddShelfCommand { get; set; }
         public ICommand LoadViewCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
 
 
         public ShelvesViewModel()
         {
-            //SetupView();
             SetupCommands();
 
             LoadViewCommand.Execute(this);
@@ -39,20 +39,26 @@ namespace Bookshelf.ViewModels
                 IoC.UI.ShowDialogWindow(new AddShelfWindow());
                 LoadViewCommand.Execute(this);
             });
+            
             LoadViewCommand = new RelayCommand(async o =>
             {
                 SetupView();
+            });
+
+            GoBackCommand = new RelayCommand(o =>
+            {
+                Navigation.GoToPrevieusViewModel();
             });
         }
 
 
         public void SetupView()
         {
+            Items = new ObservableCollection<ShelfViewModel>();
+
             using (var context = new DataContextFactory().CreateDbContext())
             {
                 List<Shelf> shelfItems = context.Set<Shelf>().ToList();
-
-                Items = new ObservableCollection<ShelfViewModel>();
 
                 foreach (var item in shelfItems)
                 {

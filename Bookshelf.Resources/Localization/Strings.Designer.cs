@@ -250,6 +250,15 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Назад.
+        /// </summary>
+        public static string ShelvesBackButton {
+            get {
+                return ResourceManager.GetString("ShelvesBackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Главная.
         /// </summary>
         public static string SideBarHomeButton {

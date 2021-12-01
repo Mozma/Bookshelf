@@ -28,25 +28,33 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" MinWidth="100" />
+                    <ColumnDefinition Width="*"
+                                      MinWidth="50" />
                     <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock x:Name="ShelfNameTextBlock"
-                       Text="{lex:Loc}"
-                       Grid.Column="0"
-                       FontSize="48"
-                       TextTrimming="CharacterEllipsis"
-                       HorizontalAlignment="Left"
-                       Padding="15,5,0,0" />
+                           Text="{lex:Loc}"
+                           Grid.Column="0"
+                           FontSize="48"
+                           TextTrimming="CharacterEllipsis"
+                           HorizontalAlignment="Left"
+                           Padding="15,5,0,0" />
 
-                <Button Grid.Column="2" 
+                <Button Grid.Column="2"
                         x:Name="ShelvesAddNewShelfButton"
                         Content="{lex:Loc}"
                         Style="{StaticResource RoundCornerButton}"
-                        Command="{Binding AddShelfCommand}"
-                        Margin="0,0,15,0"
-                        />
+                        Command="{Binding AddShelfCommand}" />
+
+                <Button x:Name="ShelvesBackButton"
+                        Grid.Column="4"
+                        Style="{StaticResource RoundCornerButton}"
+                        Command="{Binding GoBackCommand}"
+                        Content="{lex:Loc}" />
             </Grid>
 
             <Border Grid.Row="1"

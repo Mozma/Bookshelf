@@ -1,6 +1,7 @@
 ﻿
 using Bookshelf.Helpers;
 using Bookshelf.Models;
+using Bookshelf.Models.Data;
 using Microsoft.Win32;
 using System;
 using System.Drawing;
@@ -11,6 +12,8 @@ namespace Bookshelf.ViewModels
 {
     public class BookViewModel : BaseViewModel
     {
+        private readonly string blankString = "---";
+
         public Book Entity { get; set; }
         public ICommand OpenBookViewCommand { get; set; }
         public ICommand SelectCoverCommand { get; set; }
@@ -73,31 +76,31 @@ namespace Bookshelf.ViewModels
 
         private void SaveEntity()
         {
-            //var bookRepository = new Repository<Book>();
 
-            if (!Title.Trim().Equals("---")) {
+            if (!Title.Trim().Equals(blankString)) {
                 Entity.Title = Title;
             }
 
-            if (!Author.Trim().Equals("---"))
+            if (!Author.Trim().Equals(blankString))
             {
-                //Entity.Author = Author;
+                //Entity.BookBinds.firs = Author;
             }
 
-            if (!PagesNumber.Trim().Equals("---") && !string.IsNullOrWhiteSpace(PagesNumber)) 
+            if (!PagesNumber.Trim().Equals(blankString) && !string.IsNullOrWhiteSpace(PagesNumber)) 
             {
                 Entity.PagesNumber = int.Parse(PagesNumber);
             }
 
-            //if (!Title.Trim().Equals("---"))
-            //{
-            //    Entity.Year = Title;
-            //}
+            int year = 0;
+            if (!Year.Trim().Equals(blankString) && Int32.TryParse(Year, out year))
+            {
+                Entity.Year = year;
+            }
 
-            //if (!Title.Trim().Equals("---"))
-            //{
-            //    Entity.ISBN = Title;
-            //}
+            if (!ISBN.Trim().Equals(blankString))
+            {
+                Entity.ISBN = ISBN;
+            }
 
             //if (!Title.Trim().Equals("---"))
             //{
@@ -109,8 +112,11 @@ namespace Bookshelf.ViewModels
             //    Entity.Publisher = Status;
             //}
 
-
-//            bookRepository.Update(Entity.Id, Entity);
+            using (var context = new DataContextFactory().CreateDbContext())
+            {
+                context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.SaveChangesAsync();
+            }
             
         }
 
