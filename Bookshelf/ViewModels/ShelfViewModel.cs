@@ -1,5 +1,4 @@
 ﻿using Bookshelf.Models;
-using Bookshelf.Models.Data;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +13,7 @@ namespace Bookshelf.ViewModels
         public ICommand OpenShelfCommand { get; set; }
         public ICommand AddNewBookCommand { get; set; }
         public ICommand GoToShelvesCommand { get; set; }
+        public ICommand LoadViewCommand { get; set; }
 
         public string Name { get; set; }
         public ObservableCollection<BookViewModel> Items { get; set; }
@@ -22,31 +22,24 @@ namespace Bookshelf.ViewModels
         {
             Entity = entity;
             Name = entity.Name;
+            SetupCommands();
 
             if (Entity != null)
             {
-                SetupView();
+                LoadViewCommand.Execute(this);
             }
-
-            SetupCommands();
         }
 
-        private void SetupView()
+        private void LoadView()
         {
+
             Items = new ObservableCollection<BookViewModel>();
 
-            using (var context = new DataContextFactory().CreateDbContext())
+            List<ShelfBind> shelfBindItems = Entity.ShelfBinds;
+
+            foreach (var shelfBind in shelfBindItems)
             {
-                List<ShelfBind> shelfBindItems = context.Set<ShelfBind>().ToList();
-
-                shelfBindItems = context.Set<ShelfBind>()
-                    .Where(o => o.Shelf.Id.Equals(Entity.Id))
-                    .ToList();
-
-                foreach (var shelfBind in shelfBindItems)
-                {
-                    Items.Add(new BookViewModel(shelfBind.Book));
-                }
+                Items.Add(new BookViewModel(shelfBind.Book));
             }
         }
 
@@ -65,10 +58,14 @@ namespace Bookshelf.ViewModels
             AddNewBookCommand = new RelayCommand(o =>
             {
                 IoC.UI.ShowDialogWindow(new AddNewBookWindow());
-                SetupView();
+                LoadView();
             });
 
-        }
+            LoadViewCommand = new RelayCommand(o =>
+           {
+               LoadView();
+           });
 
+        }
     }
 }

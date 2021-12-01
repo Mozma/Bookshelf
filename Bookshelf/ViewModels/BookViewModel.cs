@@ -1,7 +1,6 @@
 ﻿
 using Bookshelf.Helpers;
 using Bookshelf.Models;
-using Bookshelf.Services;
 using Microsoft.Win32;
 using System;
 using System.Drawing;
@@ -74,7 +73,7 @@ namespace Bookshelf.ViewModels
 
         private void SaveEntity()
         {
-            var bookRepository = new Repository<Book>();
+            //var bookRepository = new Repository<Book>();
 
             if (!Title.Trim().Equals("---")) {
                 Entity.Title = Title;
@@ -111,7 +110,7 @@ namespace Bookshelf.ViewModels
             //}
 
 
-            bookRepository.Update(Entity.Id, Entity);
+//            bookRepository.Update(Entity.Id, Entity);
             
         }
 
