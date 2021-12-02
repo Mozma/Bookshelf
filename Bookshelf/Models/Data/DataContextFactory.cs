@@ -22,7 +22,7 @@ namespace Bookshelf.Models.Data
 
             var context = new DataContext(optionsBuilder.Options);
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            
+
             return context;
         }
     }

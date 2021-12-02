@@ -1,7 +1,6 @@
 ﻿using Bookshelf.Models.Data;
 using Bookshelf.Resources.Localization;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -52,7 +51,7 @@ namespace Bookshelf
         }
 
 
-        
+
 
     }
 }

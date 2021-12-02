@@ -77,7 +77,7 @@ namespace Bookshelf.ViewModels
                     {
                         Base64Data = Cover.BitmapToBase64String()
                     }).Entity;
-                    context.SaveChangesAsync();
+                    context.SaveChanges();
                 }
 
                 if (book == null)
@@ -87,13 +87,13 @@ namespace Bookshelf.ViewModels
                         Title = BookTitle,
                         ImageId = image.Id
                     }).Entity;
-                    context.SaveChangesAsync();
+                    context.SaveChanges();
                 }
 
                 if (author == null)
                 {
                     author = context.Set<Author>().Add(new Author { FullName = AuthorName }).Entity;
-                    context.SaveChangesAsync();
+                    context.SaveChanges();
                 }
 
                 if (context.Set<ShelfBind>().FirstOrDefault(s => s.BookId == book.Id && s.ShelfId == shelf.Id) == null)
@@ -103,6 +103,7 @@ namespace Bookshelf.ViewModels
                         BookId = book.Id,
                         ShelfId = shelf.Id
                     });
+                    context.SaveChanges();
                 }
 
                 if (context.Set<BookBind>().FirstOrDefault(b => b.BookId == book.Id && b.AuthorId == author.Id) == null)
@@ -112,9 +113,10 @@ namespace Bookshelf.ViewModels
                         BookId = book.Id,
                         AuthorId = author.Id
                     });
+                    context.SaveChanges();
                 }
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
 
             CloseCommand.Execute(this);
@@ -122,8 +124,9 @@ namespace Bookshelf.ViewModels
 
         public void GetSuggestions()
         {
-            using (var context = new DataContextFactory().CreateDbContext()) {
-                
+            using (var context = new DataContextFactory().CreateDbContext())
+            {
+
                 BooksTitles = context.Set<Book>().Select(o => o.Title).ToList();
                 AuthorsNames = context.Set<Author>().Select(o => o.FullName).ToList();
                 ShelvesNames = context.Set<Shelf>().Select(o => o.Name).ToList();

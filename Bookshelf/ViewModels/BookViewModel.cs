@@ -2,9 +2,11 @@
 using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
+using Bookshelf.Services;
 using Microsoft.Win32;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -26,7 +28,7 @@ namespace Bookshelf.ViewModels
         public string Title { get; set; }
         public string Author { get; set; }
         public Bitmap Cover { get; set; } = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
-     
+
         public string PagesNumber { get; set; }
         public string Year { get; set; }
         public string ISBN { get; set; }
@@ -71,13 +73,14 @@ namespace Bookshelf.ViewModels
             {
                 SaveEntity();
             });
-            
-    }
+
+        }
 
         private void SaveEntity()
         {
 
-            if (!Title.Trim().Equals(blankString)) {
+            if (!Title.Trim().Equals(blankString))
+            {
                 Entity.Title = Title;
             }
 
@@ -86,13 +89,13 @@ namespace Bookshelf.ViewModels
                 //Entity.BookBinds.firs = Author;
             }
 
-            if (!PagesNumber.Trim().Equals(blankString) && !string.IsNullOrWhiteSpace(PagesNumber)) 
+            if (!PagesNumber.Trim().Equals(blankString) && !string.IsNullOrWhiteSpace(PagesNumber))
             {
                 Entity.PagesNumber = int.Parse(PagesNumber);
             }
 
             int year = 0;
-            if (!Year.Trim().Equals(blankString) && Int32.TryParse(Year, out year))
+            if (!Year.Trim().Equals(blankString) && int.TryParse(Year, out year))
             {
                 Entity.Year = year;
             }
@@ -117,19 +120,21 @@ namespace Bookshelf.ViewModels
                 context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChangesAsync();
             }
-            
         }
 
         private void SetFields()
         {
             if (Entity != null)
             {
+                var bookBindSerice = new DataService<BookBind>(new DataContextFactory());
+                var author = bookBindSerice.GetAll().Result
+                    .Where(o => o.BookId == Entity.Id)
+                    .Select(o => o.Author)
+                    .ToList();
+
                 Title = Entity.Title;
-                Author = Entity.BookBinds[0].Author.FullName;
-
-
-                PagesNumber = Entity.PagesNumber == null ? "---" : Entity.PagesNumber.ToString(); 
-
+                Author = author[0].FullName;
+                PagesNumber = Entity.PagesNumber == null ? "---" : Entity.PagesNumber.ToString();
 
                 if (Entity.Image != null)
                 {

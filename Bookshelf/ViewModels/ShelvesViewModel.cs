@@ -1,5 +1,6 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
+using Bookshelf.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace Bookshelf.ViewModels
                 IoC.UI.ShowDialogWindow(new AddShelfWindow());
                 LoadViewCommand.Execute(this);
             });
-            
+
             LoadViewCommand = new RelayCommand(async o =>
             {
                 SetupView();
@@ -56,14 +57,14 @@ namespace Bookshelf.ViewModels
         {
             Items = new ObservableCollection<ShelfViewModel>();
 
-            using (var context = new DataContextFactory().CreateDbContext())
-            {
-                List<Shelf> shelfItems = context.Set<Shelf>().ToList();
+            IDataService<Shelf> shelfService = new DataService<Shelf>(new DataContextFactory());
 
-                foreach (var item in shelfItems)
-                {
-                    Items.Add(new ShelfViewModel(item));
-                }
+            List<Shelf> shelfItems = shelfService.GetAll().Result.ToList();
+
+            foreach (var item in shelfItems)
+            {
+
+                Items.Add(new ShelfViewModel(item));
             }
         }
     }
