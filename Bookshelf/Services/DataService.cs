@@ -7,7 +7,7 @@ namespace Bookshelf.Services
 {
     public class DataService<T> : IDataService<T> where T : class
     {
-        DataContextFactory contextFactory;
+        protected DataContextFactory contextFactory;
 
         public DataService(DataContextFactory contextFactory)
         {

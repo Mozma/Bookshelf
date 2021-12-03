@@ -17,14 +17,13 @@ namespace Bookshelf.ViewModels
             set
             {
                 items = value;
-                OnPropertyChanged("Items");
+                OnPropertyChanged(nameof(Items));
             }
         }
 
         public ICommand AddShelfCommand { get; set; }
         public ICommand LoadViewCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
-
 
         public ShelvesViewModel()
         {
@@ -52,7 +51,6 @@ namespace Bookshelf.ViewModels
             });
         }
 
-
         public void SetupView()
         {
             Items = new ObservableCollection<ShelfViewModel>();
@@ -63,8 +61,7 @@ namespace Bookshelf.ViewModels
 
             foreach (var item in shelfItems)
             {
-
-                Items.Add(new ShelfViewModel(item));
+                Items.Add(new ShelfViewModel(item.Id));
             }
         }
     }

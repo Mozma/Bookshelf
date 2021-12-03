@@ -89,21 +89,21 @@ namespace Bookshelf.ViewModels
                 //Entity.BookBinds.firs = Author;
             }
 
-            if (!PagesNumber.Trim().Equals(blankString) && !string.IsNullOrWhiteSpace(PagesNumber))
+            if (!string.IsNullOrWhiteSpace(PagesNumber) && !PagesNumber.Trim().Equals(blankString))
             {
                 Entity.PagesNumber = int.Parse(PagesNumber);
             }
 
-            int year = 0;
-            if (!Year.Trim().Equals(blankString) && int.TryParse(Year, out year))
-            {
-                Entity.Year = year;
-            }
+            //int year = 0;
+            //if (!Year.Trim().Equals(blankString) && int.TryParse(Year, out year))
+            //{
+            //    Entity.Year = year;
+            //}
 
-            if (!ISBN.Trim().Equals(blankString))
-            {
-                Entity.ISBN = ISBN;
-            }
+            //if (!ISBN.Trim().Equals(blankString))
+            //{
+            //    Entity.ISBN = ISBN;
+            //}
 
             //if (!Title.Trim().Equals("---"))
             //{

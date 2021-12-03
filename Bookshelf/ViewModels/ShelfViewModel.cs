@@ -1,6 +1,7 @@
 ﻿using Bookshelf.Models;
+using Bookshelf.Models.Data;
+using Bookshelf.Services;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
@@ -8,6 +9,7 @@ namespace Bookshelf.ViewModels
     public class ShelfViewModel : BaseViewModel
     {
         public Shelf Entity { get; set; }
+        public int ShelfId { get; }
 
         public ICommand OpenShelfCommand { get; set; }
         public ICommand AddNewBookCommand { get; set; }
@@ -15,42 +17,33 @@ namespace Bookshelf.ViewModels
         public ICommand LoadViewCommand { get; set; }
 
         public string Name { get; set; }
+        public List<BookViewModel> Items { get; set; }
 
-        private ObservableCollection<BookViewModel> items;
-        public ObservableCollection<BookViewModel> Items
+        public ShelfViewModel(int  shelfId)
         {
-            get { return items; }
-            set
-            {
-                items = value;
-                OnPropertyChanged("Items");
-            }
-        }
-
-        public ShelfViewModel(Shelf entity)
-        {
-            Entity = entity;
-            Name = entity.Name;
             SetupCommands();
 
-            if (Entity != null)
-            {
-                LoadViewCommand.Execute(this);
-            }
+            ShelfId = shelfId;
+            LoadViewCommand.Execute(this);
         }
 
         private void LoadView()
         {
-            Items = new ObservableCollection<BookViewModel>();
+            var shelfService = new ShelfService(new DataContextFactory());
+            Entity = shelfService.GetById(ShelfId).Result;
+            
+            Name = Entity.Name;
 
-            //var shelfBindService = new DataService<ShelfBind>(new Models.Data.DataContextFactory());
+            var items = new List<BookViewModel>();
 
             List<ShelfBind> shelfBindItems = Entity.ShelfBinds;
 
             foreach (var shelfBind in shelfBindItems)
             {
-                Items.Add(new BookViewModel(shelfBind.Book));
+                items.Add(new BookViewModel(shelfBind.Book));
             }
+
+            Items = items;
         }
 
         private void SetupCommands()
