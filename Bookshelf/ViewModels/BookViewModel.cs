@@ -27,7 +27,7 @@ namespace Bookshelf.ViewModels
 
         public string Title { get; set; }
         public string Author { get; set; }
-        public Bitmap Cover { get; set; } = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
+        public Bitmap Cover { get; set; } 
 
         public string PagesNumber { get; set; }
         public string Year { get; set; }
@@ -139,6 +139,10 @@ namespace Bookshelf.ViewModels
                 if (Entity.Image != null)
                 {
                     Cover = Entity.Image.Base64Data.Base64StringToBitmap();
+                }
+                else
+                {
+                    Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
                 }
             }
         }

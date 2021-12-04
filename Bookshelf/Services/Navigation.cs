@@ -42,7 +42,7 @@ namespace Bookshelf
                 {
                     History.Pop();
                 }
-                SetView(History.Pop());
+                Instance.CurrentViewModel = History.Pop(); 
             }
         }
 

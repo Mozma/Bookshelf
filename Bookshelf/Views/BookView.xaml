@@ -13,10 +13,10 @@
              TextOptions.TextFormattingMode="Display"
              mc:Ignorable="d"
              d:Height="700"
-             d:Width="900">
+             d:Width="1000">
 
     <UserControl.Resources>
-            <!--<Style x:Key="{x:Type ToolTip}"
+        <!--<Style x:Key="{x:Type ToolTip}"
                    TargetType="ToolTip">
                 <Setter Property="OverridesDefaultStyle"
                         Value="true" />
@@ -44,11 +44,9 @@
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"
             BorderThickness="0"
-            Padding="15">
-        <Grid 
-            >
-            <Grid Background="Transparent"
-                  >
+            Padding="15,15,0,15">
+        <Grid>
+            <Grid Background="Transparent">
                 <Grid.ContextMenu>
                     <ContextMenu Style="{StaticResource ModernContextMenuStyle}">
                         <MenuItem Header="Изменить"
@@ -73,14 +71,17 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="20" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"
+                                      MinWidth="520"/>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Row="2"
                       Grid.Column="0"
                       Panel.ZIndex="1">
                     <Border Width="345"
-                            Height="580"
+                            Height="527"
                             Background="{StaticResource BackgroundDarkGrayBrush}"
                             CornerRadius="10"
                             BorderThickness="0"
@@ -95,7 +96,7 @@
                     </Border>
 
                     <Border Width="345"
-                            Height="580"
+                            Height="527"
                             Background="{StaticResource BackgroundDarkGrayBrush}"
                             CornerRadius="10"
                             BorderThickness="0"
@@ -118,8 +119,7 @@
 
                 <!-- Book Info -->
                 <Grid Grid.Row="2"
-                      Grid.Column="2"
-                      >
+                      Grid.Column="2">
                     <StackPanel>
                         <!-- Title and Author-->
                         <TextBlock  FontSize="36"
@@ -127,7 +127,7 @@
                                     TextTrimming="CharacterEllipsis"
                                     FontFamily="{StaticResource RobotoRegular}"
                                     Text="{Binding Title, FallbackValue=Название книги}"
-                                    ToolTip="{Binding Title}"/>
+                                    ToolTip="{Binding Title}" />
                         <TextBlock  FontSize="24"
                                     FontFamily="{StaticResource RobotoRegular}"
                                     TextDecorations="Underline"
@@ -243,19 +243,17 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Button x:Name="BookCancelButton"
-                                    Grid.Row="1"
+                                        Grid.Row="1"
                                         Grid.Column="1"
                                         Content="{lex:Loc}"
-                                        
                                         Style="{StaticResource RoundCornerButton}"
-                                        Command="{Binding CancelCommand}"/>
+                                        Command="{Binding CancelCommand}" />
                                 <Button x:Name="BookSaveButton"
-                                    Grid.Row="1"
+                                        Grid.Row="1"
                                         Grid.Column="3"
                                         Content="{lex:Loc}"
-                                        
                                         Style="{StaticResource RoundCornerButton}"
-                                        Command="{Binding SaveCommand}"/>
+                                        Command="{Binding SaveCommand}" />
 
                             </Grid>
                         </Grid>
@@ -263,7 +261,33 @@
                     </StackPanel>
 
                 </Grid>
+                <Grid VerticalAlignment="Top"
+                      Margin="0,1,0,0"
+                      Grid.Row="2"
+                      Grid.Column="4"
+                      Panel.ZIndex="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="10" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--<Button x:Name="ShelfAddNewBookButton"
+                            Grid.Column="2"
+                            Style="{StaticResource RoundCornerButton}"
+                            Content="{lex:Loc}"
+                            Command="{Binding AddNewBookCommand}" />-->
+
+                    <Button x:Name="ShelfBackButton"
+                            Grid.Column="1"
+                            Style="{StaticResource RoundCornerButton}"
+                            Command="{Binding GoBackCommand}"
+                            Content="{lex:Loc}" />
+
+                </Grid>
             </Grid>
+
+
         </Grid>
     </Border>
 
