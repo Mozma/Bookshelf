@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Menus.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="ContextMenus.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

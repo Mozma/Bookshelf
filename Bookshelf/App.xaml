@@ -21,6 +21,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Windows.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Converters.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/ContextMenus.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Bookshelf.Styles;component/Menus.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodel:HomeViewModel}">
