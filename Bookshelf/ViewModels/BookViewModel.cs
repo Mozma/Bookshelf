@@ -27,7 +27,7 @@ namespace Bookshelf.ViewModels
 
         public string Title { get; set; }
         public string Author { get; set; }
-        public Bitmap Cover { get; set; } 
+        public Bitmap Cover { get; set; }
 
         public string PagesNumber { get; set; }
         public string Year { get; set; }

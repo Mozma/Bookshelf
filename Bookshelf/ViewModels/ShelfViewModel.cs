@@ -19,7 +19,7 @@ namespace Bookshelf.ViewModels
         public string Name { get; set; }
         public List<BookViewModel> Items { get; set; }
 
-        public ShelfViewModel(int  shelfId)
+        public ShelfViewModel(int shelfId)
         {
             SetupCommands();
 
@@ -31,7 +31,7 @@ namespace Bookshelf.ViewModels
         {
             var shelfService = new ShelfService(new DataContextFactory());
             Entity = shelfService.GetById(ShelfId).Result;
-            
+
             Name = Entity.Name;
 
             var items = new List<BookViewModel>();

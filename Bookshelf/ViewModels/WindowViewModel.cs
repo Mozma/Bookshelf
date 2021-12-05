@@ -5,28 +5,22 @@ using System.Windows.Input;
 
 namespace Bookshelf
 {
-    /// <summary>
-    /// View model for custom flat window
-    /// </summary>
-    public class WindowViewModel : BaseViewModel
+    public partial class WindowViewModel : BaseViewModel
     {
-        private Window currentWindow;
-        private int outerMarginSize = 10;
-        private int windowRadius = 5;
-
-
-        #region Properties
-
-        public HomeViewModel HomeVM { get; set; }
-        public ShelvesViewModel ShelfsVM { get; set; }
-        public NotesViewModel NotesVM { get; set; }
-
-
         public BaseViewModel CurrentViewModel
         {
             get => Navigation.GetCurrentViewModel();
             set => Navigation.SetView(value);
         }
+
+        public bool IsHomeViewModel => CurrentViewModel is HomeViewModel;
+        public bool IsNotesViewModel => CurrentViewModel is NotesViewModel;
+        public bool IsShelvesViewModel => CurrentViewModel is ShelvesViewModel;
+
+        #region Window property
+        private Window currentWindow;
+        private int outerMarginSize = 10;
+        private int windowRadius = 5;
 
         public int ResizeBorder { get; set; } = 4;
         public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder + OuterMarginSize); } }
@@ -57,8 +51,6 @@ namespace Bookshelf
         public int TitleHeight { get; set; } = 21;
         public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight + ResizeBorder); } }
 
-        public int MinHeight { get; set; } = 400;
-        public int MinWidth { get; set; } = 600;
         #endregion
 
         #region Commands
@@ -98,19 +90,6 @@ namespace Bookshelf
             var resizer = new WindowResizer(currentWindow);
         }
 
-        private void FixEfFirstLoadProblem()
-        {
-            // Fix for Issue: Reduce EF Core application startup time via compiled models
-            // https://github.com/dotnet/efcore/issues/1906
-            CurrentViewModel = new ShelvesViewModel();
-            CurrentViewModel = null;
-        }
-
-        private void OnCurrentViewModelChanged()
-        {
-            OnPropertyChanged(nameof(CurrentViewModel));
-        }
-
         private void SetupViewModels()
         {
             Navigation.SetView(new HomeViewModel());
@@ -127,19 +106,35 @@ namespace Bookshelf
 
             HomeViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = new HomeViewModel(); ;
+                CurrentViewModel = CurrentViewModel is HomeViewModel ? CurrentViewModel : new HomeViewModel();
             });
 
             ShelvesViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = new ShelvesViewModel(); ;
+                CurrentViewModel = CurrentViewModel is ShelvesViewModel ? CurrentViewModel : new ShelvesViewModel();
             });
 
             NotesViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = new NotesViewModel();
+                CurrentViewModel = CurrentViewModel is NotesViewModel ? CurrentViewModel : new NotesViewModel();
             });
 
+        }
+
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+            OnPropertyChanged(nameof(IsHomeViewModel));
+            OnPropertyChanged(nameof(IsNotesViewModel));
+            OnPropertyChanged(nameof(IsShelvesViewModel));
+        }
+
+        private void FixEfFirstLoadProblem()
+        {
+            // Fix for Issue: Reduce EF Core application startup time via compiled models
+            // https://github.com/dotnet/efcore/issues/1906
+            CurrentViewModel = new ShelvesViewModel();
+            CurrentViewModel = null;
         }
     }
 }

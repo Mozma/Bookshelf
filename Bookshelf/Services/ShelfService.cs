@@ -9,7 +9,7 @@ namespace Bookshelf.Services
     public class ShelfService : DataService<Shelf>
     {
         public ShelfService(DataContextFactory contextFactory)
-            :base(contextFactory)
+            : base(contextFactory)
         {
         }
 
@@ -18,8 +18,8 @@ namespace Bookshelf.Services
             using (var context = contextFactory.CreateDbContext())
             {
                 Shelf entity = await context.Set<Shelf>()
-                    .Include(o => o.ShelfBinds).SingleOrDefaultAsync(o=> o.Id == id);
-                    
+                    .Include(o => o.ShelfBinds).SingleOrDefaultAsync(o => o.Id == id);
+
                 return entity;
             }
         }

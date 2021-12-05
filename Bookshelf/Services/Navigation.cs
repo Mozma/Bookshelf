@@ -22,7 +22,7 @@ namespace Bookshelf
 
         public static BaseViewModel GetCurrentViewModel()
         {
-            return Instance.CurrentViewModel;
+            return IoC.Get<ApplicationViewModel>().CurrentViewModel;
         }
 
         public static void SetView(BaseViewModel viewModel)
@@ -42,7 +42,7 @@ namespace Bookshelf
                 {
                     History.Pop();
                 }
-                Instance.CurrentViewModel = History.Pop(); 
+                Instance.CurrentViewModel = History.Pop();
             }
         }
 

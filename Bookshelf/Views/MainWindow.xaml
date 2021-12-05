@@ -15,8 +15,8 @@
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
-        MinHeight="{Binding Path=MinHeight, Mode=OneWay}"
-        MinWidth="{Binding Path=MinWidth, Mode=OneWay}"
+        MinHeight="400"
+        MinWidth="600"
         x:Name="AppMainWindow"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource ModernWindowStyle}"
@@ -31,94 +31,9 @@
                       GlassFrameThickness="0" />
 
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <Style x:Key="RadioButtonListItem"
-               TargetType="{x:Type ListBoxItem}">
-
-            <Setter Property="Template">
-                <Setter.Value>
-
-                    <ControlTemplate TargetType="ListBoxItem">
-
-                        <DockPanel LastChildFill="True"
-                                   Background="{TemplateBinding Background}"
-                                   HorizontalAlignment="Stretch"
-                                   VerticalAlignment="Center">
-
-                            <RadioButton IsChecked="{TemplateBinding IsSelected}"
-                                         Focusable="False"
-                                         IsHitTestVisible="False"
-                                         VerticalAlignment="Center"
-                                         Margin="0,0,4,0" />
-
-                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
-                                              ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
-                                              ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
-                                              HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
-
-                        </DockPanel>
-
-                    </ControlTemplate>
-
-                </Setter.Value>
-
-            </Setter>
-
-        </Style>
-
-        <Style x:Key="RadioButtonList"
-               TargetType="ListBox">
-
-            <Style.Resources>
-                <Style TargetType="Label">
-                    <Setter Property="Padding"
-                            Value="0" />
-                </Style>
-            </Style.Resources>
-
-            <Setter Property="BorderThickness"
-                    Value="0" />
-            <Setter Property="Background"
-                    Value="Transparent" />
-
-            <Setter Property="ItemContainerStyle"
-                    Value="{StaticResource RadioButtonListItem}" />
-
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListBox}">
-                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-            <Style.Triggers>
-                <Trigger Property="IsEnabled"
-                         Value="False">
-                    <Setter Property="TextBlock.Foreground"
-                            Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
-                </Trigger>
-            </Style.Triggers>
-
-        </Style>
-
-        <Style x:Key="HorizontalRadioButtonList"
-               BasedOn="{StaticResource RadioButtonList}"
-               TargetType="ListBox">
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Background="Transparent"
-                                                Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+    
     <Grid>
-
+        <!-- Overlay -->
         <Border x:Name="Overlay"
                 Panel.ZIndex="10"
                 Visibility="Visible"
@@ -137,8 +52,6 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Overlay -->
-
                 <!-- Sidebar -->
                 <Border Grid.Column="0"
                         Background="{StaticResource BackgroundLightGrayBrush}"
@@ -153,17 +66,20 @@
                                      Tag="{StaticResource HomeIcon}"
                                      Content="{lex:Loc}"
                                      Command="{Binding HomeViewCommand}"
-                                     IsChecked="True"/>
+                                     IsChecked="{Binding IsHomeViewModel, Mode=OneWay}"/>
                         <RadioButton x:Name="SideBarNoteButton"
                                      Style="{DynamicResource MenuRadioButtonStyle}"
                                      Tag="{StaticResource NoteIcon}"
                                      Content="{lex:Loc}"
-                                     Command="{Binding NotesViewCommand}" />
+                                     Command="{Binding NotesViewCommand}"
+                                     IsChecked="{Binding IsNotesViewModel, Mode=OneWay}"
+                                      />
                         <RadioButton  x:Name="SideBarShelvesButton"
                                       Style="{DynamicResource MenuRadioButtonStyle}"
                                       Tag="{StaticResource ShelfIcon}"
                                       Content="{lex:Loc}"
-                                      Command="{Binding ShelvesViewCommand}" />
+                                      Command="{Binding ShelvesViewCommand}"
+                                      IsChecked="{Binding IsShelvesViewModel, Mode=OneWay}" />
                     </StackPanel>
 
                 </Border>
