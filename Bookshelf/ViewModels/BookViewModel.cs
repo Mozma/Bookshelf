@@ -5,6 +5,7 @@ using Bookshelf.Models.Data;
 using Bookshelf.Services;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Input;
@@ -14,8 +15,6 @@ namespace Bookshelf.ViewModels
 {
     public class BookViewModel : BaseViewModel
     {
-        private readonly string blankString = "---";
-
         public Book Entity { get; set; }
         public ICommand OpenBookViewCommand { get; set; }
         public ICommand SelectCoverCommand { get; set; }
@@ -30,10 +29,16 @@ namespace Bookshelf.ViewModels
         public Bitmap Cover { get; set; }
 
         public string PagesNumber { get; set; }
+        public string PagesRead { get; set; }
         public string Year { get; set; }
         public string ISBN { get; set; }
         public string Publisher { get; set; }
         public string Status { get; set; }
+
+
+        public List<string> Publishers { get; set; }
+        public List<string> Statuses { get; set; }
+
 
         public BookViewModel()
         {
@@ -51,6 +56,7 @@ namespace Bookshelf.ViewModels
             OpenBookViewCommand = new RelayCommand(o =>
             {
                 Navigation.SetView(this);
+                SetFields();
             });
 
             GoBackCommand = new RelayCommand(o =>
@@ -78,47 +84,71 @@ namespace Bookshelf.ViewModels
 
         private void SaveEntity()
         {
+            bool isDirty = false;
 
-            if (!Title.Trim().Equals(blankString))
+            if (!string.IsNullOrWhiteSpace(ISBN))
             {
-                Entity.Title = Title;
+                Entity.ISBN = ISBN;
+                isDirty = true;
             }
 
-            if (!Author.Trim().Equals(blankString))
+            if (!string.IsNullOrWhiteSpace(PagesNumber) && int.TryParse(PagesNumber, out int pagesNumber))
             {
-                //Entity.BookBinds.firs = Author;
+                Entity.PagesNumber = pagesNumber;
+                isDirty = true;
+            }
+   
+            if (!string.IsNullOrWhiteSpace(PagesRead) && int.TryParse(PagesRead, out int pagesRead))
+            {
+                Entity.PagesRead = pagesRead;
+                isDirty = true;
             }
 
-            if (!string.IsNullOrWhiteSpace(PagesNumber) && !PagesNumber.Trim().Equals(blankString))
+            if (!string.IsNullOrWhiteSpace(Year) && int.TryParse(Year, out int year))
             {
-                Entity.PagesNumber = int.Parse(PagesNumber);
+                Entity.Year = year;
+                isDirty = true;
             }
 
-            //int year = 0;
-            //if (!Year.Trim().Equals(blankString) && int.TryParse(Year, out year))
-            //{
-            //    Entity.Year = year;
-            //}
 
-            //if (!ISBN.Trim().Equals(blankString))
-            //{
-            //    Entity.ISBN = ISBN;
-            //}
 
-            //if (!Title.Trim().Equals("---"))
-            //{
-            //    Entity.Publisher = Title;
-            //}
+            using (var context = new DataContextFactory().CreateDbContext()) {
 
-            //if (!Title.Trim().Equals("---"))
-            //{
-            //    Entity.Publisher = Status;
-            //}
+                var image = context.Set<Models.Image>().FirstOrDefault(i => i.Base64Data.Equals(Cover.BitmapToBase64String()));
+                if (image == null)
+                {
+                    image = context.Set<Models.Image>().Add(new Models.Image
+                    {
+                        Base64Data = Cover.BitmapToBase64String()
+                    }).Entity;
+                }
+                
+                var publisher = context.Set<Publisher>().FirstOrDefault(p => p.Name.Equals(Publisher.Trim()));
+                if (publisher == null)
+                {
+                    publisher = context.Set<Publisher>().Add(new Publisher
+                    {
+                        Name = Publisher.Trim()
+                    }).Entity;
+                }
 
-            using (var context = new DataContextFactory().CreateDbContext())
+                context.SaveChanges();
+
+                Entity.ImageId = image.Id;
+                Entity.PublisherId = publisher.Id;
+
+                isDirty = true;
+            }
+
+            if (isDirty)
             {
-                context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                context.SaveChangesAsync();
+                using (var context = new DataContextFactory().CreateDbContext())
+                {
+                    context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.SaveChangesAsync();
+                }
+
+                SetFields();
             }
         }
 
@@ -132,19 +162,34 @@ namespace Bookshelf.ViewModels
                     .Select(o => o.Author)
                     .ToList();
 
+                Entity = bookBindSerice.GetAll().Result.Single(o => o.BookId == Entity.Id).Book;
+                
+
                 Title = Entity.Title;
                 Author = author[0].FullName;
-                PagesNumber = Entity.PagesNumber == null ? "---" : Entity.PagesNumber.ToString();
+                
+                ISBN = Entity.ISBN == null ? string.Empty : Entity.ISBN.ToString();
+                PagesNumber = Entity.PagesNumber == null ? string.Empty : Entity.PagesNumber.ToString();
+                Year = Entity.Year == null ? string.Empty : Entity.Year.ToString();
+
+
+                PagesRead = Entity.PagesRead == null ? string.Empty : Entity.PagesRead.ToString();
+                Publisher = Entity.Publisher == null ? string.Empty : Entity.Publisher.Name;
+                Status = Entity.Status == null ? string.Empty : Entity.Status.Name;
+
 
                 if (Entity.Image != null)
-                {
-                    Cover = Entity.Image.Base64Data.Base64StringToBitmap();
-                }
-                else
-                {
-                    Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
-                }
+                    {
+                        Cover = Entity.Image.Base64Data.Base64StringToBitmap();
+                    }
+                    else
+                    {
+                        Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
+                    }
+                
             }
+
+            GetSuggestions();
         }
 
         private void SelectCover()
@@ -158,5 +203,15 @@ namespace Bookshelf.ViewModels
             }
         }
 
+
+        public void GetSuggestions()
+        {
+            using (var context = new DataContextFactory().CreateDbContext())
+            {
+
+                Publishers = context.Set<Publisher>().Select(o => o.Name).ToList();
+                Statuses = context.Set<Status>().Select(o => o.Name).ToList();
+            }
+        }
     }
 }

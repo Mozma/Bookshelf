@@ -14,37 +14,11 @@
              mc:Ignorable="d"
              d:Height="700"
              d:Width="1000">
-
-    <UserControl.Resources>
-        <!--<Style x:Key="{x:Type ToolTip}"
-                   TargetType="ToolTip">
-                <Setter Property="OverridesDefaultStyle"
-                        Value="true" />
-                <Setter Property="HasDropShadow"
-                        Value="True" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ToolTip">
-                        <Border Background="White"
-                                CornerRadius="5"
-                                Padding="5,0,5,0"
-                                BorderThickness="0"
-                                >
-                            <TextBlock FontSize="16"
-                                       FontWeight="Regular"
-                                       >
-                            <ContentPresenter />
-                            </TextBlock>
-                        </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>-->
-    </UserControl.Resources>
     <Border Background="{StaticResource BackgroundWhiteBrush}"
             CornerRadius="10"
             BorderThickness="0"
-            Padding="15,15,0,15">
+            Padding="15,15,0,15"
+            MinWidth="1000">
         <Grid>
             <Grid Background="Transparent">
                 <Grid.ContextMenu>
@@ -112,9 +86,7 @@
                             <ImageBrush Stretch="UniformToFill"
                                         ImageSource="{Binding Cover, FallbackValue={StaticResource DefaultBookCover}, Converter={StaticResource WPFBitmapConverter}}" />
                         </Button.Background>
-
                     </Button>
-
                 </Grid>
 
                 <!-- Book Info -->
@@ -171,8 +143,10 @@
                                        Text="{lex:Loc}" />
                             <input:AutoCompleteBox Grid.Row="1"
                                                    Grid.Column="2"
-                                                   Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
-                                                   Style="{StaticResource ACBBaseStyle}" />
+                                                   Text="{Binding ISBN, Mode=TwoWay}"
+                                                   Style="{StaticResource ACBBaseStyle}">
+
+                            </input:AutoCompleteBox>
 
                             <TextBlock Grid.Row="3"
                                        Grid.Column="0"
@@ -182,7 +156,7 @@
                                        Text="{lex:Loc}" />
                             <input:AutoCompleteBox Grid.Row="3"
                                                    Grid.Column="2"
-                                                   Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                                   Text="{Binding Year, Mode=TwoWay}"
                                                    Style="{StaticResource ACBBaseStyle}" />
 
                             <TextBlock Grid.Row="5"
@@ -193,7 +167,8 @@
                                        Text="{lex:Loc}" />
                             <input:AutoCompleteBox Grid.Row="5"
                                                    Grid.Column="2"
-                                                   Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                                   ItemsSource="{Binding Publishers}"
+                                                   Text="{Binding Publisher, Mode=TwoWay}"
                                                    Style="{StaticResource ACBBaseStyle}" />
 
                             <TextBlock Grid.Row="7"
@@ -204,7 +179,7 @@
                                        Text="{lex:Loc}" />
                             <input:AutoCompleteBox Grid.Row="7"
                                                    Grid.Column="2"
-                                                   Text="{Binding PagesNumber, Mode=TwoWay,FallbackValue=---}"
+                                                   Text="{Binding PagesNumber, Mode=TwoWay}"
                                                    Style="{StaticResource ACBBaseStyle}" />
 
                             <TextBlock Grid.Row="9"
@@ -215,7 +190,7 @@
                                        Text="{lex:Loc}" />
                             <input:AutoCompleteBox Grid.Row="9"
                                                    Grid.Column="2"
-                                                   Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                                   Text="{Binding PagesRead, Mode=TwoWay}"
                                                    Style="{StaticResource ACBBaseStyle}" />
 
                             <TextBlock Grid.Row="11"
@@ -227,7 +202,8 @@
                             <input:AutoCompleteBox Grid.Row="11"
                                                    Grid.Column="2"
                                                    MaxWidth="500"
-                                                   Text="{Binding BookTitle, Mode=TwoWay,FallbackValue=---}"
+                                                   ItemsSource="{Binding Statuses}"
+                                                   Text="{Binding BookTitle}"
                                                    Style="{StaticResource ACBBaseStyle}" />
 
                             <Grid Grid.Row="13"
@@ -271,13 +247,6 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="10" />
                     </Grid.ColumnDefinitions>
-
-                    <!--<Button x:Name="ShelfAddNewBookButton"
-                            Grid.Column="2"
-                            Style="{StaticResource RoundCornerButton}"
-                            Content="{lex:Loc}"
-                            Command="{Binding AddNewBookCommand}" />-->
-
                     <Button x:Name="ShelfBackButton"
                             Grid.Column="1"
                             Style="{StaticResource RoundCornerButton}"
