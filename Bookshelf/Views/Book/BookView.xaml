@@ -218,18 +218,12 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Button x:Name="BookCancelButton"
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        Content="{lex:Loc}"
-                                        Style="{StaticResource RoundCornerButton}"
-                                        Command="{Binding CancelCommand}" />
-                                <Button x:Name="BookSaveButton"
+                                <Button x:Name="BookEditButton"
                                         Grid.Row="1"
                                         Grid.Column="3"
                                         Content="{lex:Loc}"
                                         Style="{StaticResource RoundCornerButton}"
-                                        Command="{Binding SaveCommand}" />
+                                        Command="{Binding EditCommand}" />
 
                             </Grid>
                         </Grid>

@@ -17,6 +17,7 @@ namespace Bookshelf.Models
             builder.Property(o => o.StatusId).IsRequired(false);
 
             builder.Navigation(o => o.Image).AutoInclude();
+            builder.Navigation(o => o.Status).AutoInclude();
             builder.Navigation(o => o.Publisher).AutoInclude();
             builder.Navigation(o => o.BookBinds).AutoInclude();
         }

@@ -37,7 +37,7 @@
     <Compile Update="Views\NotesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\BookView.xaml.cs">
+    <Compile Update="Views\Book\BookView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ShelfView.xaml.cs">
@@ -67,7 +67,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\AddNewBookWindow.xaml">
+    <Page Update="Views\Book\AddNewBookWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -75,7 +75,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\BookView.xaml">
+    <Page Update="Views\Book\BookView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

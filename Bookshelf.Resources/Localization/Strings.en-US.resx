@@ -192,4 +192,16 @@
   <data name="ShelvesBackButton" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="EditBookHeaderTextBlock" xml:space="preserve">
+    <value>Book edit</value>
+  </data>
+  <data name="EditBookCancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="EditBookAcceptButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="BookEditButton" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>

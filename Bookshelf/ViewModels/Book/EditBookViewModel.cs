@@ -1,5 +1,4 @@
-﻿
-using Bookshelf.Helpers;
+﻿using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Bookshelf.Services;
@@ -8,12 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace Bookshelf.ViewModels
 {
-    public class BookViewModel : BaseViewModel
+    public class EditBookViewModel : BaseViewModel
     {
         public Book Entity { get; set; }
         public ICommand OpenBookViewCommand { get; set; }
@@ -35,19 +35,21 @@ namespace Bookshelf.ViewModels
         public string Publisher { get; set; }
         public string Status { get; set; }
 
-
         public List<string> Publishers { get; set; }
         public List<string> Statuses { get; set; }
 
-
-        public BookViewModel()
+        private Window currentWindow;
+        private BookViewModel viewModel;
+        public EditBookViewModel()
         {
             SetupCommands();
         }
 
-        public BookViewModel(Book entity) : this()
+        public EditBookViewModel(Window window, BookViewModel bookViewModel) : this()
         {
-            Entity = entity;
+            viewModel = bookViewModel;
+            Entity = viewModel.Entity;
+            currentWindow = window;
             SetFields();
         }
 
@@ -73,11 +75,16 @@ namespace Bookshelf.ViewModels
             CancelCommand = new RelayCommand(o =>
             {
                 SetFields();
+                currentWindow.Close();
+
             });
 
             SaveCommand = new RelayCommand(o =>
             {
                 SaveEntity();
+
+                viewModel.Refresh();
+                currentWindow.Close();
             });
 
         }
@@ -92,12 +99,19 @@ namespace Bookshelf.ViewModels
                 isDirty = true;
             }
 
+            if (!string.IsNullOrWhiteSpace(Title))
+            {
+                Entity.Title = Title;
+                isDirty = true;
+            }
+
+
             if (!string.IsNullOrWhiteSpace(PagesNumber) && int.TryParse(PagesNumber, out int pagesNumber))
             {
                 Entity.PagesNumber = pagesNumber;
                 isDirty = true;
             }
-   
+
             if (!string.IsNullOrWhiteSpace(PagesRead) && int.TryParse(PagesRead, out int pagesRead))
             {
                 Entity.PagesRead = pagesRead;
@@ -111,8 +125,8 @@ namespace Bookshelf.ViewModels
             }
 
 
-
-            using (var context = new DataContextFactory().CreateDbContext()) {
+            using (var context = new DataContextFactory().CreateDbContext())
+            {
 
                 var image = context.Set<Models.Image>().FirstOrDefault(i => i.Base64Data.Equals(Cover.BitmapToBase64String()));
                 if (image == null)
@@ -122,7 +136,7 @@ namespace Bookshelf.ViewModels
                         Base64Data = Cover.BitmapToBase64String()
                     }).Entity;
                 }
-                
+
                 var publisher = context.Set<Publisher>().FirstOrDefault(p => p.Name.Equals(Publisher.Trim()));
                 if (publisher == null)
                 {
@@ -131,6 +145,25 @@ namespace Bookshelf.ViewModels
                         Name = Publisher.Trim()
                     }).Entity;
                 }
+
+                var author = context.Set<Author>().FirstOrDefault(p => p.FullName.Equals(Author.Trim()));
+                if (author == null)
+                {
+                    author = context.Set<Author>().Add(new Author
+                    {
+                        FullName = Author.Trim()
+                    }).Entity;
+                }
+
+                var status = context.Set<Status>().FirstOrDefault(p => p.Name.Equals(Status.Trim()));
+                if (status == null)
+                {
+                    status = context.Set<Status>().Add(new Status
+                    {
+                        Name = Status.Trim()
+                    }).Entity;
+                }
+
 
                 context.SaveChanges();
 
@@ -163,11 +196,11 @@ namespace Bookshelf.ViewModels
                     .ToList();
 
                 Entity = bookBindSerice.GetAll().Result.Single(o => o.BookId == Entity.Id).Book;
-                
+
 
                 Title = Entity.Title;
                 Author = author[0].FullName;
-                
+
                 ISBN = Entity.ISBN == null ? string.Empty : Entity.ISBN.ToString();
                 PagesNumber = Entity.PagesNumber == null ? string.Empty : Entity.PagesNumber.ToString();
                 Year = Entity.Year == null ? string.Empty : Entity.Year.ToString();
@@ -179,14 +212,14 @@ namespace Bookshelf.ViewModels
 
 
                 if (Entity.Image != null)
-                    {
-                        Cover = Entity.Image.Base64Data.Base64StringToBitmap();
-                    }
-                    else
-                    {
-                        Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
-                    }
-                
+                {
+                    Cover = Entity.Image.Base64Data.Base64StringToBitmap();
+                }
+                else
+                {
+                    Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
+                }
+
             }
 
             GetSuggestions();
@@ -215,3 +248,4 @@ namespace Bookshelf.ViewModels
         }
     }
 }
+

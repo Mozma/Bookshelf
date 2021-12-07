@@ -151,6 +151,15 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Редактировать.
+        /// </summary>
+        public static string BookEditButton {
+            get {
+                return ResourceManager.GetString("BookEditButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Сохранить.
         /// </summary>
         public static string BookSaveButton {
@@ -210,6 +219,33 @@ namespace Bookshelf.Resources.Localization {
         public static string BookViewYearTextBlock {
             get {
                 return ResourceManager.GetString("BookViewYearTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string EditBookAcceptButton {
+            get {
+                return ResourceManager.GetString("EditBookAcceptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отмена.
+        /// </summary>
+        public static string EditBookCancelButton {
+            get {
+                return ResourceManager.GetString("EditBookCancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Редактирование книги.
+        /// </summary>
+        public static string EditBookHeaderTextBlock {
+            get {
+                return ResourceManager.GetString("EditBookHeaderTextBlock", resourceCulture);
             }
         }
         

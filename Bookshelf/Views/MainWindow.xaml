@@ -37,7 +37,7 @@
         <Border x:Name="Overlay"
                 Panel.ZIndex="10"
                 Visibility="Visible"
-                Opacity="0.1"
+                Opacity="0.2"
                 CornerRadius="10"
                 Background="Black">
 
