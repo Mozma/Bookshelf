@@ -1,6 +1,7 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Bookshelf.Services;
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 
@@ -31,7 +32,6 @@ namespace Bookshelf.ViewModels
         {
             var shelfService = new ShelfService(new DataContextFactory());
             Entity = shelfService.GetById(ShelfId).Result;
-
             Name = Entity.Name;
 
             var items = new List<BookViewModel>();
@@ -40,10 +40,18 @@ namespace Bookshelf.ViewModels
 
             foreach (var shelfBind in shelfBindItems)
             {
-                items.Add(new BookViewModel(shelfBind.Book));
+                var bookview = new BookViewModel(shelfBind.Book);
+
+                bookview.BookViewModelChanged += OnBookViewModelChanged;
+                items.Add(bookview);
             }
 
             Items = items;
+        }
+        private void OnBookViewModelChanged()
+        {
+            LoadViewCommand.Execute(this);
+            ShelfViewModelChanged?.Invoke();
         }
 
         private void SetupCommands()
@@ -70,5 +78,8 @@ namespace Bookshelf.ViewModels
             });
 
         }
+
+
+        public event Action ShelfViewModelChanged;
     }
 }

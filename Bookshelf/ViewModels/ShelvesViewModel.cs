@@ -61,8 +61,15 @@ namespace Bookshelf.ViewModels
 
             foreach (var item in shelfItems)
             {
-                Items.Add(new ShelfViewModel(item.Id));
+                var shelfViewModel = new ShelfViewModel(item.Id);
+                shelfViewModel.ShelfViewModelChanged += OnViewModelChanged;
+                Items.Add(shelfViewModel);
             }
+        }
+
+        private void OnViewModelChanged()
+        {
+            LoadViewCommand.Execute(this);
         }
     }
 }

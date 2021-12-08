@@ -117,7 +117,8 @@
             <Button.ContextMenu>
                 <ContextMenu Style="{StaticResource ModernContextMenuStyle}">
                     <MenuItem Header="Удалить" />
-                    <MenuItem Header="Изменить" />
+                    <MenuItem Header="Изменить"
+                              Command="{Binding EditCommand}" />
                     <MenuItem Header="Изменить статус ...">
                         <MenuItem Header="Изменить статус ..." />
                     </MenuItem>

@@ -19,7 +19,6 @@ namespace Bookshelf.ViewModels
         public ICommand OpenBookViewCommand { get; set; }
         public ICommand SelectCoverCommand { get; set; }
 
-        public ICommand EditCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
@@ -34,6 +33,10 @@ namespace Bookshelf.ViewModels
         public string ISBN { get; set; }
         public string Publisher { get; set; }
         public string Status { get; set; }
+
+
+        public List<Shelf> Shelves { get; set; }
+        public Shelf SelectedShelf { get; set; }
 
         public List<string> Publishers { get; set; }
         public List<string> Statuses { get; set; }
@@ -76,7 +79,6 @@ namespace Bookshelf.ViewModels
             {
                 SetFields();
                 currentWindow.Close();
-
             });
 
             SaveCommand = new RelayCommand(o =>
@@ -124,7 +126,6 @@ namespace Bookshelf.ViewModels
                 isDirty = true;
             }
 
-
             using (var context = new DataContextFactory().CreateDbContext())
             {
 
@@ -164,11 +165,11 @@ namespace Bookshelf.ViewModels
                     }).Entity;
                 }
 
-
                 context.SaveChanges();
 
                 Entity.ImageId = image.Id;
                 Entity.PublisherId = publisher.Id;
+                Entity.BookBinds[0].AuthorId = author.Id;
 
                 isDirty = true;
             }
@@ -178,6 +179,7 @@ namespace Bookshelf.ViewModels
                 using (var context = new DataContextFactory().CreateDbContext())
                 {
                     context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.Entry(Entity.BookBinds[0]).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     context.SaveChangesAsync();
                 }
 
@@ -190,26 +192,23 @@ namespace Bookshelf.ViewModels
             if (Entity != null)
             {
                 var bookBindSerice = new DataService<BookBind>(new DataContextFactory());
-                var author = bookBindSerice.GetAll().Result
+                var authors = bookBindSerice.GetAll().Result
                     .Where(o => o.BookId == Entity.Id)
                     .Select(o => o.Author)
                     .ToList();
 
                 Entity = bookBindSerice.GetAll().Result.Single(o => o.BookId == Entity.Id).Book;
 
-
                 Title = Entity.Title;
-                Author = author[0].FullName;
+                Author = authors[0].FullName;
 
                 ISBN = Entity.ISBN == null ? string.Empty : Entity.ISBN.ToString();
                 PagesNumber = Entity.PagesNumber == null ? string.Empty : Entity.PagesNumber.ToString();
                 Year = Entity.Year == null ? string.Empty : Entity.Year.ToString();
 
-
                 PagesRead = Entity.PagesRead == null ? string.Empty : Entity.PagesRead.ToString();
                 Publisher = Entity.Publisher == null ? string.Empty : Entity.Publisher.Name;
                 Status = Entity.Status == null ? string.Empty : Entity.Status.Name;
-
 
                 if (Entity.Image != null)
                 {
@@ -220,6 +219,7 @@ namespace Bookshelf.ViewModels
                     Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
                 }
 
+                Entity.ShelfBinds.
             }
 
             GetSuggestions();

@@ -4,6 +4,7 @@ using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Bookshelf.Services;
 using Bookshelf.Views;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -117,6 +118,7 @@ namespace Bookshelf.ViewModels
         public void Refresh()
         {
             SetFields();
+            BookViewModelChanged?.Invoke();
         }
 
         public void GetSuggestions()
@@ -128,5 +130,8 @@ namespace Bookshelf.ViewModels
                 Statuses = context.Set<Status>().Select(o => o.Name).ToList();
             }
         }
+
+        public event Action BookViewModelChanged;
+
     }
 }

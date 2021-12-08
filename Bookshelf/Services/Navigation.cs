@@ -46,6 +46,11 @@ namespace Bookshelf
             }
         }
 
+        public void Update()
+        {
+            OnCurrentViewModelChanged();
+        }
+
         private void OnCurrentViewModelChanged()
         {
             CurrentViewModelChanged?.Invoke();

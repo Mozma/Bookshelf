@@ -129,15 +129,6 @@
                                                ItemsSource="{Binding AuthorsNames}"
                                                Style="{StaticResource ACBBaseStyle}" />
 
-                        <TextBlock x:Name="AddBookShelfTextBlock"
-                                   Text="{lex:Loc}" />
-
-                        <ComboBox ItemsSource="{Binding Shelves}"
-                                  DisplayMemberPath="Name"
-                                  Height="30"
-                                  FontFamily="{StaticResource RobotoRegular}"
-                                  SelectedItem="{Binding SelectedShelf}" />
-
                         <TextBlock x:Name="BookViewISBNTextBlock"
                                    VerticalAlignment="Center"
                                    Text="{lex:Loc}" />
