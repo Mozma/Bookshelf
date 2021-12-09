@@ -22,6 +22,7 @@ namespace Bookshelf.ViewModels
         public ICommand EditCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         public string Title { get; set; }
         public string Author { get; set; }
@@ -47,7 +48,7 @@ namespace Bookshelf.ViewModels
         public BookViewModel(Book entity) : this()
         {
             Entity = entity;
-            Refresh();
+            SetFields();
         }
 
         private void SetupCommands()
@@ -55,12 +56,14 @@ namespace Bookshelf.ViewModels
             OpenBookViewCommand = new RelayCommand(o =>
             {
                 Navigation.SetView(this);
+                SetFields();
                 Refresh();
             });
 
             GoBackCommand = new RelayCommand(o =>
             {
                 Navigation.GoToPrevieusViewModel();
+                SetFields();
                 Refresh();
             });
 
@@ -73,6 +76,19 @@ namespace Bookshelf.ViewModels
             {
                 IoC.UI.ShowDialogWindow(new EditBookWindow(this));
             });
+            
+            DeleteCommand = new RelayCommand(o =>
+            {
+                DeleteBook();
+                Refresh();
+            });
+        }
+
+        private void DeleteBook()
+        {
+            var bookService = new DataService<Book>(new DataContextFactory());
+
+            bookService.Delete(Entity.Id);
         }
 
         private void SetFields()
@@ -117,7 +133,6 @@ namespace Bookshelf.ViewModels
 
         public void Refresh()
         {
-            SetFields();
             BookViewModelChanged?.Invoke();
         }
 

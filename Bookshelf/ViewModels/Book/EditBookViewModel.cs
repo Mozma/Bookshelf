@@ -219,7 +219,6 @@ namespace Bookshelf.ViewModels
                     Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
                 }
 
-                Entity.ShelfBinds.
             }
 
             GetSuggestions();
