@@ -59,12 +59,13 @@
                             Width="30"
                             Height="25"
                             Style="{StaticResource DialogCloseButton}"
-                            Command="{Binding CloseCommand}" />
+                            Command="{Binding CancelCommand}" />
                 </Grid>
                 <!-- Content -->
 
                 <Grid Grid.Row="2"
-                      Grid.ColumnSpan="2">
+                      Grid.ColumnSpan="2"
+                      FocusManager.FocusedElement="{Binding ElementName=ShelfNameField}">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
@@ -80,7 +81,8 @@
                                Text="{lex:Loc}"
                                VerticalAlignment="Center" />
 
-                    <input:AutoCompleteBox Grid.Row="0"
+                    <input:AutoCompleteBox x:Name="ShelfNameField"
+                                           Grid.Row="0"
                                            Grid.Column="2"
                                            Text="{Binding ShelfName, Mode=TwoWay}"
                                            Style="{StaticResource ACBBaseStyle}" />

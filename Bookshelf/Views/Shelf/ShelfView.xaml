@@ -38,13 +38,14 @@
                     <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0"
-                           Text="{Binding Name}"
-                           ToolTip="{Binding Name}"
-                           FontSize="48"
-                           TextTrimming="CharacterEllipsis"
-                           HorizontalAlignment="Left"
-                           Padding="15,5,0,0" />
+                <Button Grid.Row="0"
+                        Content="{Binding Name}"
+                        ToolTip="{Binding Name}"
+                        FontSize="48"
+                        HorizontalAlignment="Left"
+                        Padding="15,5,0,0"
+                        Style="{StaticResource HyperlinkLikeButton}"
+                        Command="{Binding EditCommand}" />
 
                 <Button x:Name="ShelfAddNewBookButton"
                         Grid.Column="2"

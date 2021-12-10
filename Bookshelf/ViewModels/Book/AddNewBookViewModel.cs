@@ -1,5 +1,4 @@
 ﻿using Bookshelf.Helpers;
-
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Microsoft.Win32;

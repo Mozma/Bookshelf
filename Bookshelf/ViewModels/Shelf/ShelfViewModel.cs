@@ -4,6 +4,7 @@ using Bookshelf.Services;
 using Bookshelf.Views;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
@@ -47,15 +48,16 @@ namespace Bookshelf.ViewModels
             {
                 var bookview = new BookViewModel(shelfBind.Book);
 
-                bookview.BookViewModelChanged += OnBookViewModelChanged;
+                bookview.BookViewModelChanged += OnShelfViewModelChanged;
+                bookview.BookViewModelChanged += () => LoadViewCommand.Execute(this);
+
                 items.Add(bookview);
             }
 
             Items = items;
         }
-        private void OnBookViewModelChanged()
+        private void OnShelfViewModelChanged()
         {
-            LoadViewCommand.Execute(this);
             ShelfViewModelChanged?.Invoke();
         }
 
@@ -85,8 +87,40 @@ namespace Bookshelf.ViewModels
             EditCommand = new RelayCommand(o =>
             {
                 IoC.UI.ShowDialogWindow(new EditShelfWindow(this));
-                OnBookViewModelChanged();
+                LoadViewCommand.Execute(this);
+                OnShelfViewModelChanged();
             });
+
+            ClearCommand = new RelayCommand(async o =>
+            {
+                ClearShelf();
+                OnShelfViewModelChanged();
+            });
+
+            DeleteCommand = new RelayCommand(o =>
+            {
+                DeleteShelf();
+                OnShelfViewModelChanged();
+            });
+        }
+
+        private void ClearShelf()
+        {
+            var shelfBindService = new DataService<ShelfBind>(new DataContextFactory());
+
+            var shelfBinds = shelfBindService.GetAll().Result.Where(s => s.ShelfId == Entity.Id);
+
+            foreach (var item in shelfBinds)
+            {
+                shelfBindService.Delete(item.Id);
+            }
+        }
+
+        private void DeleteShelf()
+        {
+            var shelfService = new DataService<Shelf>(new DataContextFactory());
+
+            shelfService.Delete(Entity.Id);
         }
 
         public event Action ShelfViewModelChanged;
