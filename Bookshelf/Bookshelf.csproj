@@ -40,7 +40,7 @@
     <Compile Update="Views\Book\BookView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ShelfView.xaml.cs">
+    <Compile Update="Views\Shelf\ShelfView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -63,7 +63,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\AddShelfWindow.xaml">
+    <Page Update="Views\Shelf\AddShelfWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -79,7 +79,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ShelfView.xaml">
+    <Page Update="Views\Shelf\ShelfView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

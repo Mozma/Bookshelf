@@ -76,7 +76,7 @@ namespace Bookshelf.ViewModels
             {
                 IoC.UI.ShowDialogWindow(new EditBookWindow(this));
             });
-            
+
             DeleteCommand = new RelayCommand(o =>
             {
                 DeleteBook();
@@ -96,12 +96,15 @@ namespace Bookshelf.ViewModels
             if (Entity != null)
             {
                 var bookBindSerice = new DataService<BookBind>(new DataContextFactory());
+
                 var author = bookBindSerice.GetAll().Result
                     .Where(o => o.BookId == Entity.Id)
                     .Select(o => o.Author)
                     .ToList();
 
-                Entity = bookBindSerice.GetAll().Result.Single(o => o.BookId == Entity.Id).Book;
+                var bookService = new DataService<Book>(new DataContextFactory());
+
+                Entity = bookService.Get(Entity.Id).Result;
 
 
                 Title = Entity.Title;

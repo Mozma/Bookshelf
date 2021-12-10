@@ -204,4 +204,10 @@
   <data name="BookEditButton" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EditShelfAcceptButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="EditShelfHeaderTextBlock" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>

@@ -250,6 +250,24 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string EditShelfAcceptButton {
+            get {
+                return ResourceManager.GetString("EditShelfAcceptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Редактирование.
+        /// </summary>
+        public static string EditShelfHeaderTextBlock {
+            get {
+                return ResourceManager.GetString("EditShelfHeaderTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to + Добавить новую книгу.
         /// </summary>
         public static string ShelfAddNewBookButton {

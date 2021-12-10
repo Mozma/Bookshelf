@@ -47,7 +47,18 @@
                         Style="{StaticResource HyperlinkLikeButton}"
                         Content="{Binding Name, FallbackValue=Заголовок }"
                         FontSize="24"
-                        Command="{Binding OpenShelfCommand}" />
+                        Command="{Binding OpenShelfCommand}">
+                    <Button.ContextMenu>
+                        <ContextMenu Style="{StaticResource ModernContextMenuStyle}">
+                            <MenuItem Header="Изменить название"
+                                      Command="{Binding EditCommand}" />
+                            <MenuItem Header="Убрать все книги с полки"
+                                      Command="{Binding ClearCommand}" />
+                            <MenuItem Header="Удалить полку"
+                                      Command="{Binding DeleteCommand}" />
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
 
                 <TextBlock Grid.Column="3"
                            Text="{Binding Items.Count, FallbackValue=0 }"

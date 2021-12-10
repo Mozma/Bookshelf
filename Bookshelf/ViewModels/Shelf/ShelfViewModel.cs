@@ -1,6 +1,7 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Bookshelf.Services;
+using Bookshelf.Views;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -16,6 +17,10 @@ namespace Bookshelf.ViewModels
         public ICommand AddNewBookCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
         public ICommand LoadViewCommand { get; set; }
+
+        public ICommand EditCommand { get; set; }
+        public ICommand ClearCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         public string Name { get; set; }
         public List<BookViewModel> Items { get; set; }
@@ -77,8 +82,12 @@ namespace Bookshelf.ViewModels
                 LoadView();
             });
 
+            EditCommand = new RelayCommand(o =>
+            {
+                IoC.UI.ShowDialogWindow(new EditShelfWindow(this));
+                OnBookViewModelChanged();
+            });
         }
-
 
         public event Action ShelfViewModelChanged;
     }
