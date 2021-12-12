@@ -23,6 +23,7 @@ namespace Bookshelf.ViewModels
         public ICommand CancelCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand ChangeStatusCommand { get; set; }
 
         public string Title { get; set; }
         public string Author { get; set; }
@@ -33,8 +34,7 @@ namespace Bookshelf.ViewModels
         public string Year { get; set; }
         public string ISBN { get; set; }
         public string Publisher { get; set; }
-        public string Status { get; set; }
-
+        public BookStatus Status { get; set; }
 
         public List<string> Publishers { get; set; }
         public List<string> Statuses { get; set; }
@@ -82,6 +82,30 @@ namespace Bookshelf.ViewModels
                 DeleteBook();
                 Refresh();
             });
+
+            ChangeStatusCommand = new RelayCommand(o =>
+            {
+                SetNextStatus();
+                
+            });
+        }
+
+        private void SetNextStatus()
+        {
+            Status = Status.Next();
+            SaveStatus();
+        }
+
+        private void SaveStatus()
+        {
+            using (var context = new DataContextFactory().CreateDbContext())
+            {
+                Entity.Status = (int)Status;
+
+                context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.SaveChangesAsync();
+            }
+            
         }
 
         private void DeleteBook()
@@ -117,7 +141,8 @@ namespace Bookshelf.ViewModels
 
                 PagesRead = Entity.PagesRead == null ? string.Empty : Entity.PagesRead.ToString();
                 Publisher = Entity.Publisher == null ? string.Empty : Entity.Publisher.Name;
-                Status = Entity.Status == null ? string.Empty : Entity.Status.Name;
+
+                Status = Entity.Status == null ? 0 : (BookStatus)Entity.Status;
 
 
                 if (Entity.Image != null)
@@ -143,9 +168,7 @@ namespace Bookshelf.ViewModels
         {
             using (var context = new DataContextFactory().CreateDbContext())
             {
-
                 Publishers = context.Set<Publisher>().Select(o => o.Name).ToList();
-                Statuses = context.Set<Status>().Select(o => o.Name).ToList();
             }
         }
 

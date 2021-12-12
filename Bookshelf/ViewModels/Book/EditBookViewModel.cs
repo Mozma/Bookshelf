@@ -156,15 +156,6 @@ namespace Bookshelf.ViewModels
                     }).Entity;
                 }
 
-                var status = context.Set<Status>().FirstOrDefault(p => p.Name.Equals(Status.Trim()));
-                if (status == null)
-                {
-                    status = context.Set<Status>().Add(new Status
-                    {
-                        Name = Status.Trim()
-                    }).Entity;
-                }
-
                 context.SaveChanges();
 
                 Entity.ImageId = image.Id;
@@ -208,7 +199,6 @@ namespace Bookshelf.ViewModels
 
                 PagesRead = Entity.PagesRead == null ? string.Empty : Entity.PagesRead.ToString();
                 Publisher = Entity.Publisher == null ? string.Empty : Entity.Publisher.Name;
-                Status = Entity.Status == null ? string.Empty : Entity.Status.Name;
 
                 if (Entity.Image != null)
                 {
@@ -242,7 +232,6 @@ namespace Bookshelf.ViewModels
             {
 
                 Publishers = context.Set<Publisher>().Select(o => o.Name).ToList();
-                Statuses = context.Set<Status>().Select(o => o.Name).ToList();
             }
         }
     }

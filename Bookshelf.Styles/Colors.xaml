@@ -39,4 +39,26 @@
 
     <Color x:Key="GlyphColor">#FF444444</Color>
 
+    <!-- Colors for statuses -->
+
+    <Color x:Key="StatusWithoutStatus">#F7f7f7</Color>
+    <SolidColorBrush x:Key="StatusWithoutStatusBrush"
+                     Color="{StaticResource StatusWithoutStatus}" />
+
+    <Color x:Key="StatusNowReading">#fff44f</Color>
+    <SolidColorBrush x:Key="StatusNowReadingBrush"
+                     Color="{StaticResource StatusNowReading}" />
+
+    <Color x:Key="StatusFinished">#7cdd73</Color>
+    <SolidColorBrush x:Key="StatusFinishedBrush"
+                     Color="{StaticResource StatusFinished}" />
+
+    <Color x:Key="StatusWantToRead">#c0cbff</Color>
+    <SolidColorBrush x:Key="StatusWantToReadBrush"
+                     Color="{StaticResource StatusWantToRead}" />
+
+    <Color x:Key="StatusQuitReading">#ffc0cb</Color>
+    <SolidColorBrush x:Key="StatusQuitReadingBrush"
+                     Color="{StaticResource StatusQuitReading}" />
+
 </ResourceDictionary>
