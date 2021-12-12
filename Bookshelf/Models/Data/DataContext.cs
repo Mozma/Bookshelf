@@ -10,8 +10,6 @@ namespace Bookshelf.Models.Data
         DbSet<Publisher> Publishers { get; set; }
         DbSet<Shelf> Shelves { get; set; }
         DbSet<ShelfBind> ShelfBinds { get; set; }
-        DbSet<Status> Statuses { get; set; }
-
 
         public DataContext(DbContextOptions options) : base(options)
         {
@@ -27,7 +25,6 @@ namespace Bookshelf.Models.Data
             builder.ApplyConfiguration(new PublisherConfiguration());
             builder.ApplyConfiguration(new ShelfConfiguration());
             builder.ApplyConfiguration(new ShelfBindConfiguration());
-            builder.ApplyConfiguration(new StatusConfiguration());
         }
     }
 }

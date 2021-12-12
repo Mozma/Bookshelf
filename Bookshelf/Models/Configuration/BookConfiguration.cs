@@ -14,10 +14,9 @@ namespace Bookshelf.Models
             builder.Property(o => o.ISBN).IsRequired(false);
             builder.Property(o => o.PublisherId).IsRequired(false);
             builder.Property(o => o.Description).IsRequired(false);
-            builder.Property(o => o.StatusId).IsRequired(false);
+            builder.Property(o => o.Status).IsRequired(false);
 
             builder.Navigation(o => o.Image).AutoInclude();
-            builder.Navigation(o => o.Status).AutoInclude();
             builder.Navigation(o => o.Publisher).AutoInclude();
             builder.Navigation(o => o.BookBinds).AutoInclude();
         }
