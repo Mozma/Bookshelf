@@ -101,7 +101,7 @@
         <Setter Property="FilterMode"
                 Value="ContainsOrdinal" />
         <Setter Property="Placeholder"
-                Value="---"/>
+                Value="---" />
         <Setter Property="PlaceholderTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -121,17 +121,33 @@
     <Style TargetType="TextBox"
            x:Key="HiddenRoundCornersTextbox"
            BasedOn="{StaticResource RoundCornersTextbox}">
-
-        <Style.Triggers>
-            
-        </Style.Triggers>
     </Style>
-    
 
     <Style x:Key="ACBBaseHiddenStyle"
            TargetType="{x:Type input:AutoCompleteBox}">
         <Setter Property="TextBoxStyle"
                 Value="{StaticResource HiddenRoundCornersTextbox}" />
+    </Style>
+
+    <!-- Selectabale label-like -->
+    <Style TargetType="TextBox"
+           x:Key="SelectableTextBox">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="FontSize"
+                Value="18" />
+
+        <Setter Property="IsReadOnly"
+                Value="True" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoRegular}" />
+        <Setter Property="CaretBrush"
+                Value="{StaticResource ForegroundGrayBrush}" />
+        <Setter Property="SelectionBrush"
+                Value="{StaticResource ForegroundGrayBrush}" />
     </Style>
 
 </ResourceDictionary>

@@ -30,8 +30,10 @@ namespace Bookshelf.ViewModels
         public List<Shelf> Shelves { get; set; }
         public Shelf SelectedShelf { get; set; }
 
-        public AddNewBookViewModel(Window window)
+        public AddNewBookViewModel(Window window, ShelfViewModel shelfViewModel)
         {
+
+
             CloseCommand = new RelayCommand(o => window.Close());
 
             AddBookCommand = new RelayCommand(o =>
@@ -45,9 +47,13 @@ namespace Bookshelf.ViewModels
             });
 
             GetSuggestions();
+            if (shelfViewModel != null)
+            {
+                SelectedShelf = Shelves.Find(o => o.Id == shelfViewModel.Entity.Id);
+            }
         }
 
-        // Todo: вынести метод в отдельное место 
+
         private Bitmap GetBitmapImageFromDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -131,7 +137,6 @@ namespace Bookshelf.ViewModels
                 ShelvesNames = context.Set<Shelf>().Select(o => o.Name).ToList();
 
                 Shelves = context.Set<Shelf>().ToList();
-
             }
         }
     }

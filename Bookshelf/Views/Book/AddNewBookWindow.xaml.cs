@@ -11,10 +11,10 @@ namespace Bookshelf
     {
         public string CoverImagePath { get; set; }
 
-        public AddNewBookWindow()
+        public AddNewBookWindow(ShelfViewModel shelfViewModel)
         {
             InitializeComponent();
-            this.DataContext = new AddNewBookViewModel(this);
+            this.DataContext = new AddNewBookViewModel(this, shelfViewModel);
         }
 
         private void mask_Drop(object sender, DragEventArgs e)

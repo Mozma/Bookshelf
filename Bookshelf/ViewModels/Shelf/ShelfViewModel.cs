@@ -75,7 +75,7 @@ namespace Bookshelf.ViewModels
 
             AddNewBookCommand = new RelayCommand(o =>
             {
-                IoC.UI.ShowDialogWindow(new AddNewBookWindow());
+                IoC.UI.ShowDialogWindow(new AddNewBookWindow(this));
                 LoadViewCommand.Execute(this);
             });
 

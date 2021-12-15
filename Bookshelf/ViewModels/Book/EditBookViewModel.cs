@@ -15,6 +15,8 @@ namespace Bookshelf.ViewModels
 {
     public class EditBookViewModel : BaseViewModel
     {
+        private readonly string emptyString = "---";
+
         public Book Entity { get; set; }
         public ICommand OpenBookViewCommand { get; set; }
         public ICommand SelectCoverCommand { get; set; }
@@ -32,7 +34,6 @@ namespace Bookshelf.ViewModels
         public string Year { get; set; }
         public string ISBN { get; set; }
         public string Publisher { get; set; }
-        public string Status { get; set; }
 
 
         public List<Shelf> Shelves { get; set; }

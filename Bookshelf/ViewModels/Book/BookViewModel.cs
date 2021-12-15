@@ -1,5 +1,4 @@
-﻿
-using Bookshelf.Helpers;
+﻿using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Bookshelf.Services;
@@ -15,6 +14,8 @@ namespace Bookshelf.ViewModels
 {
     public class BookViewModel : BaseViewModel
     {
+        public readonly string PlaceHolder = "---";
+
         public Book Entity { get; set; }
         public ICommand OpenBookViewCommand { get; set; }
         public ICommand SelectCoverCommand { get; set; }
@@ -56,15 +57,13 @@ namespace Bookshelf.ViewModels
             OpenBookViewCommand = new RelayCommand(o =>
             {
                 Navigation.SetView(this);
-                SetFields();
-                Refresh();
+                UpdateView();
             });
 
             GoBackCommand = new RelayCommand(o =>
             {
                 Navigation.GoToPrevieusViewModel();
-                SetFields();
-                Refresh();
+                UpdateView();
             });
 
             SelectCoverCommand = new RelayCommand(o =>
@@ -75,6 +74,7 @@ namespace Bookshelf.ViewModels
             EditCommand = new RelayCommand(o =>
             {
                 IoC.UI.ShowDialogWindow(new EditBookWindow(this));
+                UpdateView();
             });
 
             DeleteCommand = new RelayCommand(o =>
@@ -86,8 +86,13 @@ namespace Bookshelf.ViewModels
             ChangeStatusCommand = new RelayCommand(o =>
             {
                 SetNextStatus();
-                
             });
+        }
+
+        private void UpdateView()
+        {
+            SetFields();
+            Refresh();
         }
 
         private void SetNextStatus()
@@ -105,7 +110,7 @@ namespace Bookshelf.ViewModels
                 context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChangesAsync();
             }
-            
+
         }
 
         private void DeleteBook()
@@ -134,13 +139,13 @@ namespace Bookshelf.ViewModels
                 Title = Entity.Title;
                 Author = author[0].FullName;
 
-                ISBN = Entity.ISBN == null ? string.Empty : Entity.ISBN.ToString();
-                PagesNumber = Entity.PagesNumber == null ? string.Empty : Entity.PagesNumber.ToString();
-                Year = Entity.Year == null ? string.Empty : Entity.Year.ToString();
+                ISBN = Entity.ISBN == null ? PlaceHolder : Entity.ISBN.ToString();
+                PagesNumber = Entity.PagesNumber == null ? PlaceHolder : Entity.PagesNumber.ToString();
+                Year = Entity.Year == null ? PlaceHolder : Entity.Year.ToString();
 
 
-                PagesRead = Entity.PagesRead == null ? string.Empty : Entity.PagesRead.ToString();
-                Publisher = Entity.Publisher == null ? string.Empty : Entity.Publisher.Name;
+                PagesRead = Entity.PagesRead == null ? PlaceHolder : Entity.PagesRead.ToString();
+                Publisher = Entity.Publisher == null ? PlaceHolder : Entity.Publisher.Name;
 
                 Status = Entity.Status == null ? 0 : (BookStatus)Entity.Status;
 

@@ -165,7 +165,7 @@
                                   FontSize="16"
                                   Height="30"
                                   FontFamily="{StaticResource RobotoRegular}"
-                                  SelectedItem="{Binding SelectedShelf}" />
+                                  SelectedItem="{Binding SelectedShelf, Mode=TwoWay}" />
 
                         <Grid Grid.Row="12">
                             <Grid.ColumnDefinitions>
