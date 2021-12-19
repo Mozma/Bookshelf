@@ -86,7 +86,6 @@ namespace Bookshelf.ViewModels
             {
                 SaveEntity();
 
-                viewModel.Refresh();
                 currentWindow.Close();
             });
 

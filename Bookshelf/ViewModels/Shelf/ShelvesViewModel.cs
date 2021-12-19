@@ -13,11 +13,17 @@ namespace Bookshelf.ViewModels
         private ObservableCollection<ShelfViewModel> items;
         public ObservableCollection<ShelfViewModel> Items
         {
-            get { return items; }
+            get => items;
             set
             {
+                if (items == value)
+                {
+                    return;
+                }
+
                 items = value;
-                OnPropertyChanged(nameof(Items));
+
+                OnPropertyChanged(nameof(items));
             }
         }
 
@@ -61,8 +67,8 @@ namespace Bookshelf.ViewModels
 
             foreach (var item in shelfItems)
             {
-                var shelfViewModel = new ShelfViewModel(item.Id);
-                shelfViewModel.ShelfViewModelChanged += OnViewModelChanged;
+                var shelfViewModel = new ShelfViewModel(item);
+                shelfViewModel.ShelfViewModelDeleted += OnViewModelChanged;
                 Items.Add(shelfViewModel);
             }
         }

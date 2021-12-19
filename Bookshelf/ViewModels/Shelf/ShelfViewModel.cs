@@ -4,7 +4,9 @@ using Bookshelf.Services;
 using Bookshelf.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
@@ -24,41 +26,59 @@ namespace Bookshelf.ViewModels
         public ICommand DeleteCommand { get; set; }
 
         public string Name { get; set; }
-        public List<BookViewModel> Items { get; set; }
 
-        public ShelfViewModel(int shelfId)
+
+        public ObservableCollection<BookViewModel> items;
+        public ObservableCollection<BookViewModel> Items
+        {
+            get => items;
+            set
+            {
+                if (items == value)
+                {
+                    return;
+                }
+
+                items = value;
+
+                OnPropertyChanged(nameof(items));
+            }
+        }
+        public bool IsOpen { get; set; } = false;
+
+        public ShelfViewModel(Shelf shelf)
         {
             SetupCommands();
 
-            ShelfId = shelfId;
-            LoadViewCommand.Execute(this);
+            ShelfId = shelf.Id;
+            LoadView();
         }
 
-        private void LoadView()
+        private async void LoadView()
         {
+
             var shelfService = new ShelfService(new DataContextFactory());
             Entity = shelfService.GetById(ShelfId).Result;
             Name = Entity.Name;
 
-            var items = new List<BookViewModel>();
-
-            List<ShelfBind> shelfBindItems = Entity.ShelfBinds;
-
-            foreach (var shelfBind in shelfBindItems)
+            await Task.Run(() =>
             {
-                var bookview = new BookViewModel(shelfBind.Book);
+                var items = new ObservableCollection<BookViewModel>();
 
-                bookview.BookViewModelChanged += OnShelfViewModelChanged;
-                bookview.BookViewModelChanged += () => LoadViewCommand.Execute(this);
+                List<ShelfBind> shelfBindItems = Entity.ShelfBinds;
 
-                items.Add(bookview);
-            }
+                foreach (var shelfBind in shelfBindItems)
+                {
+                    var bookview = new BookViewModel(shelfBind.Book);
+                    items.Add(bookview);
+                }
 
-            Items = items;
+                Items = items;
+            });
         }
         private void OnShelfViewModelChanged()
         {
-            ShelfViewModelChanged?.Invoke();
+            ShelfViewModelDeleted?.Invoke();
         }
 
         private void SetupCommands()
@@ -66,6 +86,7 @@ namespace Bookshelf.ViewModels
             OpenShelfCommand = new RelayCommand(o =>
             {
                 Navigation.SetView(this);
+                LoadView();
             });
 
             GoBackCommand = new RelayCommand(o =>
@@ -76,7 +97,7 @@ namespace Bookshelf.ViewModels
             AddNewBookCommand = new RelayCommand(o =>
             {
                 IoC.UI.ShowDialogWindow(new AddNewBookWindow(this));
-                LoadViewCommand.Execute(this);
+                LoadView();
             });
 
             LoadViewCommand = new RelayCommand(async o =>
@@ -87,25 +108,23 @@ namespace Bookshelf.ViewModels
             EditCommand = new RelayCommand(o =>
             {
                 IoC.UI.ShowDialogWindow(new EditShelfWindow(this));
-                LoadViewCommand.Execute(this);
-                OnShelfViewModelChanged();
             });
 
-            ClearCommand = new RelayCommand(async o =>
+            ClearCommand = new RelayCommand(o =>
             {
                 ClearShelf();
-                OnShelfViewModelChanged();
             });
 
             DeleteCommand = new RelayCommand(o =>
             {
                 DeleteShelf();
-                OnShelfViewModelChanged();
             });
         }
 
         private void ClearShelf()
         {
+            Items.Clear();
+
             var shelfBindService = new DataService<ShelfBind>(new DataContextFactory());
 
             var shelfBinds = shelfBindService.GetAll().Result.Where(s => s.ShelfId == Entity.Id);
@@ -121,8 +140,10 @@ namespace Bookshelf.ViewModels
             var shelfService = new DataService<Shelf>(new DataContextFactory());
 
             shelfService.Delete(Entity.Id);
+
+            OnShelfViewModelChanged();
         }
 
-        public event Action ShelfViewModelChanged;
+        public event Action ShelfViewModelDeleted;
     }
 }

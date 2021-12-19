@@ -36,6 +36,18 @@ namespace Bookshelf.ViewModels
             {
                 var shelf = context.Set<Shelf>().FirstOrDefault(s => s.Name == ShelfName);
 
+                //var rnd = new Random();
+                //for (int i = 0; i < 100; i++)
+                //{
+                //    context.Set<Shelf>().Add(new Shelf
+                //    {
+                //        Name = rnd.Next().ToString()
+                //    });
+                //}
+
+                //context.SaveChangesAsync();
+
+
                 if (shelf == null)
                 {
                     context.Set<Shelf>().Add(new Shelf

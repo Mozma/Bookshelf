@@ -43,6 +43,8 @@ namespace Bookshelf.ViewModels
             {
                 SaveEntity();
 
+
+
                 CurrentViewModel.OnPropertyChanged();
                 CurrentWindow.Close();
             });
@@ -56,6 +58,7 @@ namespace Bookshelf.ViewModels
             if (!string.IsNullOrWhiteSpace(ShelfName) && !ShelfName.Equals(CurrentShelfName))
             {
                 CurrentShelf.Name = ShelfName;
+                CurrentViewModel.Name = ShelfName;
                 isDirty = true;
             }
 
