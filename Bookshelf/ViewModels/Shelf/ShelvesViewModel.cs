@@ -42,7 +42,7 @@ namespace Bookshelf.ViewModels
         {
             AddShelfCommand = new RelayCommand(o =>
             {
-                IoC.UI.ShowDialogWindow(new AddShelfWindow());
+                Navigation.SetCurrentOverlayViewModel(new AddShelfViewModel());
                 LoadViewCommand.Execute(this);
             });
 

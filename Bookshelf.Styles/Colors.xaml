@@ -6,11 +6,20 @@
 
     <Color x:Key="BackgroundLightGray">#fdfdfd</Color>
     <SolidColorBrush x:Key="BackgroundLightGrayBrush" Color="{StaticResource BackgroundLightGray}"/>
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <Color x:Key="BackgroundWhite">#ffffff</Color>
     <SolidColorBrush x:Key="BackgroundWhiteBrush" Color="{StaticResource BackgroundWhite}"/>
 
-    <Color x:Key="LightGreen">#7cdd73</Color>
+    <Color x:Key="LightGreen">#00C896</Color>
     <SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}"/>
     
     <Color x:Key="ForegroundGray">#b9b9b9</Color>

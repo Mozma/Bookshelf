@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        xmlns:views="clr-namespace:Bookshelf.Views"
         lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         TextOptions.TextFormattingMode="Display"
@@ -34,14 +35,20 @@
     
     <Grid>
         <!-- Overlay -->
-        <Border x:Name="Overlay"
-                Panel.ZIndex="10"
-                Visibility="Visible"
-                Opacity="0.2"
-                CornerRadius="10"
-                Background="Black">
 
-        </Border>
+        <Grid x:Name="Overlay"
+              Panel.ZIndex="1000"
+              Visibility="{Binding IsOverlayVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <!-- Overlay shadow -->
+            <Border Opacity="0.2"
+                    CornerRadius="10"
+                    Background="Black" />
+
+            <!-- Overlay content -->
+            <ContentControl  Content="{Binding CurrentOverlayViewModel}" />
+        </Grid>
+
+
 
         <Border Background="{StaticResource BackgroundDarkGrayBrush}">
 

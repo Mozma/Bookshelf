@@ -13,6 +13,12 @@ namespace Bookshelf
             set => Navigation.SetView(value);
         }
 
+        public BaseViewModel CurrentOverlayViewModel
+        {
+            get => Navigation.GetCurrentOverlayViewModel();
+        }
+
+        public bool IsOverlayVisible => Navigation.GetCurrentOverlayViewModel() != null;
         public bool IsHomeViewModel => CurrentViewModel is HomeViewModel;
         public bool IsNotesViewModel => CurrentViewModel is NotesViewModel;
         public bool IsShelvesViewModel => CurrentViewModel is ShelvesViewModel;
@@ -101,29 +107,40 @@ namespace Bookshelf
             MaximizeCommand = new RelayCommand(o => currentWindow.WindowState ^= WindowState.Maximized);
             CloseCommand = new RelayCommand(o => currentWindow.Close());
 
-
-            /// Navigation Commands
-
             HomeViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = CurrentViewModel is HomeViewModel ? CurrentViewModel : new HomeViewModel();
+                SetCurrentViewModel<HomeViewModel>();
             });
 
             ShelvesViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = CurrentViewModel is ShelvesViewModel ? CurrentViewModel : new ShelvesViewModel();
+                SetCurrentViewModel<ShelvesViewModel>();
             });
 
             NotesViewCommand = new RelayCommand(o =>
             {
-                CurrentViewModel = CurrentViewModel is NotesViewModel ? CurrentViewModel : new NotesViewModel();
+
+                SetCurrentViewModel<NotesViewModel>();
             });
 
         }
 
+        private void SetCurrentViewModel<T>() where T : BaseViewModel, new()
+        {
+            if (CurrentViewModel is T)
+            {
+                return;
+            }
+
+            CurrentViewModel = new T();
+        }
+
+
         private void OnCurrentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));
+            OnPropertyChanged(nameof(CurrentOverlayViewModel));
+            OnPropertyChanged(nameof(IsOverlayVisible));
             OnPropertyChanged(nameof(IsHomeViewModel));
             OnPropertyChanged(nameof(IsNotesViewModel));
             OnPropertyChanged(nameof(IsShelvesViewModel));

@@ -18,6 +18,33 @@ namespace Bookshelf
                 IoC.Get<ApplicationViewModel>().CurrentViewModel = value;
                 OnCurrentViewModelChanged();
             }
+
+        }
+
+        public BaseViewModel CurrentOverlayViewModel
+        {
+            get => IoC.Get<ApplicationViewModel>().CurrentOverlayViewModel;
+            set
+            {
+                IoC.Get<ApplicationViewModel>().CurrentOverlayViewModel = value;
+                OnCurrentViewModelChanged();
+            }
+
+        }
+
+        public static void RemoveOverlay()
+        {
+            Instance.CurrentOverlayViewModel = null;
+        }
+
+        internal static BaseViewModel GetCurrentOverlayViewModel()
+        {
+            return Instance.CurrentOverlayViewModel;
+        }
+
+        internal static void SetCurrentOverlayViewModel(BaseViewModel viewModel)
+        {
+            Instance.CurrentOverlayViewModel = viewModel;
         }
 
         public static BaseViewModel GetCurrentViewModel()

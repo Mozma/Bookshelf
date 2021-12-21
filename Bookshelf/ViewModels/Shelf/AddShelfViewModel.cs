@@ -1,7 +1,6 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
@@ -13,11 +12,11 @@ namespace Bookshelf.ViewModels
         public ICommand CloseCommand { get; set; }
         public ICommand AddShelfCommand { get; set; }
 
-        public AddShelfViewModel(Window window)
+        public AddShelfViewModel()
         {
             CloseCommand = new RelayCommand(o =>
             {
-                window.Close();
+                Navigation.RemoveOverlay();
             });
 
             AddShelfCommand = new RelayCommand(o =>

@@ -17,7 +17,7 @@ namespace Bookshelf
         private void AppMainWindow_Activated(object sender, System.EventArgs e)
         {
 
-            Overlay.Visibility = Visibility.Hidden;
+            //Overlay.Visibility = Visibility.Hidden;
         }
 
         private void AppMainWindow_Deactivated(object sender, System.EventArgs e)
@@ -25,7 +25,7 @@ namespace Bookshelf
             if (Application.Current.Windows.OfType<Window>().Any())
             {
 
-                Overlay.Visibility = Visibility.Visible;
+                //  Overlay.Visibility = Visibility.Visible;
             }
 
         }
