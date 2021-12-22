@@ -84,19 +84,18 @@ namespace Bookshelf
                 OnPropertyChanged(nameof(TitleHeight));
                 OnPropertyChanged(nameof(TitleHeightGridLength));
             };
-
+            var resizer = new WindowResizer(currentWindow);
 
             Navigation.Instance.CurrentViewModelChanged += OnCurrentViewModelChanged;
+            Navigation.Instance.CurrentOverlayModelChanged += OnCurrentOverlayViewModelChanged;
 
             FixEfFirstLoadProblem();
 
-            SetupViewModels();
+            SetStartupView();
             SetupCommands();
-
-            var resizer = new WindowResizer(currentWindow);
         }
 
-        private void SetupViewModels()
+        private void SetStartupView()
         {
             Navigation.SetView(new HomeViewModel());
         }
@@ -139,11 +138,15 @@ namespace Bookshelf
         private void OnCurrentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));
-            OnPropertyChanged(nameof(CurrentOverlayViewModel));
-            OnPropertyChanged(nameof(IsOverlayVisible));
             OnPropertyChanged(nameof(IsHomeViewModel));
             OnPropertyChanged(nameof(IsNotesViewModel));
             OnPropertyChanged(nameof(IsShelvesViewModel));
+        }
+
+        private void OnCurrentOverlayViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentOverlayViewModel));
+            OnPropertyChanged(nameof(IsOverlayVisible));
         }
 
         private void FixEfFirstLoadProblem()

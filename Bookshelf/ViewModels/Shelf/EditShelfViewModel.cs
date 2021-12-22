@@ -1,6 +1,5 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
@@ -9,7 +8,6 @@ namespace Bookshelf.ViewModels
     {
         private Shelf CurrentShelf { get; set; }
         private ShelfViewModel CurrentViewModel { get; set; }
-        private Window CurrentWindow { get; set; }
 
         public string ShelfName { get; set; }
         private string CurrentShelfName { get; }
@@ -20,13 +18,11 @@ namespace Bookshelf.ViewModels
             SetupCommands();
         }
 
-        public EditShelfViewModel(Window window, ShelfViewModel shelfViewModel) : this()
+        public EditShelfViewModel(ShelfViewModel shelfViewModel) : this()
         {
             CurrentViewModel = shelfViewModel;
             CurrentShelf = shelfViewModel.Entity;
             CurrentShelfName = shelfViewModel.Entity.Name;
-            CurrentWindow = window;
-
 
             SetFields();
         }
@@ -36,19 +32,17 @@ namespace Bookshelf.ViewModels
             CancelCommand = new RelayCommand(o =>
             {
                 SetFields();
-                CurrentWindow.Close();
+                Navigation.RemoveOverlay();
             });
 
             AcceptCommand = new RelayCommand(o =>
             {
                 SaveEntity();
 
-
-
                 CurrentViewModel.OnPropertyChanged();
-                CurrentWindow.Close();
-            });
 
+                Navigation.RemoveOverlay();
+            });
         }
 
         private void SaveEntity()
@@ -83,10 +77,6 @@ namespace Bookshelf.ViewModels
 
         public void GetSuggestions()
         {
-            using (var context = new DataContextFactory().CreateDbContext())
-            {
-
-            }
         }
     }
 }

@@ -27,15 +27,19 @@ namespace Bookshelf
             set
             {
                 IoC.Get<ApplicationViewModel>().CurrentOverlayViewModel = value;
-                OnCurrentViewModelChanged();
+                OnCurrentOverlayModelChanged();
             }
 
         }
 
+
+
         public static void RemoveOverlay()
         {
             Instance.CurrentOverlayViewModel = null;
+            Instance.OnCurrentOverlayRemoved();
         }
+
 
         internal static BaseViewModel GetCurrentOverlayViewModel()
         {
@@ -76,6 +80,7 @@ namespace Bookshelf
         public void Update()
         {
             OnCurrentViewModelChanged();
+            OnCurrentOverlayModelChanged();
         }
 
         private void OnCurrentViewModelChanged()
@@ -83,7 +88,20 @@ namespace Bookshelf
             CurrentViewModelChanged?.Invoke();
         }
 
+        private void OnCurrentOverlayModelChanged()
+        {
+            CurrentOverlayModelChanged?.Invoke();
+        }
+
+        private void OnCurrentOverlayRemoved()
+        {
+            CurrentOverlayRemoved?.Invoke();
+        }
+
 
         public event Action CurrentViewModelChanged;
+        public event Action CurrentOverlayModelChanged;
+        public event Action CurrentOverlayRemoved;
+
     }
 }

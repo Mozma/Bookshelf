@@ -35,6 +35,8 @@ namespace Bookshelf.ViewModels
         {
             SetupCommands();
 
+            Navigation.Instance.CurrentOverlayRemoved += OnViewModelChanged;
+
             LoadViewCommand.Execute(this);
         }
 
@@ -43,7 +45,6 @@ namespace Bookshelf.ViewModels
             AddShelfCommand = new RelayCommand(o =>
             {
                 Navigation.SetCurrentOverlayViewModel(new AddShelfViewModel());
-                LoadViewCommand.Execute(this);
             });
 
             LoadViewCommand = new RelayCommand(async o =>
@@ -59,6 +60,7 @@ namespace Bookshelf.ViewModels
 
         public void SetupView()
         {
+
             Items = new ObservableCollection<ShelfViewModel>();
 
             IDataService<Shelf> shelfService = new DataService<Shelf>(new DataContextFactory());

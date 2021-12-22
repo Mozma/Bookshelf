@@ -1,7 +1,6 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Bookshelf.Services;
-using Bookshelf.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,6 +50,9 @@ namespace Bookshelf.ViewModels
             SetupCommands();
 
             ShelfId = shelf.Id;
+
+            Navigation.Instance.CurrentOverlayRemoved += OnShelfViewModelChanged;
+
             LoadView();
         }
 
@@ -107,7 +109,7 @@ namespace Bookshelf.ViewModels
 
             EditCommand = new RelayCommand(o =>
             {
-                IoC.UI.ShowDialogWindow(new EditShelfWindow(this));
+                Navigation.SetCurrentOverlayViewModel(new EditShelfViewModel(this));
             });
 
             ClearCommand = new RelayCommand(o =>
