@@ -1,20 +1,19 @@
-﻿using Bookshelf.ViewModels;
-using System;
+﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
-namespace Bookshelf
+namespace Bookshelf.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddBookDialogView.xaml
     /// </summary>
-    public partial class AddNewBookWindow : Window
+    public partial class AddBookDialogView : UserControl
     {
         public string CoverImagePath { get; set; }
 
-        public AddNewBookWindow(ShelfViewModel shelfViewModel)
+        public AddBookDialogView()
         {
             InitializeComponent();
-            this.DataContext = new AddNewBookViewModel(this, shelfViewModel);
         }
 
         private void mask_Drop(object sender, DragEventArgs e)

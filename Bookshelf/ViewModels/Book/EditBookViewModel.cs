@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -15,15 +14,12 @@ namespace Bookshelf.ViewModels
 {
     public class EditBookViewModel : BaseViewModel
     {
-        private readonly string emptyString = "---";
-
         public Book Entity { get; set; }
-        public ICommand OpenBookViewCommand { get; set; }
         public ICommand SelectCoverCommand { get; set; }
 
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
-        public ICommand GoBackCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
 
         public string Title { get; set; }
         public string Author { get; set; }
@@ -42,33 +38,23 @@ namespace Bookshelf.ViewModels
         public List<string> Publishers { get; set; }
         public List<string> Statuses { get; set; }
 
-        private Window currentWindow;
         private BookViewModel viewModel;
-        public EditBookViewModel()
+
+        public EditBookViewModel(BookViewModel bookViewModel)
         {
             SetupCommands();
-        }
 
-        public EditBookViewModel(Window window, BookViewModel bookViewModel) : this()
-        {
             viewModel = bookViewModel;
             Entity = viewModel.Entity;
-            currentWindow = window;
+
             SetFields();
         }
 
         private void SetupCommands()
         {
-            OpenBookViewCommand = new RelayCommand(o =>
+            CloseCommand = new RelayCommand(o =>
             {
-                Navigation.SetView(this);
-                SetFields();
-            });
-
-            GoBackCommand = new RelayCommand(o =>
-            {
-                Navigation.GoToPrevieusViewModel();
-                SetFields();
+                Navigation.RemoveOverlay();
             });
 
             SelectCoverCommand = new RelayCommand(o =>
@@ -79,14 +65,12 @@ namespace Bookshelf.ViewModels
             CancelCommand = new RelayCommand(o =>
             {
                 SetFields();
-                currentWindow.Close();
             });
 
             SaveCommand = new RelayCommand(o =>
             {
                 SaveEntity();
-
-                currentWindow.Close();
+                CloseCommand.Execute(this);
             });
 
         }

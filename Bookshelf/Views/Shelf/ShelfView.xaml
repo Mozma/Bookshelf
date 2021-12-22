@@ -51,7 +51,7 @@
                         Grid.Column="2"
                         Style="{StaticResource RoundCornerButton}"
                         Content="{lex:Loc}"
-                        Command="{Binding AddNewBookCommand}" />
+                        Command="{Binding AddBookCommand}" />
 
                 <Button x:Name="ShelfBackButton"
                         Grid.Column="4"
@@ -75,20 +75,6 @@
                         <customcontrols:SearchBox x:Name="SearchBoxPlaceHolder"
                                                   Height="30"
                                                   Width="300" />
-                        <!--<Border Grid.Column="1"
-                                Margin="15,0,15,0">
-                            <Button x:Name="ShelfAddNewBookButton"
-                                    Style="{StaticResource RoundCornerButton}"
-                                    Content="{lex:Loc}"
-                                    Command="{Binding AddNewBookCommand}"
-                                    />
-                        </Border>
-                        <Border Grid.Column="2">
-                            <Button x:Name="ShelfBackButton"
-                                    Style="{StaticResource RoundCornerButton}"
-                                    Command="{Binding GoToShelvesCommand}"
-                                    Content="{lex:Loc}" />
-                        </Border >-->
                     </Grid>
 
                 </Border>

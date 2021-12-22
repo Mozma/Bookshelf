@@ -2,7 +2,6 @@
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Bookshelf.Services;
-using Bookshelf.Views;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -73,8 +72,7 @@ namespace Bookshelf.ViewModels
 
             EditCommand = new RelayCommand(o =>
             {
-                IoC.UI.ShowDialogWindow(new EditBookWindow(this));
-                UpdateView();
+                Navigation.SetCurrentOverlayViewModel(new EditBookViewModel(this));
             });
 
             DeleteCommand = new RelayCommand(o =>

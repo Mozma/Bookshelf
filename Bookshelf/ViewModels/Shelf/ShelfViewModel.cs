@@ -16,7 +16,7 @@ namespace Bookshelf.ViewModels
         public int ShelfId { get; }
 
         public ICommand OpenShelfCommand { get; set; }
-        public ICommand AddNewBookCommand { get; set; }
+        public ICommand AddBookCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
         public ICommand LoadViewCommand { get; set; }
 
@@ -96,10 +96,9 @@ namespace Bookshelf.ViewModels
                 Navigation.GoToPrevieusViewModel();
             });
 
-            AddNewBookCommand = new RelayCommand(o =>
+            AddBookCommand = new RelayCommand(o =>
             {
-                IoC.UI.ShowDialogWindow(new AddNewBookWindow(this));
-                LoadView();
+                Navigation.SetCurrentOverlayViewModel(new AddBookViewModel(this));
             });
 
             LoadViewCommand = new RelayCommand(async o =>

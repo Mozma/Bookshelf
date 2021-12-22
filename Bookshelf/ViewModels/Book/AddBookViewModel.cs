@@ -7,13 +7,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace Bookshelf.ViewModels
 {
-    public class AddNewBookViewModel : BaseViewModel
+    public class AddBookViewModel : BaseViewModel
     {
         public string BookTitle { get; set; }
         public string AuthorName { get; set; }
@@ -30,11 +29,24 @@ namespace Bookshelf.ViewModels
         public List<Shelf> Shelves { get; set; }
         public Shelf SelectedShelf { get; set; }
 
-        public AddNewBookViewModel(Window window, ShelfViewModel shelfViewModel)
+        public AddBookViewModel(ShelfViewModel shelfViewModel)
         {
+            SetupCommands();
 
+            GetSuggestions();
 
-            CloseCommand = new RelayCommand(o => window.Close());
+            if (shelfViewModel != null)
+            {
+                SelectedShelf = Shelves.Find(o => o.Id == shelfViewModel.Entity.Id);
+            }
+        }
+
+        private void SetupCommands()
+        {
+            CloseCommand = new RelayCommand(o =>
+            {
+                Navigation.RemoveOverlay();
+            });
 
             AddBookCommand = new RelayCommand(o =>
             {
@@ -45,14 +57,7 @@ namespace Bookshelf.ViewModels
             {
                 Cover = GetBitmapImageFromDialog();
             });
-
-            GetSuggestions();
-            if (shelfViewModel != null)
-            {
-                SelectedShelf = Shelves.Find(o => o.Id == shelfViewModel.Entity.Id);
-            }
         }
-
 
         private Bitmap GetBitmapImageFromDialog()
         {
