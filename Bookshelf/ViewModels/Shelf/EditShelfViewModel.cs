@@ -1,28 +1,24 @@
-﻿using Bookshelf.Models;
-using Bookshelf.Models.Data;
+﻿using Bookshelf.Commands;
+using Bookshelf.Stores;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
 {
     public class EditShelfViewModel : BaseViewModel
     {
-        private Shelf CurrentShelf { get; set; }
-        private ShelfViewModel CurrentViewModel { get; set; }
-
+        private readonly ShelfViewModel _viewModel;
+        private readonly ShelfStore _shelfStore;
         public string ShelfName { get; set; }
-        private string CurrentShelfName { get; }
+        public string CurrentShelfName => _viewModel.Name;
         public ICommand AcceptCommand { get; set; }
         public ICommand CancelCommand { get; set; }
-        public EditShelfViewModel()
-        {
-            SetupCommands();
-        }
 
-        public EditShelfViewModel(ShelfViewModel shelfViewModel) : this()
+        public EditShelfViewModel(ShelfViewModel shelfViewModel, ShelfStore shelfStore)
         {
-            CurrentViewModel = shelfViewModel;
-            CurrentShelf = shelfViewModel.Entity;
-            CurrentShelfName = shelfViewModel.Entity.Name;
+            _viewModel = shelfViewModel;
+            _shelfStore = shelfStore;
+
+            SetupCommands();
 
             SetFields();
         }
@@ -31,52 +27,25 @@ namespace Bookshelf.ViewModels
         {
             CancelCommand = new RelayCommand(o =>
             {
-                SetFields();
-                Navigation.RemoveOverlay();
+                Close();
             });
 
-            AcceptCommand = new RelayCommand(o =>
-            {
-                SaveEntity();
-
-                CurrentViewModel.OnPropertyChanged();
-
-                Navigation.RemoveOverlay();
-            });
-        }
-
-        private void SaveEntity()
-        {
-            bool isDirty = false;
-
-            if (!string.IsNullOrWhiteSpace(ShelfName) && !ShelfName.Equals(CurrentShelfName))
-            {
-                CurrentShelf.Name = ShelfName;
-                CurrentViewModel.Name = ShelfName;
-                isDirty = true;
-            }
-
-            if (isDirty)
-            {
-                using (var context = new DataContextFactory().CreateDbContext())
-                {
-                    context.Entry(CurrentShelf).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    context.SaveChangesAsync();
-                }
-
-                SetFields();
-            }
+            AcceptCommand = new SaveShelfChangesCommand(this, _shelfStore, _viewModel.Entity);
         }
 
         private void SetFields()
         {
-            ShelfName = CurrentShelfName;
-
+            ShelfName = _viewModel.Name;
             GetSuggestions();
         }
 
         public void GetSuggestions()
         {
+        }
+
+        internal void Close()
+        {
+            Navigation.RemoveOverlay();
         }
     }
 }
