@@ -2,7 +2,8 @@
 
 namespace Bookshelf.Stores
 {
-    public class ShelfStore : StoreBase<Shelf>
+    public class BookStore : StoreBase<Book>
     {
+
     }
 }

@@ -28,7 +28,7 @@ namespace Bookshelf.Commands
 
             shelfService.Delete(_viewModel.Entity.Id);
 
-            _shelfStore.DeleteShelf(_viewModel.Entity);
+            _shelfStore.DeleteEntity(_viewModel.Entity);
         }
     }
 }

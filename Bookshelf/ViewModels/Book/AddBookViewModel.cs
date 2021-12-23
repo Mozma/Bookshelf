@@ -1,6 +1,8 @@
-﻿using Bookshelf.Helpers;
+﻿using Bookshelf.Commands;
+using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
+using Bookshelf.Stores;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -29,8 +31,12 @@ namespace Bookshelf.ViewModels
         public List<Shelf> Shelves { get; set; }
         public Shelf SelectedShelf { get; set; }
 
-        public AddBookViewModel(ShelfViewModel shelfViewModel)
+
+        private BookStore _bookStore;
+        public AddBookViewModel(ShelfViewModel shelfViewModel, BookStore bookStore)
         {
+            _bookStore = bookStore;
+
             SetupCommands();
 
             GetSuggestions();
@@ -48,10 +54,7 @@ namespace Bookshelf.ViewModels
                 Navigation.RemoveOverlay();
             });
 
-            AddBookCommand = new RelayCommand(o =>
-            {
-                AddBook();
-            });
+            AddBookCommand = new CreateBookCommand(this, _bookStore);
 
             SelectCoverCommand = new RelayCommand(o =>
             {
@@ -70,66 +73,6 @@ namespace Bookshelf.ViewModels
             }
 
             return ResourceFinder.Get<BitmapImage>("DefaultBookCover").BitmapImageToBitmap();
-        }
-
-        private void AddBook()
-        {
-            using (var context = new DataContextFactory().CreateDbContext())
-            {
-                var author = context.Set<Author>().FirstOrDefault(a => a.FullName == AuthorName);
-                var book = context.Set<Book>().FirstOrDefault(b => b.Title == BookTitle);
-                var shelf = context.Set<Shelf>().FirstOrDefault(s => s.Name == SelectedShelf.Name);
-                var image = context.Set<Models.Image>().FirstOrDefault(i => i.Base64Data.Equals(Cover.BitmapToBase64String()));
-
-                if (image == null)
-                {
-                    image = context.Set<Models.Image>().Add(new Models.Image
-                    {
-                        Base64Data = Cover.BitmapToBase64String()
-                    }).Entity;
-                    context.SaveChanges();
-                }
-
-                if (book == null)
-                {
-                    book = context.Set<Book>().Add(new Book
-                    {
-                        Title = BookTitle,
-                        ImageId = image.Id
-                    }).Entity;
-                    context.SaveChanges();
-                }
-
-                if (author == null)
-                {
-                    author = context.Set<Author>().Add(new Author { FullName = AuthorName }).Entity;
-                    context.SaveChanges();
-                }
-
-                if (context.Set<ShelfBind>().FirstOrDefault(s => s.BookId == book.Id && s.ShelfId == shelf.Id) == null)
-                {
-                    context.Set<ShelfBind>().Add(new ShelfBind
-                    {
-                        BookId = book.Id,
-                        ShelfId = shelf.Id
-                    });
-                    context.SaveChanges();
-                }
-
-                if (context.Set<BookBind>().FirstOrDefault(b => b.BookId == book.Id && b.AuthorId == author.Id) == null)
-                {
-                    context.Set<BookBind>().Add(new BookBind
-                    {
-                        BookId = book.Id,
-                        AuthorId = author.Id
-                    });
-                    context.SaveChanges();
-                }
-
-                context.SaveChanges();
-            }
-
-            CloseCommand.Execute(this);
         }
 
         public void GetSuggestions()

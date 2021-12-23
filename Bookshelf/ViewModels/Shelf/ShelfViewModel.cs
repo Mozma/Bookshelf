@@ -13,6 +13,7 @@ namespace Bookshelf.ViewModels
     public class ShelfViewModel : BaseViewModel
     {
         private readonly ShelfStore _shelfStore;
+        private readonly BookStore _bookStore;
 
         public Shelf Entity { get; set; }
         public int ShelfId => Entity.Id;
@@ -47,18 +48,19 @@ namespace Bookshelf.ViewModels
         }
         public bool IsOpen { get; set; } = false;
 
-        public ShelfViewModel(Shelf shelf, ShelfStore shelfStore)
+        public ShelfViewModel(Shelf shelf, ShelfStore shelfStore, BookStore bookStore)
         {
             Entity = shelf;
             _shelfStore = shelfStore;
+            _bookStore = bookStore;
 
             SetupCommands();
             LoadView();
 
-            _shelfStore.ShelfChanged += OnShelfViewModelChanged;
+            BindEvents();
         }
 
-        private async void LoadView()
+        private void LoadView()
         {
             Name = Entity.Name;
 
@@ -95,7 +97,7 @@ namespace Bookshelf.ViewModels
 
             AddBookCommand = new RelayCommand(o =>
             {
-                Navigation.SetCurrentOverlayViewModel(new AddBookViewModel(this));
+                Navigation.SetCurrentOverlayViewModel(new AddBookViewModel(this, _bookStore));
             });
 
             LoadViewCommand = new RelayCommand(async o =>
@@ -130,10 +132,37 @@ namespace Bookshelf.ViewModels
             }
         }
 
+
+        private void OnBookChanged(Book obj)
+        {
+            using (var context = new DataContextFactory().CreateDbContext())
+            {
+                Entity = context.Set<Shelf>()
+                                .Where(s => s.Id == Entity.Id)
+                                .FirstOrDefault();
+            }
+            LoadView();
+        }
+
+        private void BindEvents()
+        {
+            _shelfStore.EntityChanged += OnShelfViewModelChanged;
+            _bookStore.EntityCreated += OnBookChanged;
+        }
+
+
+        private void UnbindEvents()
+        {
+            _shelfStore.EntityChanged -= OnShelfViewModelChanged;
+            _bookStore.EntityCreated -= OnBookChanged;
+        }
+
+
         public override void Dispose()
         {
-            _shelfStore.ShelfChanged -= OnShelfViewModelChanged;
+            UnbindEvents();
             base.Dispose();
         }
+
     }
 }

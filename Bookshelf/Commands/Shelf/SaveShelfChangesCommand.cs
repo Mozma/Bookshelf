@@ -36,7 +36,7 @@ namespace Bookshelf.Commands
                     context.SaveChangesAsync();
                 }
 
-                _shelfStore.ChangeShelf(_shelf);
+                _shelfStore.ChangeEntity(_shelf);
                 _viewModel.Close();
             }
         }

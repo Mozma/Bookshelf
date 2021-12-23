@@ -34,9 +34,11 @@ namespace Bookshelf.ViewModels
 
 
         private readonly ShelfStore _shelfStore;
+        private readonly BookStore _bookStore;
         public ShelvesViewModel()
         {
             _shelfStore = new ShelfStore();
+            _bookStore = new BookStore();
 
             SetupCommands();
             BindEvents();
@@ -75,7 +77,7 @@ namespace Bookshelf.ViewModels
 
             foreach (var item in shelfItems)
             {
-                var shelfViewModel = new ShelfViewModel(item, _shelfStore);
+                var shelfViewModel = new ShelfViewModel(item, _shelfStore, _bookStore);
 
                 Items.Add(shelfViewModel);
             }
@@ -84,36 +86,36 @@ namespace Bookshelf.ViewModels
 
         private void BindEvents()
         {
-            _shelfStore.ShelfCreated += OnShelfCreated;
-            _shelfStore.ShelfDeleted += OnShelfDeleted;
-            _shelfStore.ShelfChanged += OnShelfChanged;
+            _shelfStore.EntityCreated += OnShelfChanged;
+            _shelfStore.EntityDeleted += OnShelfChanged;
+            _shelfStore.EntityChanged += OnShelfChanged;
+
+            //_bookStore.EntityCreated += OnBookChanged;
         }
         private void UnbindEvents()
         {
-            _shelfStore.ShelfCreated -= OnShelfCreated;
-            _shelfStore.ShelfDeleted -= OnShelfDeleted;
-            _shelfStore.ShelfChanged -= OnShelfChanged;
+            _shelfStore.EntityCreated -= OnShelfChanged;
+            _shelfStore.EntityDeleted -= OnShelfChanged;
+            _shelfStore.EntityChanged -= OnShelfChanged;
+
+            //     _bookStore.EntityCreated -= OnBookChanged;
         }
+
 
         private void OnViewModelChanged()
         {
             LoadViewCommand.Execute(this);
         }
 
-        private void OnShelfCreated(Shelf shelf)
-        {
-            OnViewModelChanged();
-        }
-
         private void OnShelfChanged(Shelf obj)
         {
             OnViewModelChanged();
         }
-
-        private void OnShelfDeleted(Shelf obj)
+        private void OnBookChanged(Book obj)
         {
             OnViewModelChanged();
         }
+
         public override void Dispose()
         {
             UnbindEvents();

@@ -64,7 +64,7 @@ namespace Bookshelf.Commands
                     context.Set<Shelf>().Add(shelf);
                     context.SaveChangesAsync();
 
-                    _shelfStore.CreateShelf(shelf);
+                    _shelfStore.CreateEntity(shelf);
                 }
             }
         }
