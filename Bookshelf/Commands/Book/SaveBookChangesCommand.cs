@@ -25,11 +25,23 @@ namespace Bookshelf.Commands
             if (Validate())
             {
                 SaveEntity();
+
+                _viewModel.CloseCommand.Execute(this);
             }
         }
 
         private bool Validate()
         {
+            if (string.IsNullOrWhiteSpace(_viewModel.Title))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(_viewModel.Author))
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -37,7 +49,8 @@ namespace Bookshelf.Commands
         {
             bool isDirty = false;
 
-            if (!string.IsNullOrWhiteSpace(_viewModel.ISBN))
+            if (!string.IsNullOrWhiteSpace(_viewModel.ISBN)
+                && string.Equals(_viewModel.ISBN.Trim(), _viewModel.Entity.ISBN))
             {
                 _viewModel.Entity.ISBN = _viewModel.ISBN;
                 isDirty = true;
@@ -49,20 +62,22 @@ namespace Bookshelf.Commands
                 isDirty = true;
             }
 
-
-            if (!string.IsNullOrWhiteSpace(_viewModel.PagesNumber) && int.TryParse(_viewModel.PagesNumber, out int pagesNumber))
+            if (!string.IsNullOrWhiteSpace(_viewModel.PagesNumber)
+                && int.TryParse(_viewModel.PagesNumber, out int pagesNumber))
             {
                 _viewModel.Entity.PagesNumber = pagesNumber;
                 isDirty = true;
             }
 
-            if (!string.IsNullOrWhiteSpace(_viewModel.PagesRead) && int.TryParse(_viewModel.PagesRead, out int pagesRead))
+            if (!string.IsNullOrWhiteSpace(_viewModel.PagesRead)
+                && int.TryParse(_viewModel.PagesRead, out int pagesRead))
             {
                 _viewModel.Entity.PagesRead = pagesRead;
                 isDirty = true;
             }
 
-            if (!string.IsNullOrWhiteSpace(_viewModel.Year) && int.TryParse(_viewModel.Year, out int year))
+            if (!string.IsNullOrWhiteSpace(_viewModel.Year)
+                && int.TryParse(_viewModel.Year, out int year))
             {
                 _viewModel.Entity.Year = year;
                 isDirty = true;
@@ -118,8 +133,6 @@ namespace Bookshelf.Commands
 
                 _bookStore.ChangeEntity(_viewModel.Entity);
             }
-
-            _viewModel.CloseCommand.Execute(this);
         }
     }
 }

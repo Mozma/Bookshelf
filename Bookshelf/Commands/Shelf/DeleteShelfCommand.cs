@@ -19,7 +19,17 @@ namespace Bookshelf.Commands
 
         public override void Execute(object parameter)
         {
-            DeleteShelf();
+            if (ConfirmDelete())
+            {
+                DeleteShelf();
+            }
+        }
+
+        private bool ConfirmDelete()
+        {
+            //TODO: Вызвть диалог для подтверждения удавления
+
+            return true;
         }
 
         private void DeleteShelf()

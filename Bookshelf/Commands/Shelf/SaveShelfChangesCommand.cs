@@ -2,6 +2,8 @@
 using Bookshelf.Models.Data;
 using Bookshelf.Stores;
 using Bookshelf.ViewModels;
+using System.Linq;
+using System.Windows;
 
 namespace Bookshelf.Commands
 {
@@ -20,25 +22,49 @@ namespace Bookshelf.Commands
 
         public override void Execute(object parameter)
         {
-            SaveEntity();
+            if (Validate())
+            {
+                SaveEntity();
+
+                _viewModel.Close();
+            }
+        }
+
+        private bool Validate()
+        {
+            //TODO: Добавить диалог
+
+            if (string.IsNullOrWhiteSpace(_viewModel.ShelfName))
+            {
+                MessageBox.Show("Имя не может быть пустым");
+                return false;
+            }
+
+            using (var context = new DataContextFactory().CreateDbContext())
+            {
+                var shelf = context.Set<Shelf>().FirstOrDefault(s => s.Name == _viewModel.ShelfName.Trim());
+
+                if (shelf != null)
+                {
+                    MessageBox.Show("Полка с таким названием уже существует");
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void SaveEntity()
         {
-
-            if (!string.IsNullOrWhiteSpace(_viewModel.ShelfName) && !_viewModel.ShelfName.Equals(_viewModel.CurrentShelfName))
+            using (var context = new DataContextFactory().CreateDbContext())
             {
-                using (var context = new DataContextFactory().CreateDbContext())
-                {
-                    _shelf.Name = _viewModel.ShelfName;
+                _shelf.Name = _viewModel.ShelfName;
 
-                    context.Entry(_shelf).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    context.SaveChangesAsync();
-                }
-
-                _shelfStore.ChangeEntity(_shelf);
-                _viewModel.Close();
+                context.Entry(_shelf).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.SaveChangesAsync();
             }
+
+            _shelfStore.ChangeEntity(_shelf);
         }
     }
 }
