@@ -3,6 +3,7 @@ using Bookshelf.Models.Data;
 using Bookshelf.Stores;
 using Bookshelf.ViewModels;
 using System.Linq;
+using System.Windows;
 
 namespace Bookshelf.Commands
 {
@@ -24,7 +25,7 @@ namespace Bookshelf.Commands
             {
                 AddShelf();
 
-                _viewModel.CloseCommand.Execute(this);
+
             }
         }
 
@@ -53,19 +54,23 @@ namespace Bookshelf.Commands
 
                 //context.SaveChangesAsync();
 
-
-                if (shelf == null)
+                if (shelf != null)
                 {
-                    shelf = new Shelf
-                    {
-                        Name = _viewModel.ShelfName
-                    };
-
-                    context.Set<Shelf>().Add(shelf);
-                    context.SaveChangesAsync();
-
-                    _shelfStore.CreateEntity(shelf);
+                    MessageBox.Show("Полка с таким названием уже существует");
+                    return;
                 }
+
+
+                shelf = new Shelf
+                {
+                    Name = _viewModel.ShelfName
+                };
+
+                context.Set<Shelf>().Add(shelf);
+                context.SaveChangesAsync();
+
+                _shelfStore.CreateEntity(shelf);
+                _viewModel.CloseCommand.Execute(this);
             }
         }
     }

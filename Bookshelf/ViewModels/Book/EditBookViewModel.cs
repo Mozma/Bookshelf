@@ -1,7 +1,9 @@
-﻿using Bookshelf.Helpers;
+﻿using Bookshelf.Commands;
+using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Bookshelf.Services;
+using Bookshelf.Stores;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -38,15 +40,17 @@ namespace Bookshelf.ViewModels
         public List<string> Publishers { get; set; }
         public List<string> Statuses { get; set; }
 
-        private BookViewModel viewModel;
+        private BookViewModel _viewModel;
+        private BookStore _bookStore;
 
-        public EditBookViewModel(BookViewModel bookViewModel)
+        public EditBookViewModel(BookViewModel bookViewModel, BookStore bookStore)
         {
+
+            _viewModel = bookViewModel;
+            _bookStore = bookStore;
+            Entity = _viewModel.Entity;
+
             SetupCommands();
-
-            viewModel = bookViewModel;
-            Entity = viewModel.Entity;
-
             SetFields();
         }
 
@@ -67,100 +71,10 @@ namespace Bookshelf.ViewModels
                 SetFields();
             });
 
-            SaveCommand = new RelayCommand(o =>
-            {
-                SaveEntity();
-                CloseCommand.Execute(this);
-            });
-
+            SaveCommand = new SaveBookChangesCommand(this, _bookStore, Entity);
         }
 
-        private void SaveEntity()
-        {
-            bool isDirty = false;
 
-            if (!string.IsNullOrWhiteSpace(ISBN))
-            {
-                Entity.ISBN = ISBN;
-                isDirty = true;
-            }
-
-            if (!string.IsNullOrWhiteSpace(Title))
-            {
-                Entity.Title = Title;
-                isDirty = true;
-            }
-
-
-            if (!string.IsNullOrWhiteSpace(PagesNumber) && int.TryParse(PagesNumber, out int pagesNumber))
-            {
-                Entity.PagesNumber = pagesNumber;
-                isDirty = true;
-            }
-
-            if (!string.IsNullOrWhiteSpace(PagesRead) && int.TryParse(PagesRead, out int pagesRead))
-            {
-                Entity.PagesRead = pagesRead;
-                isDirty = true;
-            }
-
-            if (!string.IsNullOrWhiteSpace(Year) && int.TryParse(Year, out int year))
-            {
-                Entity.Year = year;
-                isDirty = true;
-            }
-
-            using (var context = new DataContextFactory().CreateDbContext())
-            {
-
-                var image = context.Set<Models.Image>().FirstOrDefault(i => i.Base64Data.Equals(Cover.BitmapToBase64String()));
-                if (image == null)
-                {
-                    image = context.Set<Models.Image>().Add(new Models.Image
-                    {
-                        Base64Data = Cover.BitmapToBase64String()
-                    }).Entity;
-                }
-
-                var publisher = context.Set<Publisher>().FirstOrDefault(p => p.Name.Equals(Publisher.Trim()));
-                if (publisher == null)
-                {
-                    publisher = context.Set<Publisher>().Add(new Publisher
-                    {
-                        Name = Publisher.Trim()
-                    }).Entity;
-                }
-
-                var author = context.Set<Author>().FirstOrDefault(p => p.FullName.Equals(Author.Trim()));
-                if (author == null)
-                {
-                    author = context.Set<Author>().Add(new Author
-                    {
-                        FullName = Author.Trim()
-                    }).Entity;
-                }
-
-                context.SaveChanges();
-
-                Entity.ImageId = image.Id;
-                Entity.PublisherId = publisher.Id;
-                Entity.BookBinds[0].AuthorId = author.Id;
-
-                isDirty = true;
-            }
-
-            if (isDirty)
-            {
-                using (var context = new DataContextFactory().CreateDbContext())
-                {
-                    context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    context.Entry(Entity.BookBinds[0]).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    context.SaveChangesAsync();
-                }
-
-                SetFields();
-            }
-        }
 
         private void SetFields()
         {

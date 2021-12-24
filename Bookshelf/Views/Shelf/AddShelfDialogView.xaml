@@ -73,6 +73,7 @@
                     <input:AutoCompleteBox x:Name="ShelfNameField"
                                            Grid.Row="0"
                                            Grid.Column="2"
+                                           ItemsSource="{Binding Shelves}"
                                            Text="{Binding ShelfName, Mode=TwoWay}"
                                            Style="{StaticResource ACBBaseStyle}" />
 

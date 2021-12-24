@@ -32,21 +32,16 @@ namespace Bookshelf.ViewModels
         public ICommand LoadViewCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
 
-
         private readonly ShelfStore _shelfStore;
-        private readonly BookStore _bookStore;
         public ShelvesViewModel()
         {
             _shelfStore = new ShelfStore();
-            _bookStore = new BookStore();
 
             SetupCommands();
             BindEvents();
 
             LoadViewCommand.Execute(this);
         }
-
-
 
         private void SetupCommands()
         {
@@ -77,30 +72,24 @@ namespace Bookshelf.ViewModels
 
             foreach (var item in shelfItems)
             {
-                var shelfViewModel = new ShelfViewModel(item, _shelfStore, _bookStore);
+                var shelfViewModel = new ShelfViewModel(item, _shelfStore);
 
                 Items.Add(shelfViewModel);
             }
         }
 
-
         private void BindEvents()
         {
             _shelfStore.EntityCreated += OnShelfChanged;
-            _shelfStore.EntityDeleted += OnShelfChanged;
+            _shelfStore.EntityDeleted += OnShelfDeleted;
             _shelfStore.EntityChanged += OnShelfChanged;
-
-            //_bookStore.EntityCreated += OnBookChanged;
         }
         private void UnbindEvents()
         {
             _shelfStore.EntityCreated -= OnShelfChanged;
-            _shelfStore.EntityDeleted -= OnShelfChanged;
+            _shelfStore.EntityDeleted -= OnShelfDeleted;
             _shelfStore.EntityChanged -= OnShelfChanged;
-
-            //     _bookStore.EntityCreated -= OnBookChanged;
         }
-
 
         private void OnViewModelChanged()
         {
@@ -111,9 +100,10 @@ namespace Bookshelf.ViewModels
         {
             OnViewModelChanged();
         }
-        private void OnBookChanged(Book obj)
+
+        private void OnShelfDeleted(Shelf obj)
         {
-            OnViewModelChanged();
+            Items.Remove(Items.Single(i => i.Entity == obj));
         }
 
         public override void Dispose()

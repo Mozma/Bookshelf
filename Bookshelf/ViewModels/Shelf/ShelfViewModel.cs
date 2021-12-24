@@ -13,7 +13,6 @@ namespace Bookshelf.ViewModels
     public class ShelfViewModel : BaseViewModel
     {
         private readonly ShelfStore _shelfStore;
-        private readonly BookStore _bookStore;
 
         public Shelf Entity { get; set; }
         public int ShelfId => Entity.Id;
@@ -29,6 +28,7 @@ namespace Bookshelf.ViewModels
 
         public string Name { get; set; }
 
+        private BookStore _bookStore;
 
         public ObservableCollection<BookViewModel> items;
         public ObservableCollection<BookViewModel> Items
@@ -48,11 +48,11 @@ namespace Bookshelf.ViewModels
         }
         public bool IsOpen { get; set; } = false;
 
-        public ShelfViewModel(Shelf shelf, ShelfStore shelfStore, BookStore bookStore)
+        public ShelfViewModel(Shelf shelf, ShelfStore shelfStore)
         {
+            _bookStore = new BookStore();
             Entity = shelf;
             _shelfStore = shelfStore;
-            _bookStore = bookStore;
 
             SetupCommands();
             LoadView();
@@ -68,9 +68,12 @@ namespace Bookshelf.ViewModels
 
             List<ShelfBind> shelfBindItems = Entity.ShelfBinds;
 
+            BookStore bookStore;
+
             foreach (var shelfBind in shelfBindItems)
             {
-                var bookview = new BookViewModel(shelfBind.Book);
+                bookStore = new BookStore();
+                var bookview = new BookViewModel(shelfBind.Book, bookStore);
                 items.Add(bookview);
             }
 
