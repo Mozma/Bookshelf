@@ -169,6 +169,15 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Книги.
+        /// </summary>
+        public static string BooksNameTextBlock {
+            get {
+                return ResourceManager.GetString("BooksNameTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ISBN:.
         /// </summary>
         public static string BookViewISBNTextBlock {
@@ -309,6 +318,15 @@ namespace Bookshelf.Resources.Localization {
         public static string ShelvesBackButton {
             get {
                 return ResourceManager.GetString("ShelvesBackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Книги.
+        /// </summary>
+        public static string SideBarBooksButton {
+            get {
+                return ResourceManager.GetString("SideBarBooksButton", resourceCulture);
             }
         }
         

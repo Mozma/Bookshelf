@@ -87,6 +87,12 @@
                                       Content="{lex:Loc}"
                                       Command="{Binding ShelvesViewCommand}"
                                       IsChecked="{Binding IsShelvesViewModel, Mode=OneWay}" />
+                        <RadioButton  x:Name="SideBarBooksButton"
+                                      Style="{DynamicResource MenuRadioButtonStyle}"
+                                      Tag="{StaticResource BooksIcon}"
+                                      Content="{lex:Loc}"
+                                      Command="{Binding BooksViewCommand}"
+                                      IsChecked="{Binding IsBooksViewModel, Mode=OneWay}" />
                     </StackPanel>
 
                 </Border>

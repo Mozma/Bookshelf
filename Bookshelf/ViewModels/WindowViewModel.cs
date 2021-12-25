@@ -22,6 +22,7 @@ namespace Bookshelf
         public bool IsHomeViewModel => CurrentViewModel is HomeViewModel;
         public bool IsNotesViewModel => CurrentViewModel is NotesViewModel;
         public bool IsShelvesViewModel => CurrentViewModel is ShelvesViewModel;
+        public bool IsBooksViewModel => CurrentViewModel is BooksViewModel;
 
         #region Window property
         private Window currentWindow;
@@ -67,6 +68,7 @@ namespace Bookshelf
         public ICommand HomeViewCommand { get; set; }
         public ICommand NotesViewCommand { get; set; }
         public ICommand ShelvesViewCommand { get; set; }
+        public ICommand BooksViewCommand { get; set; }
 
 
         #endregion
@@ -122,6 +124,11 @@ namespace Bookshelf
                 SetCurrentViewModel<NotesViewModel>();
             });
 
+            BooksViewCommand = new RelayCommand(o =>
+            {
+
+                SetCurrentViewModel<BooksViewModel>();
+            });
         }
 
         private void SetCurrentViewModel<T>() where T : BaseViewModel, new()

@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="Fonts\fontawesome-webfont.ttf" />
     <None Remove="Images\Default\search.png" />
+    <None Remove="Images\Sidebar\Books.png" />
     <None Remove="Images\Sidebar\Home.png" />
     <None Remove="Images\Sidebar\HomeOld.png" />
     <None Remove="Images\Sidebar\Note.png" />
@@ -34,6 +35,9 @@
     <Resource Include="Fonts\fontawesome-webfont.ttf" />
     <Resource Include="Images\Default\bookCover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Sidebar\Books.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Sidebar\Home.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

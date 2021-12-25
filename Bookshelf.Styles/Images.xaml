@@ -14,7 +14,9 @@
     <BitmapImage x:Key="ShelfIcon"
                  UriSource="{StaticResource ShelfPath}" />
 
-
+    <system:Uri x:Key="BooksPath">pack://application:,,,/Bookshelf.Resources;component/Images/Sidebar/Books.png</system:Uri>
+    <BitmapImage x:Key="BooksIcon"
+                 UriSource="{StaticResource BooksPath}" />
 
     <!-- Toolbox icons -->
 

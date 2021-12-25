@@ -40,6 +40,9 @@
     <Compile Update="Views\Book\BookView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\BooksView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Shelf\ShelfView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -65,6 +68,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Book\BookView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\BooksView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

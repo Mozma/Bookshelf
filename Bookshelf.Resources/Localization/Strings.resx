@@ -210,4 +210,10 @@
   <data name="EditShelfHeaderTextBlock" xml:space="preserve">
     <value>Редактирование</value>
   </data>
+  <data name="SideBarBooksButton" xml:space="preserve">
+    <value>Книги</value>
+  </data>
+  <data name="BooksNameTextBlock" xml:space="preserve">
+    <value>Книги</value>
+  </data>
 </root>

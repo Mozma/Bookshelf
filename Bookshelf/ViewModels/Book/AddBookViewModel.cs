@@ -31,8 +31,8 @@ namespace Bookshelf.ViewModels
         public List<Shelf> Shelves { get; set; }
         public Shelf SelectedShelf { get; set; }
 
-
         private BookStore _bookStore;
+
         public AddBookViewModel(ShelfViewModel shelfViewModel, BookStore bookStore)
         {
             _bookStore = bookStore;
@@ -46,6 +46,9 @@ namespace Bookshelf.ViewModels
                 SelectedShelf = Shelves.Find(o => o.Id == shelfViewModel.Entity.Id);
             }
         }
+
+        public AddBookViewModel(BookStore bookStore) : this(null, bookStore) { }
+
 
         private void SetupCommands()
         {

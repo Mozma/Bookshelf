@@ -210,4 +210,10 @@
   <data name="EditShelfHeaderTextBlock" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="SideBarBooksButton" xml:space="preserve">
+    <value>Books</value>
+  </data>
+  <data name="BooksNameTextBlock" xml:space="preserve">
+    <value>Books</value>
+  </data>
 </root>
