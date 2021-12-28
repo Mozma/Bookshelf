@@ -3,13 +3,13 @@ namespace Bookshelf.Models.Data
 {
     public class DataContext : DbContext
     {
-        DbSet<Image> Images { get; set; }
-        DbSet<Author> Authors { get; set; }
-        DbSet<Book> Books { get; set; }
-        DbSet<BookBind> BookBinds { get; set; }
-        DbSet<Publisher> Publishers { get; set; }
-        DbSet<Shelf> Shelves { get; set; }
-        DbSet<ShelfBind> ShelfBinds { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<BookBind> BookBinds { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Shelf> Shelves { get; set; }
+        public DbSet<ShelfBind> ShelfBinds { get; set; }
 
         public DataContext(DbContextOptions options) : base(options)
         {

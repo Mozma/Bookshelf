@@ -66,15 +66,16 @@ namespace Bookshelf.ViewModels
 
             Items = new ObservableCollection<ShelfViewModel>();
 
-            IDataService<Shelf> shelfService = new DataService<Shelf>(new DataContextFactory());
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext())) {
 
-            List<Shelf> shelfItems = shelfService.GetAll().Result.ToList();
+                var shelves = unitOfWork.Shelves.GetAllWithBindings();
 
-            foreach (var item in shelfItems)
-            {
-                var shelfViewModel = new ShelfViewModel(item, _shelfStore);
+                foreach (var shelf in shelves)
+                {
+                    var shelfViewModel = new ShelfViewModel(shelf, _shelfStore);
 
-                Items.Add(shelfViewModel);
+                    Items.Add(shelfViewModel);
+                }
             }
         }
 

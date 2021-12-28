@@ -1,11 +1,8 @@
 ﻿using Bookshelf.Commands;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
-using Bookshelf.Services;
 using Bookshelf.Stores;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
@@ -66,15 +63,15 @@ namespace Bookshelf.ViewModels
 
             var items = new ObservableCollection<BookViewModel>();
 
-            List<ShelfBind> shelfBindItems = Entity.ShelfBinds;
-
-            BookStore bookStore;
-
-            foreach (var shelfBind in shelfBindItems)
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
             {
-                bookStore = new BookStore();
-                var bookview = new BookViewModel(shelfBind.Book, bookStore);
-                items.Add(bookview);
+                var books = unitOfWork.Shelves.GetBooks(ShelfId);
+
+                foreach (var book in books)
+                {
+                    var bookview = new BookViewModel(book, new BookStore());
+                    items.Add(bookview);
+                }
             }
 
             Items = items;
@@ -125,24 +122,18 @@ namespace Bookshelf.ViewModels
         {
             Items.Clear();
 
-            var shelfBindService = new DataService<ShelfBind>(new DataContextFactory());
-
-            var shelfBinds = shelfBindService.GetAll().Result.Where(s => s.ShelfId == Entity.Id);
-
-            foreach (var item in shelfBinds)
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
             {
-                shelfBindService.Delete(item.Id);
+                unitOfWork.Shelves.RemoveBooksFromShelf(ShelfId);
             }
         }
 
 
         private void OnBookChanged(Book obj)
         {
-            using (var context = new DataContextFactory().CreateDbContext())
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
             {
-                Entity = context.Set<Shelf>()
-                                .Where(s => s.Id == Entity.Id)
-                                .FirstOrDefault();
+                Entity = unitOfWork.Shelves.Get(Entity.Id);
             }
             LoadView();
         }
@@ -153,19 +144,16 @@ namespace Bookshelf.ViewModels
             _bookStore.EntityCreated += OnBookChanged;
         }
 
-
         private void UnbindEvents()
         {
             _shelfStore.EntityChanged -= OnShelfViewModelChanged;
             _bookStore.EntityCreated -= OnBookChanged;
         }
 
-
         public override void Dispose()
         {
             UnbindEvents();
             base.Dispose();
         }
-
     }
 }
