@@ -16,6 +16,7 @@ namespace Bookshelf
         {
             return Context.Set<Shelf>()
                 .Include(o => o.ShelfBinds)
+                .OrderBy(o => o.Name)
                 .ToList();
         }
 
@@ -25,6 +26,7 @@ namespace Bookshelf
                 .Include(o => o.Shelf)
                 .Include(o => o.Book)
                 .Where(o => o.Shelf.Id == shelfId)
+                .OrderBy(o => o.Book.Title)
                 .Select(o => o.Book)
                 .ToList();
         }
@@ -34,6 +36,7 @@ namespace Bookshelf
             var shelfBinds = Context.ShelfBinds
                 .Where(o => o.Shelf.Id == shelfId)
                 .ToList();
+
             Context.ShelfBinds.RemoveRange(shelfBinds);
             Context.SaveChanges();
         }

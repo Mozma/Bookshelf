@@ -1,7 +1,6 @@
 ﻿using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
-using Bookshelf.Services;
 using Bookshelf.Stores;
 using System.Collections.Generic;
 using System.Drawing;
@@ -55,7 +54,6 @@ namespace Bookshelf.ViewModels
         private void BindEvents()
         {
             _bookStore.EntityChanged += OnViewModelChanged;
-
         }
 
         private void UnbindEvents()
@@ -65,7 +63,11 @@ namespace Bookshelf.ViewModels
 
         private void OnViewModelChanged(Book obj)
         {
-            Entity = obj;
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
+            {
+                Entity = unitOfWork.Books.Get(Entity.Id);
+            }
+
             SetFields();
         }
 
@@ -126,55 +128,54 @@ namespace Bookshelf.ViewModels
                 context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChangesAsync();
             }
-
         }
 
         private void DeleteBook()
         {
-            var bookService = new DataService<Book>(new DataContextFactory());
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
+            {
+                unitOfWork.Books.Remove(Entity);
+                unitOfWork.Complete();
 
-            bookService.Delete(Entity.Id);
+                _bookStore.DeleteEntity(Entity);
+            }
         }
 
-        private async void SetFields()
+        private void SetFields()
         {
             if (Entity != null)
             {
-                var bookBindSerice = new DataService<BookBind>(new DataContextFactory());
-
-                var author = bookBindSerice.GetAll().Result
-                    .Where(o => o.BookId == Entity.Id)
-                    .Select(o => o.Author)
-                    .ToList();
-
-                var bookService = new DataService<Book>(new DataContextFactory());
-
-                Entity = bookService.Get(Entity.Id).Result;
 
 
-                Title = Entity.Title;
-                Author = author[0].FullName;
-
-                ISBN = Entity.ISBN == null ? PlaceHolder : Entity.ISBN.ToString();
-                PagesNumber = Entity.PagesNumber == null ? PlaceHolder : Entity.PagesNumber.ToString();
-                Year = Entity.Year == null ? PlaceHolder : Entity.Year.ToString();
-
-
-                PagesRead = Entity.PagesRead == null ? PlaceHolder : Entity.PagesRead.ToString();
-                Publisher = Entity.Publisher == null ? PlaceHolder : Entity.Publisher.Name;
-
-                Status = Entity.Status == null ? 0 : (BookStatus)Entity.Status;
-
-
-                if (Entity.Image != null)
+                using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
                 {
-                    Cover = Entity.Image.Base64Data.Base64StringToBitmap();
-                }
-                else
-                {
-                    Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
-                }
+                    Entity = unitOfWork.Books.Get(Entity.Id);
 
+                    Title = Entity.Title;
+
+                    var authors = unitOfWork.Books.GetAuthors(Entity.Id);
+                    Author = authors.First().FullName;
+                    ISBN = Entity.ISBN == null ? PlaceHolder : Entity.ISBN.ToString();
+                    PagesNumber = Entity.PagesNumber == null ? PlaceHolder : Entity.PagesNumber.ToString();
+                    Year = Entity.Year == null ? PlaceHolder : Entity.Year.ToString();
+
+
+                    PagesRead = Entity.PagesRead == null ? PlaceHolder : Entity.PagesRead.ToString();
+                    Publisher = Entity.Publisher == null ? PlaceHolder : Entity.Publisher.Name;
+
+                    Status = Entity.Status == null ? 0 : (BookStatus)Entity.Status;
+
+
+                    if (Entity.Image != null)
+                    {
+                        Cover = Entity.Image.Base64Data.Base64StringToBitmap();
+                    }
+                    else
+                    {
+                        Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
+                    }
+
+                }
             }
 
             GetSuggestions();

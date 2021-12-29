@@ -69,7 +69,7 @@ namespace Bookshelf.ViewModels
 
                 foreach (var book in books)
                 {
-                    var bookview = new BookViewModel(book, new BookStore());
+                    var bookview = new BookViewModel(book, _bookStore);
                     items.Add(bookview);
                 }
             }
@@ -135,6 +135,7 @@ namespace Bookshelf.ViewModels
             {
                 Entity = unitOfWork.Shelves.Get(Entity.Id);
             }
+
             LoadView();
         }
 
@@ -142,12 +143,14 @@ namespace Bookshelf.ViewModels
         {
             _shelfStore.EntityChanged += OnShelfViewModelChanged;
             _bookStore.EntityCreated += OnBookChanged;
+            _bookStore.EntityDeleted += OnBookChanged;
         }
 
         private void UnbindEvents()
         {
             _shelfStore.EntityChanged -= OnShelfViewModelChanged;
             _bookStore.EntityCreated -= OnBookChanged;
+            _bookStore.EntityDeleted -= OnBookChanged;
         }
 
         public override void Dispose()

@@ -2,7 +2,6 @@
 using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
-using Bookshelf.Services;
 using Bookshelf.Stores;
 using Microsoft.Win32;
 using System;
@@ -80,33 +79,30 @@ namespace Bookshelf.ViewModels
         {
             if (Entity != null)
             {
-                var bookBindSerice = new DataService<BookBind>(new DataContextFactory());
-                var authors = bookBindSerice.GetAll().Result
-                    .Where(o => o.BookId == Entity.Id)
-                    .Select(o => o.Author)
-                    .ToList();
-
-                Entity = bookBindSerice.GetAll().Result.Single(o => o.BookId == Entity.Id).Book;
-
-                Title = Entity.Title;
-                Author = authors[0].FullName;
-
-                ISBN = Entity.ISBN == null ? string.Empty : Entity.ISBN.ToString();
-                PagesNumber = Entity.PagesNumber == null ? string.Empty : Entity.PagesNumber.ToString();
-                Year = Entity.Year == null ? string.Empty : Entity.Year.ToString();
-
-                PagesRead = Entity.PagesRead == null ? string.Empty : Entity.PagesRead.ToString();
-                Publisher = Entity.Publisher == null ? string.Empty : Entity.Publisher.Name;
-
-                if (Entity.Image != null)
+                using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
                 {
-                    Cover = Entity.Image.Base64Data.Base64StringToBitmap();
-                }
-                else
-                {
-                    Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
-                }
+                    Entity = unitOfWork.Books.Get(Entity.Id);
+                    Title = Entity.Title;
 
+                    var authors = unitOfWork.Books.GetAuthors(Entity.Id);
+                    Author = authors.First().FullName;
+
+                    ISBN = Entity.ISBN == null ? string.Empty : Entity.ISBN.ToString();
+                    PagesNumber = Entity.PagesNumber == null ? string.Empty : Entity.PagesNumber.ToString();
+                    Year = Entity.Year == null ? string.Empty : Entity.Year.ToString();
+
+                    PagesRead = Entity.PagesRead == null ? string.Empty : Entity.PagesRead.ToString();
+                    Publisher = Entity.Publisher == null ? string.Empty : Entity.Publisher.Name;
+
+                    if (Entity.Image != null)
+                    {
+                        Cover = Entity.Image.Base64Data.Base64StringToBitmap();
+                    }
+                    else
+                    {
+                        Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
+                    }
+                }
             }
 
             GetSuggestions();

@@ -9,10 +9,13 @@ namespace Bookshelf
         public UnitOfWork(DataContext context)
         {
             _context = context;
+
             Shelves = new ShelfRepository(_context);
+            Books = new BookRepository(_context);
         }
 
         public IShelfRepository Shelves { get; private set; }
+        public IBookRepository Books { get; private set; }
 
         public int Complete()
         {

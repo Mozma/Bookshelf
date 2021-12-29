@@ -1,6 +1,4 @@
-﻿using Bookshelf.Models;
-using Bookshelf.Models.Data;
-using Bookshelf.Services;
+﻿using Bookshelf.Models.Data;
 using Bookshelf.Stores;
 using Bookshelf.ViewModels;
 
@@ -34,11 +32,13 @@ namespace Bookshelf.Commands
 
         private void DeleteShelf()
         {
-            var shelfService = new DataService<Shelf>(new DataContextFactory());
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
+            {
+                unitOfWork.Shelves.Remove(_viewModel.Entity);
+                unitOfWork.Complete();
 
-            shelfService.Delete(_viewModel.Entity.Id);
-
-            _shelfStore.DeleteEntity(_viewModel.Entity);
+                _shelfStore.DeleteEntity(_viewModel.Entity);
+            }
         }
     }
 }

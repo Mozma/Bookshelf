@@ -1,6 +1,5 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
-using Bookshelf.Services;
 using Bookshelf.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -48,20 +47,18 @@ namespace Bookshelf.ViewModels
         {
             var items = new ObservableCollection<BookViewModel>();
 
-            BookStore bookStore;
-
-            var bookServise = new DataService<Book>(new DataContextFactory());
-
-            var books = bookServise.GetAll().Result;
-
-            foreach (var book in books)
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
             {
-                bookStore = new BookStore();
-                var bookview = new BookViewModel(book, bookStore);
-                items.Add(bookview);
-            }
+                var books = unitOfWork.Books.GetAll();
 
-            Items = items;
+                foreach (var book in books)
+                {
+                    var bookview = new BookViewModel(book, _bookStore);
+                    items.Add(bookview);
+                }
+
+                Items = items;
+            }
         }
 
         private void SetupCommands()
@@ -76,7 +73,7 @@ namespace Bookshelf.ViewModels
                 Navigation.SetCurrentOverlayViewModel(new AddBookViewModel(_bookStore));
             });
 
-            LoadViewCommand = new RelayCommand(async o =>
+            LoadViewCommand = new RelayCommand(o =>
             {
                 LoadView();
             });
@@ -91,12 +88,15 @@ namespace Bookshelf.ViewModels
         {
             _bookStore.EntityCreated += OnBookChanged;
             _bookStore.EntityChanged += OnBookChanged;
+            _bookStore.EntityDeleted += OnBookChanged;
+
         }
 
         private void UnbindEvents()
         {
             _bookStore.EntityCreated -= OnBookChanged;
             _bookStore.EntityChanged -= OnBookChanged;
+            _bookStore.EntityDeleted -= OnBookChanged;
         }
 
         public override void Dispose()
