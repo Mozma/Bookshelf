@@ -4,6 +4,14 @@
     <Color x:Key="BackgroundDarkGray">#f2f2f2</Color>
     <SolidColorBrush x:Key="BackgroundDarkGrayBrush" Color="{StaticResource BackgroundDarkGray}"/>
 
+    <Color x:Key="BaseGray">#f4f4f4</Color>
+    <SolidColorBrush x:Key="BaseGrayBrush"
+                     Color="{StaticResource BaseGray}" />
+
+    <Color x:Key="BaseDarkGray">#929292</Color>
+    <SolidColorBrush x:Key="BaseDarkGrayBrush"
+                     Color="{StaticResource BaseDarkGray}" />
+
     <Color x:Key="BackgroundLightGray">#fdfdfd</Color>
     <SolidColorBrush x:Key="BackgroundLightGrayBrush" Color="{StaticResource BackgroundLightGray}"/>
     

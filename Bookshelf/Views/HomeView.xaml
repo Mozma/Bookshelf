@@ -3,15 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Bookshelf.Views"
-             xmlns:customcontrols="clr-namespace:Bookshelf.CustomControls"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              TextOptions.TextFormattingMode="Display"
              mc:Ignorable="d"
-             d:Height="500"
+             d:Height="700"
              d:Width="900">
 
     <UserControl.Resources>
@@ -65,12 +63,13 @@
 
                 <Grid Grid.Row="0"
                       Margin="0,10,40,0">
-
+                    <Border
+                         Background="{StaticResource BackgroundWhiteBrush}">
                     <lvc:PieChart LegendLocation="Right"
                                   FontSize="18"
                                   FontFamily="{StaticResource RobotoRegular}"
                                   Series="{Binding Series}"
-                                  StartingRotationAngle="225">
+                                  StartingRotationAngle="315">
                         <lvc:PieChart.Resources>
                             <Style TargetType="lvc:PieSeries">
                                 <Setter Property="DataLabels"
@@ -84,7 +83,7 @@
                             </Style>
 
                         </lvc:PieChart.Resources>
-                    
+
                         <lvc:PieChart.SeriesColors>
                             <lvc:ColorsCollection>
                                 <Color>#00C844</Color>
@@ -93,13 +92,12 @@
                                 <Color>#007E8B</Color>
                                 <Color>#006279</Color>
                                 <Color>#2F4858</Color>
-                                
+
                             </lvc:ColorsCollection>
                         </lvc:PieChart.SeriesColors>
 
                     </lvc:PieChart>
-                        
-
+                    </Border>
                 </Grid>
 
                 <!-- Lines -->
@@ -121,8 +119,7 @@
                 <Border Grid.Row="2"
                         Background="{StaticResource BackgroundLightGrayBrush}"
                         CornerRadius="10"
-                        Margin="15"
-                        >
+                        Margin="15">
                     <TextBlock Text="Трекер чтения"
                                FontSize="28"
                                HorizontalAlignment="Center"
@@ -142,18 +139,47 @@
                 </Border>
 
                 <!-- Shelves -->
-                <Border Grid.Row="2"
-                        Grid.Column="2"
-                        Background="{StaticResource BackgroundLightGrayBrush}"
-                        CornerRadius="10"
-                        Margin="15">
-                    <TextBlock Text="Полки"
-                               FontSize="28"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
-                </Border>
+                <Grid Grid.Row="2"
+                      Grid.Column="2"
+                      Margin="15,5,15,0">
 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock  Grid.Row="0"
+                                Text="Полки"
+                                FontSize="28"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center" />
+
+
+                    <Grid Grid.Row="1"
+                          VerticalAlignment="Top">
+                        <ListBox Style="{StaticResource RoundedListBox}"
+                                 ItemsSource="{Binding ShelvesItems}"
+                                 >
+
+                            <!--<ListBoxItem Content="Элемент" />
+                            <ListBoxItem Content="Элемент2" />
+                            <ListBoxItem Content="Элемент3" />
+                            <ListBoxItem Content="ds" />
+                            <ListBoxItem Content="ds" />
+                            <ListBoxItem Content="ds" />
+                            <ListBoxItem Content="ds" />
+                            <ListBoxItem Content="Элемент3" />
+                            <ListBoxItem Content="ds" />
+                            <ListBoxItem Content="ds" />
+                            <ListBoxItem Content="ds" />
+                            <ListBoxItem Content="ds" />-->
+                        </ListBox>
+                    </Grid>
+
+                </Grid >
+
+                </Grid>
             </Grid>
-        </Grid>
     </Border>
 </UserControl>

@@ -4,6 +4,7 @@ using Bookshelf.Models.Data;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Bookshelf.ViewModels
@@ -11,11 +12,35 @@ namespace Bookshelf.ViewModels
     public class HomeViewModel : BaseViewModel
     {
 
-        public SeriesCollection Series { get; set; }
+        private ObservableCollection<object> shelvesItems;
+        public ObservableCollection<object> ShelvesItems
+        {
+            get => shelvesItems;
+            set
+            {
+                if (shelvesItems == value)
+                {
+                    return;
+                }
 
+                shelvesItems = value;
+
+                OnPropertyChanged(nameof(shelvesItems));
+            }
+        }
+        public SeriesCollection Series { get; set; }
         public HomeViewModel()
         {
             LoadSeries();
+            LoadShelves();
+        }
+
+        private void LoadShelves()
+        {
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
+            {
+                ShelvesItems = new ObservableCollection<object>(unitOfWork.Shelves.GetShelvesNamesAndAmountOfBooks(12));
+            }
         }
 
         private void LoadSeries()

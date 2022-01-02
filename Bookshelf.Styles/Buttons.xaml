@@ -398,7 +398,7 @@
             </Setter>
         </Style>
 
-    <!-- Button with rounded with background corner-->
+    <!-- Rounded button for corner -->
     <Style x:Key="RoundCornerCoverButton"
            TargetType="{x:Type Button}">
         <Setter Property="SnapsToDevicePixels"

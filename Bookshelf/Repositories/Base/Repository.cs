@@ -14,22 +14,22 @@ namespace Bookshelf
         {
             Context = dataContext;
         }
-        
+
         public TEntity Get(int id)
         {
             return Context.Set<TEntity>().Find(id);
         }
-        
+
         public IEnumerable<TEntity> GetAll()
         {
             return Context.Set<TEntity>().ToList();
         }
-        
+
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().Where(predicate);
         }
-        
+
         public void Add(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);

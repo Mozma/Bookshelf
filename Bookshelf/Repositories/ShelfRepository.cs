@@ -40,5 +40,21 @@ namespace Bookshelf
             Context.ShelfBinds.RemoveRange(shelfBinds);
             Context.SaveChanges();
         }
+
+        public IEnumerable<object> GetShelvesNamesAndAmountOfBooks(int amount)
+        {
+            return Context.Shelves
+                .Include(o => o.ShelfBinds)
+                .Select(o => new
+                {
+                    Id = o.Id,
+                    Name = o.Name,
+                    Amount = (o.ShelfBinds.Where(s => s.ShelfId == o.Id)).Count()
+                })
+                .OrderByDescending(x => x.Amount)
+                .Take(amount)
+                .ToList();
+        }
+
     }
 }
