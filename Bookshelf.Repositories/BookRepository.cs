@@ -1,11 +1,9 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 //using System.Linq;
 
-namespace Bookshelf
+namespace Bookshelf.Repositories
 {
     public class BookRepository : Repository<Book>, IBookRepository
     {

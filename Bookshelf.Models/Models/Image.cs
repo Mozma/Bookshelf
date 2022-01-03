@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Bookshelf.Models
+﻿namespace Bookshelf.Models
 {
     public class Image
     {

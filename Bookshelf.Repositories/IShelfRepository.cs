@@ -1,7 +1,6 @@
 ﻿using Bookshelf.Models;
-using System.Collections.Generic;
 
-namespace Bookshelf
+namespace Bookshelf.Repositories
 {
     public interface IShelfRepository : IRepository<Shelf>
     {

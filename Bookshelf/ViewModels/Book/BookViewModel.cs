@@ -1,6 +1,7 @@
 ﻿using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
+using Bookshelf.Repositories;
 using Bookshelf.Stores;
 using System.Collections.Generic;
 using System.Drawing;

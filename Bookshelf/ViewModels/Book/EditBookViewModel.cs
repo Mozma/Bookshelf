@@ -2,6 +2,7 @@
 using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
+using Bookshelf.Repositories;
 using Bookshelf.Stores;
 using Microsoft.Win32;
 using System;

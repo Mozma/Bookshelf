@@ -1,4 +1,4 @@
-﻿namespace Bookshelf
+﻿namespace Bookshelf.Repositories
 {
     public class ShelfInfoSimple
     {

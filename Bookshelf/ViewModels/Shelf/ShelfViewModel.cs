@@ -1,6 +1,7 @@
 ﻿using Bookshelf.Commands;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
+using Bookshelf.Repositories;
 using Bookshelf.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -63,7 +64,7 @@ namespace Bookshelf.ViewModels
 
 
             var items = new ObservableCollection<BookViewModel>();
-            
+
 
             using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
             {

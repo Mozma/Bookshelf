@@ -8,24 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.0.90" />
-    <PackageReference Include="Fody" Version="6.5.3">
+    <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.1.93" />
+    <PackageReference Include="Fody" Version="6.6.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0-rc.2.21480.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0-rc.2.21480.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0-rc.2.21480.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0-rc.2.21480.5" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />
     <PackageReference Include="Ninject" Version="4.0.0-beta-0134" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115" />
-    <PackageReference Include="WPFLocalizeExtension" Version="3.9.0" />
+    <PackageReference Include="WPFLocalizeExtension" Version="3.9.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,11 +75,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bookshelf.Helpers\Bookshelf.Helpers.csproj" />
-    <ProjectReference Include="..\Bookshelf.Styles\Bookshelf.Styles.csproj" />
+    <ProjectReference Include="..\Bookshelf.Models\Bookshelf.Models.csproj" />
+    <ProjectReference Include="..\Bookshelf.Repositories\Bookshelf.Repositories.csproj" />
+    <ProjectReference Include="..\Bookshelf.Resources\Bookshelf.Resources.csproj" />
+	  <ProjectReference Include="..\Bookshelf.Styles\Bookshelf.Styles.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="FodyWeavers.xsd" />
   </ItemGroup>
 
 </Project>

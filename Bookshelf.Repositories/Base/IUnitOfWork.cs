@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Bookshelf
+﻿namespace Bookshelf.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {

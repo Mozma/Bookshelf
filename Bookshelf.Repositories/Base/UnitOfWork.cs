@@ -1,6 +1,6 @@
 ﻿using Bookshelf.Models.Data;
 
-namespace Bookshelf
+namespace Bookshelf.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

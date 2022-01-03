@@ -1,10 +1,7 @@
 ﻿using Bookshelf.Models.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
-namespace Bookshelf
+namespace Bookshelf.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {

@@ -1,5 +1,6 @@
 ﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
+using Bookshelf.Repositories;
 using Bookshelf.Stores;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace Bookshelf.ViewModels
                 Navigation.SetCurrentOverlayViewModel(new AddShelfViewModel(_shelfStore));
             });
 
-            LoadViewCommand = new RelayCommand(async o =>
+            LoadViewCommand = new RelayCommand(o =>
             {
                 SetupView();
             });

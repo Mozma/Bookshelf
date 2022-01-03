@@ -1,4 +1,5 @@
 ﻿using Bookshelf.Models.Data;
+using Bookshelf.Repositories;
 using Bookshelf.Stores;
 using Bookshelf.ViewModels;
 
