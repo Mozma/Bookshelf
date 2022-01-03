@@ -43,7 +43,7 @@ namespace Bookshelf.ViewModels
                 OnPropertyChanged(nameof(items));
             }
         }
-        public bool IsOpen { get; set; } = false;
+        public bool IsOpen { get; set; }
 
         public ShelfViewModel(Shelf shelf, ShelfStore shelfStore)
         {
@@ -61,7 +61,9 @@ namespace Bookshelf.ViewModels
         {
             Name = Entity.Name;
 
+
             var items = new ObservableCollection<BookViewModel>();
+            
 
             using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
             {
@@ -75,6 +77,7 @@ namespace Bookshelf.ViewModels
             }
 
             Items = items;
+            IsOpen = Items.Count > 0 ? true : false;
         }
         private void OnShelfViewModelChanged(Shelf shelf)
         {
@@ -100,7 +103,7 @@ namespace Bookshelf.ViewModels
                 Navigation.SetCurrentOverlayViewModel(new AddBookViewModel(this, _bookStore));
             });
 
-            LoadViewCommand = new RelayCommand(async o =>
+            LoadViewCommand = new RelayCommand(o =>
             {
                 LoadView();
             });

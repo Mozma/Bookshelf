@@ -52,6 +52,8 @@
                         <ContextMenu Style="{StaticResource ModernContextMenuStyle}">
                             <MenuItem Header="Изменить название"
                                       Command="{Binding EditCommand}" />
+                            <MenuItem Header="Добавить книгу"
+                                      Command="{Binding AddBookCommand}" />
                             <MenuItem Header="Убрать все книги с полки"
                                       Command="{Binding ClearCommand}" />
                             <MenuItem Header="Удалить полку"
