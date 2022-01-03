@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              lex:ResxLocalizationProvider.DefaultAssembly="Bookshelf.Resources"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              TextOptions.TextFormattingMode="Display"
@@ -160,20 +161,7 @@
                           VerticalAlignment="Top">
                         <ListBox Style="{StaticResource RoundedListBox}"
                                  ItemsSource="{Binding ShelvesItems}"
-                                 >
-
-                            <!--<ListBoxItem Content="Элемент" />
-                            <ListBoxItem Content="Элемент2" />
-                            <ListBoxItem Content="Элемент3" />
-                            <ListBoxItem Content="ds" />
-                            <ListBoxItem Content="ds" />
-                            <ListBoxItem Content="ds" />
-                            <ListBoxItem Content="ds" />
-                            <ListBoxItem Content="Элемент3" />
-                            <ListBoxItem Content="ds" />
-                            <ListBoxItem Content="ds" />
-                            <ListBoxItem Content="ds" />
-                            <ListBoxItem Content="ds" />-->
+                                 SelectedItem="{Binding SelectedShelf, Mode=TwoWay}">
                         </ListBox>
                     </Grid>
 

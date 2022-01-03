@@ -7,7 +7,7 @@ namespace Bookshelf
     {
         IEnumerable<Book> GetBooks(int shelfId);
         IEnumerable<Shelf> GetAllWithBindings();
-        IEnumerable<object> GetShelvesNamesAndAmountOfBooks(int amount);
+        IEnumerable<ShelfInfoSimple> GetShelvesNamesAndAmountOfBooks(int amount);
 
         /// <summary>
         /// Removes only links between entities

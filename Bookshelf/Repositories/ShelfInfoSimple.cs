@@ -2,8 +2,8 @@
 {
     public class ShelfInfoSimple
     {
-        int Id { get; set; }
-        string Name { get; set; }
-        int Amount { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Amount { get; set; }
     }
 }

@@ -6,14 +6,15 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace Bookshelf.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
 
-        private ObservableCollection<object> shelvesItems;
-        public ObservableCollection<object> ShelvesItems
+        private ObservableCollection<ShelfInfoSimple> shelvesItems;
+        public ObservableCollection<ShelfInfoSimple> ShelvesItems
         {
             get => shelvesItems;
             set
@@ -28,18 +29,62 @@ namespace Bookshelf.ViewModels
                 OnPropertyChanged(nameof(shelvesItems));
             }
         }
+
+        private ShelfInfoSimple selectedShelf;
+        public ShelfInfoSimple SelectedShelf
+        {
+            get { return selectedShelf; }
+
+            set
+            {
+                selectedShelf = value;
+                OpenShelf();
+                OnPropertyChanged(nameof(SelectedShelf));
+            }
+        }
+
+        public ICommand OpenShelfCommand { get; set; }
+
         public SeriesCollection Series { get; set; }
         public HomeViewModel()
+        {
+
+            LoadView();
+            SetupCommadns();
+        }
+
+        private void LoadView()
         {
             LoadSeries();
             LoadShelves();
         }
 
+        private void SetupCommadns()
+        {
+            //S
+
+            //OpenShelfCommand = new RelayCommand(o =>
+            //{
+            //    using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
+            //    {
+            //        Navigation.SetView(new ShelfViewModel(unitOfWork.Shelves.Get(SelectedShelf.Id), new Stores.ShelfStore()));
+            //    }
+            //});
+        }
+
+
+        private void OpenShelf()
+        {
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
+            {
+                Navigation.SetView(new ShelfViewModel(unitOfWork.Shelves.Get(SelectedShelf.Id), new Stores.ShelfStore()));
+            }
+        }
         private void LoadShelves()
         {
             using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
             {
-                ShelvesItems = new ObservableCollection<object>(unitOfWork.Shelves.GetShelvesNamesAndAmountOfBooks(12));
+                ShelvesItems = new ObservableCollection<ShelfInfoSimple>(unitOfWork.Shelves.GetShelvesNamesAndAmountOfBooks(12));
             }
         }
 

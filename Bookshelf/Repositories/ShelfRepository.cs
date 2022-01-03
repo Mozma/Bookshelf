@@ -41,11 +41,11 @@ namespace Bookshelf
             Context.SaveChanges();
         }
 
-        public IEnumerable<object> GetShelvesNamesAndAmountOfBooks(int amount)
+        public IEnumerable<ShelfInfoSimple> GetShelvesNamesAndAmountOfBooks(int amount)
         {
             return Context.Shelves
                 .Include(o => o.ShelfBinds)
-                .Select(o => new
+                .Select(o => new ShelfInfoSimple
                 {
                     Id = o.Id,
                     Name = o.Name,
