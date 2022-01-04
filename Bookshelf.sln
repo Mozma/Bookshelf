@@ -19,6 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Models", "Bookshe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Repositories", "Bookshelf.Repositories\Bookshelf.Repositories.csproj", "{C1A6AE40-A52B-4CEF-BCB2-965D9452A0FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.Repositories.Tests", "Bookshelf.Repositories.Tests\Bookshelf.Repositories.Tests.csproj", "{03325A97-881F-4DA7-B20B-2B1A9C8B0C98}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C1A6AE40-A52B-4CEF-BCB2-965D9452A0FB} = {C1A6AE40-A52B-4CEF-BCB2-965D9452A0FB}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +54,10 @@ Global
 		{C1A6AE40-A52B-4CEF-BCB2-965D9452A0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1A6AE40-A52B-4CEF-BCB2-965D9452A0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1A6AE40-A52B-4CEF-BCB2-965D9452A0FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03325A97-881F-4DA7-B20B-2B1A9C8B0C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03325A97-881F-4DA7-B20B-2B1A9C8B0C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03325A97-881F-4DA7-B20B-2B1A9C8B0C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03325A97-881F-4DA7-B20B-2B1A9C8B0C98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
