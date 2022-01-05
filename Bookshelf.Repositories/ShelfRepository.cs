@@ -39,7 +39,7 @@ namespace Bookshelf.Repositories
             Context.SaveChanges();
         }
 
-        public IEnumerable<ShelfInfoSimple> GetShelvesNamesAndAmountOfBooks(int amount)
+        public IEnumerable<ShelfInfoSimple> GetShelvesNamesAndAmountOfBooks(int amount = 20)
         {
             return Context.Shelves
                 .Include(o => o.ShelfBinds)

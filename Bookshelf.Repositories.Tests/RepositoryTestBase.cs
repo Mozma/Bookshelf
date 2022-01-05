@@ -10,11 +10,7 @@ namespace Bookshelf.Repositories.Tests
 
         public RepositoryTestBase()
         {
-            DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder()
-                .UseInMemoryDatabase(
-                    Guid.NewGuid().ToString()
-                );
-            context = new DataContext(dbOptions.Options);
+
         }
     }
 }
