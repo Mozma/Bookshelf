@@ -9,5 +9,11 @@
         public Book Book { get; set; }
         public Shelf Shelf { get; set; }
 
+        public ShelfBind() { }
+        public ShelfBind(int shelfId, int bookId)
+        {
+            ShelfId = shelfId;
+            BookId = bookId;
+        }
     }
 }

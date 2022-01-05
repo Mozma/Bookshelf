@@ -1,4 +1,5 @@
 ﻿using Bookshelf.Models;
+using Bookshelf.Tests;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,63 +12,33 @@ namespace Bookshelf.Repositories.Tests
         public void RemoveBookFromShelf()
         {
             // Arrange
-
             var shelfId = 1;
 
             context.Books.AddRange(
-                new Book()
-                {
-                    Id = 1,
-                    Title = "book1"
-                },
-                new Book()
-                {
-                    Id = 2,
-                    Title = "book2"
-                },
-                new Book()
-                {
-                    Id = 3,
-                    Title = "book3"
-                });
-            context.Shelves.Add(new Shelf()
-            {
-                Id = shelfId,
-                Name = "shelf1"
-            });
-            context.Shelves.Add(new Shelf()
-            {
-                Id = 4,
-                Name = "shelf2"
-            });
+                Given.Book.WithId(1),
+                Given.Book.WithId(2),
+                Given.Book.WithId(3)
+                );
+            
+            context.Shelves.AddRange(
+                Given.Shelf.WithId(shelfId),
+                Given.Shelf.WithId(4)
+                );
             context.SaveChanges();
+            
             context.ShelfBinds.AddRange(
-
-                    new ShelfBind()
-                    {
-                        BookId = 1,
-                        ShelfId = shelfId
-                    },
-                    new ShelfBind()
-                    {
-                        BookId = 2,
-                        ShelfId = shelfId
-                    },
-                    new ShelfBind()
-                    {
-                        BookId = 3,
-                        ShelfId = 4
-                    });
+                Given.ShelfBind.WithBookId(1).WithShelfId(shelfId),
+                Given.ShelfBind.WithBookId(2).WithShelfId(shelfId),
+                Given.ShelfBind.WithBookId(3).WithShelfId(4)
+                );
             context.SaveChanges();
 
             var repository = new ShelfRepository(context);
 
             // Act
-
             repository.RemoveBooksFromShelf(shelfId);
 
             // Assert
-
             List<ShelfBind> shelfList = context.ShelfBinds.ToList();
 
             Assert.That(shelfList.Count(o => o.ShelfId == shelfId), Is.EqualTo(0));
