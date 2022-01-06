@@ -8,6 +8,7 @@
         <ResourceDictionary Source="Fonts.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <!-- ListBix for shelves -->
     <Style x:Key="RoundedItem"
            TargetType="ListBoxItem">
         <Setter Property="Template">
@@ -46,7 +47,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
     </Style>
 
     <Style x:Key="RoundedListBox"
@@ -78,10 +78,9 @@
                         <TextBlock Grid.Column="0"
                                    FontFamily="{StaticResource RobotoRegular}"
                                    Text="{Binding Name}" />
-                        
+
                         <TextBlock Grid.Column="2"
                                    Margin="0,2,0,0"
-                                   
                                    FontSize="16"
                                    FontFamily="{StaticResource RobotoRegular}"
                                    Foreground="{StaticResource BaseDarkGrayBrush}"
@@ -90,8 +89,118 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
-                
     </Style>
 
-    
+    <!-- List box for books -->
+    <Style x:Key="BookRoundedListBox"
+           TargetType="ListBox">
+        <Setter Property="ItemContainerStyle"
+                Value="{DynamicResource BookRoundedItem}" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                Value="Disabled" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="2" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0"
+                              VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="1"
+                                     Fill="{Binding BookStatus, Converter={StaticResource StatusToColorConverter}}"
+                                     Width="15"
+                                     Height="15"/>
+
+                            <TextBlock Grid.Column="3"
+                                       FontFamily="{StaticResource RobotoRegular}"
+                                       Text="{Binding Title}"
+                                       TextTrimming="CharacterEllipsis"/>
+
+                        </Grid>
+                        <Border Grid.Column="1"
+                                Width="2"
+                                CornerRadius="1"
+                                Background="{StaticResource BaseLightBlackBrush}" 
+                                Margin="0,2,0,2"/>
+                        <Grid Grid.Column="2"
+                              VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="1"
+                                       FontFamily="{StaticResource RobotoRegular}"
+                                       Text="{Binding Author}"
+                                       TextTrimming="CharacterEllipsis" />
+
+                        </Grid>
+
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style x:Key="BookRoundedItem"
+           TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid>
+                        <Border x:Name="base"
+                                CornerRadius="5"
+                                Background="{StaticResource BaseGrayBrush}"
+                                BorderThickness="1"
+                                Margin="0,0,5,5">
+
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="0.4"
+                                                  BlurRadius="2"
+                                                  ShadowDepth="1"
+                                                  Direction="315" />
+                            </Border.Effect>
+
+                        </Border>
+                        <Border Margin="0,0,5,5"
+                                Height="29">
+                            <ContentPresenter TextBlock.FontFamily="{StaticResource RobotoRegular}"
+                                              TextBlock.FontSize="18" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Opacity"
+                                    TargetName="base"
+                                    Value="0.9" />
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
 </ResourceDictionary>

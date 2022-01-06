@@ -12,9 +12,12 @@
     <SolidColorBrush x:Key="BaseDarkGrayBrush"
                      Color="{StaticResource BaseDarkGray}" />
 
+    <Color x:Key="BaseLightBlack">#cdcdcd</Color>
+    <SolidColorBrush x:Key="BaseLightBlackBrush"
+                     Color="{StaticResource BaseLightBlack}"/>
+    
     <Color x:Key="BackgroundLightGray">#fdfdfd</Color>
     <SolidColorBrush x:Key="BackgroundLightGrayBrush" Color="{StaticResource BackgroundLightGray}"/>
-    
     
     
     

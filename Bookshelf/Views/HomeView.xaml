@@ -128,16 +128,31 @@
                 </Border>
 
                 <!-- Books -->
-                <Border Grid.Row="0"
-                        Grid.Column="2"
-                        Background="{StaticResource BackgroundLightGrayBrush}"
-                        CornerRadius="10"
-                        Margin="15">
-                    <TextBlock Text="Книги"
-                               FontSize="28"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
-                </Border>
+                <Grid Grid.Row="0"
+                      Grid.Column="2"
+                      Margin="15,5,15,0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock  Grid.Row="0"
+                                Text="Недавно добавленные"
+                                FontSize="28"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center" />
+
+                    <Grid Grid.Row="1"
+                          VerticalAlignment="Top">
+                        <ListBox Style="{StaticResource BookRoundedListBox}"
+                                 ItemsSource="{Binding Books,FallbackValue=........}"
+                                 SelectedItem="{Binding SelectedBook, Mode=TwoWay}">
+                        </ListBox>
+                    </Grid>
+
+                </Grid >
 
                 <!-- Shelves -->
                 <Grid Grid.Row="2"
@@ -160,7 +175,7 @@
                     <Grid Grid.Row="1"
                           VerticalAlignment="Top">
                         <ListBox Style="{StaticResource RoundedListBox}"
-                                 ItemsSource="{Binding ShelvesItems}"
+                                 ItemsSource="{Binding Shelves,FallbackValue=........}"
                                  SelectedItem="{Binding SelectedShelf, Mode=TwoWay}">
                         </ListBox>
                     </Grid>

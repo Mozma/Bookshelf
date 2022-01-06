@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bookshelf.Helpers
+namespace Bookshelf.Models
 {
     public enum BookStatus
     {

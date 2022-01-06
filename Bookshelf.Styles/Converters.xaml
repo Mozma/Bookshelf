@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:helpers="clr-namespace:Bookshelf.Helpers;assembly=Bookshelf.Helpers">
-
     <helpers:WPFBitmapConverter x:Key="WPFBitmapConverter" />
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    
+
+    <helpers:StatusToColorConverter x:Key="StatusToColorConverter" />
 </ResourceDictionary>

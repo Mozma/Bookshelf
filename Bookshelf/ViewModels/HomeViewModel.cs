@@ -5,6 +5,7 @@ using Bookshelf.Repositories;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -15,7 +16,7 @@ namespace Bookshelf.ViewModels
     {
 
         private ObservableCollection<ShelfInfoSimple> shelvesItems;
-        public ObservableCollection<ShelfInfoSimple> ShelvesItems
+        public ObservableCollection<ShelfInfoSimple> Shelves
         {
             get => shelvesItems;
             set
@@ -44,6 +45,45 @@ namespace Bookshelf.ViewModels
             }
         }
 
+        private ObservableCollection<BookInfoSimple> booksItems;
+        public ObservableCollection<BookInfoSimple> Books
+        {
+            get => booksItems;
+            set
+            {
+                if (booksItems == value)
+                {
+                    return;
+                }
+
+                booksItems = value;
+
+                OnPropertyChanged(nameof(booksItems));
+            }
+        }
+
+        private BookInfoSimple selectedBook;
+        public BookInfoSimple SelectedBook
+        {
+            get { return selectedBook; }
+
+            set
+            {
+                selectedBook = value;
+                OpenBook();
+                OnPropertyChanged(nameof(SelectedBook));
+            }
+        }
+
+        private void OpenBook()
+        {
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
+            {
+                Navigation.SetView(new BookViewModel(unitOfWork.Books.Get(SelectedBook.Id), new Stores.BookStore()));
+                selectedBook = null;
+            }
+        }
+
         public ICommand OpenShelfCommand { get; set; }
 
         public SeriesCollection Series { get; set; }
@@ -58,9 +98,17 @@ namespace Bookshelf.ViewModels
         {
             LoadSeries();
             LoadShelves();
+            LoadBooks();
         }
 
-        private void SetupCommadns()
+        private void LoadBooks()
+        {
+            using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
+            {
+                Books = new ObservableCollection<BookInfoSimple>(unitOfWork.Books.GetBooksSimpleInfo(12));
+            }
+        }
+       private void SetupCommadns()
         {
         }
 
@@ -70,13 +118,14 @@ namespace Bookshelf.ViewModels
             using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
             {
                 Navigation.SetView(new ShelfViewModel(unitOfWork.Shelves.Get(SelectedShelf.Id), new Stores.ShelfStore()));
+                selectedShelf = null;
             }
         }
         private void LoadShelves()
         {
             using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
             {
-                ShelvesItems = new ObservableCollection<ShelfInfoSimple>(unitOfWork.Shelves.GetShelvesNamesAndAmountOfBooks(12));
+                Shelves = new ObservableCollection<ShelfInfoSimple>(unitOfWork.Shelves.GetShelvesNamesAndAmountOfBooks(12));
             }
         }
 

@@ -218,26 +218,6 @@
                                     Style="{StaticResource StatusButton}"
                                     Command="{Binding ChangeStatusCommand}" />
 
-                            <!--<Grid Grid.Row="13"
-                                  Grid.Column="2">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <Button x:Name="BookEditButton"
-                                        Grid.Row="1"
-                                        Grid.Column="3"
-                                        Content="{lex:Loc}"
-                                        Style="{StaticResource RoundCornerButton}"
-                                        Command="{Binding EditCommand}" />
-
-                            </Grid>-->
                         </Grid>
 
                     </StackPanel>
