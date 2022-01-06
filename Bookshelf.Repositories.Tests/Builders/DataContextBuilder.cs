@@ -2,10 +2,6 @@
 using Bookshelf.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bookshelf.Tests
 {
@@ -41,8 +37,8 @@ namespace Bookshelf.Tests
                     Guid.NewGuid().ToString()
                 );
             _context = new DataContext(dbOptions.Options);
-            
-            if(_shelves != null)
+
+            if (_shelves != null)
             {
                 _context.AddRange(_shelves);
                 _context.SaveChanges();

@@ -1,6 +1,4 @@
 using Bookshelf.Models.Data;
-using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Bookshelf.Repositories.Tests
 {

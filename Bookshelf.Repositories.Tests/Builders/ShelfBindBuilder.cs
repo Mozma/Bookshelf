@@ -23,7 +23,7 @@ namespace Bookshelf.Tests
             _bookId = id;
             return this;
         }
-    
+
 
         public ShelfBind Build()
         {

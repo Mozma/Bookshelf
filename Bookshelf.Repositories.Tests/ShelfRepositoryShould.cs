@@ -30,7 +30,7 @@ namespace Bookshelf.Repositories.Tests
                         Given.ShelfBind.WithBookId(3).WithShelfId(4)
                     );
             var repository = new ShelfRepository(context);
-            
+
             // Act
             repository.RemoveBooksFromShelf(shelfId);
 
@@ -61,13 +61,13 @@ namespace Bookshelf.Repositories.Tests
                         Given.ShelfBind.WithBookId(3).WithShelfId(4)
                     );
             var repository = new ShelfRepository(context);
-         
+
             // Act
             IEnumerable<Book> books = repository.GetBooks(shelfId);
-            
+
             // Assert
             Assert.That(books.Count(), Is.EqualTo(2));
-            Assert.That(books.Count(o=>o.Id == 3), Is.EqualTo(0));
+            Assert.That(books.Count(o => o.Id == 3), Is.EqualTo(0));
         }
 
         [Test]

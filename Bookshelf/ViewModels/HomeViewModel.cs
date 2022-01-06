@@ -62,15 +62,6 @@ namespace Bookshelf.ViewModels
 
         private void SetupCommadns()
         {
-            //S
-
-            //OpenShelfCommand = new RelayCommand(o =>
-            //{
-            //    using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
-            //    {
-            //        Navigation.SetView(new ShelfViewModel(unitOfWork.Shelves.Get(SelectedShelf.Id), new Stores.ShelfStore()));
-            //    }
-            //});
         }
 
 
@@ -107,8 +98,6 @@ namespace Bookshelf.ViewModels
 
                 foreach (var item in query)
                 {
-
-
                     series.Add(new PieSeries
                     {
                         Title = item.key == null ? "Без статуса" : ((BookStatus)item.key).ToString(),

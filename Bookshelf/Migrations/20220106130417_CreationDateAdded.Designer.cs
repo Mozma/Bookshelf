@@ -11,13 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bookshelf.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211111133845_Initial")]
-    partial class Initial
+    [Migration("20220106130417_CreationDateAdded")]
+    partial class CreationDateAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.0-rc.2.21480.5");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
 
             modelBuilder.Entity("Bookshelf.Models.Author", b =>
                 {
@@ -48,22 +48,28 @@ namespace Bookshelf.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("BookImageId")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ISBN")
+                    b.Property<string>("ISBN")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ImageId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("PagesNumber")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("PagesRead")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("PublisherId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("StatusId")
+                    b.Property<int?>("Status")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Subtitle")
@@ -78,11 +84,9 @@ namespace Bookshelf.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookImageId");
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("PublisherId");
-
-                    b.HasIndex("StatusId");
 
                     b.ToTable("Books");
                 });
@@ -114,9 +118,9 @@ namespace Bookshelf.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<byte[]>("Binary")
+                    b.Property<string>("Base64Data")
                         .IsRequired()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -177,24 +181,6 @@ namespace Bookshelf.Migrations
                     b.ToTable("ShelfBinds");
                 });
 
-            modelBuilder.Entity("Bookshelf.Models.Status", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Statuses");
-                });
-
             modelBuilder.Entity("Bookshelf.Models.Author", b =>
                 {
                     b.HasOne("Bookshelf.Models.Image", "AuthorImage")
@@ -206,23 +192,17 @@ namespace Bookshelf.Migrations
 
             modelBuilder.Entity("Bookshelf.Models.Book", b =>
                 {
-                    b.HasOne("Bookshelf.Models.Image", "BookImage")
+                    b.HasOne("Bookshelf.Models.Image", "Image")
                         .WithMany("Books")
-                        .HasForeignKey("BookImageId");
+                        .HasForeignKey("ImageId");
 
                     b.HasOne("Bookshelf.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherId");
 
-                    b.HasOne("Bookshelf.Models.Status", "Status")
-                        .WithMany("Books")
-                        .HasForeignKey("StatusId");
-
-                    b.Navigation("BookImage");
+                    b.Navigation("Image");
 
                     b.Navigation("Publisher");
-
-                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Bookshelf.Models.BookBind", b =>
@@ -290,11 +270,6 @@ namespace Bookshelf.Migrations
             modelBuilder.Entity("Bookshelf.Models.Shelf", b =>
                 {
                     b.Navigation("ShelfBinds");
-                });
-
-            modelBuilder.Entity("Bookshelf.Models.Status", b =>
-                {
-                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

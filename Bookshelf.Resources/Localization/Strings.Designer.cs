@@ -178,6 +178,15 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дата добавления:.
+        /// </summary>
+        public static string BookViewCreationDateTextBlock {
+            get {
+                return ResourceManager.GetString("BookViewCreationDateTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ISBN:.
         /// </summary>
         public static string BookViewISBNTextBlock {

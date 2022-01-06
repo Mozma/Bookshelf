@@ -35,7 +35,10 @@ namespace Bookshelf.ViewModels
         public string Year { get; set; }
         public string ISBN { get; set; }
         public string Publisher { get; set; }
+        public string CreationDate { get; set; }
+        public string CreationDateToolTip { get; set; }
         public BookStatus Status { get; set; }
+
 
         public List<string> Publishers { get; set; }
         public List<string> Statuses { get; set; }
@@ -159,7 +162,8 @@ namespace Bookshelf.ViewModels
                     ISBN = Entity.ISBN == null ? PlaceHolder : Entity.ISBN.ToString();
                     PagesNumber = Entity.PagesNumber == null ? PlaceHolder : Entity.PagesNumber.ToString();
                     Year = Entity.Year == null ? PlaceHolder : Entity.Year.ToString();
-
+                    CreationDate = Entity.CreationTime == null ? PlaceHolder : Entity.CreationTime.ToString("dd MMMM yyyy");
+                    CreationDateToolTip = Entity.CreationTime == null ? PlaceHolder : Entity.CreationTime.ToString("ddd, dd MMM yyy HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
 
                     PagesRead = Entity.PagesRead == null ? PlaceHolder : Entity.PagesRead.ToString();
                     Publisher = Entity.Publisher == null ? PlaceHolder : Entity.Publisher.Name;

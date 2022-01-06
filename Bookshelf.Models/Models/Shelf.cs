@@ -8,8 +8,8 @@
         public List<ShelfBind> ShelfBinds { get; set; }
 
         public Shelf() { }
-        
-        public Shelf(int id,string name)
+
+        public Shelf(int id, string name)
         {
             Id = id;
             Name = name;

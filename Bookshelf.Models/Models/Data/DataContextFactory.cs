@@ -15,8 +15,9 @@ namespace Bookshelf.Models.Data
                    .SetBasePath(Directory.GetCurrentDirectory())
                    .AddJsonFile("appsettings.json")
                    .Build();
+
                 var connectionString = configuration.GetConnectionString("Default");
-                optionsBuilder.UseSqlite(connectionString);
+                optionsBuilder.UseSqlite(connectionString, b => b.MigrationsAssembly("Bookshelf"));
             }
 
             var context = new DataContext(optionsBuilder.Options);

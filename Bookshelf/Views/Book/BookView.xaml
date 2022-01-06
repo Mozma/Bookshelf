@@ -124,6 +124,8 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="{DynamicResource lineSpasing}" />
                                 <RowDefinition Height="*" />
+                                <RowDefinition Height="{DynamicResource lineSpasing}" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
@@ -192,6 +194,18 @@
 
                             <TextBlock Grid.Row="11"
                                        Grid.Column="0"
+                                       x:Name="BookViewCreationDateTextBlock"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       Text="{lex:Loc}" />
+                            <TextBox Grid.Row="11"
+                                     Grid.Column="2"
+                                     Text="{Binding CreationDate, Mode=TwoWay}"
+                                     ToolTip="{Binding CreationDateToolTip, Mode=TwoWay}"
+                                     Style="{StaticResource SelectableTextBox}" />
+
+                            <TextBlock Grid.Row="13"
+                                       Grid.Column="0"
                                        x:Name="BookViewStatusTextBlock"
                                        FontSize="18"
                                        VerticalAlignment="Center"
@@ -199,7 +213,7 @@
 
                             <Button x:Name="ChangeStatusButton"
                                     HorizontalAlignment="Left"
-                                    Grid.Row="11"
+                                    Grid.Row="13"
                                     Grid.Column="2"
                                     Style="{StaticResource StatusButton}"
                                     Command="{Binding ChangeStatusCommand}" />

@@ -216,4 +216,7 @@
   <data name="BooksNameTextBlock" xml:space="preserve">
     <value>Books</value>
   </data>
+  <data name="BookViewCreationDateTextBlock" xml:space="preserve">
+    <value>Creation date:</value>
+  </data>
 </root>

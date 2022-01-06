@@ -5,7 +5,7 @@ namespace Bookshelf.Tests
     public class ShelfBuilder
     {
         private int _id;
-        private string _name; 
+        private string _name;
 
         public ShelfBuilder WithId(int id)
         {
