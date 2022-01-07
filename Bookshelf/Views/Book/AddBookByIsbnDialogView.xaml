@@ -26,6 +26,7 @@
     <Border Padding="20">
         <Border CornerRadius="10"
                 Width="550"
+                Height="476"
                 Background="{StaticResource BackgroundSilverBrush}"
                 Padding="19,14,19,19">
             <Border.Effect>
@@ -88,7 +89,7 @@
                                     x:Name="FindIsbnInfoButton"
                                     HorizontalAlignment="Right"
                                     Style="{StaticResource GrayRoundCornerButton}"
-                                    Command="{Binding SaveCommand}"
+                                    Command="{Binding FindByIsbnCommand}"
                                     Content="{lex:Loc}" />
 
                         </Grid>

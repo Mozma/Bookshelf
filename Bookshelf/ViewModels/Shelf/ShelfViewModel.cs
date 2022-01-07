@@ -122,7 +122,7 @@ namespace Bookshelf.ViewModels
 
             AddBookByIsbnCommand = new RelayCommand(o =>
             {
-                Navigation.SetCurrentOverlayViewModel(new AddBookViewModel(this, _bookStore));
+                Navigation.SetCurrentOverlayViewModel(new AddBookByIsbnViewModel(_bookStore));
             });
 
             DeleteCommand = new DeleteShelfCommand(this, _shelfStore);

@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Bookshelf.Models\Bookshelf.Models.csproj" />
     <ProjectReference Include="..\Bookshelf.Repositories\Bookshelf.Repositories.csproj" />
+    <ProjectReference Include="..\Bookshelf.Services\Bookshelf.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Bookshelf.Helpers;
 using Bookshelf.Models;
 using Bookshelf.Models.Data;
-using Bookshelf.Repositories;
+using Bookshelf.Services;
 using Bookshelf.Stores;
 using Microsoft.Win32;
 using System;
@@ -15,8 +15,9 @@ namespace Bookshelf.ViewModels
 {
     public class AddBookByIsbnViewModel : BaseViewModel
     {
-        public Book Entity { get; set; }
+        public BookInfo Entity { get; set; }
         public ICommand SelectCoverCommand { get; set; }
+        public ICommand FindByIsbnCommand { get; set; }
 
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -42,12 +43,9 @@ namespace Bookshelf.ViewModels
         private BookViewModel _viewModel;
         private BookStore _bookStore;
 
-        public AddBookByIsbnViewModel(BookViewModel bookViewModel, BookStore bookStore)
+        public AddBookByIsbnViewModel(BookStore bookStore)
         {
-
-            _viewModel = bookViewModel;
             _bookStore = bookStore;
-            Entity = _viewModel.Entity;
 
             SetupCommands();
             SetFields();
@@ -70,42 +68,39 @@ namespace Bookshelf.ViewModels
                 SetFields();
             });
 
-            //SaveCommand = new SaveBookChangesCommand(this, _bookStore, Entity);
+            FindByIsbnCommand = new RelayCommand(o =>
+            {
+                FindByIsbn();
+            });
+
         }
 
+        private void FindByIsbn()
+        {
+            var googleBooks = new GoogleBooks();
 
+            var book = googleBooks.FindBookByIsbnAsync(ISBN).Result;
+
+            Entity = book;
+
+            SetFields();
+        }
 
         private void SetFields()
         {
             if (Entity != null)
             {
-                using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
-                {
-                    Entity = unitOfWork.Books.Get(Entity.Id);
-                    Title = Entity.Title;
 
-                    var authors = unitOfWork.Books.GetAuthors(Entity.Id);
-                    Author = authors.First().FullName;
+                Title = Entity.Title;
+                Author = Entity.Author;
 
-                    ISBN = Entity.ISBN == null ? string.Empty : Entity.ISBN.ToString();
-                    PagesNumber = Entity.PagesNumber == null ? string.Empty : Entity.PagesNumber.ToString();
-                    Year = Entity.Year == null ? string.Empty : Entity.Year.ToString();
+                PagesNumber = Entity.PagesNumber == null ? string.Empty : Entity.PagesNumber.ToString();
+                Year = Entity.Year == null ? string.Empty : Entity.Year.ToString();
+                Publisher = Entity.Publisher == null ? string.Empty : Entity.Publisher;
 
-                    PagesRead = Entity.PagesRead == null ? string.Empty : Entity.PagesRead.ToString();
-                    Publisher = Entity.Publisher == null ? string.Empty : Entity.Publisher.Name;
-
-                    if (Entity.Image != null)
-                    {
-                        Cover = Entity.Image.Base64Data.Base64StringToBitmap();
-                    }
-                    else
-                    {
-                        Cover = BitmapImageConverter.BitmapImageToBitmap(ResourceFinder.Get<BitmapImage>("DefaultBookCover"));
-                    }
-                }
             }
 
-            GetSuggestions();
+            //GetSuggestions();
         }
 
         private void SelectCover()

@@ -92,11 +92,16 @@
     <ProjectReference Include="..\Bookshelf.Models\Bookshelf.Models.csproj" />
     <ProjectReference Include="..\Bookshelf.Repositories\Bookshelf.Repositories.csproj" />
     <ProjectReference Include="..\Bookshelf.Resources\Bookshelf.Resources.csproj" />
+    <ProjectReference Include="..\Bookshelf.Services\Bookshelf.Services.csproj" />
 	  <ProjectReference Include="..\Bookshelf.Styles\Bookshelf.Styles.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="FodyWeavers.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
