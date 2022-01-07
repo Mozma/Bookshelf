@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ShelfAddNewBookButton" xml:space="preserve">
-    <value>+ Добавить новую книгу</value>
+  <data name="ShelfAddBookButton" xml:space="preserve">
+    <value>Добавить книгу</value>
   </data>
   <data name="ShelfBackButton" xml:space="preserve">
     <value>Назад</value>
@@ -218,5 +218,17 @@
   </data>
   <data name="BookViewCreationDateTextBlock" xml:space="preserve">
     <value>Дата добавления:</value>
+  </data>
+  <data name="AddBookByISBNButton" xml:space="preserve">
+    <value>Добавить по ISBN</value>
+  </data>
+  <data name="FindIsbnInfoButton" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="AddBookByIsbnTextBlock" xml:space="preserve">
+    <value>Добаление по ISBN</value>
+  </data>
+  <data name="ShelfAddBookByIsbnButton" xml:space="preserve">
+    <value>Добавить книгу по ISBN</value>
   </data>
 </root>

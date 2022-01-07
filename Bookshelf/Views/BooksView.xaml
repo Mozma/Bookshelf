@@ -55,7 +55,7 @@
                            TextTrimming="CharacterEllipsis"
                            VerticalAlignment="Top" />
 
-                <Button x:Name="ShelfAddNewBookButton"
+                <Button x:Name="ShelfAddBookButton"
                         Grid.Column="4"
                         Style="{StaticResource RoundCornerButton}"
                         Content="{lex:Loc}"

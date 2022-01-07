@@ -79,6 +79,24 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить по ISBN.
+        /// </summary>
+        public static string AddBookByISBNButton {
+            get {
+                return ResourceManager.GetString("AddBookByISBNButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добаление по ISBN.
+        /// </summary>
+        public static string AddBookByIsbnTextBlock {
+            get {
+                return ResourceManager.GetString("AddBookByIsbnTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отменить.
         /// </summary>
         public static string AddBookCancelButton {
@@ -286,11 +304,29 @@ namespace Bookshelf.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to + Добавить новую книгу.
+        ///   Looks up a localized string similar to Найти.
         /// </summary>
-        public static string ShelfAddNewBookButton {
+        public static string FindIsbnInfoButton {
             get {
-                return ResourceManager.GetString("ShelfAddNewBookButton", resourceCulture);
+                return ResourceManager.GetString("FindIsbnInfoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добавить книгу.
+        /// </summary>
+        public static string ShelfAddBookButton {
+            get {
+                return ResourceManager.GetString("ShelfAddBookButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добавить книгу по ISBN.
+        /// </summary>
+        public static string ShelfAddBookByIsbnButton {
+            get {
+                return ResourceManager.GetString("ShelfAddBookByIsbnButton", resourceCulture);
             }
         }
         

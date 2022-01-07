@@ -36,6 +36,8 @@
                     <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Row="0"
@@ -47,14 +49,20 @@
                         Style="{StaticResource HyperlinkLikeButton}"
                         Command="{Binding EditCommand}" />
 
-                <Button x:Name="ShelfAddNewBookButton"
+                <Button x:Name="ShelfAddBookButton"
                         Grid.Column="2"
+                        Style="{StaticResource RoundCornerButton}"
+                        Content="{lex:Loc}"
+                        Command="{Binding AddBookByIsbnCommand}" />
+                
+                <Button x:Name="ShelfAddBookByIsbnButton"
+                        Grid.Column="4"
                         Style="{StaticResource RoundCornerButton}"
                         Content="{lex:Loc}"
                         Command="{Binding AddBookCommand}" />
 
                 <Button x:Name="ShelfBackButton"
-                        Grid.Column="4"
+                        Grid.Column="6"
                         Style="{StaticResource RoundCornerButton}"
                         Command="{Binding GoBackCommand}"
                         Content="{lex:Loc}" />

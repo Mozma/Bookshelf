@@ -30,6 +30,9 @@
     <Compile Update="CustomControls\RoundCornerTextBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Book\AddBookByIsbnDialogView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\NotesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -59,6 +62,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="CustomControls\RoundCornerTextBox.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Book\AddBookByIsbnDialogView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

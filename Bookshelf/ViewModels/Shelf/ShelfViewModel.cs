@@ -22,6 +22,7 @@ namespace Bookshelf.ViewModels
 
         public ICommand EditCommand { get; set; }
         public ICommand ClearCommand { get; set; }
+        public ICommand AddBookByIsbnCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
         public string Name { get; set; }
@@ -117,6 +118,11 @@ namespace Bookshelf.ViewModels
             ClearCommand = new RelayCommand(o =>
             {
                 ClearShelf();
+            });
+
+            AddBookByIsbnCommand = new RelayCommand(o =>
+            {
+                Navigation.SetCurrentOverlayViewModel(new AddBookViewModel(this, _bookStore));
             });
 
             DeleteCommand = new DeleteShelfCommand(this, _shelfStore);

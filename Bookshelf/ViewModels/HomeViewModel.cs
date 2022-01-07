@@ -1,11 +1,9 @@
-﻿using Bookshelf.Helpers;
-using Bookshelf.Models;
+﻿using Bookshelf.Models;
 using Bookshelf.Models.Data;
 using Bookshelf.Repositories;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -108,7 +106,7 @@ namespace Bookshelf.ViewModels
                 Books = new ObservableCollection<BookInfoSimple>(unitOfWork.Books.GetBooksSimpleInfo(12));
             }
         }
-       private void SetupCommadns()
+        private void SetupCommadns()
         {
         }
 

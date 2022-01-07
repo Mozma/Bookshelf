@@ -52,12 +52,18 @@
                 <view:EditShelfDialogView />
             </DataTemplate>
 
+
             <DataTemplate DataType="{x:Type viewmodel:AddBookViewModel}">
                 <view:AddBookDialogView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:AddBookByIsbnViewModel}">
+                <view:AddBookByIsbnDialogView />
+            </DataTemplate>            
             <DataTemplate DataType="{x:Type viewmodel:EditBookViewModel}">
                 <view:EditBookDialogView />
             </DataTemplate>
+            
+            
         </ResourceDictionary>
 
     </Application.Resources>
