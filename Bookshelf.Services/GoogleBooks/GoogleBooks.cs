@@ -13,7 +13,7 @@ namespace Bookshelf.Services
        new BaseClientService.Initializer
        {
            ApplicationName = "Bookshelf",
-           ApiKey = "AIzaSyAjzdI_t0rM8XGlH0vc8_Oj5mZ4LDKPauA",
+           ApiKey = Credentials.ApiKey,
        });
 
         public async Task<BookInfo> FindBookByIsbnAsync(string isbn)
