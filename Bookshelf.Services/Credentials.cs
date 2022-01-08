@@ -8,6 +8,6 @@ namespace Bookshelf.Services
 {
     public static class Credentials
     {
-        public const string ApiKey = "YOUR_API_KEY";
+        public static string ApiKey => Environment.GetEnvironmentVariable("BOOKSHELF_GOOGLEBOOK_API_KEY");
     }
 }
