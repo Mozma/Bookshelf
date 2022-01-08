@@ -12,6 +12,8 @@ namespace Bookshelf.Commands
         private readonly AddBookViewModel _viewModel;
         private readonly BookStore _bookStore;
 
+        private readonly bool IsFromBookInfo;
+
         public CreateBookCommand(AddBookViewModel viewModel, BookStore bookStore)
         {
             _viewModel = viewModel;

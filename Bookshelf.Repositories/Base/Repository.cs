@@ -32,6 +32,11 @@ namespace Bookshelf.Repositories
             Context.Set<TEntity>().Add(entity);
         }
 
+        public TEntity AddAndReturn(TEntity entity)
+        {
+            return Context.Set<TEntity>().Add(entity).Entity;
+        }
+
         public void AddRange(IEnumerable<TEntity> entities)
         {
             Context.Set<TEntity>().AddRange(entities);

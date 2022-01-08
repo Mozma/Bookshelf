@@ -12,10 +12,17 @@ namespace Bookshelf.Repositories
 
             Shelves = new ShelfRepository(_context);
             Books = new BookRepository(_context);
+            Authors = new AuthorRepository(_context);
+            Publishers = new PublisherRepository(_context);
+            BookBinds = new BookBindRepository(_context);
         }
+        public UnitOfWork() : this(new DataContextFactory().CreateDbContext()) { }
 
+        public IAuthorRepository Authors { get; private set; }
+        public IPublisherRepository Publishers { get; private set; }
         public IShelfRepository Shelves { get; private set; }
         public IBookRepository Books { get; private set; }
+        public IBookBindRepository BookBinds { get; private set; }
 
         public int Complete()
         {
@@ -26,5 +33,6 @@ namespace Bookshelf.Repositories
         {
             _context.Dispose();
         }
+
     }
 }
