@@ -11,6 +11,7 @@ namespace Bookshelf.ViewModels
     {
 
         public ICommand AddBookCommand { get; set; }
+        public ICommand AddBookByIsbnCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
         public ICommand LoadViewCommand { get; set; }
 
@@ -77,6 +78,12 @@ namespace Bookshelf.ViewModels
             LoadViewCommand = new RelayCommand(o =>
             {
                 LoadView();
+            });
+
+
+            AddBookByIsbnCommand = new RelayCommand(o =>
+            {
+                Navigation.SetCurrentOverlayViewModel(new AddBookByIsbnViewModel(_bookStore));
             });
         }
 

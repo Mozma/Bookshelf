@@ -107,12 +107,12 @@ namespace Bookshelf.Commands
 
         private Publisher CreatPublisher(UnitOfWork unitOfWork)
         {
-            return unitOfWork.Publishers.GetOrCreatePublisherWithName(_viewModel.Entity.Publisher);
+            return unitOfWork.Publishers.GetOrCreatePublisherWithName(_viewModel.Publisher);
         }
 
         private Author CreateAuthor(UnitOfWork unitOfWork)
         {
-            return unitOfWork.Authors.GetOrCreateAuthorWithName(_viewModel.Entity.Author);
+            return unitOfWork.Authors.GetOrCreateAuthorWithName(_viewModel.Author);
         }
     }
 }

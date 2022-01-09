@@ -37,6 +37,8 @@
                     <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock x:Name="BooksNameTextBlock"
@@ -61,12 +63,17 @@
                         Content="{lex:Loc}"
                         Command="{Binding AddBookCommand}" />
 
-                <Button x:Name="ShelfBackButton"
+                <Button x:Name="ShelfAddBookByIsbnButton"
                         Grid.Column="6"
+                        Style="{StaticResource RoundCornerButton}"
+                        Content="{lex:Loc}"
+                        Command="{Binding AddBookByIsbnCommand}" />
+
+                <Button x:Name="ShelfBackButton"
+                        Grid.Column="8"
                         Style="{StaticResource RoundCornerButton}"
                         Command="{Binding GoBackCommand}"
                         Content="{lex:Loc}" />
-
             </Grid>
 
             <Border Grid.Row="1"

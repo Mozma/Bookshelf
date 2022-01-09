@@ -53,7 +53,7 @@
                         Grid.Column="2"
                         Style="{StaticResource RoundCornerButton}"
                         Content="{lex:Loc}"
-                        Command="{Binding AddBookByIsbnCommand}" />
+                        Command="{Binding AddBookCommand}" />
                 
                 <Button x:Name="ShelfAddBookByIsbnButton"
                         Grid.Column="4"
