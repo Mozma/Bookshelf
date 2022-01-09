@@ -38,7 +38,7 @@ namespace Bookshelf.Repositories.Tests
             List<ShelfBind> shelfList = context.ShelfBinds.ToList();
 
             Assert.That(shelfList.Count(o => o.ShelfId == shelfId), Is.EqualTo(0));
-            Assert.That(shelfList.Count(), Is.EqualTo(1));
+            Assert.That(shelfList.Count, Is.EqualTo(1));
         }
 
         [Test]

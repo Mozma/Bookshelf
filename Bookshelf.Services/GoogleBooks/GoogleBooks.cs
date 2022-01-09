@@ -7,24 +7,28 @@ namespace Bookshelf.Services
 {
     public class GoogleBooks : IGoogleBooks
     {
-        public static BooksService service = new BooksService(
-           new BaseClientService.Initializer
-           {
-               ApplicationName = "Bookshelf",
-               ApiKey = Credentials.ApiKey,
-           });
+        private IGoogleBookService _googleBookService { get; }
 
-        public async Task<BookInfo> FindBookByIsbnAsync(string isbn)
+        public GoogleBooks()
         {
-            //string URL = "http://www.google.com/books/feeds/volumes/?q=ISBN%3C" + isbn + "%3E";
+            _googleBookService = new GoogleBookService();
+        }
 
-            var result = service.Volumes.List(isbn).Execute();
+        public GoogleBooks(IGoogleBookService googleBookService)
+        {
+            _googleBookService = googleBookService;
+        }
+
+        public BookInfo FindBookByIsbn(string isbn)
+        {
+            var result = _googleBookService.FindBook(isbn);
 
             if (result.Items == null)
             {
                 return null;
             }
-            string[] formats = new string[] { "dd/MM/yyyy", "dd-MM-yyyy", "yyyy" };
+
+            string[] formats = new string[] { "dd/MM/yyyy", "dd-MM-yyyy", "yyyy-MM-dd", "yyyy" };
 
             var book = new BookInfo
             {

@@ -4,6 +4,6 @@ namespace Bookshelf.Services
 {
     public interface IGoogleBooks
     {
-        public Task<BookInfo> FindBookByIsbnAsync(string isbn);
+        public BookInfo FindBookByIsbn(string isbn);
     }
 }

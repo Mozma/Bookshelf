@@ -77,7 +77,7 @@ namespace Bookshelf.ViewModels
         {
             var googleBooks = new GoogleBooks();
 
-            var book = googleBooks.FindBookByIsbnAsync(ISBN).Result;
+            var book = googleBooks.FindBookByIsbn(ISBN);
 
             Entity = book;
 
