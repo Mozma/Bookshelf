@@ -49,5 +49,11 @@ namespace Bookshelf.Repositories
                         
             return query.OrderByDescending(o => o.Count);
         }
+
+        public void UpdateStatus(Book entity, BookStatus status)
+        {
+            entity.Status = (int)status;
+            Context.Entry(entity).State = EntityState.Modified;
+        }
     }
 }

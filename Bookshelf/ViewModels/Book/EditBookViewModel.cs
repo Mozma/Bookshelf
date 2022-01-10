@@ -37,8 +37,7 @@ namespace Bookshelf.ViewModels
         public List<Shelf> Shelves { get; set; }
         public Shelf SelectedShelf { get; set; }
 
-        public List<string> Publishers { get; set; }
-        public List<string> Statuses { get; set; }
+        public IEnumerable<string> Publishers { get; set; }
 
         private BookViewModel _viewModel;
         private BookStore _bookStore;
@@ -123,10 +122,9 @@ namespace Bookshelf.ViewModels
 
         public void GetSuggestions()
         {
-            using (var context = new DataContextFactory().CreateDbContext())
+            using (var unitOfWork = new UnitOfWork())
             {
-
-                Publishers = context.Set<Publisher>().Select(o => o.Name).ToList();
+                Publishers = unitOfWork.Publishers.GetNames();
             }
         }
     }

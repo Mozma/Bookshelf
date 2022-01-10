@@ -22,5 +22,8 @@ namespace Bookshelf.Repositories
             return publisher;
         }
 
+        public IEnumerable<string> GetNames() {
+            return Context.Publishers.Select(o => o.Name).ToList();
+        }
     }
 }

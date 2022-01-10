@@ -39,9 +39,7 @@ namespace Bookshelf.ViewModels
         public string CreationDateToolTip { get; set; }
         public BookStatus Status { get; set; }
 
-
-        public List<string> Publishers { get; set; }
-        public List<string> Statuses { get; set; }
+        public IEnumerable<string> Publishers { get; set; }
 
         public BookViewModel(Book entity, BookStore bookStore)
         {
@@ -125,12 +123,11 @@ namespace Bookshelf.ViewModels
 
         private void SaveStatus()
         {
-            using (var context = new DataContextFactory().CreateDbContext())
+            using (var unitOfWork = new UnitOfWork())
             {
-                Entity.Status = (int)Status;
-
-                context.Entry(Entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                context.SaveChangesAsync();
+                unitOfWork.Books.UpdateStatus(Entity, Status);
+                unitOfWork.Complete();
+                _bookStore.ChangeEntity(Entity);
             }
         }
 
@@ -149,8 +146,6 @@ namespace Bookshelf.ViewModels
         {
             if (Entity != null)
             {
-
-
                 using (var unitOfWork = new UnitOfWork(new DataContextFactory().CreateDbContext()))
                 {
                     Entity = unitOfWork.Books.Get(Entity.Id);
@@ -188,9 +183,9 @@ namespace Bookshelf.ViewModels
 
         public void GetSuggestions()
         {
-            using (var context = new DataContextFactory().CreateDbContext())
+            using (var unitOfWork = new UnitOfWork())
             {
-                Publishers = context.Set<Publisher>().Select(o => o.Name).ToList();
+                Publishers = unitOfWork.Publishers.GetNames();
             }
         }
 
