@@ -70,7 +70,8 @@
                                   FontSize="18"
                                   FontFamily="{StaticResource RobotoRegular}"
                                   Series="{Binding Series}"
-                                  StartingRotationAngle="315">
+                                  StartingRotationAngle="0"
+                                  DataTooltip="{x:Null}">
                         <lvc:PieChart.Resources>
                             <Style TargetType="lvc:PieSeries">
                                 <Setter Property="DataLabels"

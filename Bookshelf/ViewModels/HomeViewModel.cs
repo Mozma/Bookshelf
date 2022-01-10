@@ -129,33 +129,53 @@ namespace Bookshelf.ViewModels
 
         private void LoadSeries()
         {
-            using (var context = new DataContextFactory().CreateDbContext())
-            {
 
-                var query = from book in context.Set<Book>().ToList()
-                            group book by book.Status into g
-                            select new
-                            {
-                                key = g.Key,
-                                count = g.Count()
-                            };
-                query = query.OrderByDescending(o => o.count);
+            using (var unitOfWork = new UnitOfWork())
+            {
+                var list = unitOfWork.Books.GetStatusesInfo();
 
                 var series = new SeriesCollection();
 
-                foreach (var item in query)
+                foreach (var item in list)
                 {
                     series.Add(new PieSeries
                     {
-                        Title = item.key == null ? "Без статуса" : ((BookStatus)item.key).ToString(),
-                        Values = new ChartValues<ObservableValue> { new ObservableValue(item.count) },
-                        DataLabels = item.count > 0 ? true : false
+                        Title = item.Key == null ? "Без статуса" : ((BookStatus)item.Key).GetName(),
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(item.Count) },
+                        DataLabels = item.Count > 0 ? true : false
                     });
 
                 }
-
                 Series = series;
             }
+
+            //using (var context = new DataContextFactory().CreateDbContext())
+            //{
+
+            //    var query = from book in context.Set<Book>().ToList()
+            //                group book by book.Status into g
+            //                select new
+            //                {
+            //                    key = g.Key,
+            //                    count = g.Count()
+            //                };
+            //    query = query.OrderByDescending(o => o.count);
+
+            //    var series = new SeriesCollection();
+
+            //    foreach (var item in query)
+            //    {
+            //        series.Add(new PieSeries
+            //        {
+            //            Title = item.key == null ? "Без статуса" : ((BookStatus)item.key).GetName(),
+            //            Values = new ChartValues<ObservableValue> { new ObservableValue(item.count) },
+            //            DataLabels = item.count > 0 ? true : false
+            //        });
+
+            //    }
+
+            //    Series = series;
+            //}
         }
     }
 }

@@ -36,5 +36,18 @@ namespace Bookshelf.Repositories
                 .Take(amount)
                 .ToList();
         }
+
+        public IEnumerable<StausesInfo> GetStatusesInfo()
+        {
+            var query = from book in Context.Books.ToList()
+                        group book by book.Status into g
+                        select new StausesInfo
+                        {
+                            Key = g.Key,
+                            Count = g.Count()
+                        };
+                        
+            return query.OrderByDescending(o => o.Count);
+        }
     }
 }
