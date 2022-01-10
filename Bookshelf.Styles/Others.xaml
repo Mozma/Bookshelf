@@ -57,6 +57,8 @@
                 Value="0" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
                 Value="Disabled" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                Value="Disabled" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -67,9 +69,10 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Grid>
+                    <Grid ToolTip="{Binding Name}">
+                        
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="9*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="15" />
@@ -77,11 +80,13 @@
 
                         <TextBlock Grid.Column="0"
                                    FontFamily="{StaticResource RobotoRegular}"
+                                   TextTrimming="CharacterEllipsis"
                                    Text="{Binding Name}" />
 
                         <TextBlock Grid.Column="2"
                                    Margin="0,2,0,0"
                                    FontSize="16"
+                                   TextTrimming="CharacterEllipsis"
                                    FontFamily="{StaticResource RobotoRegular}"
                                    Foreground="{StaticResource BaseDarkGrayBrush}"
                                    Text="{Binding Amount}" />
@@ -100,6 +105,8 @@
                 Value="0" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
                 Value="Disabled" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                Value="Disabled" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -111,6 +118,13 @@
             <Setter.Value>
                 <DataTemplate>
                     <Grid Margin="3">
+                        <Grid.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold"
+                                           Text="{Binding Title}" />
+                                <TextBlock Text="{Binding Author}" />
+                            </StackPanel>
+                        </Grid.ToolTip>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="5" />
@@ -128,19 +142,19 @@
                             <Ellipse Grid.Column="1"
                                      Fill="{Binding BookStatus, Converter={StaticResource StatusToColorConverter}}"
                                      Width="15"
-                                     Height="15"/>
+                                     Height="15" />
 
                             <TextBlock Grid.Column="3"
                                        FontFamily="{StaticResource RobotoRegular}"
                                        Text="{Binding Title}"
-                                       TextTrimming="CharacterEllipsis"/>
+                                       TextTrimming="CharacterEllipsis" />
 
                         </Grid>
                         <Border Grid.Column="1"
                                 Width="2"
                                 CornerRadius="1"
-                                Background="{StaticResource BaseLightBlackBrush}" 
-                                Margin="0,2,0,2"/>
+                                Background="{StaticResource BaseLightBlackBrush}"
+                                Margin="0,2,0,2" />
                         <Grid Grid.Column="2"
                               VerticalAlignment="Center">
                             <Grid.ColumnDefinitions>
