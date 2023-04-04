@@ -77,7 +77,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="WPFLocalizeExtension" Version="3.9.2" />
+    <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
   </ItemGroup>
 
   <ItemGroup>
